@@ -6,19 +6,31 @@ namespace Terramental
 {
     public class Game1 : Game
     {
+        public const int gravity = 3;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private PlayerCharacter _playerCharacter = new PlayerCharacter();
+
+        private Texture2D _playerTexture;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            
+            IsMouseVisible = false;
+
+            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.IsFullScreen = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
+            _playerCharacter.Initialize(_playerTexture, new Rectangle(100, 100, 100, 100), 5);
 
             base.Initialize();
         }
@@ -26,8 +38,6 @@ namespace Terramental
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -35,16 +45,18 @@ namespace Terramental
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            _playerCharacter.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gray);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            _playerCharacter.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
