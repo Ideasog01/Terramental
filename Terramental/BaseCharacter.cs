@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Terramental
 {
-    class BaseCharacter
+    class BaseCharacter : Sprite
     {
         
     }

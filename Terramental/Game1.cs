@@ -15,6 +15,11 @@ namespace Terramental
 
         private Texture2D _playerTexture;
 
+        private CameraController _mainCam;
+
+        public static int screenHeight = 540;
+        public static int screenWidth = 960;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -22,15 +27,15 @@ namespace Terramental
             
             IsMouseVisible = false;
 
-            _graphics.PreferredBackBufferHeight = 1080;
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.IsFullScreen = true;
+            _graphics.PreferredBackBufferHeight = screenHeight;
+            _graphics.PreferredBackBufferWidth = screenWidth;
+            _graphics.IsFullScreen = false;
         }
 
         protected override void Initialize()
         {
             _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
-            _playerCharacter.Initialize(_playerTexture, new Rectangle(100, 100, 100, 100), 5);
+            
 
             base.Initialize();
         }
@@ -38,6 +43,10 @@ namespace Terramental
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _mainCam = new CameraController();
+            _playerCharacter.Initialise(Vector2.Zero, _playerTexture);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -46,6 +55,7 @@ namespace Terramental
                 Exit();
 
             _playerCharacter.Update(gameTime);
+            _mainCam.MoveCamera(_playerCharacter);
 
             base.Update(gameTime);
         }
@@ -54,8 +64,9 @@ namespace Terramental
         {
             GraphicsDevice.Clear(Color.Gray);
 
-            _spriteBatch.Begin();
-            _playerCharacter.Draw(_spriteBatch);
+            _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
+            _playerCharacter.Draw(gameTime, _spriteBatch);
+            _spriteBatch.Draw(_playerTexture, new Rectangle(10, 10, 100, 100), Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

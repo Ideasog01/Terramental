@@ -11,38 +11,20 @@ namespace Terramental
 {
     class PlayerCharacter : BaseCharacter
     {
-        private Texture2D _playerTexture;
-
-        private Rectangle _playerRectangle;
-
-        private int _playerMovementSpeed;
-
-        public void Initialize(Texture2D playerTexture, Rectangle playerRectangle, int playerMovementSpeed)
-        {
-            _playerTexture = playerTexture;
-            _playerRectangle = playerRectangle;
-            _playerMovementSpeed = playerMovementSpeed;
-        }
+        private int _playerMovementSpeed = 5;
 
         public void Update(GameTime gameTime)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _playerRectangle.X += _playerMovementSpeed;
+                SpritePosition = new Vector2(SpritePosition.X + _playerMovementSpeed, SpritePosition.Y);
             }
             else if(Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                _playerRectangle.X -= _playerMovementSpeed;
+                SpritePosition = new Vector2(SpritePosition.X - _playerMovementSpeed, SpritePosition.Y);
             }
 
             //_playerRectangle.Y += Game1.gravity;
-
-            
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(_playerTexture, _playerRectangle, Color.White);
         }
     }
 }
