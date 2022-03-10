@@ -4,7 +4,6 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 
 namespace Terramental
@@ -13,18 +12,74 @@ namespace Terramental
     {
         private int _playerMovementSpeed = 5;
 
+        private int _elementIndex;
+
+        private int _ultimateAbilityCooldown;
+
+        private bool _ultimateActive;
+
+        public void ActivateUltimate()
+        {
+            if(_ultimateAbilityCooldown <= 0)
+            {
+                switch(_elementIndex)
+                {
+                    case 0 :
+                        FireUltimate();
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        Console.WriteLine("ERROR: Element index is invalid during ultimate activatation");
+                        break;
+                }
+            }
+        }
+
+        public void PrimaryAttack()
+        {
+            if(_ultimateActive)
+            {
+                switch (_elementIndex)
+                {
+                    case 0:
+                        FireSwordAttack();
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        Console.WriteLine("ERROR: Element index is invalid during ultimate attack");
+                        break;
+                }
+                //Play Animation
+            }
+        }
+
+        public void PlayerMovement(int vertical)
+        {
+            SpritePosition = new Vector2(SpritePosition.X + (vertical * _playerMovementSpeed), SpritePosition.Y);
+        }
+
         public void Update(GameTime gameTime)
         {
-            if(Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                SpritePosition = new Vector2(SpritePosition.X + _playerMovementSpeed, SpritePosition.Y);
-            }
-            else if(Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                SpritePosition = new Vector2(SpritePosition.X - _playerMovementSpeed, SpritePosition.Y);
-            }
-
             //_playerRectangle.Y += Game1.gravity;
+        }
+
+        private void FireUltimate()
+        {
+            //Play Animation
+            //Spawn Sword
+
+        }
+
+        private void FireSwordAttack()
+        {
+            //Play Animation
+            //Check for enemies within range
         }
     }
 }

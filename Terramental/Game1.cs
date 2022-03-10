@@ -11,6 +11,8 @@ namespace Terramental
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private InputManager _inputManager;
+
         private PlayerCharacter _playerCharacter = new PlayerCharacter();
 
         private Texture2D _playerTexture;
@@ -46,6 +48,7 @@ namespace Terramental
 
             _mainCam = new CameraController();
             _playerCharacter.Initialise(Vector2.Zero, _playerTexture);
+            _inputManager = new InputManager(_playerCharacter);
 
         }
 
@@ -56,6 +59,7 @@ namespace Terramental
 
             _playerCharacter.Update(gameTime);
             _mainCam.MoveCamera(_playerCharacter);
+            _inputManager.Update(gameTime);
 
             base.Update(gameTime);
         }

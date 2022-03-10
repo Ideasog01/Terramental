@@ -34,10 +34,5 @@ namespace Terramental
             _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, 64, 64);
             spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
         }
-
-        public void Update(GameTime gameTime)
-        {
-
-        }
     }
 }
