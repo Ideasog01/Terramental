@@ -64,11 +64,6 @@ namespace Terramental
             SpritePosition = new Vector2(SpritePosition.X + (vertical * _playerMovementSpeed), SpritePosition.Y);
         }
 
-        public void Update(GameTime gameTime)
-        {
-            //_playerRectangle.Y += Game1.gravity;
-        }
-
         private void FireUltimate()
         {
             //Play Animation

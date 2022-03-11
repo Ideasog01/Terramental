@@ -46,6 +46,13 @@ namespace Terramental
         protected override void Initialize()
         {
             _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
+
+            Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
+            AnimationTest test = new AnimationTest();
+            test.Initialise(new Vector2(100, 100), animTexture, new Vector2(64, 128));
+            test.AddAnimation(animTexture);
+            test.SetAnimationIndex(0, 4, 120f);
+
             base.Initialize();
         }
 
@@ -54,7 +61,7 @@ namespace Terramental
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, _playerTexture);
+            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(64, 64));
             _inputManager = new InputManager(_playerCharacter);
 
         }
@@ -64,7 +71,11 @@ namespace Terramental
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _playerCharacter.Update(gameTime);
+            foreach(Sprite sprite in _spriteList)
+            {
+                sprite.Update(gameTime);
+            }
+
             _mainCam.MoveCamera(_playerCharacter);
             _inputManager.Update(gameTime);
 
@@ -82,7 +93,7 @@ namespace Terramental
                 sprite.Draw(gameTime, _spriteBatch);
             }
 
-            _spriteBatch.Draw(_playerTexture, new Rectangle(10, 10, 100, 100), Color.White); //Test
+            //_spriteBatch.Draw(_playerTexture, new Rectangle(10, 10, 100, 100), Color.White); //Test
 
             _spriteBatch.End();
 
