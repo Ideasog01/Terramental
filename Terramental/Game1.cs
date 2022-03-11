@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Terramental
 {
@@ -19,6 +20,8 @@ namespace Terramental
 
         private CameraController _mainCam;
 
+        private static List<Sprite> _spriteList = new List<Sprite>();
+
         public static int screenHeight = 540;
         public static int screenWidth = 960;
 
@@ -34,11 +37,15 @@ namespace Terramental
             _graphics.IsFullScreen = false;
         }
 
+        public static List<Sprite> SpriteList
+        {
+            get { return _spriteList; }
+        }
+        
+
         protected override void Initialize()
         {
             _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
-            
-
             base.Initialize();
         }
 
@@ -69,8 +76,14 @@ namespace Terramental
             GraphicsDevice.Clear(Color.Gray);
 
             _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
-            _playerCharacter.Draw(gameTime, _spriteBatch);
-            _spriteBatch.Draw(_playerTexture, new Rectangle(10, 10, 100, 100), Color.White);
+
+            foreach(Sprite sprite in _spriteList)
+            {
+                sprite.Draw(gameTime, _spriteBatch);
+            }
+
+            _spriteBatch.Draw(_playerTexture, new Rectangle(10, 10, 100, 100), Color.White); //Test
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

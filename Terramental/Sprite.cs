@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
-    class Sprite
+    public class Sprite
     {
         private Vector2 _spritePosition;
         private Texture2D _spriteTexture;
@@ -16,6 +16,7 @@ namespace Terramental
         {
             _spritePosition = startPosition;
             _spriteTexture = texture;
+            Game1.SpriteList.Add(this);
         }
 
         public Vector2 SpritePosition
