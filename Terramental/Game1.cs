@@ -46,10 +46,12 @@ namespace Terramental
 
             //Test Animation
             Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
-            AnimationTest test = new AnimationTest();
+            Sprite test = new Sprite();
             test.Initialise(new Vector2(100, 100), animTexture, new Vector2(64, 128));
-            test.AddAnimation(animTexture);
-            test.SetAnimationIndex(0, 4, 120f);
+
+            Animation testAnim = new Animation(animTexture, 4, 120f);
+            test.Animations.Add(testAnim);
+            
 
             base.Initialize();
         }

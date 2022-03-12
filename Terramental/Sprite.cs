@@ -14,12 +14,10 @@ namespace Terramental
         private Rectangle _spriteRectangle;
         private Rectangle _spriteSourceRectangle;
 
-        private List<Texture2D> _animationSpriteSheets = new List<Texture2D>();
-        private int _animationIndex;
+        private List<Animation> _spriteAnimations = new List<Animation>();
+        private int _animationIndex = 0;
         private float _animationElapsedTime;
-        private float _animationFrameDuration = 0;
         private int _animationFrameIndex;
-        private int _animationFrameCount = 0;
 
         public void Initialise(Vector2 startPosition, Texture2D texture, Vector2 scale)
         {
@@ -46,36 +44,14 @@ namespace Terramental
             get { return _spriteRectangle; }
         }
 
-        public int AnimationFrameCount
+        public List<Animation> Animations
         {
-            set { _animationFrameCount = value; }
-        }
-
-        public float AnimationFrameDuration
-        {
-            set { _animationFrameDuration = value; }
-        }
-
-        public Rectangle SpriteSourceRectangle
-        {
-            get { return _spriteSourceRectangle; }
-            set { _spriteSourceRectangle = value; }
-        }
-
-        public List<Texture2D> Animations
-        {
-            get { return _animationSpriteSheets; }
-        }
-
-        public int AnimationIndex
-        {
-            get { return _animationIndex; }
-            set { _animationIndex = value; }
+            get { return _spriteAnimations; }
         }
 
         public void Update(GameTime gameTime)
         {
-            if(_animationSpriteSheets.Count > 0)
+            if(_spriteAnimations.Count > 0)
             {
                 UpdateAnimationFrames(gameTime);
             }
@@ -85,9 +61,11 @@ namespace Terramental
         {
             _animationElapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            if(_animationElapsedTime >= _animationFrameDuration)
+            Animation animation = _spriteAnimations[_animationIndex];
+
+            if(_animationElapsedTime >= animation.FrameDuration)
             {
-                if(_animationFrameIndex >= _animationFrameCount - 1)
+                if(_animationFrameIndex >= animation.FrameCount - 1)
                 {
                     _animationFrameIndex = 0;
                 }
@@ -106,13 +84,13 @@ namespace Terramental
         {
             _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
 
-            if(_animationSpriteSheets.Count == 0)
+            if(_spriteAnimations.Count == 0)
             {
                 spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
             }
-            else if(_animationIndex < _animationSpriteSheets.Count)
+            else if(_animationIndex < _spriteAnimations.Count)
             {
-                spriteBatch.Draw(_animationSpriteSheets[_animationIndex], _spriteRectangle, _spriteSourceRectangle, Color.White);
+                spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
             }
         }
 
