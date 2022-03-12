@@ -14,8 +14,10 @@ namespace Terramental
 
         private InputManager _inputManager;
         private SpriteManager _spriteManager;
+        private SpawnManager _spawnManager = new SpawnManager();
 
         private PlayerCharacter _playerCharacter = new PlayerCharacter();
+        private BaseCharacter _testEnemy = new BaseCharacter();
 
         private Texture2D _playerTexture;
 
@@ -35,19 +37,37 @@ namespace Terramental
             _graphics.PreferredBackBufferWidth = screenWidth;
             _graphics.IsFullScreen = false;
         }
-        
+
+        public SpawnManager SpawnManager
+        {
+            get { return _spawnManager; }
+        }
+
+        public void LoadFlameSprite(Vector2 position, Vector2 scale, Sprite attachSprite)
+        {
+            Sprite flameSprite = new Sprite();
+            Texture2D spriteTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
+            flameSprite.Initialise(position, spriteTexture, scale, this);
+            flameSprite.AttachSprite = attachSprite;
+
+            Animation flameAnimation = new Animation(spriteTexture, 4, 120f);
+            flameSprite.Animations.Add(flameAnimation);
+
+            flameSprite.Destroy(5);
+        }
+
 
         protected override void Initialize()
         {
             _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
 
             //Test Animation
-            Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
-            Sprite test = new Sprite();
-            test.Initialise(new Vector2(100, 100), animTexture, new Vector2(64, 128));
+            //Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Projectiles/WaterProjectile_SpriteSheet");
+            //Sprite test = new Sprite();
+            //test.Initialise(new Vector2(100, 100), animTexture, new Vector2(64, 128), this);
 
-            Animation testAnim = new Animation(animTexture, 4, 120f);
-            test.Animations.Add(testAnim);
+            //Animation testAnim = new Animation(animTexture, 4, 120f);
+            //test.Animations.Add(testAnim);
             
 
             base.Initialize();
@@ -60,7 +80,9 @@ namespace Terramental
             InitialiseManagers();
 
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96));
+            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96), this);
+            _testEnemy.Initialise(new Vector2(100, 0), _playerTexture, new Vector2(96, 96), this);
+            _spawnManager.enemyCharacters.Add(_testEnemy);
         }
 
         protected override void Update(GameTime gameTime)
@@ -97,6 +119,7 @@ namespace Terramental
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
+            _spawnManager.Update(gameTime);
         }
     }
 }

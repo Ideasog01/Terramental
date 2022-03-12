@@ -26,6 +26,7 @@ namespace Terramental
         private void KeyboardMouseInput()
         {
             KeyboardState keyboardState = Keyboard.GetState();
+            MouseState mouseState = Mouse.GetState();
 
             if(keyboardState.IsKeyDown(Keys.D))
             {
@@ -40,6 +41,13 @@ namespace Terramental
             {
                 _playerCharacter.ActivateUltimate();
             }
+
+            if(mouseState.LeftButton == ButtonState.Pressed)
+            {
+                _playerCharacter.PrimaryAttack();
+            }
+
+            
         }
     }
 }

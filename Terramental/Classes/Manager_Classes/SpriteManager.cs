@@ -35,6 +35,5 @@ namespace Terramental
         {
             _spriteList.Remove(sprite);
         }
-
     }
 }

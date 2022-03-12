@@ -14,11 +14,15 @@ namespace Terramental
 
         private int _elementIndex = 0;
 
-        private float _ultimateAbilityCooldown;
+        private float _ultimateAbilityCooldown = 0;
 
-        private float _ultimateActiveTimer;
+        private float _ultimateActiveTimer = 0;
 
         private bool _ultimateActive;
+
+        private bool _rightDirection;
+
+        private float _attackTimer;
 
         public void ActivateUltimate()
         {
@@ -57,13 +61,21 @@ namespace Terramental
                         Console.WriteLine("ERROR: Element index is invalid during ultimate attack");
                         break;
                 }
-                //Play Animation
             }
         }
 
         public void PlayerMovement(int vertical)
         {
             SpritePosition = new Vector2(SpritePosition.X + (vertical * _playerMovementSpeed), SpritePosition.Y);
+
+            if(vertical > 0)
+            {
+                _rightDirection = true;
+            }
+            else
+            {
+                _rightDirection = false;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -74,10 +86,15 @@ namespace Terramental
             }
             else if(_ultimateActive)
             {
-                DeactivateUltimate();
+                _ultimateActive = false;
             }
 
-            if (_ultimateAbilityCooldown > 0)
+            if(_attackTimer > 0)
+            {
+                _attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (_ultimateAbilityCooldown > 0 && !_ultimateActive)
             {
                 _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -86,21 +103,46 @@ namespace Terramental
 
         private void FireUltimate()
         {
-            //Play Animation
-            
             _ultimateActive = true;
             _ultimateActiveTimer = 10;
         }
 
-        private void FireSwordAttack()
+        public void FireSwordAttack()
         {
-            //Play Animation
-            //Check for enemies within range
-        }
+            if(_attackTimer <= 0)
+            {
+                Rectangle rect;
 
-        private void DeactivateUltimate()
-        {
-            _ultimateActive = false;
+                if (_rightDirection)
+                {
+                    rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
+                }
+                else
+                {
+                    rect = new Rectangle((int)SpritePosition.X - 2, (int)SpritePosition.Y, 96, 96);
+                }
+
+                Collision enemyCheck = new Collision(rect);
+
+                SpawnManager spawnManager = GameManager.SpawnManager;
+
+                foreach (BaseCharacter character in spawnManager.enemyCharacters)
+                {
+                    if (enemyCheck.OnCollision(character.SpriteRectangle))
+                    {
+                        character.TakeDamage(20);
+                        if(!character.IsBurning)
+                        {
+                            GameManager.LoadFlameSprite(character.SpritePosition, new Vector2(64, 128), character);
+                            character.SetStatus(0, 5, 1.5f);
+                        }
+                        
+                    }
+                }
+
+                _attackTimer = 2;
+                enemyCheck.IsActive = false;
+            }
         }
     }
 }
