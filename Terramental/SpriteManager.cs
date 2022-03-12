@@ -31,5 +31,10 @@ namespace Terramental
             }
         }
 
+        public void DestroySprite(Sprite sprite)
+        {
+            _spriteList.Remove(sprite);
+        }
+
     }
 }

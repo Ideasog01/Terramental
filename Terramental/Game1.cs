@@ -16,8 +16,10 @@ namespace Terramental
         private SpriteManager _spriteManager;
 
         private PlayerCharacter _playerCharacter = new PlayerCharacter();
+        private Sprite _testPickup = new Sprite();
 
         private Texture2D _playerTexture;
+        private Texture2D _pickupTexture;
 
         private CameraController _mainCam;
 
@@ -40,7 +42,7 @@ namespace Terramental
         protected override void Initialize()
         {
             _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
-
+            _pickupTexture = Content.Load<Texture2D>("Sprites/Pickups/Fire_Pickup");
 
             //Test Animation
             Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
@@ -60,6 +62,7 @@ namespace Terramental
 
             _mainCam = new CameraController();
             _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96));
+            _testPickup.Initialise(new Vector2(200, 0), _pickupTexture, new Vector2(96, 96));
 
         }
 
@@ -67,8 +70,6 @@ namespace Terramental
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            
 
             _mainCam.MoveCamera(_playerCharacter);
             UpdateManagers(gameTime);

@@ -30,6 +30,11 @@ namespace Terramental
             SpriteManager.SpriteList.Add(this);
         }
 
+        public Rectangle BoxCollision
+        {
+            get { return new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y); }
+        }
+
         public Vector2 SpritePosition
         {
             get { return _spritePosition; }
@@ -108,6 +113,18 @@ namespace Terramental
             else if(_animationIndex < _animationSpriteSheets.Count)
             {
                 spriteBatch.Draw(_animationSpriteSheets[_animationIndex], _spriteRectangle, _spriteSourceRectangle, Color.White);
+            }
+        }
+
+        public bool OnCollision(Rectangle otherObject)
+        {
+            if(BoxCollision.Intersects(otherObject))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
