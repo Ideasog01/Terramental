@@ -27,7 +27,7 @@ namespace Terramental
             _spriteTexture = texture;
             _spriteScale = scale;
 
-            Game1.SpriteList.Add(this);
+            SpriteManager.SpriteList.Add(this);
         }
 
         public Vector2 SpritePosition

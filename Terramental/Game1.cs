@@ -13,14 +13,13 @@ namespace Terramental
         private SpriteBatch _spriteBatch;
 
         private InputManager _inputManager;
+        private SpriteManager _spriteManager;
 
         private PlayerCharacter _playerCharacter = new PlayerCharacter();
 
         private Texture2D _playerTexture;
 
         private CameraController _mainCam;
-
-        private static List<Sprite> _spriteList = new List<Sprite>();
 
         public static int screenHeight = 540;
         public static int screenWidth = 960;
@@ -36,17 +35,14 @@ namespace Terramental
             _graphics.PreferredBackBufferWidth = screenWidth;
             _graphics.IsFullScreen = false;
         }
-
-        public static List<Sprite> SpriteList
-        {
-            get { return _spriteList; }
-        }
         
 
         protected override void Initialize()
         {
             _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
 
+
+            //Test Animation
             Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
             AnimationTest test = new AnimationTest();
             test.Initialise(new Vector2(100, 100), animTexture, new Vector2(64, 128));
@@ -60,9 +56,10 @@ namespace Terramental
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            InitialiseManagers();
+
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(64, 64));
-            _inputManager = new InputManager(_playerCharacter);
+            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96));
 
         }
 
@@ -71,13 +68,10 @@ namespace Terramental
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            foreach(Sprite sprite in _spriteList)
-            {
-                sprite.Update(gameTime);
-            }
+            
 
             _mainCam.MoveCamera(_playerCharacter);
-            _inputManager.Update(gameTime);
+            UpdateManagers(gameTime);
 
             base.Update(gameTime);
         }
@@ -88,16 +82,23 @@ namespace Terramental
 
             _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
 
-            foreach(Sprite sprite in _spriteList)
-            {
-                sprite.Draw(gameTime, _spriteBatch);
-            }
-
-            //_spriteBatch.Draw(_playerTexture, new Rectangle(10, 10, 100, 100), Color.White); //Test
+            _spriteManager.Draw(gameTime, _spriteBatch);
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void InitialiseManagers()
+        {
+            _inputManager = new InputManager(_playerCharacter);
+            _spriteManager = new SpriteManager();
+        }
+
+        private void UpdateManagers(GameTime gameTime)
+        {
+            _inputManager.Update(gameTime);
+            _spriteManager.Update(gameTime);
         }
     }
 }
