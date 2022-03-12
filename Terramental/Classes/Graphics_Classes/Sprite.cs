@@ -49,7 +49,7 @@ namespace Terramental
             get { return _spriteAnimations; }
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             if(_spriteAnimations.Count > 0)
             {

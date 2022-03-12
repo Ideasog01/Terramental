@@ -35,6 +35,11 @@ namespace Terramental
             {
                 _playerCharacter.PlayerMovement(-1);
             }
+
+            if(keyboardState.IsKeyDown(Keys.Q))
+            {
+                _playerCharacter.ActivateUltimate();
+            }
         }
     }
 }

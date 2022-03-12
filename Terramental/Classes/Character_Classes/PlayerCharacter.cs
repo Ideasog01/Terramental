@@ -12,15 +12,17 @@ namespace Terramental
     {
         private int _playerMovementSpeed = 5;
 
-        private int _elementIndex;
+        private int _elementIndex = 0;
 
-        private int _ultimateAbilityCooldown;
+        private float _ultimateAbilityCooldown;
+
+        private float _ultimateActiveTimer;
 
         private bool _ultimateActive;
 
         public void ActivateUltimate()
         {
-            if(_ultimateAbilityCooldown <= 0)
+            if(_ultimateAbilityCooldown <= 0 && _ultimateActiveTimer <= 0)
             {
                 switch(_elementIndex)
                 {
@@ -64,17 +66,41 @@ namespace Terramental
             SpritePosition = new Vector2(SpritePosition.X + (vertical * _playerMovementSpeed), SpritePosition.Y);
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            if(_ultimateActiveTimer > 0)
+            {
+                _ultimateActiveTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else if(_ultimateActive)
+            {
+                DeactivateUltimate();
+            }
+
+            if (_ultimateAbilityCooldown > 0)
+            {
+                _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            
+        }
+
         private void FireUltimate()
         {
             //Play Animation
-            //Spawn Sword
-
+            
+            _ultimateActive = true;
+            _ultimateActiveTimer = 10;
         }
 
         private void FireSwordAttack()
         {
             //Play Animation
             //Check for enemies within range
+        }
+
+        private void DeactivateUltimate()
+        {
+            _ultimateActive = false;
         }
     }
 }
