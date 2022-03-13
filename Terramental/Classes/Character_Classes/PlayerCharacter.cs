@@ -124,19 +124,18 @@ namespace Terramental
 
                 Collision enemyCheck = new Collision(rect);
 
-                SpawnManager spawnManager = GameManager.SpawnManager;
-
-                foreach (BaseCharacter character in spawnManager.enemyCharacters)
+                foreach (BaseCharacter character in SpawnManager.enemyCharacters)
                 {
                     if (enemyCheck.OnCollision(character.SpriteRectangle))
                     {
                         character.TakeDamage(20);
-                        if(!character.IsBurning)
+                        if (!character.IsBurning)
                         {
-                            GameManager.LoadFlameSprite(character.SpritePosition, new Vector2(64, 128), character);
+                            Vector2 scale = new Vector2(64, 128);
+                            SpawnManager.SpawnEffect("Sprites/SpriteSheets/Effects/Flame_SpriteSheet", character.SpritePosition, scale, character, 5);
                             character.SetStatus(0, 5, 1.5f);
                         }
-                        
+
                     }
                 }
 

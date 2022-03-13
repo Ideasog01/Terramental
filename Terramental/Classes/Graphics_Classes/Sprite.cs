@@ -16,8 +16,6 @@ namespace Terramental
         private bool _isActive;
         private Sprite _attachSprite;
 
-        private Game1 _game1;
-
         private List<Animation> _spriteAnimations = new List<Animation>();
         private int _animationIndex = 0;
         private float _animationElapsedTime;
@@ -26,14 +24,16 @@ namespace Terramental
         private float _destroyTimer;
         private bool _destructionActivated;
 
-        public void Initialise(Vector2 startPosition, Texture2D texture, Vector2 scale, Game1 game1)
+        private SpawnManager _spawnManager;
+
+        public void Initialise(Vector2 startPosition, Texture2D texture, Vector2 scale, SpawnManager spawnManager)
         {
             _spritePosition = startPosition;
             _spriteTexture = texture;
             _spriteScale = scale;
-            _game1 = game1;
             _isActive = true;
 
+            _spawnManager = spawnManager;
             SpriteManager.SpriteList.Add(this);
         }
 
@@ -46,11 +46,6 @@ namespace Terramental
         {
             _destroyTimer = destroyTime;
             _destructionActivated = true;
-        }
-
-        public Game1 GameManager
-        {
-            get { return _game1; }
         }
 
         public bool IsActive
@@ -90,6 +85,11 @@ namespace Terramental
         public List<Animation> Animations
         {
             get { return _spriteAnimations; }
+        }
+
+        public SpawnManager SpawnManager
+        {
+            get { return _spawnManager; }
         }
 
         public virtual void Update(GameTime gameTime)

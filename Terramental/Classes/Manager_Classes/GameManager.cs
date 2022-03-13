@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Terramental
 {
-    public class Game1 : Game
+    public class GameManager : Game
     {
         public const int gravity = 3;
 
@@ -14,7 +14,7 @@ namespace Terramental
 
         private InputManager _inputManager;
         private SpriteManager _spriteManager;
-        private SpawnManager _spawnManager = new SpawnManager();
+        private SpawnManager _spawnManager;
 
         private PlayerCharacter _playerCharacter = new PlayerCharacter();
         private BaseCharacter _testEnemy = new BaseCharacter();
@@ -26,7 +26,7 @@ namespace Terramental
         public static int screenHeight = 540;
         public static int screenWidth = 960;
 
-        public Game1()
+        public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -38,24 +38,10 @@ namespace Terramental
             _graphics.IsFullScreen = false;
         }
 
-        public SpawnManager SpawnManager
+        public Texture2D GetTexture(string path)
         {
-            get { return _spawnManager; }
+            return Content.Load<Texture2D>(path);
         }
-
-        public void LoadFlameSprite(Vector2 position, Vector2 scale, Sprite attachSprite)
-        {
-            Sprite flameSprite = new Sprite();
-            Texture2D spriteTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Effects/Flame_SpriteSheet");
-            flameSprite.Initialise(position, spriteTexture, scale, this);
-            flameSprite.AttachSprite = attachSprite;
-
-            Animation flameAnimation = new Animation(spriteTexture, 4, 120f);
-            flameSprite.Animations.Add(flameAnimation);
-
-            flameSprite.Destroy(5);
-        }
-
 
         protected override void Initialize()
         {
@@ -80,8 +66,8 @@ namespace Terramental
             InitialiseManagers();
 
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96), this);
-            _testEnemy.Initialise(new Vector2(100, 0), _playerTexture, new Vector2(96, 96), this);
+            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96), _spawnManager);
+            _testEnemy.Initialise(new Vector2(100, 0), _playerTexture, new Vector2(96, 96), _spawnManager);
             _spawnManager.enemyCharacters.Add(_testEnemy);
         }
 
@@ -113,6 +99,7 @@ namespace Terramental
         {
             _inputManager = new InputManager(_playerCharacter);
             _spriteManager = new SpriteManager();
+            _spawnManager = new SpawnManager(this);
         }
 
         private void UpdateManagers(GameTime gameTime)
