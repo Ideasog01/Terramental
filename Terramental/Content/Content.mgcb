@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Sprites/Enemies/Knight/Knight_Default.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Enemies/Knight/Knight_Default.png
+
 #begin Sprites/Pickups/Fire_Pickup.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -25,7 +37,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Pickups/Fire_Pickup.png
 
-#begin Sprites/Player/Knight_Side.png
+#begin Sprites/Player/PlayerCharacter_Sprite_Fire.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +47,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player/Knight_Side.png
+/build:Sprites/Player/PlayerCharacter_Sprite_Fire.png
 
 #begin Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter

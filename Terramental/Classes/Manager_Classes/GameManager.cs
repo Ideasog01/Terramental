@@ -19,8 +19,6 @@ namespace Terramental
         private PlayerCharacter _playerCharacter = new PlayerCharacter();
         private BaseCharacter _testEnemy = new BaseCharacter();
 
-        private Texture2D _playerTexture;
-
         private CameraController _mainCam;
 
         public static int screenHeight = 540;
@@ -45,8 +43,6 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            _playerTexture = Content.Load<Texture2D>("Sprites/Player/Knight_Side");
-
             //Test Animation
             //Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Projectiles/WaterProjectile_SpriteSheet");
             //Sprite test = new Sprite();
@@ -66,8 +62,8 @@ namespace Terramental
             InitialiseManagers();
 
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, _playerTexture, new Vector2(96, 96), _spawnManager);
-            _testEnemy.Initialise(new Vector2(100, 0), _playerTexture, new Vector2(96, 96), _spawnManager);
+            _playerCharacter.Initialise(Vector2.Zero, GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(96, 96), _spawnManager);
+            _testEnemy.Initialise(new Vector2(100, 0), GetTexture("Sprites/Enemies/Knight/Knight_Default"), new Vector2(96, 96), _spawnManager);
             _spawnManager.enemyCharacters.Add(_testEnemy);
         }
 
