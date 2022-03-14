@@ -33,8 +33,9 @@ namespace Terramental
             effectSprite.Initialise(position, spriteTexture, scale, this);
             effectSprite.AttachSprite = attachSprite;
 
-            Animation flameAnimation = new Animation(spriteTexture, 4, 120f);
-            effectSprite.Animations.Add(flameAnimation);
+            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true);
+
+            effectSprite.Animations.Add(effectAnimation);
 
             effectSprite.Destroy(duration);
         }
@@ -45,7 +46,7 @@ namespace Terramental
             Texture2D spriteTexture = _gameManager.GetTexture(texturePath);
             effectSprite.Initialise(position, spriteTexture, scale, this);
 
-            Animation effectAnimation = new Animation(spriteTexture, 4, 120f);
+            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true);
             effectSprite.Animations.Add(effectAnimation);
 
             effectSprite.Destroy(duration);
