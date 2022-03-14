@@ -62,8 +62,8 @@ namespace Terramental
             InitialiseManagers();
 
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(96, 96), _spawnManager);
-            _testEnemy.Initialise(new Vector2(100, 0), GetTexture("Sprites/Enemies/Knight/Knight_Default"), new Vector2(96, 96), _spawnManager);
+            _playerCharacter.Initialise(Vector2.Zero, GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64), _spawnManager);
+            _testEnemy.Initialise(new Vector2(100, -32), GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96), _spawnManager);
             _spawnManager.enemyCharacters.Add(_testEnemy);
         }
 

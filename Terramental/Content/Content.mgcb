@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Sprites/Enemies/Knight/Knight_Default.png
+#begin Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Enemies/Knight/Knight_Default.png
+/build:Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png
 
 #begin Sprites/Pickups/Fire_Pickup.png
 /importer:TextureImporter
