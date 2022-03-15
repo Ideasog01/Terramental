@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-03-15T09:13:00.5302878+00:00</SourceTime>
+  <SourceTime>2022-03-15T16:00:25.0050473+00:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-15T09:14:06.6108548+00:00</DestTime>
+  <DestTime>2022-03-15T16:02:02.1430222+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
