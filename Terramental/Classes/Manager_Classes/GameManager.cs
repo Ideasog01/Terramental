@@ -72,7 +72,7 @@ namespace Terramental
             _playerCharacter.Initialise(Vector2.Zero, GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64), _spawnManager);
             _testEnemy.Initialise(new Vector2(100, -32), GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), new Vector2(96, 96), _spawnManager);
 
-            Animation knightIdle = new Animation(GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"), 8, 120f, true);
+            Animation knightIdle = new Animation(GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 8, 120f, true);
             _testEnemy.Animations.Add(knightIdle);
             _spawnManager.enemyCharacters.Add(_testEnemy);
         }
