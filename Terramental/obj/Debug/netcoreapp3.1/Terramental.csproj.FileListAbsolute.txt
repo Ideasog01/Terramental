@@ -44,3 +44,6 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\SnowPickup_SpriteSheet.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\WaterPickup_SpriteSheet.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FirePickup_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Walk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Walk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Walk_SpriteSheet.xnb
