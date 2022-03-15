@@ -8,7 +8,7 @@ namespace Terramental
 {
     class PlayerCharacter : BaseCharacter
     {
-        private int _playerMovementSpeed = 5;
+        private float _playerMovementSpeed = 5;
 
         private int _elementIndex = 0;
 
@@ -62,7 +62,7 @@ namespace Terramental
             }
         }
 
-        public void PlayerMovement(int vertical)
+        public void PlayerMovement(float vertical)
         {
             SpritePosition = new Vector2(SpritePosition.X + (vertical * _playerMovementSpeed), SpritePosition.Y);
 
@@ -96,7 +96,6 @@ namespace Terramental
             {
                 _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            
         }
 
         private void FireUltimate()

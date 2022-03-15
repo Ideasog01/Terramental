@@ -147,7 +147,7 @@ namespace Terramental
                     _animationElapsedTime = 0;
                 }
 
-                _spriteSourceRectangle = new Rectangle((_animationFrameIndex * 256), 0, 256, 512);
+                _spriteSourceRectangle = new Rectangle((_animationFrameIndex * animation.SpriteSheet.Width / animation.FrameCount), 0, animation.SpriteSheet.Width / animation.FrameCount, animation.SpriteSheet.Height);
             }
 
             
