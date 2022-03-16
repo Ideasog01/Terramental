@@ -22,6 +22,8 @@ namespace Terramental
 
         private float _attackTimer;
 
+        private bool _isGrounded;
+
         public void ActivateUltimate()
         {
             if(_ultimateAbilityCooldown <= 0 && _ultimateActiveTimer <= 0)
@@ -98,12 +100,27 @@ namespace Terramental
             {
                 _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
+
+            if(!_isGrounded)
+            {
+                SpritePosition += new Vector2(0, 4);
+            }
+            else
+            {
+                _isGrounded = false;
+            }
         }
 
         private void FireUltimate()
         {
             _ultimateActive = true;
             _ultimateActiveTimer = 10;
+        }
+
+        public bool IsGrounded
+        {
+            get { return _isGrounded; }
+            set { _isGrounded = value; }
         }
 
         public void FireSwordAttack()

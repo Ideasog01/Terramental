@@ -24,6 +24,8 @@ namespace Terramental
         public static int screenHeight = 540;
         public static int screenWidth = 960;
 
+        private MapManager _mapManager;
+
         public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,19 +45,21 @@ namespace Terramental
 
         protected override void Initialize()
         {
+            _mapManager = new MapManager(14, 10, 0, this, _spawnManager, _playerCharacter);
+
             Animation animation = new Animation(GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), 4, 120f, true);
             Sprite test = new Sprite();
-            test.Initialise(new Vector2(100, 100), GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
+            test.Initialise(new Vector2(576, 128), GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
             test.Animations.Add(animation);
 
             Animation waterAnim = new Animation(GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), 4, 200f, true);
             Sprite test2 = new Sprite();
-            test2.Initialise(new Vector2(300, 100), GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
+            test2.Initialise(new Vector2(640, 128), GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
             test2.Animations.Add(waterAnim);
 
             Animation snowAnim = new Animation(GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), 4, 120f, true);
             Sprite test3 = new Sprite();
-            test3.Initialise(new Vector2(500, 100), GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
+            test3.Initialise(new Vector2(512, 128), GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
             test3.Animations.Add(snowAnim);
 
 
@@ -69,8 +73,8 @@ namespace Terramental
             InitialiseManagers();
 
             _mainCam = new CameraController();
-            _playerCharacter.Initialise(Vector2.Zero, GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64), _spawnManager);
-            _testEnemy.Initialise(new Vector2(100, -32), GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), new Vector2(96, 96), _spawnManager);
+            _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64), _spawnManager);
+            _testEnemy.Initialise(new Vector2(196, 96), GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), new Vector2(96, 96), _spawnManager);
 
             Animation knightIdle = new Animation(GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 8, 120f, true);
             _testEnemy.Animations.Add(knightIdle);
@@ -84,6 +88,8 @@ namespace Terramental
 
             _mainCam.MoveCamera(_playerCharacter);
             UpdateManagers(gameTime);
+
+            _mapManager.Update();
 
             base.Update(gameTime);
         }

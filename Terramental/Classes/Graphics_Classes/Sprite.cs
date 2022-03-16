@@ -32,6 +32,7 @@ namespace Terramental
             _spriteTexture = texture;
             _spriteScale = scale;
             _isActive = true;
+            _spriteRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, (int)scale.X, (int)scale.Y);
 
             _spawnManager = spawnManager;
             SpriteManager.SpriteList.Add(this);

@@ -29,9 +29,6 @@ namespace Terramental
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 
-            
-             
-
             if(keyboardState.IsKeyDown(Keys.D))
             {
                 _playerCharacter.PlayerMovement(1, gameTime);

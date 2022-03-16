@@ -22,5 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sprites\Enemies\Knight\" />
+    <Folder Include="Content\Sprites\Tiles\" />
   </ItemGroup>
 </Project>
