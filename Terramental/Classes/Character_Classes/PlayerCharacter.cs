@@ -8,7 +8,7 @@ namespace Terramental
 {
     class PlayerCharacter : BaseCharacter
     {
-        private float _playerMovementSpeed = 5;
+        private float _playerMovementSpeed = 0.5f;
 
         private int _elementIndex = 0;
 
@@ -62,17 +62,19 @@ namespace Terramental
             }
         }
 
-        public void PlayerMovement(float vertical)
+        public void PlayerMovement(float vertical , GameTime gameTime)
         {
-            SpritePosition = new Vector2(SpritePosition.X + (vertical * _playerMovementSpeed), SpritePosition.Y);
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if(vertical > 0)
             {
                 _rightDirection = true;
+                SpritePosition += new Vector2(_playerMovementSpeed * deltaTime, 0);
             }
             else
             {
                 _rightDirection = false;
+                SpritePosition += new Vector2(-_playerMovementSpeed * deltaTime, 0);
             }
         }
 

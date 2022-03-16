@@ -9,6 +9,7 @@ namespace Terramental
     class InputManager
     {
         private PlayerCharacter _playerCharacter;
+        private float _verticalInput;
 
         public InputManager(PlayerCharacter playerCharacter)
         {
@@ -19,22 +20,25 @@ namespace Terramental
         {
             if(_playerCharacter != null)
             {
-                KeyboardMouseInput();
+                KeyboardMouseInput(gameTime);
             }
         }
 
-        private void KeyboardMouseInput()
+        private void KeyboardMouseInput(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 
+            
+             
+
             if(keyboardState.IsKeyDown(Keys.D))
             {
-                _playerCharacter.PlayerMovement(1);
+                _playerCharacter.PlayerMovement(1, gameTime);
             }
             else if(keyboardState.IsKeyDown(Keys.A))
             {
-                _playerCharacter.PlayerMovement(-1);
+                _playerCharacter.PlayerMovement(-1, gameTime);
             }
 
             if(keyboardState.IsKeyDown(Keys.Q))
