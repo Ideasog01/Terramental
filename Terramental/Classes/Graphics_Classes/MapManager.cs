@@ -15,6 +15,7 @@ namespace Terramental
         private SpawnManager _spawnManager;
         private PlayerCharacter _playerCharacter;
         private List<Tile> _tileList = new List<Tile>();
+        private GameManager _gameManager;
 
         public MapManager(int width, int height, int levelIndex, GameManager gameManager, SpawnManager spawnManager, PlayerCharacter playerCharacter)
         {
@@ -24,6 +25,7 @@ namespace Terramental
             _defaultTileTexture = gameManager.GetTexture("Sprites/Tiles/DefaultTile");
             _spawnManager = spawnManager;
             _playerCharacter = playerCharacter;
+            _gameManager = gameManager;
 
             GenerateMap();
         }
@@ -46,9 +48,15 @@ namespace Terramental
                     tile.Initialise(new Vector2(x * 64, y * 64), _defaultTileTexture, new Vector2(64, 64), _spawnManager);
                     _tileList.Add(tile);
 
-                    if(y * 64 >= 400)
+                    if(y * 64 == 448)
                     {
                         tile.GroundTile = true;
+                    }
+
+                    if(x * 64 == 320 && y * 64 == 384)
+                    {
+                        tile.WallTile = true;
+                        tile.SpriteTexture = _gameManager.GetTexture("Sprites/Tiles/Tile-Fire");
                     }
                 }
             }

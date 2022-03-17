@@ -24,6 +24,22 @@ namespace Terramental
 
         private bool _isGrounded;
 
+        private bool _rightDisabled;
+
+        private bool _leftDisabled;
+
+        public bool RightDisabled
+        {
+            get { return _rightDisabled; }
+            set { _rightDisabled = value; }
+        }
+
+        public bool LeftDisabled
+        {
+            get { return _leftDisabled; }
+            set { _leftDisabled = value; }
+        }
+
         public void ActivateUltimate()
         {
             if(_ultimateAbilityCooldown <= 0 && _ultimateActiveTimer <= 0)
@@ -70,13 +86,24 @@ namespace Terramental
 
             if(vertical > 0)
             {
-                _rightDirection = true;
-                SpritePosition += new Vector2(_playerMovementSpeed * deltaTime, 0);
+                if(!_rightDisabled)
+                {
+                    _rightDirection = true;
+                    SpritePosition += new Vector2(_playerMovementSpeed * deltaTime, 0);
+                }
+
+                
+                _leftDisabled = false;
             }
-            else
+            else if(!_leftDisabled)
             {
-                _rightDirection = false;
-                SpritePosition += new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                if(!_leftDisabled)
+                {
+                    _rightDirection = false;
+                    SpritePosition += new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                }
+                
+                _rightDisabled = false;
             }
         }
 
@@ -108,6 +135,20 @@ namespace Terramental
             else
             {
                 _isGrounded = false;
+            }
+        }
+
+        public void WallCollision()
+        {
+            if(_rightDirection)
+            {
+                _rightDisabled = true;
+                _leftDisabled = false;
+            }
+            else
+            {
+                _rightDisabled = false;
+                _rightDisabled = false;
             }
         }
 

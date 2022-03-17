@@ -55,6 +55,12 @@ namespace Terramental
             set { _isActive = value; }
         }
 
+        public Texture2D SpriteTexture
+        {
+            get { return _spriteTexture; }
+            set { _spriteTexture = value; }
+        }
+
         public Sprite AttachSprite
         {
             get { return _attachSprite; }
