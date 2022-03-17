@@ -51,6 +51,7 @@ namespace Terramental
                     if(y * 64 == 448)
                     {
                         tile.GroundTile = true;
+                        tile.SpriteTexture = _gameManager.GetTexture("Sprites/Tiles/Tile-Fire");
                     }
 
                     if(x * 64 == 320 && y * 64 == 384)
