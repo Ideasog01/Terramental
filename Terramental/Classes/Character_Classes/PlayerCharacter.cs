@@ -18,27 +18,13 @@ namespace Terramental
 
         private bool _ultimateActive;
 
-        private bool _rightDirection;
-
         private float _attackTimer;
 
         private bool _isGrounded;
 
-        private bool _rightDisabled;
+        private bool _disableRight;
 
-        private bool _leftDisabled;
-
-        public bool RightDisabled
-        {
-            get { return _rightDisabled; }
-            set { _rightDisabled = value; }
-        }
-
-        public bool LeftDisabled
-        {
-            get { return _leftDisabled; }
-            set { _leftDisabled = value; }
-        }
+        private bool _disableLeft;
 
         public void ActivateUltimate()
         {
@@ -86,25 +72,35 @@ namespace Terramental
 
             if(vertical > 0)
             {
-                if(!_rightDisabled)
+                if(!_disableRight)
                 {
-                    _rightDirection = true;
-                    SpritePosition += new Vector2(_playerMovementSpeed * deltaTime, 0);
+                    SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                    _disableLeft = false;
                 }
-
-                
-                _leftDisabled = false;
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
             }
-            else if(!_leftDisabled)
+            else if(vertical < 0)
             {
-                if(!_leftDisabled)
+                if(!_disableLeft)
                 {
-                    _rightDirection = false;
-                    SpritePosition += new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                    SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                    _disableRight = false;
                 }
-                
-                _rightDisabled = false;
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
             }
+            
+            if(vertical == 0)
+            {
+                SpriteVelocity = new Vector2(0, 0);
+            }
+
+            SpritePosition += SpriteVelocity;
         }
 
         public override void Update(GameTime gameTime)
@@ -130,7 +126,8 @@ namespace Terramental
 
             if(!_isGrounded)
             {
-                SpritePosition += new Vector2(0, 4);
+                SpriteVelocity = new Vector2(0, 4);
+                SpritePosition += SpriteVelocity;
             }
             else
             {
@@ -138,17 +135,16 @@ namespace Terramental
             }
         }
 
-        public void WallCollision()
+        public void WallCollision(bool left, bool right)
         {
-            if(_rightDirection)
+            if(left && SpriteVelocity.X < 0)
             {
-                _rightDisabled = true;
-                _leftDisabled = false;
+                _disableLeft = true;
             }
-            else
+
+            if(right && SpriteVelocity.X > 0)
             {
-                _rightDisabled = false;
-                _rightDisabled = false;
+                _disableRight = true;
             }
         }
 
@@ -170,14 +166,7 @@ namespace Terramental
             {
                 Rectangle rect;
 
-                if (_rightDirection)
-                {
-                    rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
-                }
-                else
-                {
-                    rect = new Rectangle((int)SpritePosition.X - 2, (int)SpritePosition.Y, 96, 96);
-                }
+                rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
 
                 Collision enemyCheck = new Collision(rect);
 

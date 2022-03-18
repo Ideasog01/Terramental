@@ -82,7 +82,7 @@ namespace Terramental
             _spawnManager.enemyCharacters.Add(_testEnemy);
 
             _healthPickup = new HealthPickup(_playerCharacter, 20);
-            _healthPickup.Initialise(new Vector2(400, 0), GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64,64), _spawnManager);
+            _healthPickup.Initialise(new Vector2(400, 384), GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64,64), _spawnManager);
 
 
         }

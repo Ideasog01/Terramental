@@ -10,6 +10,7 @@ namespace Terramental
     {
         private Vector2 _spritePosition;
         private Vector2 _spriteScale;
+        private Vector2 _spriteVelocity;
         private Texture2D _spriteTexture;
         private Rectangle _spriteRectangle;
         private Rectangle _spriteSourceRectangle;
@@ -70,6 +71,12 @@ namespace Terramental
         public Rectangle BoxCollision
         {
             get { return new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y); }
+        }
+
+        public Vector2 SpriteVelocity
+        {
+            get { return _spriteVelocity; }
+            set { _spriteVelocity = value; }
         }
 
         public Vector2 SpritePosition
