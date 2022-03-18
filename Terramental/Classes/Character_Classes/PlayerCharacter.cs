@@ -198,13 +198,7 @@ namespace Terramental
                 _isJumping = true;
                 _jumpHeight = SpritePosition.Y - 150;
                 _jumpSpeed = -5;
-                
-                
-                
             }
-            
-
-
         }
 
         private void PlayerJumpBehavior(GameTime gameTime)
@@ -241,7 +235,7 @@ namespace Terramental
             {
                 if (!_isJumping)
                 {
-                    SpriteVelocity = new Vector2(0, 4);
+                    SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
                     
                 }
             }

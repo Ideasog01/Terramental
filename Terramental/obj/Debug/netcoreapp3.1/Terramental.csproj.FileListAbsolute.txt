@@ -107,3 +107,6 @@ D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.genrun
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb
