@@ -8,6 +8,10 @@ namespace Terramental
 {
     class SpriteManager
     {
+        /// <summary>
+        /// Controls all loaded sprites
+        /// </summary>
+
         private static List<Sprite> _spriteList = new List<Sprite>();
 
         public static List<Sprite> SpriteList

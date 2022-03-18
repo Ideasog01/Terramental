@@ -6,10 +6,19 @@ namespace Terramental
 {
     class Tile : Sprite
     {
+        /// <summary>
+        /// Tiles make up levels and are managed by the TileManager class
+        /// </summary>
+
+        #region Variables
+
         private bool _isGroundTile;
 
         private bool _isWallTile;
 
+        #endregion
+
+        #region Properties
         public bool GroundTile
         {
             get { return _isGroundTile; }
@@ -21,6 +30,10 @@ namespace Terramental
             get { return _isWallTile; }
             set { _isWallTile = value; }
         }
+
+        #endregion
+
+        #region CollisionDetection
 
         public void CheckCollision(PlayerCharacter playerCharacter)
         {
@@ -57,5 +70,7 @@ namespace Terramental
         {
             return this.SpriteRectangle.Top + this.SpriteVelocity.Y < sprite.SpriteRectangle.Bottom && this.SpriteRectangle.Bottom > sprite.SpriteRectangle.Bottom && this.SpriteRectangle.Right > sprite.SpriteRectangle.Left && this.SpriteRectangle.Left < sprite.SpriteRectangle.Right;
         }
+
+        #endregion
     }
 }

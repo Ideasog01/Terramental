@@ -8,6 +8,10 @@ namespace Terramental
 {
     public class Animation
     {
+        /// <summary>
+        /// Use this class to add animations to sprites. This class stores all the animation's data.
+        /// </summary>
+
         private Texture2D _spriteSheet;
         private int _frameCount;
         private float _frameDuration;

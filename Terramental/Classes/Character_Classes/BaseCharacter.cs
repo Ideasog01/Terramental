@@ -7,6 +7,10 @@ namespace Terramental
 {
     public class BaseCharacter : Sprite
     {
+        /// <summary>
+        /// All characters inherit from BaseCharacter class
+        /// </summary>
+
         private int _characterMaxHealth = 100;
 
         private int _characterHealth = 80;

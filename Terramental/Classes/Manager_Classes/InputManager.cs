@@ -8,8 +8,11 @@ namespace Terramental
 {
     class InputManager
     {
+        /// <summary>
+        /// InputManager controls all essential player input
+        /// </summary>
+
         private PlayerCharacter _playerCharacter;
-        private float _verticalInput;
 
         public InputManager(PlayerCharacter playerCharacter)
         {

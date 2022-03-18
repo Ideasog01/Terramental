@@ -12,25 +12,23 @@ namespace Terramental
         private int _mapHeight;
         private int _levelIndex;
         private Texture2D _defaultTileTexture;
-        private SpawnManager _spawnManager;
         private PlayerCharacter _playerCharacter;
         private List<Tile> _tileList = new List<Tile>();
         private GameManager _gameManager;
 
-        public MapManager(int width, int height, int levelIndex, GameManager gameManager, SpawnManager spawnManager, PlayerCharacter playerCharacter)
+        public MapManager(int width, int height, int levelIndex, GameManager gameManager, PlayerCharacter playerCharacter)
         {
             _mapWidth = width;
             _mapHeight = height;
             _levelIndex = levelIndex;
             _defaultTileTexture = gameManager.GetTexture("Sprites/Tiles/DefaultTile");
-            _spawnManager = spawnManager;
             _playerCharacter = playerCharacter;
             _gameManager = gameManager;
 
             GenerateMap();
         }
 
-        public void Update()
+        public void UpdateTiles()
         {
             foreach(Tile tile in _tileList)
             {
@@ -45,7 +43,7 @@ namespace Terramental
                 for(int y = 0; y < _mapHeight; y++)
                 {
                     Tile tile = new Tile();
-                    tile.Initialise(new Vector2(x * 64, y * 64), _defaultTileTexture, new Vector2(64, 64), _spawnManager);
+                    tile.Initialise(new Vector2(x * 64, y * 64), _defaultTileTexture, new Vector2(64, 64));
                     _tileList.Add(tile);
 
                     if(y * 64 == 448)
