@@ -32,6 +32,7 @@ namespace Terramental
             _spriteTexture = texture;
             _spriteScale = scale;
             _isActive = true;
+            _spriteRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, (int)scale.X, (int)scale.Y);
 
             _spawnManager = spawnManager;
             SpriteManager.SpriteList.Add(this);
@@ -52,6 +53,12 @@ namespace Terramental
         {
             get { return _isActive; }
             set { _isActive = value; }
+        }
+
+        public Texture2D SpriteTexture
+        {
+            get { return _spriteTexture; }
+            set { _spriteTexture = value; }
         }
 
         public Sprite AttachSprite
