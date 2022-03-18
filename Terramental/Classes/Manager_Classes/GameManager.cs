@@ -24,6 +24,8 @@ namespace Terramental
         public static int screenHeight = 540;
         public static int screenWidth = 960;
 
+        private HealthPickup _healthPickup;
+
         public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,14 +45,21 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            //Test Animation
-            //Texture2D animTexture = Content.Load<Texture2D>("Sprites/SpriteSheets/Projectiles/WaterProjectile_SpriteSheet");
-            //Sprite test = new Sprite();
-            //test.Initialise(new Vector2(100, 100), animTexture, new Vector2(64, 128), this);
+            Animation animation = new Animation(GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), 4, 120f, true);
+            Sprite test = new Sprite();
+            test.Initialise(new Vector2(100, 100), GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
+            test.Animations.Add(animation);
 
-            //Animation testAnim = new Animation(animTexture, 4, 120f);
-            //test.Animations.Add(testAnim);
-            
+            Animation waterAnim = new Animation(GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), 4, 200f, true);
+            Sprite test2 = new Sprite();
+            test2.Initialise(new Vector2(300, 100), GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
+            test2.Animations.Add(waterAnim);
+
+            Animation snowAnim = new Animation(GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), 4, 120f, true);
+            Sprite test3 = new Sprite();
+            test3.Initialise(new Vector2(500, 100), GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), new Vector2(64, 64), _spawnManager);
+            test3.Animations.Add(snowAnim);
+
 
             base.Initialize();
         }
@@ -63,14 +72,24 @@ namespace Terramental
 
             _mainCam = new CameraController();
             _playerCharacter.Initialise(Vector2.Zero, GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64), _spawnManager);
-            _testEnemy.Initialise(new Vector2(100, -32), GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96), _spawnManager);
+            _testEnemy.Initialise(new Vector2(100, -32), GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), new Vector2(96, 96), _spawnManager);
+
+            Animation knightIdle = new Animation(GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 8, 120f, true);
+            _testEnemy.Animations.Add(knightIdle);
             _spawnManager.enemyCharacters.Add(_testEnemy);
+
+            _healthPickup = new HealthPickup(_playerCharacter, 20);
+            _healthPickup.Initialise(new Vector2(400, 0), GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64,64), _spawnManager);
+
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            _healthPickup.CheckCollision();
 
             _mainCam.MoveCamera(_playerCharacter);
             UpdateManagers(gameTime);

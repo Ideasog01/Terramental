@@ -126,21 +126,31 @@ namespace Terramental
 
             Animation animation = _spriteAnimations[_animationIndex];
 
-            if(_animationElapsedTime >= animation.FrameDuration)
+            if(animation.AnimationActive)
             {
-                if(_animationFrameIndex >= animation.FrameCount - 1)
+                if (_animationElapsedTime >= animation.FrameDuration)
                 {
-                    _animationFrameIndex = 0;
-                }
-                else
-                {
-                    _animationFrameIndex++;
+                    if (_animationFrameIndex >= animation.FrameCount - 1)
+                    {
+                        _animationFrameIndex = 0;
+
+                        if(!animation.LoopActive)
+                        {
+                            animation.AnimationActive = false;
+                        }
+                    }
+                    else
+                    {
+                        _animationFrameIndex++;
+                    }
+
+                    _animationElapsedTime = 0;
                 }
 
-                _animationElapsedTime = 0;
+                _spriteSourceRectangle = new Rectangle((_animationFrameIndex * animation.SpriteSheet.Width / animation.FrameCount), 0, animation.SpriteSheet.Width / animation.FrameCount, animation.SpriteSheet.Height);
             }
 
-            _spriteSourceRectangle = new Rectangle((_animationFrameIndex * 256), 0, 256, 512);
+            
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
