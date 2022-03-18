@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< HEAD:Terramental/Content/obj/Windows/Content/Sprites/Tiles/DefaultTile.mgcontent
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/DefaultTile.png</SourceFile>
   <SourceTime>2022-03-16T21:40:19.1313053+00:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Tiles/DefaultTile.xnb</DestFile>
   <DestTime>2022-03-17T21:56:47.3890259+00:00</DestTime>
+=======
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/FlamePickup_SpriteSheet.png</SourceFile>
+  <SourceTime>2022-03-14T22:54:42.0137894+00:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Pickups/FlamePickup_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-03-14T22:56:50.1873082+00:00</DestTime>
+>>>>>>> health-pickup:Terramental/Content/obj/Windows/Content/Sprites/Pickups/FlamePickup_SpriteSheet.mgcontent
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

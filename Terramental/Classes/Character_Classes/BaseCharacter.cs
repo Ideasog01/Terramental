@@ -9,7 +9,7 @@ namespace Terramental
     {
         private int _characterMaxHealth = 100;
 
-        private int _characterHealth = 100;
+        private int _characterHealth = 80;
 
         private bool _isBurning;
         private float _burnTimer;
@@ -68,6 +68,22 @@ namespace Terramental
                     _burnTimer = 0;
                 }
             }
+        }
+
+        public void Heal(int amount) { 
+        
+            if(_characterHealth + amount > _characterMaxHealth)
+            {
+                _characterHealth = _characterMaxHealth;
+            }
+            else
+            {
+                _characterHealth += amount;
+                
+            }
+
+
+
         }
     }
 }

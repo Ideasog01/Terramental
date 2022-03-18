@@ -25,6 +25,7 @@ namespace Terramental
         public static int screenWidth = 960;
 
         private MapManager _mapManager;
+        private HealthPickup _healthPickup;
 
         public GameManager()
         {
@@ -79,12 +80,19 @@ namespace Terramental
             Animation knightIdle = new Animation(GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 8, 120f, true);
             _testEnemy.Animations.Add(knightIdle);
             _spawnManager.enemyCharacters.Add(_testEnemy);
+
+            _healthPickup = new HealthPickup(_playerCharacter, 20);
+            _healthPickup.Initialise(new Vector2(400, 0), GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64,64), _spawnManager);
+
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            _healthPickup.CheckCollision();
 
             _mainCam.MoveCamera(_playerCharacter);
             UpdateManagers(gameTime);
