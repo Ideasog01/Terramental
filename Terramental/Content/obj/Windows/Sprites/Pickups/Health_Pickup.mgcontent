@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/londr/Desktop/Terramental-Animation-Branch/Terramental/Content/Sprites/Pickups/Health_Pickup.png</SourceFile>
-  <SourceTime>2022-03-18T13:51:10.5968189+00:00</SourceTime>
-  <DestFile>C:/Users/londr/Desktop/Terramental-Animation-Branch/Terramental/Content/bin/Windows/Sprites/Pickups/Health_Pickup.xnb</DestFile>
-  <DestTime>2022-03-18T13:52:45.3630958+00:00</DestTime>
+  <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Pickups/Health_Pickup.png</SourceFile>
+  <SourceTime>2022-03-18T19:55:30.3061413+00:00</SourceTime>
+  <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Sprites/Pickups/Health_Pickup.xnb</DestFile>
+  <DestTime>2022-03-18T21:07:25.6142907+00:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
+  <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T17:17:54+01:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T16:17:54+00:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
