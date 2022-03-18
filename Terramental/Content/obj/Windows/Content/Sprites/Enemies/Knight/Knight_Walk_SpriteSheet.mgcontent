@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Walk_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-03-15T15:33:29.770116+00:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Enemies/Knight/Knight_Walk_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-15T15:35:28.6182171+00:00</DestTime>
+
+
+
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Tile-Fire.png</SourceFile>
+  <SourceTime>2022-03-17T21:54:40.4220812+00:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Tiles/Tile-Fire.xnb</DestFile>
+  <DestTime>2022-03-17T22:03:34.9249398+00:00</DestTime>
+
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

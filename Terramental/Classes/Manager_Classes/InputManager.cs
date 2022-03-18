@@ -8,8 +8,11 @@ namespace Terramental
 {
     class InputManager
     {
+        /// <summary>
+        /// InputManager controls all essential player input
+        /// </summary>
+
         private PlayerCharacter _playerCharacter;
-        private float _verticalInput;
 
         public InputManager(PlayerCharacter playerCharacter)
         {
@@ -29,16 +32,17 @@ namespace Terramental
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 
-            
-             
-
-            if(keyboardState.IsKeyDown(Keys.D))
+            if (keyboardState.IsKeyDown(Keys.D))
             {
                 _playerCharacter.PlayerMovement(1, gameTime);
             }
-            else if(keyboardState.IsKeyDown(Keys.A))
+            else if (keyboardState.IsKeyDown(Keys.A))
             {
                 _playerCharacter.PlayerMovement(-1, gameTime);
+            }
+            else if(keyboardState.IsKeyUp(Keys.D) && keyboardState.IsKeyUp(Keys.A))
+            {
+                _playerCharacter.PlayerMovement(0, gameTime);
             }
 
             if(keyboardState.IsKeyDown(Keys.Q))
@@ -50,8 +54,6 @@ namespace Terramental
             {
                 _playerCharacter.PrimaryAttack();
             }
-
-            
         }
     }
 }

@@ -7,6 +7,10 @@ namespace Terramental
 {
     class CameraController
     {
+        /// <summary>
+        /// The class responsible for controlling the player camera
+        /// </summary>
+
         public Matrix Transform { get; private set; }
 
         public void MoveCamera(Sprite target)

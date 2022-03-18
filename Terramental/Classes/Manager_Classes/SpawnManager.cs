@@ -1,36 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
-    public class SpawnManager
+    public static class SpawnManager
     {
-        public GameManager _gameManager;
+        /// <summary>
+        /// Controls the majority of loaded objects
+        /// </summary>
 
-        public List<BaseCharacter> enemyCharacters = new List<BaseCharacter>();
-        public List<Sprite> effects = new List<Sprite>();
+        public static GameManager _gameManager;
 
-        public SpawnManager(GameManager gameManager)
+        public static List<BaseCharacter> enemyCharacters = new List<BaseCharacter>();
+        public static List<Sprite> effects = new List<Sprite>();
+
+        public static void Update(GameTime gameTime)
         {
-            _gameManager = gameManager;
-        }
+            //Updates all characters in the enemy characters list
 
-        public void Update(GameTime gameTime)
-        {
             foreach(BaseCharacter character in enemyCharacters)
             {
                 character.UpdateCharacter(gameTime);
             }
         }
 
-        public virtual void SpawnEffect(string texturePath, Vector2 position, Vector2 scale, Sprite attachSprite, float duration)
+        public static void SpawnAttachEffect(string texturePath, Vector2 position, Vector2 scale, Sprite attachSprite, float duration)
         {
             Sprite effectSprite = new Sprite();
             Texture2D spriteTexture = _gameManager.GetTexture(texturePath);
-            effectSprite.Initialise(position, spriteTexture, scale, this);
+            effectSprite.Initialise(position, spriteTexture, scale);
             effectSprite.AttachSprite = attachSprite;
 
             Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true);
@@ -40,11 +39,11 @@ namespace Terramental
             effectSprite.Destroy(duration);
         }
 
-        public virtual void SpawnEffect(string texturePath, Vector2 position, Vector2 scale, float duration)
+        public static void SpawnEffect(string texturePath, Vector2 position, Vector2 scale, float duration)
         {
             Sprite effectSprite = new Sprite();
             Texture2D spriteTexture = _gameManager.GetTexture(texturePath);
-            effectSprite.Initialise(position, spriteTexture, scale, this);
+            effectSprite.Initialise(position, spriteTexture, scale);
 
             Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true);
             effectSprite.Animations.Add(effectAnimation);
