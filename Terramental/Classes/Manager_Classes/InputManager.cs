@@ -54,6 +54,12 @@ namespace Terramental
             {
                 _playerCharacter.PrimaryAttack();
             }
+
+            if (keyboardState.IsKeyDown(Keys.Space))
+            {
+                _playerCharacter.PlayerJump();
+            }
         }
+
     }
 }

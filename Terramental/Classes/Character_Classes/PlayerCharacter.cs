@@ -23,6 +23,9 @@ namespace Terramental
         private float _ultimateActiveTimer = 0;
         private float _attackTimer;
         private int _elementIndex = 0;
+        private bool _isJumping;
+        private float _jumpHeight;
+        private float _jumpSpeed;
 
         #region Properties
 
@@ -173,7 +176,6 @@ namespace Terramental
                 SpriteVelocity = new Vector2(0, 0);
             }
 
-            SpritePosition += SpriteVelocity;
         }
 
         public override void Update(GameTime gameTime)
@@ -181,8 +183,48 @@ namespace Terramental
             UpdateUltimateStatus(gameTime);
 
             GroundCollision();
+
+            PlayerJumpBehavior(gameTime);
+
+            SpritePosition += SpriteVelocity;
+
         }
 
+        public void PlayerJump()
+        {
+            
+            if (!_isJumping && _isGrounded)
+            {
+                _isJumping = true;
+                _jumpHeight = SpritePosition.Y - 150;
+                _jumpSpeed = -5;
+            }
+        }
+
+        private void PlayerJumpBehavior(GameTime gameTime)
+        {
+
+            if (_isJumping)
+            {
+               
+                SpriteVelocity += new Vector2(0, _jumpSpeed);
+
+                float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
+
+                if (_jumpSpeed < -1 && distance < 128)
+                {
+                    _jumpSpeed += 1f;
+                }
+             
+                if (SpritePosition.Y == _jumpHeight)
+                {
+                    _isJumping = false;
+                }
+
+
+
+            }
+        }
         #endregion
 
         #region Collisions
@@ -191,14 +233,18 @@ namespace Terramental
         {
             if (!_isGrounded)
             {
-                SpriteVelocity = new Vector2(0, 4);
-                SpritePosition += SpriteVelocity;
+                if (!_isJumping)
+                {
+                    SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
+                    
+                }
             }
             else
             {
                 _isGrounded = false;
             }
         }
+       
 
         public void WallCollision(bool left, bool right)
         {

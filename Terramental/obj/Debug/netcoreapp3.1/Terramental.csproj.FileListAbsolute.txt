@@ -51,3 +51,62 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\DefaultTile.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile-Fire.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Health_Pickup.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Walk_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Walk_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FlamePickup_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Sprite_Default.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Attack_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Idle_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Walk_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FirePickup_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Health_Pickup.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\SnowPickup_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\WaterPickup_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Effects\Flame_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Projectiles\WaterProjectile_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\DefaultTile.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile-Fire.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Terramental.exe
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Terramental.deps.json
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Terramental.runtimeconfig.json
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Terramental.runtimeconfig.dev.json
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Terramental.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Terramental.pdb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Microsoft.VisualBasic.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct2D1.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct3D11.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct3D9.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.DXGI.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Mathematics.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.MediaFoundation.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.XAudio2.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\SharpDX.XInput.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\debian-x64\native\libuv.so
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\fedora-x64\native\libuv.so
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\opensuse-x64\native\libuv.so
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\osx\native\libuv.dylib
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\rhel-x64\native\libuv.so
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.AssemblyReference.cache
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfoInputs.cache
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfo.cs
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.CoreCompileInputs.cache
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.CopyComplete
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.dll
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.pdb
+D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.genruntimeconfig.cache
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb

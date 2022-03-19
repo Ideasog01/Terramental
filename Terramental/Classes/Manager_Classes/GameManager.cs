@@ -55,7 +55,10 @@ namespace Terramental
             InitialiseManagers();
 
             _mainCam = new CameraController();
+
             _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64));
+
+
         }
 
         protected override void Update(GameTime gameTime)
