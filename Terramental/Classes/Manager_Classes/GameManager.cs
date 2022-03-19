@@ -56,14 +56,7 @@ namespace Terramental
 
             _mainCam = new CameraController();
 
-            _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
-            Animation idle = new Animation(GetTexture("Sprites/Player/Idle_Fire_SpriteSheet"), 5, 120f, true);
-            _playerCharacter.Animations.Add(idle);
-
-            Sprite firePickup = new Sprite();
-            firePickup.Initialise(new Vector2(300, 382), GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));
-            Animation fireAnimation = new Animation(GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), 4, 120f, true);
-            firePickup.Animations.Add(fireAnimation);
+            _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64));
 
 
         }
