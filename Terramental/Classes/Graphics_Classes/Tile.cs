@@ -42,6 +42,7 @@ namespace Terramental
                 if (TopCollision(playerCharacter))
                 {
                     playerCharacter.IsGrounded = true;
+                    playerCharacter.IsDoubleJumpUsed = false;
                 }
             }
 

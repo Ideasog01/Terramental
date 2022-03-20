@@ -24,6 +24,7 @@ namespace Terramental
         private float _attackTimer;
         private int _elementIndex = 0;
         private bool _isJumping;
+        private bool _isDoubleJumpUsed;
         private float _jumpHeight;
         private float _jumpSpeed;
 
@@ -33,6 +34,12 @@ namespace Terramental
         {
             get { return _isGrounded; }
             set { _isGrounded = value; }
+        }
+
+        public bool IsDoubleJumpUsed
+        {
+            get { return _isDoubleJumpUsed; }
+            set { _isDoubleJumpUsed = value; }
         }
 
         #endregion
@@ -148,6 +155,7 @@ namespace Terramental
 
             if (vertical > 0)
             {
+                // IsFacingRight = true;
                 if (!_disableRight)
                 {
                     SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
@@ -160,6 +168,7 @@ namespace Terramental
             }
             else if (vertical < 0)
             {
+                // IsFacingRight = false;
                 if (!_disableLeft)
                 {
                     SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
@@ -178,11 +187,11 @@ namespace Terramental
 
         }
 
-        public override void Update(GameTime gameTime)
+        public void UpdatePlayerCharacter(GameTime gameTime)
         {
             UpdateUltimateStatus(gameTime);
 
-            GroundCollision();
+            ApplyGravity();
 
             PlayerJumpBehavior(gameTime);
 
@@ -192,9 +201,18 @@ namespace Terramental
 
         public void PlayerJump()
         {
-            
+            if (_isJumping && !_isDoubleJumpUsed && !_isGrounded)
+            {
+                _isGrounded = false;
+                _isJumping = true;
+                _isDoubleJumpUsed = true;
+                _jumpHeight = SpritePosition.Y - 150;
+                _jumpSpeed = -5;
+            }
+
             if (!_isJumping && _isGrounded)
             {
+                _isGrounded = false;
                 _isJumping = true;
                 _jumpHeight = SpritePosition.Y - 150;
                 _jumpSpeed = -5;
@@ -219,6 +237,7 @@ namespace Terramental
                 if (SpritePosition.Y == _jumpHeight)
                 {
                     _isJumping = false;
+                    _isGrounded = false;
                 }
 
 
@@ -229,7 +248,7 @@ namespace Terramental
 
         #region Collisions
 
-        public void GroundCollision()
+        public void ApplyGravity()
         {
             if (!_isGrounded)
             {
@@ -237,11 +256,7 @@ namespace Terramental
                 {
                     SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
                     
-                }
-            }
-            else
-            {
-                _isGrounded = false;
+                }        
             }
         }
        

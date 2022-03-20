@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle_Water_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-03-18T21:38:05.5301639+00:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle_Water_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-18T21:39:31.3774739+00:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Idle_Water_SpriteSheet.png</SourceFile>
+  <SourceTime>2022-03-19T14:11:33.9464775+00:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle_Water_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-03-20T16:47:39.58865+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

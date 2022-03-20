@@ -57,6 +57,7 @@ namespace Terramental
             _mainCam = new CameraController();
 
             _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64));
+            _playerCharacter.InitialiseAnimations(this);
 
 
         }
@@ -67,6 +68,8 @@ namespace Terramental
                 Exit();
 
             UpdateManagers(gameTime);
+            _playerCharacter.UpdateCharacter(gameTime);
+            _playerCharacter.UpdatePlayerCharacter(gameTime);
 
             base.Update(gameTime);
         }

@@ -50,7 +50,7 @@ namespace Terramental
             SpriteManager.SpriteList.Add(this);
         }
 
-        public virtual void Update(GameTime gameTime)
+        public void UpdateSprite(GameTime gameTime)
         {
             if (_isActive)
             {
@@ -88,7 +88,7 @@ namespace Terramental
                 {
                     spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
                 }
-                else if (_animationIndex < _spriteAnimations.Count)
+                else
                 {
                     spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
                 }
@@ -145,6 +145,12 @@ namespace Terramental
             get { return _spriteAnimations; }
         }
 
+        public int AnimationIndex
+        {
+            get { return _animationIndex; }
+            set { _animationIndex = value; }
+        }
+
         #endregion
 
         #region DestroyFunctions
@@ -191,8 +197,19 @@ namespace Terramental
                     _animationElapsedTime = 0;
                 }
 
-                _spriteSourceRectangle = new Rectangle((_animationFrameIndex * animation.SpriteSheet.Width / animation.FrameCount), 0, animation.SpriteSheet.Width / animation.FrameCount, animation.SpriteSheet.Height);
+                // _spriteSourceRectangle = new Rectangle((_animationFrameIndex * animation.SpriteSheet.Width / animation.FrameCount), 0, animation.SpriteSheet.Width / animation.FrameCount, animation.SpriteSheet.Height);
+                _spriteSourceRectangle = new Rectangle(_animationFrameIndex * 64, 0, 64, 64);
             }
+        }
+
+        public void SetAnimation(int animationIndex)
+        {
+            _animationIndex = animationIndex;
+        }
+
+        public void AddAnimation(Animation animation)
+        {
+            _spriteAnimations.Add(animation);
         }
 
         #endregion

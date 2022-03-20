@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/Health_Pickup.png</SourceFile>
-  <SourceTime>2022-03-19T12:02:06.3047484+00:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Pickups/Health_Pickup.xnb</DestFile>
-  <DestTime>2022-03-19T13:20:11.3153098+00:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Pickups/Health_Pickup.png</SourceFile>
+  <SourceTime>2022-03-18T23:15:50.7172151+00:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Pickups/Health_Pickup.xnb</DestFile>
+  <DestTime>2022-03-20T06:31:41.1069868+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
