@@ -27,8 +27,17 @@ namespace Terramental
         private bool _isDoubleJumpUsed;
         private float _jumpHeight;
         private float _jumpSpeed;
+        private bool _rightDisabled;
+        private bool _leftDisabled;
+        private Tile _groundTile;
 
         #region Properties
+
+        public bool IsJumping
+        {
+            get { return _isJumping; }
+            set { _isJumping = value; }
+        }
 
         public bool IsGrounded
         {
@@ -42,16 +51,6 @@ namespace Terramental
             set { _isDoubleJumpUsed = value; }
         }
 
-        #endregion
-
-        #region Ultimate Functions
-
-        private bool _isGrounded;
-
-        private bool _rightDisabled;
-
-        private bool _leftDisabled;
-
         public bool RightDisabled
         {
             get { return _rightDisabled; }
@@ -63,6 +62,10 @@ namespace Terramental
             get { return _leftDisabled; }
             set { _leftDisabled = value; }
         }
+
+        #endregion
+
+        #region Ultimate Functions
 
         public void ActivateUltimate()
         {
@@ -124,20 +127,11 @@ namespace Terramental
             {
                 _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-
-            if(!_isGrounded)
-            {
-                SpritePosition += new Vector2(0, 4);
-            }
-            else
-            {
-                _isGrounded = false;
-            }
         }
 
         public void WallCollision()
         {
-            if(_rightDirection)
+            if(SpriteVelocity.X > 0)
             {
                 _rightDisabled = true;
                 _leftDisabled = false;
@@ -155,12 +149,6 @@ namespace Terramental
         {
             _ultimateActive = true;
             _ultimateActiveTimer = 10;
-        }
-
-        public bool IsGrounded
-        {
-            get { return _isGrounded; }
-            set { _isGrounded = value; }
         }
 
         public void FireSwordAttack()
@@ -242,6 +230,14 @@ namespace Terramental
 
             PlayerJumpBehavior(gameTime);
 
+            if(_groundTile != null)
+            {
+                if(!_groundTile.TopCollision(this))
+                {
+                    _isGrounded = false;
+                }
+            }
+
             SpritePosition += SpriteVelocity;
 
         }
@@ -268,10 +264,8 @@ namespace Terramental
 
         private void PlayerJumpBehavior(GameTime gameTime)
         {
-
             if (_isJumping)
             {
-               
                 SpriteVelocity += new Vector2(0, _jumpSpeed);
 
                 float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
@@ -286,9 +280,6 @@ namespace Terramental
                     _isJumping = false;
                     _isGrounded = false;
                 }
-
-
-
             }
         }
         #endregion
@@ -302,9 +293,15 @@ namespace Terramental
                 if (!_isJumping)
                 {
                     SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
-                    
                 }        
             }
+        }
+
+        public void GroundCollision(Tile tile)
+        {
+            _groundTile = tile;
+            IsGrounded = true;
+            IsDoubleJumpUsed = false;
         }
        
 

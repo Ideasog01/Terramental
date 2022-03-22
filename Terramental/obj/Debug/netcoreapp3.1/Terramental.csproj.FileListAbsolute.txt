@@ -167,3 +167,6 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.genruntimeconfig.cache
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire_Left.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire_Left.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

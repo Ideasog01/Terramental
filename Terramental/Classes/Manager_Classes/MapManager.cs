@@ -8,7 +8,6 @@ namespace Terramental
 {
     class MapManager
     {
-        private SpawnManager _spawnManager;
         private PlayerCharacter _playerCharacter;
         private GameManager _gameManager;
         private MapData _mapData;
@@ -17,9 +16,8 @@ namespace Terramental
 
         private List<Tile> _tileList = new List<Tile>();
 
-        public MapManager(GameManager gameManager, SpawnManager spawnManager, PlayerCharacter playerCharacter)
+        public MapManager(GameManager gameManager, PlayerCharacter playerCharacter)
         {
-            _spawnManager = spawnManager;
             _playerCharacter = playerCharacter;
             _gameManager = gameManager;
 
@@ -33,7 +31,7 @@ namespace Terramental
             }
         }
 
-        public void Update()
+        public void UpdateTiles()
         {
             foreach(Tile tile in _tileList)
             {
@@ -65,11 +63,12 @@ namespace Terramental
                     int tileIndex = tileData[x, y];
 
                     Tile tile = new Tile();
-                    tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64), _spawnManager);
+                    tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
                     
 
                     bool isGround = tileIndex == 1;
                     tile.GroundTile = isGround;
+                  //  tile.WallTile = isGround;
 
                     _tileList.Add(tile);
 

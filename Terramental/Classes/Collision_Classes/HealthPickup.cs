@@ -23,9 +23,6 @@ namespace Terramental
                 _playerCharacter.Heal(_amount);
                 IsActive = false;
             }
-
-
-
         }
 
         

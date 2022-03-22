@@ -39,6 +39,62 @@ namespace Terramental
 
         #endregion
 
+        #region Properties
+
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set { _isActive = value; }
+        }
+
+        public Texture2D SpriteTexture
+        {
+            get { return _spriteTexture; }
+            set { _spriteTexture = value; }
+        }
+
+        public Sprite AttachSprite
+        {
+            get { return _attachSprite; }
+            set { _attachSprite = value; }
+        }
+
+        public Vector2 SpriteVelocity
+        {
+            get { return _spriteVelocity; }
+            set { _spriteVelocity = value; }
+        }
+
+        public Vector2 SpritePosition
+        {
+            get { return _spritePosition; }
+            set { _spritePosition = value; }
+        }
+
+        public Vector2 SpriteScale
+        {
+            get { return _spriteScale; }
+            set { _spriteScale = value; }
+        }
+
+        public Rectangle SpriteRectangle
+        {
+            get { return _spriteRectangle; }
+        }
+
+        public List<Animation> Animations
+        {
+            get { return _spriteAnimations; }
+        }
+
+        public int AnimationIndex
+        {
+            get { return _animationIndex; }
+            set { _animationIndex = value; }
+        }
+
+        #endregion
+
         #region Core
         public void Initialise(Vector2 startPosition, Texture2D texture, Vector2 scale)
         {
@@ -93,62 +149,6 @@ namespace Terramental
                     spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
                 }
             }
-        }
-
-        #endregion
-
-        #region Properties
-
-        public bool IsActive
-        {
-            get { return _isActive; }
-            set { _isActive = value; }
-        }
-
-        public Texture2D SpriteTexture
-        {
-            get { return _spriteTexture; }
-            set { _spriteTexture = value; }
-        }
-
-        public Sprite AttachSprite
-        {
-            get { return _attachSprite; }
-            set { _attachSprite = value; }
-        }
-
-        public Vector2 SpriteVelocity
-        {
-            get { return _spriteVelocity; }
-            set { _spriteVelocity = value; }
-        }
-
-        public Vector2 SpritePosition
-        {
-            get { return _spritePosition; }
-            set { _spritePosition = value; }
-        }
-
-        public Vector2 SpriteScale
-        {
-            get { return _spriteScale; }
-            set { _spriteScale = value; }
-        }
-
-        public Rectangle SpriteRectangle
-        {
-            get { return _spriteRectangle; }
-        }
-
-        public List<Animation> Animations
-        {
-            get { return _spriteAnimations; }
-        }
-
-        public int AnimationIndex
-        {
-            get { return _animationIndex; }
-            set { _animationIndex = value; }
         }
 
         #endregion

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Terramental
 {
-    class Tile : Sprite
+    public class Tile : Sprite
     {
         /// <summary>
         /// Tiles make up levels and are managed by the TileManager class
@@ -41,8 +41,7 @@ namespace Terramental
             {
                 if (TopCollision(playerCharacter))
                 {
-                    playerCharacter.IsGrounded = true;
-                    playerCharacter.IsDoubleJumpUsed = false;
+                    playerCharacter.GroundCollision(this);
                 }
             }
 
