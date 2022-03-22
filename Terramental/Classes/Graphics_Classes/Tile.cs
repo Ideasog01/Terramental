@@ -35,40 +35,24 @@ namespace Terramental
 
         #region CollisionDetection
 
-        public void CheckCollision(PlayerCharacter playerCharacter)
+        public bool LeftCollision(Sprite otherSprite)
         {
-            if(_isGroundTile && !playerCharacter.IsGrounded)
-            {
-                if (TopCollision(playerCharacter))
-                {
-                    playerCharacter.GroundCollision(this);
-                }
-            }
-
-            if(_isWallTile)
-            {
-                playerCharacter.WallCollision(LeftCollision(playerCharacter), RightCollision(playerCharacter));
-            }
+            return (this.SpriteRectangle.Right <= otherSprite.SpriteRectangle.Right && this.SpriteRectangle.Right >= otherSprite.SpriteRectangle.Left - 5 && this.SpriteRectangle.Top <= otherSprite.SpriteRectangle.Bottom - (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherSprite.SpriteRectangle.Top + (otherSprite.SpriteRectangle.Width / 4));
         }
 
-        public bool LeftCollision(Sprite sprite)
+        public bool RightCollision(Sprite otherSprite)
         {
-            return this.SpriteRectangle.Right + this.SpriteVelocity.X > sprite.SpriteRectangle.Left && this.SpriteRectangle.Left < sprite.SpriteRectangle.Left && this.SpriteRectangle.Bottom > sprite.SpriteRectangle.Top && this.SpriteRectangle.Top < sprite.SpriteRectangle.Bottom;
+            return (this.SpriteRectangle.Left >= otherSprite.SpriteRectangle.Left && this.SpriteRectangle.Left <= otherSprite.SpriteRectangle.Right + 5 && this.SpriteRectangle.Top <= otherSprite.SpriteRectangle.Bottom - (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherSprite.SpriteRectangle.Top + (otherSprite.SpriteRectangle.Width / 4));
         }
 
-        public bool RightCollision(Sprite sprite)
+        public bool TopCollision(Sprite otherSprite)
         {
-            return this.SpriteRectangle.Left + this.SpriteVelocity.X < sprite.SpriteRectangle.Right && this.SpriteRectangle.Right > sprite.SpriteRectangle.Right && this.SpriteRectangle.Bottom > sprite.SpriteRectangle.Top && this.SpriteRectangle.Top < sprite.SpriteRectangle.Bottom;
+            return this.SpriteRectangle.Top + this.SpriteVelocity.Y < otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Bottom > otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right;
         }
 
-        public bool BottomCollision(Sprite sprite)
+        public bool BottomCollision(Sprite otherSprite)
         {
-            return this.SpriteRectangle.Bottom + this.SpriteVelocity.Y > sprite.SpriteRectangle.Top && this.SpriteRectangle.Top < sprite.SpriteRectangle.Top && this.SpriteRectangle.Right > sprite.SpriteRectangle.Left && this.SpriteRectangle.Left < sprite.SpriteRectangle.Right;
-        }
-
-        public bool TopCollision(Sprite sprite)
-        {
-            return this.SpriteRectangle.Top + this.SpriteVelocity.Y < sprite.SpriteRectangle.Bottom && this.SpriteRectangle.Bottom > sprite.SpriteRectangle.Bottom && this.SpriteRectangle.Right > sprite.SpriteRectangle.Left && this.SpriteRectangle.Left < sprite.SpriteRectangle.Right;
+            return this.SpriteRectangle.Bottom + this.SpriteVelocity.Y > otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Top < otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right;
         }
 
         #endregion

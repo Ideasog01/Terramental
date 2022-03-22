@@ -44,7 +44,7 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            _mapManager = new MapManager(this, _playerCharacter);
+            _mapManager = new MapManager(this);
             base.Initialize();
         }
 
@@ -56,8 +56,8 @@ namespace Terramental
 
             _mainCam = new CameraController();
 
-            _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), new Vector2(64, 64));
-            _playerCharacter.InitialiseAnimations(this);
+            _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
+            _playerCharacter.InitialisePlayerAnimations(this);
 
 
         }
@@ -89,11 +89,13 @@ namespace Terramental
 
         #endregion
 
-        #region Properties
+        #region Property Tools
+
         public Texture2D GetTexture(string path)
         {
             return Content.Load<Texture2D>(path);
         }
+
         #endregion
 
         #region Managers
@@ -108,7 +110,6 @@ namespace Terramental
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
-            _mapManager.UpdateTiles();
             _mainCam.MoveCamera(_playerCharacter);
             SpawnManager.Update(gameTime);
         }

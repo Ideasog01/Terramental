@@ -8,17 +8,15 @@ namespace Terramental
 {
     class MapManager
     {
-        private PlayerCharacter _playerCharacter;
+        public static List<Tile> tileList = new List<Tile>();
+
         private GameManager _gameManager;
         private MapData _mapData;
 
         private List<Texture2D> _tileMap1 = new List<Texture2D>();
 
-        private List<Tile> _tileList = new List<Tile>();
-
-        public MapManager(GameManager gameManager, PlayerCharacter playerCharacter)
+        public MapManager(GameManager gameManager)
         {
-            _playerCharacter = playerCharacter;
             _gameManager = gameManager;
 
             LoadTextures();
@@ -28,14 +26,6 @@ namespace Terramental
             if(_mapData != null)
             {
                 GenerateMap();
-            }
-        }
-
-        public void UpdateTiles()
-        {
-            foreach(Tile tile in _tileList)
-            {
-                tile.CheckCollision(_playerCharacter);
             }
         }
 
@@ -68,9 +58,9 @@ namespace Terramental
 
                     bool isGround = tileIndex == 1;
                     tile.GroundTile = isGround;
-                  //  tile.WallTile = isGround;
+                    tile.WallTile = isGround;
 
-                    _tileList.Add(tile);
+                    tileList.Add(tile);
 
                 }
             }

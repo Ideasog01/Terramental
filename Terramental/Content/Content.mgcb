@@ -109,7 +109,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Pickups/WaterPickup_SpriteSheet.png
 
-#begin Sprites/Player/Idle_Fire_SpriteSheet.png
+#begin Sprites/Player/Idle/Idle_Fire_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -119,9 +119,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player/Idle_Fire_SpriteSheet.png
+/build:Sprites/Player/Idle/Idle_Fire_SpriteSheet.png
 
-#begin Sprites/Player/Idle_Snow_SpriteSheet.png
+#begin Sprites/Player/Idle/Idle_LeftFire_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -131,9 +131,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player/Idle_Snow_SpriteSheet.png
+/build:Sprites/Player/Idle/Idle_LeftFire_SpriteSheet.png
 
-#begin Sprites/Player/Idle_Water_SpriteSheet.png
+#begin Sprites/Player/Idle/Idle_LeftSnow_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -143,9 +143,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player/Idle_Water_SpriteSheet.png
+/build:Sprites/Player/Idle/Idle_LeftSnow_SpriteSheet.png
 
-#begin Sprites/Player/PlayerCharacter_Sprite_Fire.png
+#begin Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -155,9 +155,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player/PlayerCharacter_Sprite_Fire.png
+/build:Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.png
 
-#begin Sprites/Player/PlayerCharacter_Sprite_Fire_Left.png
+#begin Sprites/Player/Idle/Idle_Snow_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -167,7 +167,103 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player/PlayerCharacter_Sprite_Fire_Left.png
+/build:Sprites/Player/Idle/Idle_Snow_SpriteSheet.png
+
+#begin Sprites/Player/Idle/Idle_Water_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Idle/Idle_Water_SpriteSheet.png
+
+#begin Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet.png
+
+#begin Sprites/Player/Walk/Fire_Walk_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Fire_Walk_SpriteSheet.png
+
+#begin Sprites/Player/Walk/Fire_Walk_SpriteSheet.png.gif
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Fire_Walk_SpriteSheet.png.gif
+
+#begin Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet.png
+
+#begin Sprites/Player/Walk/Snow_Walk_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Snow_Walk_SpriteSheet.png
+
+#begin Sprites/Player/Walk/Water_LeftWalk_SpirteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Water_LeftWalk_SpirteSheet.png
+
+#begin Sprites/Player/Walk/Water_Walk_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/Walk/Water_Walk_SpriteSheet.png
 
 #begin Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter

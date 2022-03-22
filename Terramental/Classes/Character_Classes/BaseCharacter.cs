@@ -21,25 +21,11 @@ namespace Terramental
         private float _damageTimer;
         private float _damageWaitTime;
 
-        private Animation rightAnim;
-        private Animation leftAnim;
-        private Animation idleAnim;
-
         public bool IsBurning
         {
             get { return _isBurning; }
             set { _isBurning = value; }
         }
-
-        public void InitialiseAnimations(GameManager gameManager)
-        {
-            rightAnim = new Animation(gameManager.GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire"), 1, 100, true);
-            leftAnim = new Animation(gameManager.GetTexture("Sprites/Player/PlayerCharacter_Sprite_Fire_Left"), 1, 100, true);
-            AddAnimation(rightAnim);
-            AddAnimation(leftAnim);
-        }
-
-
 
         public void SetStatus(int index, float statusTime, float damageTime)
         {

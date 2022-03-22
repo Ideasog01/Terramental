@@ -37,7 +37,6 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.genruntimeconfig.cache
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Effects\Flame_SpriteSheet.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Projectiles\WaterProjectile_SpriteSheet.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Sprite_Default.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Idle_SpriteSheet.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FlamePickup_SpriteSheet.xnb
@@ -107,9 +106,6 @@ D:\GitHub\Terramental.sln\Terramental\obj\Debug\netcoreapp3.1\Terramental.genrun
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Walk_SpriteSheet.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Walk_SpriteSheet.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FlamePickup_SpriteSheet.xnb
@@ -168,5 +164,17 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire_Left.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire_Left.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Fire_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftFire_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftSnow_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftWater_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Snow_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Water_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_LeftWalk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_Walk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpirteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_Walk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.png.xnb

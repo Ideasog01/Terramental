@@ -12,9 +12,11 @@ namespace Terramental
         //Movement Variables
 
         private bool _isGrounded;
+        private float _playerMovementSpeed = 0.5f;
+
         private bool _disableRight;
         private bool _disableLeft;
-        private float _playerMovementSpeed = 0.5f;
+        private bool _disableMovement;
 
         //Ability Variables
 
@@ -27,9 +29,11 @@ namespace Terramental
         private bool _isDoubleJumpUsed;
         private float _jumpHeight;
         private float _jumpSpeed;
-        private bool _rightDisabled;
-        private bool _leftDisabled;
         private Tile _groundTile;
+        private Tile _leftTile;
+        private Tile _rightTile;
+
+        private List<Tile> _tileList;
 
         #region Properties
 
@@ -51,16 +55,124 @@ namespace Terramental
             set { _isDoubleJumpUsed = value; }
         }
 
-        public bool RightDisabled
+        #endregion
+
+        #region Player Core
+
+        public void UpdatePlayerCharacter(GameTime gameTime)
         {
-            get { return _rightDisabled; }
-            set { _rightDisabled = value; }
+            UpdateUltimateStatus(gameTime);
+
+            ApplyGravity();
+
+            PlayerJumpBehavior(gameTime);
+
+            CheckGroundCollision();
+
+            CheckMovementCollision();
+
+            MovementAnimations();
+
+            if (_groundTile != null)
+            {
+                if (!_groundTile.TopCollision(this) || _groundTile.RightCollision(this) || _groundTile.LeftCollision(this))
+                {
+                    _isGrounded = false;
+                    _groundTile = null;
+                }
+            }
+
+            SpritePosition += SpriteVelocity;
+
         }
 
-        public bool LeftDisabled
+        public void PlayerMovement(float vertical, GameTime gameTime)
         {
-            get { return _leftDisabled; }
-            set { _leftDisabled = value; }
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (vertical > 0)
+            {
+                // IsFacingRight = true;
+
+                if (!_disableRight)
+                {
+                    SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                }
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
+
+            }
+            else if (vertical < 0)
+            {
+                // IsFacingRight = false;
+
+                if (!_disableLeft)
+                {
+                    SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                }
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
+
+            }
+
+            if (vertical == 0)
+            {
+                SpriteVelocity = new Vector2(0, 0);
+            }
+
+        }
+
+        public void PlayerJump()
+        {
+            if (!_isJumping && _isGrounded)
+            {
+                _isGrounded = false;
+                _isJumping = true;
+                _jumpHeight = SpritePosition.Y - 150;
+                _jumpSpeed = -5;
+                _isDoubleJumpUsed = false;
+                return;
+            }
+
+            if (!_isDoubleJumpUsed)
+            {
+                _jumpHeight = SpritePosition.Y - 150;
+                _jumpSpeed = -5;
+                _isDoubleJumpUsed = true;
+            }
+        }
+
+        private void PlayerJumpBehavior(GameTime gameTime)
+        {
+            if (_isJumping)
+            {
+                SpriteVelocity += new Vector2(0, _jumpSpeed);
+
+                float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
+
+                CheckJumpCollision();
+
+                if (SpritePosition.Y == _jumpHeight)
+                {
+                    _isJumping = false;
+                    _isGrounded = false;
+                }
+            }
+        }
+
+        public void ApplyGravity()
+        {
+            if (!_isGrounded)
+            {
+                if (!_isJumping)
+                {
+                    SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
+                }
+            }
         }
 
         #endregion
@@ -129,20 +241,6 @@ namespace Terramental
             }
         }
 
-        public void WallCollision()
-        {
-            if(SpriteVelocity.X > 0)
-            {
-                _rightDisabled = true;
-                _leftDisabled = false;
-            }
-            else
-            {
-                _rightDisabled = false;
-                _rightDisabled = false;
-            }
-        }
-
         #region Fire Ultimate
 
         private void FireUltimate()
@@ -182,142 +280,183 @@ namespace Terramental
 
         #endregion
 
-        #region Player Core
-
-        public void PlayerMovement(float vertical, GameTime gameTime)
-        {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            if (vertical > 0)
-            {
-                // IsFacingRight = true;
-                if (!_disableRight)
-                {
-                    SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
-                    _disableLeft = false;
-                }
-                else
-                {
-                    SpriteVelocity = new Vector2(0, 0);
-                }
-            }
-            else if (vertical < 0)
-            {
-                // IsFacingRight = false;
-                if (!_disableLeft)
-                {
-                    SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
-                    _disableRight = false;
-                }
-                else
-                {
-                    SpriteVelocity = new Vector2(0, 0);
-                }
-            }
-
-            if (vertical == 0)
-            {
-                SpriteVelocity = new Vector2(0, 0);
-            }
-
-        }
-
-        public void UpdatePlayerCharacter(GameTime gameTime)
-        {
-            UpdateUltimateStatus(gameTime);
-
-            ApplyGravity();
-
-            PlayerJumpBehavior(gameTime);
-
-            if(_groundTile != null)
-            {
-                if(!_groundTile.TopCollision(this))
-                {
-                    _isGrounded = false;
-                }
-            }
-
-            SpritePosition += SpriteVelocity;
-
-        }
-
-        public void PlayerJump()
-        {
-            if (_isJumping && !_isDoubleJumpUsed && !_isGrounded)
-            {
-                _isGrounded = false;
-                _isJumping = true;
-                _isDoubleJumpUsed = true;
-                _jumpHeight = SpritePosition.Y - 150;
-                _jumpSpeed = -5;
-            }
-
-            if (!_isJumping && _isGrounded)
-            {
-                _isGrounded = false;
-                _isJumping = true;
-                _jumpHeight = SpritePosition.Y - 150;
-                _jumpSpeed = -5;
-            }
-        }
-
-        private void PlayerJumpBehavior(GameTime gameTime)
-        {
-            if (_isJumping)
-            {
-                SpriteVelocity += new Vector2(0, _jumpSpeed);
-
-                float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
-
-                if (_jumpSpeed < -1 && distance < 128)
-                {
-                    _jumpSpeed += 1f;
-                }
-             
-                if (SpritePosition.Y == _jumpHeight)
-                {
-                    _isJumping = false;
-                    _isGrounded = false;
-                }
-            }
-        }
-        #endregion
-
         #region Collisions
 
-        public void ApplyGravity()
+        private void CheckGroundCollision()
         {
-            if (!_isGrounded)
+            _tileList = MapManager.tileList;
+
+            foreach(Tile tile in _tileList)
             {
-                if (!_isJumping)
+                if(tile.GroundTile)
                 {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
-                }        
+                    if(tile.TopCollision(this))
+                    {
+                        _isGrounded = true;
+                        _groundTile = tile;
+                    }
+                }
             }
         }
 
-        public void GroundCollision(Tile tile)
+        private void CheckJumpCollision()
         {
-            _groundTile = tile;
-            IsGrounded = true;
-            IsDoubleJumpUsed = false;
-        }
-       
+            _tileList = MapManager.tileList;
 
-        public void WallCollision(bool left, bool right)
-        {
-            if (left && SpriteVelocity.X < 0)
+            foreach (Tile tile in _tileList)
             {
-                _disableLeft = true;
+                if (tile.GroundTile)
+                {
+                    if (tile.BottomCollision(this))
+                    {
+                        _jumpHeight = SpritePosition.Y;
+                    }
+                }
+            }
+        }
+
+        private void CheckMovementCollision()
+        {
+            _tileList = MapManager.tileList;
+
+            foreach (Tile tile in _tileList)
+            {
+                if (tile.WallTile)
+                {
+                    if (tile.RightCollision(this))
+                    {
+                        _disableRight = true;
+                        _rightTile = tile;
+                    }
+
+                    if (tile.LeftCollision(this))
+                    {
+                        _disableLeft = true;
+                        _leftTile = tile;
+                    }
+                }
             }
 
-            if (right && SpriteVelocity.X > 0)
+            if(_disableRight && _rightTile != null)
             {
-                _disableRight = true;
+                if(!_rightTile.RightCollision(this))
+                {
+                    _disableRight = false;
+                    _rightTile = null;
+                }
+            }
+
+            if (_disableLeft && _leftTile != null)
+            {
+                if (!_leftTile.LeftCollision(this))
+                {
+                    _disableLeft = false;
+                    _leftTile = null;
+                }
+            }
+
+
+        }
+
+
+        #endregion
+
+        #region Animations
+
+        public void InitialisePlayerAnimations(GameManager gameManager)
+        {
+                                                                                                                            //Index
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), 5, 120f, true)); //0
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftFire_SpriteSheet"), 5, 120f, true)); //1
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet"), 5, 120f, true)); //2
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftWater_SpriteSheet"), 5, 120f, true)); //3
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Snow_SpriteSheet"), 5, 120f, true)); //4
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftSnow_SpriteSheet"), 5, 120f, true)); //5
+
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_Walk_SpriteSheet"), 4, 120f, true)); //6
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet"), 4, 120f, true)); //7
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_Walk_SpriteSheet"), 4, 120f, true)); //8
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_LeftWalk_SpirteSheet"), 4, 120f, true)); //9
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_Walk_SpriteSheet"), 4, 120f, true)); //10
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet"), 4, 120f, true)); //11
+        }
+
+        private void MovementAnimations()
+        {
+            if(SpriteVelocity.X > 0)
+            {
+                switch(_elementIndex)
+                {
+                    case 0: SetAnimation(6);
+                        break;
+                    case 1: SetAnimation(8);
+                        break;
+                    case 2: SetAnimation(10);
+                        break;
+                    default: _elementIndex = 0;
+                        break;
+                }
+            }
+            else if(SpriteVelocity.X < 0)
+            {
+                switch (_elementIndex)
+                {
+                    case 0:
+                        SetAnimation(7);
+                        break;
+                    case 1:
+                        SetAnimation(9);
+                        break;
+                    case 2:
+                        SetAnimation(11);
+                        break;
+                    default:
+                        _elementIndex = 0;
+                        break;
+                }
+            }
+            else if(SpriteVelocity.X == 0)
+            {
+                if(AnimationIndex % 2 == 0)
+                {
+                    switch (_elementIndex)
+                    {
+                        case 0:
+                            SetAnimation(0);
+                            break;
+                        case 1:
+                            SetAnimation(2);
+                            break;
+                        case 2:
+                            SetAnimation(4);
+                            break;
+                        default:
+                            _elementIndex = 0;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (_elementIndex)
+                    {
+                        case 0:
+                            SetAnimation(1);
+                            break;
+                        case 1:
+                            SetAnimation(3);
+                            break;
+                        case 2:
+                            SetAnimation(5);
+                            break;
+                        default:
+                            _elementIndex = 0;
+                            break;
+                    }
+                }
             }
         }
 
         #endregion
+
     }
 }

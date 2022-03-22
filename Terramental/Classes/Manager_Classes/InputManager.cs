@@ -13,7 +13,7 @@ namespace Terramental
         /// </summary>
 
         private PlayerCharacter _playerCharacter;
-
+        private KeyboardState _currentKeyboardState = Keyboard.GetState();
         public InputManager(PlayerCharacter playerCharacter)
         {
             _playerCharacter = playerCharacter;
@@ -29,23 +29,25 @@ namespace Terramental
 
         private void KeyboardMouseInput(GameTime gameTime)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
+            KeyboardState oldState = _currentKeyboardState;
+            _currentKeyboardState = Keyboard.GetState();
+
             MouseState mouseState = Mouse.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.D))
+            if (_currentKeyboardState.IsKeyDown(Keys.D))
             {
                 _playerCharacter.PlayerMovement(1, gameTime);
             }
-            else if (keyboardState.IsKeyDown(Keys.A))
+            else if (_currentKeyboardState.IsKeyDown(Keys.A))
             {
                 _playerCharacter.PlayerMovement(-1, gameTime);
             }
-            else if(keyboardState.IsKeyUp(Keys.D) && keyboardState.IsKeyUp(Keys.A))
+            else if(_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
             {
                 _playerCharacter.PlayerMovement(0, gameTime);
             }
 
-            if(keyboardState.IsKeyDown(Keys.Q))
+            if(_currentKeyboardState.IsKeyDown(Keys.Q))
             {
                 _playerCharacter.ActivateUltimate();
             }
@@ -55,7 +57,7 @@ namespace Terramental
                 _playerCharacter.PrimaryAttack();
             }
 
-            if (keyboardState.IsKeyDown(Keys.Space))
+            if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space))
             {
                 _playerCharacter.PlayerJump();
             }
