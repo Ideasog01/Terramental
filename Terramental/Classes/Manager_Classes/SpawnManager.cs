@@ -62,7 +62,7 @@ namespace Terramental
             if(index == 0) //Knight Enemy Character
             {
                 BaseCharacter enemyCharacter = new BaseCharacter();
-                enemyCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
+                enemyCharacter.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
 
                 enemyCharacters.Add(enemyCharacter);
             }
