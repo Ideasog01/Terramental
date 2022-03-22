@@ -44,7 +44,7 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            _mapManager = new MapManager(14, 10, 0, this, _playerCharacter);
+            _mapManager = new MapManager();
             base.Initialize();
         }
 
@@ -70,6 +70,8 @@ namespace Terramental
             UpdateManagers(gameTime);
             _playerCharacter.UpdateCharacter(gameTime);
             _playerCharacter.UpdatePlayerCharacter(gameTime);
+
+            _mapManager.Update();
 
             base.Update(gameTime);
         }

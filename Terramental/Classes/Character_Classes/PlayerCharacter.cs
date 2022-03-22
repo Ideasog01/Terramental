@@ -46,6 +46,24 @@ namespace Terramental
 
         #region Ultimate Functions
 
+        private bool _isGrounded;
+
+        private bool _rightDisabled;
+
+        private bool _leftDisabled;
+
+        public bool RightDisabled
+        {
+            get { return _rightDisabled; }
+            set { _rightDisabled = value; }
+        }
+
+        public bool LeftDisabled
+        {
+            get { return _leftDisabled; }
+            set { _leftDisabled = value; }
+        }
+
         public void ActivateUltimate()
         {
             if(_ultimateAbilityCooldown <= 0 && _ultimateActiveTimer <= 0)
@@ -106,6 +124,29 @@ namespace Terramental
             {
                 _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
+
+            if(!_isGrounded)
+            {
+                SpritePosition += new Vector2(0, 4);
+            }
+            else
+            {
+                _isGrounded = false;
+            }
+        }
+
+        public void WallCollision()
+        {
+            if(_rightDirection)
+            {
+                _rightDisabled = true;
+                _leftDisabled = false;
+            }
+            else
+            {
+                _rightDisabled = false;
+                _rightDisabled = false;
+            }
         }
 
         #region Fire Ultimate
@@ -114,6 +155,12 @@ namespace Terramental
         {
             _ultimateActive = true;
             _ultimateActiveTimer = 10;
+        }
+
+        public bool IsGrounded
+        {
+            get { return _isGrounded; }
+            set { _isGrounded = value; }
         }
 
         public void FireSwordAttack()
