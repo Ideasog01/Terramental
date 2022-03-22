@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Terramental
 {
-    class HealthPickup : Sprite
+    public class HealthPickup : Sprite
     {
         private PlayerCharacter _playerCharacter;
         private int _amount;
@@ -24,8 +24,5 @@ namespace Terramental
                 IsActive = false;
             }
         }
-
-        
-
     }
 }
