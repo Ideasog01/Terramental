@@ -45,7 +45,7 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            _mapManager = new MapManager(14, 10, 0, this, _spawnManager, _playerCharacter);
+            _mapManager = new MapManager(this, _spawnManager, _playerCharacter);
 
             Animation animation = new Animation(GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), 4, 120f, true);
             Sprite test = new Sprite();

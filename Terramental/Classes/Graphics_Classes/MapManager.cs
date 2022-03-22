@@ -1,33 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Terramental
 {
     class MapManager
     {
-        private int _mapWidth;
-        private int _mapHeight;
-        private int _levelIndex;
-        private Texture2D _defaultTileTexture;
         private SpawnManager _spawnManager;
         private PlayerCharacter _playerCharacter;
-        private List<Tile> _tileList = new List<Tile>();
         private GameManager _gameManager;
+        private MapData _mapData;
 
-        public MapManager(int width, int height, int levelIndex, GameManager gameManager, SpawnManager spawnManager, PlayerCharacter playerCharacter)
+        private List<Texture2D> _tileMap1 = new List<Texture2D>();
+
+        private List<Tile> _tileList = new List<Tile>();
+
+        public MapManager(GameManager gameManager, SpawnManager spawnManager, PlayerCharacter playerCharacter)
         {
-            _mapWidth = width;
-            _mapHeight = height;
-            _levelIndex = levelIndex;
-            _defaultTileTexture = gameManager.GetTexture("Sprites/Tiles/DefaultTile");
             _spawnManager = spawnManager;
             _playerCharacter = playerCharacter;
             _gameManager = gameManager;
 
-            GenerateMap();
+            LoadTextures();
+
+            LoadMapData(@"MapData.jsn");
+
+            if(_mapData != null)
+            {
+                GenerateMap();
+            }
         }
 
         public void Update()
@@ -38,27 +41,38 @@ namespace Terramental
             }
         }
 
+        public void LoadMapData(string filePath)
+        {
+            string strResultJson = File.ReadAllText(@"MapData.json");
+            MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
+            _mapData = newMapData;
+        }
+
+        private void LoadTextures()
+        {
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/DefaultTile"));
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile-Fire"));
+        }
+
         private void GenerateMap()
         {
-            for(int x = 0; x < _mapWidth; x++)
+            int[,] tileData = _mapData._tileMap;
+
+            for(int x = 0; x < _mapData._mapHeight; x++)
             {
-                for(int y = 0; y < _mapHeight; y++)
-                {
+                for(int y = 0; y < _mapData._mapWidth; y++)
+                {                  
+                    int tileIndex = tileData[x, y];
+
                     Tile tile = new Tile();
-                    tile.Initialise(new Vector2(x * 64, y * 64), _defaultTileTexture, new Vector2(64, 64), _spawnManager);
+                    tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64), _spawnManager);
+                    
+
+                    bool isGround = tileIndex == 1;
+                    tile.GroundTile = isGround;
+
                     _tileList.Add(tile);
 
-                    if(y * 64 == 448)
-                    {
-                        tile.GroundTile = true;
-                        tile.SpriteTexture = _gameManager.GetTexture("Sprites/Tiles/Tile-Fire");
-                    }
-
-                    if(x * 64 == 320 && y * 64 == 384)
-                    {
-                        tile.WallTile = true;
-                        tile.SpriteTexture = _gameManager.GetTexture("Sprites/Tiles/Tile-Fire");
-                    }
                 }
             }
         }
