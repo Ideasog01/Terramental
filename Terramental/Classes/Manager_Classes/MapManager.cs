@@ -66,6 +66,37 @@ namespace Terramental
             }
         }
 
+<<<<<<< Updated upstream
+=======
+        private void SpawnEntity(int index, Vector2 position)
+        {
+            if(index == 1)
+            {
+                SpawnManager.SpawnEnemy(0, position);
+            }
+
+            if(index == 2)
+            {
+                SpawnManager.SpawnHealthPickup(position);
+            }
+
+            if(index == 3)
+            {
+                SpawnManager.SpawnElementPickup(0, position);
+            }
+
+            if(index == 4)
+            {
+                SpawnManager.SpawnElementPickup(1, position);
+            }
+
+            if(index == 5)
+            {
+                SpawnManager.SpawnElementPickup(2, position);
+            }
+        }
+
+>>>>>>> Stashed changes
 
     }
 }

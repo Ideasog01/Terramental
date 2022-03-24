@@ -55,6 +55,12 @@ namespace Terramental
             set { _isDoubleJumpUsed = value; }
         }
 
+        public int ElementIndex
+        {
+            get { return _elementIndex; }
+            set { _elementIndex = value; }
+        }
+
         #endregion
 
         #region Player Core

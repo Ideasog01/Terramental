@@ -4,24 +4,31 @@ using System.Text;
 
 namespace Terramental
 {
+<<<<<<< Updated upstream
     class HealthPickup : Sprite
+=======
+    public class HealthPickup : Pickup
+>>>>>>> Stashed changes
     {
-        private PlayerCharacter _playerCharacter;
         private int _amount;
+
 
         public HealthPickup(PlayerCharacter playerCharacter, int amount)
         {
-            _playerCharacter = playerCharacter;
+            Player = playerCharacter;
             _amount = amount;
         }
 
 
-        public void CheckCollision()
+        public void CheckHealthPickupCollision()
         {
-            if (OnCollision(_playerCharacter.SpriteRectangle) && IsActive)
+            if(Player.SpriteRectangle != null)
             {
-                _playerCharacter.Heal(_amount);
-                IsActive = false;
+                if (OnCollision(Player.SpriteRectangle) && IsActive)
+                {
+                    Player.Heal(_amount);
+                    IsActive = false;
+                }
             }
         }
 

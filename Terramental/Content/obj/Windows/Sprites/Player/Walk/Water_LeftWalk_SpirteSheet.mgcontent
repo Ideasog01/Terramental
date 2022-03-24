@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< Updated upstream
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Water_LeftWalk_SpirteSheet.png</SourceFile>
   <SourceTime>2022-03-22T16:59:17.5167331+00:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Walk/Water_LeftWalk_SpirteSheet.xnb</DestFile>
   <DestTime>2022-03-22T17:00:59.4415492+00:00</DestTime>
+=======
+  <SourceFile>D:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Water_LeftWalk_SpirteSheet.png</SourceFile>
+  <SourceTime>2022-03-22T19:53:28.9786199+00:00</SourceTime>
+  <DestFile>D:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Walk/Water_LeftWalk_SpirteSheet.xnb</DestFile>
+  <DestTime>2022-03-23T09:37:32.1893064+00:00</DestTime>
+>>>>>>> Stashed changes
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
