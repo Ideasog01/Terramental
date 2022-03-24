@@ -19,7 +19,7 @@ namespace Terramental
         private InputManager _inputManager;
         private SpriteManager _spriteManager;
 
-        private PlayerCharacter _playerCharacter = new PlayerCharacter();
+        public PlayerCharacter playerCharacter = new PlayerCharacter();
 
         private CameraController _mainCam;
 
@@ -56,8 +56,8 @@ namespace Terramental
 
             _mainCam = new CameraController();
 
-            _playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
-            _playerCharacter.InitialisePlayerAnimations(this);
+            playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
+            playerCharacter.InitialisePlayerAnimations(this);
 
 
         }
@@ -68,8 +68,8 @@ namespace Terramental
                 Exit();
 
             UpdateManagers(gameTime);
-            _playerCharacter.UpdateCharacter(gameTime);
-            _playerCharacter.UpdatePlayerCharacter(gameTime);
+            playerCharacter.UpdateCharacter(gameTime);
+            playerCharacter.UpdatePlayerCharacter(gameTime);
 
             base.Update(gameTime);
         }
@@ -102,7 +102,7 @@ namespace Terramental
 
         private void InitialiseManagers()
         {
-            _inputManager = new InputManager(_playerCharacter);
+            _inputManager = new InputManager(playerCharacter);
             _spriteManager = new SpriteManager();
         }
 
@@ -110,7 +110,7 @@ namespace Terramental
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
-            _mainCam.MoveCamera(_playerCharacter);
+            _mainCam.MoveCamera(playerCharacter);
             SpawnManager.Update(gameTime);
         }
 

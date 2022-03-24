@@ -13,11 +13,8 @@ namespace Terramental
         public static GameManager _gameManager;
 
         public static List<BaseCharacter> enemyCharacters = new List<BaseCharacter>();
-<<<<<<< Updated upstream
-=======
         public static List<HealthPickup> _healthPickup = new List<HealthPickup>();
         public static List<ElementPickup> _elementPickup = new List<ElementPickup>();
->>>>>>> Stashed changes
         public static List<Sprite> effects = new List<Sprite>();
 
         public static void Update(GameTime gameTime)
@@ -28,8 +25,6 @@ namespace Terramental
             {
                 character.UpdateCharacter(gameTime);
             }
-<<<<<<< Updated upstream
-=======
 
             foreach (HealthPickup healthPickup in _healthPickup)
             {
@@ -40,7 +35,6 @@ namespace Terramental
             {
                 elementPickup.CheckElementPickupCollision(gameTime);
             }
->>>>>>> Stashed changes
         }
 
         public static void SpawnAttachEffect(string texturePath, Vector2 position, Vector2 scale, Sprite attachSprite, float duration)
@@ -68,9 +62,6 @@ namespace Terramental
 
             effectSprite.Destroy(duration);
         }
-
-<<<<<<< Updated upstream
-=======
         public static void SpawnEnemy(int index, Vector2 position)
         {
             if(index == 0) //Knight Enemy Character
@@ -106,7 +97,5 @@ namespace Terramental
         {
             _gameManager = gameManager;
         }
-
->>>>>>> Stashed changes
     }
 }

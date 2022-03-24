@@ -4,11 +4,8 @@ using System.Text;
 
 namespace Terramental
 {
-<<<<<<< Updated upstream
-    class HealthPickup : Sprite
-=======
     public class HealthPickup : Pickup
->>>>>>> Stashed changes
+
     {
         private int _amount;
 

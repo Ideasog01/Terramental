@@ -65,9 +65,6 @@ namespace Terramental
                 }
             }
         }
-
-<<<<<<< Updated upstream
-=======
         private void SpawnEntity(int index, Vector2 position)
         {
             if(index == 1)
@@ -95,8 +92,5 @@ namespace Terramental
                 SpawnManager.SpawnElementPickup(2, position);
             }
         }
-
->>>>>>> Stashed changes
-
     }
 }

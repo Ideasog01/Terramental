@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Terramental
 {
-    class MapData
+    public class MapData
     {
         public int _mapHeight;
         public int _mapWidth;
