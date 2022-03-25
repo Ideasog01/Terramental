@@ -28,6 +28,8 @@ namespace Terramental
 
         private MapManager _mapManager;
 
+        private MenuManager _menuManager;
+
         public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -45,6 +47,8 @@ namespace Terramental
         protected override void Initialize()
         {
             _mapManager = new MapManager(this);
+            _menuManager = new MenuManager(this, _graphics);
+
             base.Initialize();
         }
 
@@ -52,14 +56,12 @@ namespace Terramental
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            InitialiseManagers();
-
             _mainCam = new CameraController();
 
             playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
             playerCharacter.InitialisePlayerAnimations(this);
 
-
+            InitialiseManagers();
         }
 
         protected override void Update(GameTime gameTime)
@@ -102,7 +104,7 @@ namespace Terramental
 
         private void InitialiseManagers()
         {
-            _inputManager = new InputManager(playerCharacter);
+            _inputManager = new InputManager(playerCharacter, _mainCam, _menuManager);
             _spriteManager = new SpriteManager();
         }
 

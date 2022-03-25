@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<<<<<<< Updated upstream
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_Fire_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-03-22T15:50:39.7789175+00:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle/Idle_Fire_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-22T15:51:32.3295189+00:00</DestTime>
-=======
-  <SourceFile>D:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_Fire_SpriteSheet.png</SourceFile>
   <SourceTime>2022-03-22T18:36:21.0880881+00:00</SourceTime>
-  <DestFile>D:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle/Idle_Fire_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-23T09:37:31.9501518+00:00</DestTime>
->>>>>>> Stashed changes
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle/Idle_Fire_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-03-24T20:22:02.3756579+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

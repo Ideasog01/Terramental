@@ -13,10 +13,17 @@ namespace Terramental
         /// </summary>
 
         private PlayerCharacter _playerCharacter;
+        private MenuManager _menuManager;
+        private CameraController _playerCam;
+
         private KeyboardState _currentKeyboardState = Keyboard.GetState();
-        public InputManager(PlayerCharacter playerCharacter)
+        private MouseState _currentMouseState = Mouse.GetState();
+
+        public InputManager(PlayerCharacter playerCharacter, CameraController playerCam, MenuManager menuManager)
         {
             _playerCharacter = playerCharacter;
+            _playerCam = playerCam;
+            _menuManager = menuManager;
         }
 
         public void Update(GameTime gameTime)
@@ -29,10 +36,17 @@ namespace Terramental
 
         private void KeyboardMouseInput(GameTime gameTime)
         {
-            KeyboardState oldState = _currentKeyboardState;
+            KeyboardState oldKeyboardState = _currentKeyboardState;
             _currentKeyboardState = Keyboard.GetState();
 
-            MouseState mouseState = Mouse.GetState();
+            MouseState oldMouseState = _currentMouseState;
+            _currentMouseState = Mouse.GetState();
+            
+
+            if(_currentMouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed)
+            {
+                _menuManager.MouseClick(_playerCam.ScreenToWorldSpace(new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y)));
+            }
 
             if (_currentKeyboardState.IsKeyDown(Keys.D))
             {
@@ -52,12 +66,12 @@ namespace Terramental
                 _playerCharacter.ActivateUltimate();
             }
 
-            if(mouseState.LeftButton == ButtonState.Pressed)
+            if(_currentMouseState.LeftButton == ButtonState.Pressed)
             {
                 _playerCharacter.PrimaryAttack();
             }
 
-            if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space))
+            if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
             {
                 _playerCharacter.PlayerJump();
             }
