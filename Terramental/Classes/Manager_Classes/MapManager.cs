@@ -60,6 +60,8 @@ namespace Terramental
                     tile.GroundTile = isGround;
                     tile.WallTile = isGround;
 
+                    SpawnEntity(_mapData._entityMap[x, y], new Vector2(x * 64, y * 64));
+
                     tileList.Add(tile);
 
                 }
