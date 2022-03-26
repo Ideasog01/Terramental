@@ -370,8 +370,7 @@ namespace Terramental
         #region Animations
 
         public void InitialisePlayerAnimations(GameManager gameManager)
-        {
-                                                                                                                            //Index
+        {                                                                                                          //Index
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), 5, 120f, true)); //0
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftFire_SpriteSheet"), 5, 120f, true)); //1
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet"), 5, 120f, true)); //2

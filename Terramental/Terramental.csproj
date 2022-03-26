@@ -25,5 +25,6 @@
     <Folder Include="Content\Sprites\Enemies\Knight\" />
     <Folder Include="Content\Sprites\Player\Walk\" />
     <Folder Include="Content\Sprites\Tiles\" />
+    <Folder Include="Content\UserInterface\" />
   </ItemGroup>
 </Project>

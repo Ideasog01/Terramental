@@ -18,7 +18,7 @@ namespace Terramental
         {
             if(SpriteRectangle.Contains(mousePos))
             {
-
+                _menuManager.ButtonInteraction(_buttonIndex);
             }
         }
     }

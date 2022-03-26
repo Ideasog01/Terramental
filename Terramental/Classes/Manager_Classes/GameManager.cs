@@ -13,6 +13,8 @@ namespace Terramental
     {
         public const int gravity = 3;
 
+        public static bool gameInProgress;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -46,7 +48,6 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            _mapManager = new MapManager(this);
             _menuManager = new MenuManager(this, _graphics);
 
             base.Initialize();
@@ -56,22 +57,20 @@ namespace Terramental
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _mainCam = new CameraController();
-
-            playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
-            playerCharacter.InitialisePlayerAnimations(this);
-
             InitialiseManagers();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             UpdateManagers(gameTime);
-            playerCharacter.UpdateCharacter(gameTime);
-            playerCharacter.UpdatePlayerCharacter(gameTime);
+
+            if(gameInProgress)
+            {
+                playerCharacter.UpdateCharacter(gameTime);
+                playerCharacter.UpdatePlayerCharacter(gameTime);
+            }
+            
 
             base.Update(gameTime);
         }
@@ -102,10 +101,30 @@ namespace Terramental
 
         #region Managers
 
+        public void ExitGame()
+        {
+            Exit();
+        }
+
+        public void LoadNewGame()
+        {
+            _mapManager = new MapManager(this);
+
+            playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
+            playerCharacter.InitialisePlayerAnimations(this);
+            _inputManager.playerCharacter = playerCharacter;
+
+            CameraController.cameraActive = true;
+
+            gameInProgress = true;
+        }
+
         private void InitialiseManagers()
         {
-            _inputManager = new InputManager(playerCharacter, _mainCam, _menuManager);
             _spriteManager = new SpriteManager();
+            _mainCam = new CameraController();
+
+            _inputManager = new InputManager(_mainCam, _menuManager);
         }
 
         private void UpdateManagers(GameTime gameTime)
