@@ -24,6 +24,11 @@ namespace Terramental
             _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
         }
 
+        public Vector2 ComponentPosition
+        {
+            get { return _componentPosition; }
+        }
+
         public void FollowCamera()
         {
             _componentPosition = _playerCharacter.SpritePosition + _componentOffset;

@@ -8,6 +8,8 @@ namespace Terramental
 {
     public class PlayerCharacter : BaseCharacter
     {
+        public float dashCooldown;
+        public float ultimateCooldown;
 
         //Movement Variables
 
@@ -21,7 +23,6 @@ namespace Terramental
         //Ability Variables
 
         private bool _ultimateActive;
-        private float _ultimateAbilityCooldown = 0;
         private float _ultimateActiveTimer = 0;
         private float _attackTimer;
         private int _elementIndex = 0;
@@ -187,7 +188,7 @@ namespace Terramental
 
         public void ActivateUltimate()
         {
-            if(_ultimateAbilityCooldown <= 0 && _ultimateActiveTimer <= 0)
+            if(ultimateCooldown <= 0 && _ultimateActiveTimer <= 0)
             {
                 switch(_elementIndex)
                 {
@@ -241,9 +242,9 @@ namespace Terramental
                 _attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if (_ultimateAbilityCooldown > 0 && !_ultimateActive)
+            if (ultimateCooldown > 0 && !_ultimateActive)
             {
-                _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                ultimateCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 

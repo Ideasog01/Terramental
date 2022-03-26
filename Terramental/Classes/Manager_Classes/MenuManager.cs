@@ -19,7 +19,7 @@ namespace Terramental
             _gameManager = gameManager;
             _graphics = graphics;
 
-            LoadMainMenu();
+            //LoadMainMenu();
         }
 
         public void MouseClick(Vector2 mousePos)

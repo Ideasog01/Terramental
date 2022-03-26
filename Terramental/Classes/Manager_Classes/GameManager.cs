@@ -57,8 +57,10 @@ namespace Terramental
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             InitialiseManagers();
+
+            LoadNewGame();
         }
 
         protected override void Update(GameTime gameTime)
@@ -88,6 +90,7 @@ namespace Terramental
             if(gameInProgress)
             {
                 _playerInterface.DrawInterface(_spriteBatch);
+                _playerInterface.DrawCooldownTexts(_spriteBatch);
             }
             
 
