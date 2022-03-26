@@ -31,6 +31,7 @@ namespace Terramental
         private MapManager _mapManager;
 
         private MenuManager _menuManager;
+        private PlayerInterface _playerInterface;
 
         public GameManager()
         {
@@ -67,6 +68,7 @@ namespace Terramental
 
             if(gameInProgress)
             {
+                _playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
             }
@@ -82,6 +84,12 @@ namespace Terramental
             _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
 
             _spriteManager.Draw(gameTime, _spriteBatch);
+
+            if(gameInProgress)
+            {
+                _playerInterface.DrawInterface(_spriteBatch);
+            }
+            
 
             _spriteBatch.End();
 
@@ -116,6 +124,8 @@ namespace Terramental
 
             CameraController.cameraActive = true;
 
+            _playerInterface = new PlayerInterface(this);
+
             gameInProgress = true;
         }
 
@@ -123,7 +133,7 @@ namespace Terramental
         {
             _spriteManager = new SpriteManager();
             _mainCam = new CameraController();
-
+            SpawnManager._gameManager = this;
             _inputManager = new InputManager(_mainCam, _menuManager);
         }
 

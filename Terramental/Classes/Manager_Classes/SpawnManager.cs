@@ -92,10 +92,5 @@ namespace Terramental
             elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));   
             _elementPickup.Add(elementPickup);
         }
-
-        public static void SetGameManager(GameManager gameManager)
-        {
-            _gameManager = gameManager;
-        }
     }
 }
