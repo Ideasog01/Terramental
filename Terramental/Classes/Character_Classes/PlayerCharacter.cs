@@ -101,6 +101,26 @@ namespace Terramental
                 _snowBeam.CheckBeamCollisions();
             }
 
+            if(_snowBeam != null && _elementIndex == 2 && ultimateActive)
+            {
+                if (SpriteVelocity.X > 0)
+                {
+                    if (AnimationIndex != 0 && AnimationIndex != 2)
+                    {
+                        _snowBeam.SetAnimation(1);
+                        _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
+                    }
+                }
+                else if(SpriteVelocity.X < 0)
+                {
+                    if (AnimationIndex != 0 && AnimationIndex != 2)
+                    {
+                        _snowBeam.SetAnimation(3);
+                        _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
+                    }
+                }
+            }
+
             SpritePosition += SpriteVelocity;
 
         }
@@ -247,7 +267,7 @@ namespace Terramental
             }
             else if (ultimateActive)
             {
-                ultimateCooldown = 30;
+                ultimateCooldown = 10;
                 ultimateActive = false;
 
                 if(_elementIndex == 2)
@@ -311,15 +331,54 @@ namespace Terramental
             if(_snowBeam == null)
             {
                 _snowBeam = new SnowBeam();
-                _snowBeam.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/Player/Ultimates/SnowBeam"), new Vector2(500, 64));
+                _snowBeam.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), new Vector2(320, 64));
+
+
+                Animation snowActivationAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), 8, 120f, false, new Vector2(320, 64));
+                Animation snowIdleAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet"), 8, 120f, true, new Vector2(320, 64));
+                snowActivationAnim.NextAnimation = true;
+                _snowBeam.AddAnimation(snowActivationAnim);
+                _snowBeam.AddAnimation(snowIdleAnim);
+
+                Animation snowLeftActivationAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), 8, 120f, false, new Vector2(320, 64));
+                Animation snowLeftIdleAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet"), 8, 120f, true, new Vector2(320, 64));
+                snowLeftActivationAnim.NextAnimation = true;
+                snowLeftActivationAnim.MirrorTexture = true;
+                snowLeftIdleAnim.MirrorTexture = true;
+                _snowBeam.AddAnimation(snowLeftActivationAnim);
+                _snowBeam.AddAnimation(snowLeftIdleAnim);
+
+                if((AnimationIndex % 2) == 0 || AnimationIndex == 0)
+                {
+                    _snowBeam.SetAnimation(0);
+                    _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
+                }
+                else
+                {
+                    _snowBeam.SetAnimation(2);
+                    _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
+                }
             }
             else
             {
+                _snowBeam.SetAnimation(0);
                 _snowBeam.IsActive = true;
+                
+
+                if (SpriteVelocity.X > 0)
+                {
+                    _snowBeam.SetAnimation(0);
+                    _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
+                }
+                else if(SpriteVelocity.X < 0)
+                {
+                    _snowBeam.SetAnimation(2);
+                    _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
+                }
             }
-            
+
             _snowBeam.AttachSprite = this;
-            _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
+
 
             ultimateActive = true;
             _ultimateActiveTimer = 10;
@@ -419,19 +478,19 @@ namespace Terramental
 
         public void InitialisePlayerAnimations(GameManager gameManager)
         {                                                                                                          //Index
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), 5, 120f, true)); //0
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftFire_SpriteSheet"), 5, 120f, true)); //1
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet"), 5, 120f, true)); //2
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftWater_SpriteSheet"), 5, 120f, true)); //3
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Snow_SpriteSheet"), 5, 120f, true)); //4
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftSnow_SpriteSheet"), 5, 120f, true)); //5
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //0
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftFire_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //1
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //2
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftWater_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //3
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Snow_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //4
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftSnow_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //5
 
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_Walk_SpriteSheet"), 4, 120f, true)); //6
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet"), 4, 120f, true)); //7
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_Walk_SpriteSheet"), 4, 120f, true)); //8
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_LeftWalk_SpirteSheet"), 4, 120f, true)); //9
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_Walk_SpriteSheet"), 4, 120f, true)); //10
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet"), 4, 120f, true)); //11
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_Walk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //6
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //7
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_Walk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //8
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_LeftWalk_SpirteSheet"), 4, 120f, true, new Vector2(64, 64))); //9
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_Walk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //10
+            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //11
         }
 
         private void MovementAnimations()

@@ -17,14 +17,18 @@ namespace Terramental
         private float _frameDuration;
         private bool _loopActive;
         private bool _animationActive;
+        private bool _nextAnimation;
+        private Vector2 _frameDimensions;
+        private bool _mirrorTexture;
 
-        public Animation(Texture2D spriteSheet, int frameCount, float frameDuration, bool loopActive)
+        public Animation(Texture2D spriteSheet, int frameCount, float frameDuration, bool loopActive, Vector2 frameDimensions)
         {
             _spriteSheet = spriteSheet;
             _frameCount = frameCount;
             _frameDuration = frameDuration;
             _loopActive = loopActive;
             _animationActive = true;
+            _frameDimensions = frameDimensions;
         }
 
         public Texture2D SpriteSheet
@@ -45,6 +49,18 @@ namespace Terramental
             set { _frameDuration = value; }
         }
 
+        public bool NextAnimation
+        {
+            get { return _nextAnimation; }
+            set { _nextAnimation = value; }
+        }
+
+        public bool MirrorTexture
+        {
+            get { return _mirrorTexture; }
+            set { _mirrorTexture = value; }
+        }
+
         public bool LoopActive
         {
             get { return _loopActive; }
@@ -55,6 +71,12 @@ namespace Terramental
         {
             get { return _animationActive; }
             set { _animationActive = value; }
+        }
+
+        public Vector2 FrameDimensions
+        {
+            get { return _frameDimensions; }
+            set { _frameDimensions = value; }
         }
     }
 }

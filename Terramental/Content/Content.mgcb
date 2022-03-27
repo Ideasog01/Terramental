@@ -188,18 +188,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/Idle/Idle_Water_SpriteSheet.png
 
-#begin Sprites/Player/Ultimates/SnowBeam.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Player/Ultimates/SnowBeam.png
-
 #begin Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -295,6 +283,66 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/SpriteSheets/Projectiles/WaterProjectile_SpriteSheet.png
+
+#begin Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet.png
+
+#begin Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet.png
+
+#begin Sprites/SpriteSheets/Ultimates/SnowBeam_LeftActivation_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpriteSheets/Ultimates/SnowBeam_LeftActivation_SpriteSheet.png
+
+#begin Sprites/SpriteSheets/Ultimates/SnowBeam_LeftIdle_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpriteSheets/Ultimates/SnowBeam_LeftIdle_SpriteSheet.png
+
+#begin Sprites/SpriteSheets/Ultimates/SnowBeam_LeftIdle_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpriteSheets/Ultimates/SnowBeam_LeftIdle_SpriteSheet.png
 
 #begin Sprites/Tiles/DefaultTile.png
 /importer:TextureImporter

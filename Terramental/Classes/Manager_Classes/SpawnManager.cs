@@ -44,7 +44,7 @@ namespace Terramental
             effectSprite.Initialise(position, spriteTexture, scale);
             effectSprite.AttachSprite = attachSprite;
 
-            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true);
+            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true, new Vector2(64, 64));
 
             effectSprite.Animations.Add(effectAnimation);
 
@@ -57,7 +57,7 @@ namespace Terramental
             Texture2D spriteTexture = _gameManager.GetTexture(texturePath);
             effectSprite.Initialise(position, spriteTexture, scale);
 
-            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true);
+            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true, new Vector2(64, 64));
             effectSprite.Animations.Add(effectAnimation);
 
             effectSprite.Destroy(duration);
