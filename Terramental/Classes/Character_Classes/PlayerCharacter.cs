@@ -33,6 +33,7 @@ namespace Terramental
         private Tile _groundTile;
         private Tile _leftTile;
         private Tile _rightTile;
+        private SnowBeam _snowBeam;
 
         private List<Tile> _tileList;
         private GameManager _gameManager;
@@ -93,6 +94,11 @@ namespace Terramental
                     _isGrounded = false;
                     _groundTile = null;
                 }
+            }
+
+            if(_snowBeam != null)
+            {
+                _snowBeam.CheckBeamCollisions();
             }
 
             SpritePosition += SpriteVelocity;
@@ -243,6 +249,11 @@ namespace Terramental
             {
                 ultimateCooldown = 30;
                 ultimateActive = false;
+
+                if(_elementIndex == 2)
+                {
+                    SnowUltimateEnd();
+                }
             }
 
             if (_attackTimer > 0)
@@ -297,11 +308,26 @@ namespace Terramental
 
         private void ActivateSnowUltimate()
         {
-            Sprite sprite = new Sprite();
-            sprite.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/Player/Ultimates/SnowBeam"), new Vector2(500, 64));
+            if(_snowBeam == null)
+            {
+                _snowBeam = new SnowBeam();
+                _snowBeam.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/Player/Ultimates/SnowBeam"), new Vector2(500, 64));
+            }
+            else
+            {
+                _snowBeam.IsActive = true;
+            }
+            
+            _snowBeam.AttachSprite = this;
+            _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
 
             ultimateActive = true;
             _ultimateActiveTimer = 10;
+        }
+
+        private void SnowUltimateEnd()
+        {
+            _snowBeam.IsActive = false;
         }
 
         #endregion
