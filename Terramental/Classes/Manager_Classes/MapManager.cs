@@ -94,6 +94,11 @@ namespace Terramental
             {
                 SpawnManager.SpawnElementPickup(2, position);
             }
+
+            if(index == 6)
+            {
+                SpawnManager.SpawnScorePickup(position);
+            }
         }
     }
 }

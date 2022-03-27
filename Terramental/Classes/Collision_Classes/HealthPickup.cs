@@ -21,6 +21,7 @@
                 {
                     Player.Heal(_amount);
                     IsActive = false;
+                    Player.DisplayPlayerLives();
                 }
             }
         }

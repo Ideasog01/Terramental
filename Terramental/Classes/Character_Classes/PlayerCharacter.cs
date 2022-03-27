@@ -11,6 +11,8 @@ namespace Terramental
         public float dashCooldown;
         public float ultimateCooldown;
 
+        private int _playerScore;
+
         //Movement Variables
 
         private bool _isGrounded;
@@ -62,6 +64,12 @@ namespace Terramental
         {
             get { return _elementIndex; }
             set { _elementIndex = value; }
+        }
+
+        public int PlayerScore
+        {
+            get { return _playerScore; }
+            set { _playerScore = value; }
         }
 
         #endregion
@@ -237,6 +245,11 @@ namespace Terramental
                         break;
                 }
             }
+        }
+
+        public void DisplayPlayerLives()
+        {
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
         }
 
         private void UpdateUltimateStatus(GameTime gameTime)

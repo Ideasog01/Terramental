@@ -15,6 +15,8 @@ namespace Terramental
 
         public static bool gameInProgress;
 
+        public PlayerInterface playerInterface;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -31,7 +33,6 @@ namespace Terramental
         private MapManager _mapManager;
 
         private MenuManager _menuManager;
-        private PlayerInterface _playerInterface;
 
         public GameManager()
         {
@@ -70,7 +71,7 @@ namespace Terramental
 
             if(gameInProgress)
             {
-                _playerInterface.UpdatePlayerInterface();
+                playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
             }
@@ -89,8 +90,8 @@ namespace Terramental
 
             if(gameInProgress)
             {
-                _playerInterface.DrawInterface(_spriteBatch);
-                _playerInterface.DrawCooldownTexts(_spriteBatch);
+                playerInterface.DrawInterface(_spriteBatch);
+                playerInterface.DrawCooldownTexts(_spriteBatch);
             }
             
 
@@ -124,6 +125,9 @@ namespace Terramental
             playerCharacter.InitialisePlayerAnimations(this);
             playerCharacter.LayerOrder = -1;
             _inputManager.playerCharacter = playerCharacter;
+            playerInterface = new PlayerInterface(this);
+
+            playerCharacter.DisplayPlayerLives();
 
 
             _mapManager = new MapManager(this);
@@ -132,7 +136,7 @@ namespace Terramental
 
             CameraController.cameraActive = true;
 
-            _playerInterface = new PlayerInterface(this);
+            
 
             gameInProgress = true;
         }

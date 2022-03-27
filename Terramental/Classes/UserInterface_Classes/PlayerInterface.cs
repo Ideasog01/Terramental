@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Terramental
 {
-    class PlayerInterface
+    public class PlayerInterface
     {
 
         public static bool interfaceActive;
@@ -22,9 +22,11 @@ namespace Terramental
         private InterfaceComponent _firstLife;
         private InterfaceComponent _secondLife;
         private InterfaceComponent _thirdLife;
+        private InterfaceComponent _playerScoreComponent;
 
         private SpriteFont _dashCooldown;
         private SpriteFont _ultimateCooldown;
+        private SpriteFont _playerScore;
 
         public PlayerInterface(GameManager gameManager)
         {
@@ -61,19 +63,48 @@ namespace Terramental
             }
         }
 
+        public void UpdatePlayerLives(int livesAmount)
+        {
+            switch(livesAmount)
+            {
+                case 0:
+                    _firstLife.ComponentColor = Color.Gray;
+                    _secondLife.ComponentColor = Color.Gray;
+                    _thirdLife.ComponentColor = Color.Gray;
+                    break;
+                case 1:
+                    _firstLife.ComponentColor = Color.White;
+                    _secondLife.ComponentColor = Color.Gray;
+                    _thirdLife.ComponentColor = Color.Gray;
+                    break;
+                case 2:
+                    _firstLife.ComponentColor = Color.White;
+                    _secondLife.ComponentColor = Color.White;
+                    _thirdLife.ComponentColor = Color.Gray;
+                    break;
+                case 3:
+                    _firstLife.ComponentColor = Color.White;
+                    _secondLife.ComponentColor = Color.White;
+                    _thirdLife.ComponentColor = Color.White;
+                    break;
+            }
+        }
+
         public void DrawCooldownTexts(SpriteBatch spriteBatch)
         {
             if(interfaceActive)
             {
                 if(_gameManager.playerCharacter.dashCooldown > 0)
                 {
-                    spriteBatch.DrawString(_dashCooldown, _gameManager.playerCharacter.dashCooldown.ToString("F0"), _dashAbility.ComponentPosition + new Vector2(15, 14), Color.Gray);
+                    spriteBatch.DrawString(_dashCooldown, _gameManager.playerCharacter.dashCooldown.ToString("F0"), _dashAbility.ComponentPosition + new Vector2(15, 14), Color.Black);
                 }
 
                 if(_gameManager.playerCharacter.ultimateCooldown > 0)
                 {
-                    spriteBatch.DrawString(_ultimateCooldown, _gameManager.playerCharacter.ultimateCooldown.ToString("F0"), _ultimateAbility.ComponentPosition + new Vector2(15, 14), Color.Gray);
+                    spriteBatch.DrawString(_ultimateCooldown, _gameManager.playerCharacter.ultimateCooldown.ToString("F0"), _ultimateAbility.ComponentPosition + new Vector2(15, 14), Color.Black);
                 }
+
+                spriteBatch.DrawString(_playerScore, _gameManager.playerCharacter.PlayerScore.ToString(), _playerScoreComponent.ComponentPosition + new Vector2(40, 5), Color.Black);
                 
                 
             }
@@ -105,8 +136,12 @@ namespace Terramental
             _thirdLife = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(-360, -230), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
             playerInterfaceElements.Add(_thirdLife);
 
+            _playerScoreComponent = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(-435, -180), new Vector2(32, 32), _gameManager.GetTexture("Sprites/Pickups/Collectible"));
+            playerInterfaceElements.Add(_playerScoreComponent);
+
             _dashCooldown = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
             _ultimateCooldown = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
+            _playerScore = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
 
             interfaceActive = true;
         }

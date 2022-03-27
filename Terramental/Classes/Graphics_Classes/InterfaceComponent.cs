@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
-    class InterfaceComponent
+    public class InterfaceComponent
     {
         private PlayerCharacter _playerCharacter;
         private Vector2 _componentPosition;
@@ -12,6 +12,7 @@ namespace Terramental
         private Vector2 _componentScale;
         private Texture2D _componentTexture;
         private Rectangle _componentRectangle;
+        private Color _componentColor = Color.White;
 
         public InterfaceComponent(PlayerCharacter playerCharacter, Vector2 position, Vector2 scale, Texture2D texture)
         {
@@ -29,6 +30,12 @@ namespace Terramental
             get { return _componentPosition; }
         }
 
+        public Color ComponentColor
+        {
+            get { return _componentColor; }
+            set { _componentColor = value; }
+        }
+
         public void FollowCamera()
         {
             _componentPosition = _playerCharacter.SpritePosition + _componentOffset;
@@ -37,7 +44,7 @@ namespace Terramental
 
         public void DrawComponent(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_componentTexture, _componentRectangle, Color.White);
+            spriteBatch.Draw(_componentTexture, _componentRectangle, _componentColor);
         }
 
     }
