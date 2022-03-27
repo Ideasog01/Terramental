@@ -34,7 +34,7 @@ namespace Terramental
         {
             if(Player != null & IsActive && Player.ElementIndex != _elementIndex && _pickupTimer <= 0)
             {
-                if (OnCollision(Player.SpriteRectangle))
+                if (OnCollision(Player.SpriteRectangle) && !Player.ultimateActive)
                 {
                     ChangeElement(Player.ElementIndex);
                 }

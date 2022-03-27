@@ -58,7 +58,7 @@ namespace Terramental
                     playerCharacter.PlayerMovement(0, gameTime);
                 }
 
-                if (_currentKeyboardState.IsKeyDown(Keys.Q))
+                if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
                 {
                     playerCharacter.ActivateUltimate();
                 }

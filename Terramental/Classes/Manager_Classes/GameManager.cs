@@ -21,7 +21,7 @@ namespace Terramental
         private InputManager _inputManager;
         private SpriteManager _spriteManager;
 
-        public PlayerCharacter playerCharacter = new PlayerCharacter();
+        public PlayerCharacter playerCharacter;
 
         private CameraController _mainCam;
 
@@ -119,11 +119,16 @@ namespace Terramental
 
         public void LoadNewGame()
         {
-            _mapManager = new MapManager(this);
-
+            playerCharacter = new PlayerCharacter(this);
             playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
             playerCharacter.InitialisePlayerAnimations(this);
+            playerCharacter.LayerOrder = -1;
             _inputManager.playerCharacter = playerCharacter;
+
+
+            _mapManager = new MapManager(this);
+
+            
 
             CameraController.cameraActive = true;
 

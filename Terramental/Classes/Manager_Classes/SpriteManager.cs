@@ -31,7 +31,18 @@ namespace Terramental
         {
             foreach(Sprite sprite in _spriteList)
             {
-                sprite.Draw(gameTime, _spriteBatch);
+                if(sprite.LayerOrder == 0)
+                {
+                    sprite.Draw(gameTime, _spriteBatch);
+                }
+            }
+
+            foreach (Sprite sprite in _spriteList)
+            {
+                if (sprite.LayerOrder == -1)
+                {
+                    sprite.Draw(gameTime, _spriteBatch);
+                }
             }
         }
 

@@ -67,12 +67,12 @@ namespace Terramental
             {
                 if(_gameManager.playerCharacter.dashCooldown > 0)
                 {
-                    spriteBatch.DrawString(_dashCooldown, _gameManager.playerCharacter.dashCooldown.ToString(), _dashAbility.ComponentPosition + new Vector2(15, 14), Color.Gray);
+                    spriteBatch.DrawString(_dashCooldown, _gameManager.playerCharacter.dashCooldown.ToString("F0"), _dashAbility.ComponentPosition + new Vector2(15, 14), Color.Gray);
                 }
 
                 if(_gameManager.playerCharacter.ultimateCooldown > 0)
                 {
-                    spriteBatch.DrawString(_ultimateCooldown, _gameManager.playerCharacter.ultimateCooldown.ToString(), _ultimateAbility.ComponentPosition + new Vector2(15, 14), Color.Gray);
+                    spriteBatch.DrawString(_ultimateCooldown, _gameManager.playerCharacter.ultimateCooldown.ToString("F0"), _ultimateAbility.ComponentPosition + new Vector2(15, 14), Color.Gray);
                 }
                 
                 

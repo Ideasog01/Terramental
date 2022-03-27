@@ -263,3 +263,10 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Water_Element.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\DefaultFont.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\SpriteFonts\DefaultFont.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Fire_Idle_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_RightWalk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk-SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_RightWalk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpriteSheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_RightWalk_Spritesheet.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Ultimates\SnowBeam.xnb

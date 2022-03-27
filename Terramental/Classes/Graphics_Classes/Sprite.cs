@@ -24,6 +24,7 @@ namespace Terramental
         private Rectangle _spriteSourceRectangle;
         private bool _isActive;
         private Sprite _attachSprite;
+        private int _layerOrder;
 
         //Animation Variables
 
@@ -40,6 +41,12 @@ namespace Terramental
         #endregion
 
         #region Properties
+
+        public int LayerOrder //0 is first -1 is second
+        {
+            get { return _layerOrder; }
+            set { _layerOrder = value; }
+        }
 
         public bool IsActive
         {
