@@ -11,9 +11,9 @@ namespace Terramental
         /// All characters inherit from BaseCharacter class
         /// </summary>
 
-        private int _characterMaxHealth = 100;
+        private int _characterMaxHealth = 3;
 
-        private int _characterHealth = 80;
+        private int _characterHealth = 2;
 
         private bool _isBurning;
         private float _burnTimer;
@@ -94,9 +94,12 @@ namespace Terramental
                 _characterHealth += amount;
                 
             }
+        }
 
-
-
+        public int CharacterHealth
+        {
+            get { return _characterHealth; }
+            set { _characterHealth = value; }
         }
     }
 }

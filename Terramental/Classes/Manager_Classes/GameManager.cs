@@ -13,13 +13,17 @@ namespace Terramental
     {
         public const int gravity = 3;
 
+        public static bool gameInProgress;
+
+        public PlayerInterface playerInterface;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         private InputManager _inputManager;
         private SpriteManager _spriteManager;
 
-        public PlayerCharacter playerCharacter = new PlayerCharacter();
+        public PlayerCharacter playerCharacter;
 
         private CameraController _mainCam;
 
@@ -27,6 +31,8 @@ namespace Terramental
         public static int screenWidth = 960;
 
         private MapManager _mapManager;
+
+        private MenuManager _menuManager;
 
         public GameManager()
         {
@@ -44,31 +50,32 @@ namespace Terramental
 
         protected override void Initialize()
         {
+            _menuManager = new MenuManager(this, _graphics);
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             InitialiseManagers();
 
-            _mainCam = new CameraController();
-
-            playerCharacter.Initialise(new Vector2(128, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
-            playerCharacter.InitialisePlayerAnimations(this);
-
-
+            LoadNewGame();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             UpdateManagers(gameTime);
-            playerCharacter.UpdateCharacter(gameTime);
-            playerCharacter.UpdatePlayerCharacter(gameTime);
+
+            if(gameInProgress)
+            {
+                playerInterface.UpdatePlayerInterface();
+                playerCharacter.UpdateCharacter(gameTime);
+                playerCharacter.UpdatePlayerCharacter(gameTime);
+            }
+            
 
             base.Update(gameTime);
         }
@@ -80,6 +87,13 @@ namespace Terramental
             _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
 
             _spriteManager.Draw(gameTime, _spriteBatch);
+
+            if(gameInProgress)
+            {
+                playerInterface.DrawInterface(_spriteBatch);
+                playerInterface.DrawCooldownTexts(_spriteBatch);
+            }
+            
 
             _spriteBatch.End();
 
@@ -99,12 +113,40 @@ namespace Terramental
 
         #region Managers
 
+        public void ExitGame()
+        {
+            Exit();
+        }
+
+        public void LoadNewGame()
+        {
+            playerCharacter = new PlayerCharacter(this);
+            playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
+            playerCharacter.InitialisePlayerAnimations(this);
+            playerCharacter.LayerOrder = -1;
+            _inputManager.playerCharacter = playerCharacter;
+            playerInterface = new PlayerInterface(this);
+
+            playerCharacter.DisplayPlayerLives();
+
+
+            _mapManager = new MapManager(this);
+
+            
+
+            CameraController.cameraActive = true;
+
+            
+
+            gameInProgress = true;
+        }
+
         private void InitialiseManagers()
         {
-            _inputManager = new InputManager(playerCharacter);
             _spriteManager = new SpriteManager();
+            _mainCam = new CameraController();
             SpawnManager._gameManager = this;
-            _mapManager = new MapManager(this);
+            _inputManager = new InputManager(_mainCam, _menuManager);
         }
 
         private void UpdateManagers(GameTime gameTime)

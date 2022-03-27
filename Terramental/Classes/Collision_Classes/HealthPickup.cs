@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Terramental
+﻿namespace Terramental
 {
     public class HealthPickup : Pickup
 
@@ -25,6 +21,7 @@ namespace Terramental
                 {
                     Player.Heal(_amount);
                     IsActive = false;
+                    Player.DisplayPlayerLives();
                 }
             }
         }

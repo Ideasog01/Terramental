@@ -8,6 +8,10 @@ namespace Terramental
 {
     public class PlayerCharacter : BaseCharacter
     {
+        public float dashCooldown;
+        public float ultimateCooldown;
+
+        private int _playerScore;
 
         //Movement Variables
 
@@ -20,8 +24,7 @@ namespace Terramental
 
         //Ability Variables
 
-        private bool _ultimateActive;
-        private float _ultimateAbilityCooldown = 0;
+        public bool ultimateActive;
         private float _ultimateActiveTimer = 0;
         private float _attackTimer;
         private int _elementIndex = 0;
@@ -32,8 +35,10 @@ namespace Terramental
         private Tile _groundTile;
         private Tile _leftTile;
         private Tile _rightTile;
+        private SnowBeam _snowBeam;
 
         private List<Tile> _tileList;
+        private GameManager _gameManager;
 
         #region Properties
 
@@ -61,9 +66,20 @@ namespace Terramental
             set { _elementIndex = value; }
         }
 
+        public int PlayerScore
+        {
+            get { return _playerScore; }
+            set { _playerScore = value; }
+        }
+
         #endregion
 
         #region Player Core
+
+        public PlayerCharacter(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
 
         public void UpdatePlayerCharacter(GameTime gameTime)
         {
@@ -86,6 +102,11 @@ namespace Terramental
                     _isGrounded = false;
                     _groundTile = null;
                 }
+            }
+
+            if(_snowBeam != null)
+            {
+                _snowBeam.CheckBeamCollisions();
             }
 
             SpritePosition += SpriteVelocity;
@@ -187,16 +208,17 @@ namespace Terramental
 
         public void ActivateUltimate()
         {
-            if(_ultimateAbilityCooldown <= 0 && _ultimateActiveTimer <= 0)
+            if(ultimateCooldown <= 0 && _ultimateActiveTimer <= 0)
             {
                 switch(_elementIndex)
                 {
                     case 0 :
-                        FireUltimate();
+                        ActivateFireUltimate();
                         break;
                     case 1:
                         break;
                     case 2:
+                        ActivateSnowUltimate();
                         break;
                     default:
                         Console.WriteLine("ERROR: Element index is invalid during ultimate activatation");
@@ -207,7 +229,7 @@ namespace Terramental
 
         public void PrimaryAttack()
         {
-            if(_ultimateActive)
+            if(ultimateActive)
             {
                 switch (_elementIndex)
                 {
@@ -225,15 +247,26 @@ namespace Terramental
             }
         }
 
+        public void DisplayPlayerLives()
+        {
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+        }
+
         private void UpdateUltimateStatus(GameTime gameTime)
         {
             if (_ultimateActiveTimer > 0)
             {
                 _ultimateActiveTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (_ultimateActive)
+            else if (ultimateActive)
             {
-                _ultimateActive = false;
+                ultimateCooldown = 30;
+                ultimateActive = false;
+
+                if(_elementIndex == 2)
+                {
+                    SnowUltimateEnd();
+                }
             }
 
             if (_attackTimer > 0)
@@ -241,17 +274,17 @@ namespace Terramental
                 _attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if (_ultimateAbilityCooldown > 0 && !_ultimateActive)
+            if (ultimateCooldown > 0 && !ultimateActive)
             {
-                _ultimateAbilityCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                ultimateCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 
         #region Fire Ultimate
 
-        private void FireUltimate()
+        private void ActivateFireUltimate()
         {
-            _ultimateActive = true;
+            ultimateActive = true;
             _ultimateActiveTimer = 10;
         }
 
@@ -280,6 +313,34 @@ namespace Terramental
 
                 _attackTimer = 2;
             }
+        }
+
+        #endregion
+
+        #region Snow Ultimate
+
+        private void ActivateSnowUltimate()
+        {
+            if(_snowBeam == null)
+            {
+                _snowBeam = new SnowBeam();
+                _snowBeam.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/Player/Ultimates/SnowBeam"), new Vector2(500, 64));
+            }
+            else
+            {
+                _snowBeam.IsActive = true;
+            }
+            
+            _snowBeam.AttachSprite = this;
+            _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
+
+            ultimateActive = true;
+            _ultimateActiveTimer = 10;
+        }
+
+        private void SnowUltimateEnd()
+        {
+            _snowBeam.IsActive = false;
         }
 
         #endregion
@@ -370,8 +431,7 @@ namespace Terramental
         #region Animations
 
         public void InitialisePlayerAnimations(GameManager gameManager)
-        {
-                                                                                                                            //Index
+        {                                                                                                          //Index
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), 5, 120f, true)); //0
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftFire_SpriteSheet"), 5, 120f, true)); //1
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet"), 5, 120f, true)); //2

@@ -67,6 +67,7 @@ namespace Terramental
                 }
             }
         }
+
         private void SpawnEntity(int index, Vector2 position)
         {
             if(index == 1)
@@ -92,6 +93,11 @@ namespace Terramental
             if(index == 5)
             {
                 SpawnManager.SpawnElementPickup(2, position);
+            }
+
+            if(index == 6)
+            {
+                SpawnManager.SpawnScorePickup(position);
             }
         }
     }

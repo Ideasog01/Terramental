@@ -24,6 +24,8 @@ namespace Terramental
         private Rectangle _spriteSourceRectangle;
         private bool _isActive;
         private Sprite _attachSprite;
+        private Vector2 _attachSpriteOffset;
+        private int _layerOrder;
 
         //Animation Variables
 
@@ -40,6 +42,12 @@ namespace Terramental
         #endregion
 
         #region Properties
+
+        public int LayerOrder //0 is first -1 is second
+        {
+            get { return _layerOrder; }
+            set { _layerOrder = value; }
+        }
 
         public bool IsActive
         {
@@ -93,6 +101,12 @@ namespace Terramental
             set { _animationIndex = value; }
         }
 
+        public Vector2 AttachSpriteOffset
+        {
+            get { return _attachSpriteOffset; }
+            set { _attachSpriteOffset = value; }
+        }
+
         #endregion
 
         #region Core
@@ -118,7 +132,7 @@ namespace Terramental
 
             if (_attachSprite != null)
             {
-                _spritePosition = _attachSprite._spritePosition + new Vector2(_attachSprite.SpriteRectangle.Width / 4, 0.5f);
+                _spritePosition = _attachSprite._spritePosition + _attachSpriteOffset;
             }
 
             if (_destructionActivated)

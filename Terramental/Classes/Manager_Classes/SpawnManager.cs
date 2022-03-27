@@ -13,8 +13,9 @@ namespace Terramental
         public static GameManager _gameManager;
 
         public static List<BaseCharacter> enemyCharacters = new List<BaseCharacter>();
-        public static List<HealthPickup> _healthPickup = new List<HealthPickup>();
-        public static List<ElementPickup> _elementPickup = new List<ElementPickup>();
+        public static List<HealthPickup> _healthPickups = new List<HealthPickup>();
+        public static List<ElementPickup> _elementPickups = new List<ElementPickup>();
+        public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
         public static List<Sprite> effects = new List<Sprite>();
 
         public static void Update(GameTime gameTime)
@@ -26,14 +27,19 @@ namespace Terramental
                 character.UpdateCharacter(gameTime);
             }
 
-            foreach (HealthPickup healthPickup in _healthPickup)
+            foreach (HealthPickup healthPickup in _healthPickups)
             {
                 healthPickup.CheckHealthPickupCollision();
             }
 
-            foreach (ElementPickup elementPickup in _elementPickup)
+            foreach (ElementPickup elementPickup in _elementPickups)
             {
                 elementPickup.CheckElementPickupCollision(gameTime);
+            }
+
+            foreach(ScorePickup scorePickup in _scorePickups)
+            {
+                scorePickup.UpdateScorePickup();
             }
         }
 
@@ -75,22 +81,25 @@ namespace Terramental
 
         public static void SpawnHealthPickup(Vector2 position)
         {
-            HealthPickup healthPickup = new HealthPickup(_gameManager.playerCharacter, 20);
+            HealthPickup healthPickup = new HealthPickup(_gameManager.playerCharacter, 1);
             healthPickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64, 64));
 
-            _healthPickup.Add(healthPickup);
+            _healthPickups.Add(healthPickup);
         }
 
-        public static void SpawnScorePickup()
+        public static void SpawnScorePickup(Vector2 position)
         {
+            ScorePickup scorePickup = new ScorePickup(_gameManager.playerCharacter);
+            scorePickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
 
+            _scorePickups.Add(scorePickup);
         }
 
         public static void SpawnElementPickup(int elementIndex, Vector2 position)
         {
             ElementPickup elementPickup = new ElementPickup(elementIndex, _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), _gameManager.playerCharacter);
             elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));   
-            _elementPickup.Add(elementPickup);
+            _elementPickups.Add(elementPickup);
         }
     }
 }

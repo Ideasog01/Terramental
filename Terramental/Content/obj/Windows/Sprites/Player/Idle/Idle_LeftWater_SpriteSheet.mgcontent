@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<<<<<<< Updated upstream
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-03-22T15:49:55.255008+00:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-22T15:51:32.3484689+00:00</DestTime>
-=======
-  <SourceFile>D:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.png</SourceFile>
   <SourceTime>2022-03-22T18:36:21.0920151+00:00</SourceTime>
-  <DestFile>D:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-23T09:37:31.9940302+00:00</DestTime>
->>>>>>> Stashed changes
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/Player/Idle/Idle_LeftWater_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-03-26T21:27:23.940798+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
