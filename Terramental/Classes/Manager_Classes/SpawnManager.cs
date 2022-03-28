@@ -43,16 +43,18 @@ namespace Terramental
             }
         }
 
-        public static void SpawnAttachEffect(string texturePath, Vector2 position, Vector2 scale, Sprite attachSprite, float duration)
+        public static void SpawnAttachEffect(string texturePath, Vector2 position, Vector2 scale, Sprite attachSprite, float duration, bool animation)
         {
             Sprite effectSprite = new Sprite();
             Texture2D spriteTexture = _gameManager.GetTexture(texturePath);
             effectSprite.Initialise(position, spriteTexture, scale);
             effectSprite.AttachSprite = attachSprite;
 
-            Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true, new Vector2(64, 64));
-
-            effectSprite.Animations.Add(effectAnimation);
+            if(animation)
+            {
+                Animation effectAnimation = new Animation(spriteTexture, 4, 120f, true, new Vector2(64, 64));
+                effectSprite.Animations.Add(effectAnimation);
+            }
 
             effectSprite.Destroy(duration);
         }

@@ -18,8 +18,14 @@ namespace Terramental
         private bool _isBurning;
         private float _burnTimer;
 
+        private bool _isFrozen;
+        private bool _snowBeamCollision;
+        private float _frozenTimer;
+
         private float _damageTimer;
         private float _damageWaitTime;
+
+        private int _statusIndex;
 
         public bool IsBurning
         {
@@ -29,13 +35,25 @@ namespace Terramental
 
         public void SetStatus(int index, float statusTime, float damageTime)
         {
-            if(index == 0)
+            if(index != _statusIndex)
             {
-                _isBurning = true;
-                _burnTimer = statusTime;
-                _damageTimer = damageTime;
-                _damageWaitTime = damageTime;
+                if (index == 0)
+                {
+                    _isBurning = true;
+                    _burnTimer = statusTime;
+                    _damageTimer = damageTime;
+                    _damageWaitTime = damageTime;
+                }
+
+                if (index == 1)
+                {
+                    _frozenTimer = statusTime;
+                    _snowBeamCollision = true;
+                }
+
+                _statusIndex = index;
             }
+            
         }
 
         public void TakeDamage(int amount)
@@ -70,8 +88,39 @@ namespace Terramental
                 {
                     _isBurning = false;
                     _burnTimer = 0;
+                    _statusIndex = 0;
                 }
             }
+
+            if(_snowBeamCollision)
+            {
+                if (_frozenTimer > 0)
+                {
+                    _frozenTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    _isFrozen = true;
+                    _snowBeamCollision = false;
+                    _frozenTimer = 4;
+                    SpawnManager.SpawnAttachEffect("Sprites/Effects/FrozenEffect", SpritePosition, SpriteScale, this, 4, false);
+                }
+            }
+
+            if(_isFrozen)
+            {
+                if(_frozenTimer > 0)
+                {
+                    _frozenTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    _isFrozen = false;
+
+                    _statusIndex = 0;
+                }
+            }
+            
 
             if (SpriteVelocity.X > 0) // Facing right
             {

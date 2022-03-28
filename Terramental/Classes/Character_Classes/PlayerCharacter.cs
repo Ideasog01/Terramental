@@ -321,7 +321,7 @@ namespace Terramental
                         if (!character.IsBurning)
                         {
                             Vector2 scale = new Vector2(64, 128);
-                            SpawnManager.SpawnAttachEffect("Sprites/SpriteSheets/Effects/Flame_SpriteSheet", character.SpritePosition, scale, character, 5);
+                            SpawnManager.SpawnAttachEffect("Sprites/SpriteSheets/Effects/Flame_SpriteSheet", character.SpritePosition, scale, character, 5, true);
                             character.SetStatus(0, 5, 1.5f);
                         }
 

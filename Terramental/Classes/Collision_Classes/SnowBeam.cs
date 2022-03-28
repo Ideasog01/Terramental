@@ -6,17 +6,16 @@ namespace Terramental
 {
     class SnowBeam : Sprite
     {
+
         public void CheckBeamCollisions()
         {
-            foreach(BaseCharacter enemy in SpawnManager.enemyCharacters)
+            foreach (BaseCharacter enemy in SpawnManager.enemyCharacters)
             {
-                if(OnCollision(enemy.SpriteRectangle))
+                if (OnCollision(enemy.SpriteRectangle))
                 {
-                    enemy.TakeDamage(5);
+                    enemy.SetStatus(1, 4, 2);
                 }
             }
-
-
         }
     }
 }
