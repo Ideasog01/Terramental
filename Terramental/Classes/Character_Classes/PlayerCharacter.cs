@@ -111,17 +111,14 @@ namespace Terramental
 
             if(_snowBeam != null && _elementIndex == 2 && ultimateActive)
             {
-                if (SpriteVelocity.X > 0)
+                if(_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
                 {
-                    if (AnimationIndex != 0 && AnimationIndex != 2)
+                    if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
                     {
                         _snowBeam.SetAnimation(1);
                         _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
                     }
-                }
-                else if(SpriteVelocity.X < 0)
-                {
-                    if (AnimationIndex != 0 && AnimationIndex != 2)
+                    else
                     {
                         _snowBeam.SetAnimation(3);
                         _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
@@ -350,14 +347,15 @@ namespace Terramental
                 Animation snowActivationAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), 8, 100f, false, new Vector2(320, 64));
                 Animation snowIdleAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet"), 8, 100f, true, new Vector2(320, 64));
                 snowActivationAnim.NextAnimation = true;
-                _snowBeam.AddAnimation(snowActivationAnim);
-                _snowBeam.AddAnimation(snowIdleAnim);
 
                 Animation snowLeftActivationAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), 8, 100f, false, new Vector2(320, 64));
                 Animation snowLeftIdleAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet"), 8, 100f, true, new Vector2(320, 64));
                 snowLeftActivationAnim.NextAnimation = true;
                 snowLeftActivationAnim.MirrorTexture = true;
                 snowLeftIdleAnim.MirrorTexture = true;
+
+                _snowBeam.AddAnimation(snowActivationAnim);
+                _snowBeam.AddAnimation(snowIdleAnim);
                 _snowBeam.AddAnimation(snowLeftActivationAnim);
                 _snowBeam.AddAnimation(snowLeftIdleAnim);
 
