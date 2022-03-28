@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< HEAD
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.png</SourceFile>
   <SourceTime>2022-03-27T18:23:35.5052996+01:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-03-28T11:02:30.0474721+01:00</DestTime>
+  <DestTime>2022-03-27T23:37:55.510492+01:00</DestTime>
+=======
+<<<<<<< HEAD:Terramental/Content/obj/Windows/Content/Sprites/Player/Ultimates/SnowBeam.mgcontent
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Ultimates/SnowBeam.png</SourceFile>
+  <SourceTime>2022-03-27T23:37:20.9448316+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Player/Ultimates/SnowBeam.xnb</DestFile>
+  <DestTime>2022-03-27T23:37:55.4995206+01:00</DestTime>
+=======
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.png</SourceFile>
+  <SourceTime>2022-03-27T18:23:35.5052996+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-03-27T23:39:10.4720792+01:00</DestTime>
+>>>>>>> Snow-Ultimate-Ability:Terramental/Content/obj/Windows/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.mgcontent
+>>>>>>> Snow-Ultimate-Ability
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
