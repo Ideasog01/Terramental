@@ -160,7 +160,14 @@ namespace Terramental
                 }
                 else
                 {
-                    spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                    if(!_spriteAnimations[_animationIndex].MirrorTexture)
+                    {
+                        spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                    }
                 }
             }
         }
@@ -201,6 +208,14 @@ namespace Terramental
                         if (!animation.LoopActive)
                         {
                             animation.AnimationActive = false;
+                            _animationFrameIndex = animation.FrameCount - 1;
+
+                            if(animation.NextAnimation)
+                            {
+                                _animationIndex++;
+                                animation.AnimationActive = true;
+                                _animationFrameIndex = 0;
+                            }
                         }
                     }
                     else
@@ -212,7 +227,7 @@ namespace Terramental
                 }
 
                 // _spriteSourceRectangle = new Rectangle((_animationFrameIndex * animation.SpriteSheet.Width / animation.FrameCount), 0, animation.SpriteSheet.Width / animation.FrameCount, animation.SpriteSheet.Height);
-                _spriteSourceRectangle = new Rectangle(_animationFrameIndex * 64, 0, 64, 64);
+                _spriteSourceRectangle = new Rectangle(_animationFrameIndex * (int)animation.FrameDimensions.X, 0, (int)animation.FrameDimensions.X, (int)animation.FrameDimensions.Y);
             }
         }
 

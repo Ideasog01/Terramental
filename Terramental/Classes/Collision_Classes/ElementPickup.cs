@@ -19,9 +19,9 @@ namespace Terramental
             _waterTexture = waterTexture;
             _snowTexture = snowTexture;
 
-            Animations.Add(new Animation(_fireTexture, 4, 120f, true));
-            Animations.Add(new Animation(_waterTexture, 4, 120f, true));
-            Animations.Add(new Animation(_snowTexture, 4, 120f, true));
+            Animations.Add(new Animation(_fireTexture, 4, 120f, true, new Vector2(64, 64)));
+            Animations.Add(new Animation(_waterTexture, 4, 120f, true, new Vector2(64, 64)));
+            Animations.Add(new Animation(_snowTexture, 4, 120f, true, new Vector2(64, 64)));
 
             _elementIndex = elementIndex;
 

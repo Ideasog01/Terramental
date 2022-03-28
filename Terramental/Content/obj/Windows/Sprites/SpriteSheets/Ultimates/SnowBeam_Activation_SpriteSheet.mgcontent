@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Ultimates/SnowBeam.png</SourceFile>
-  <SourceTime>2022-03-27T18:23:35.503305+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Player/Ultimates/SnowBeam.xnb</DestFile>
-  <DestTime>2022-03-27T22:34:03.8718575+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet.png</SourceFile>
+  <SourceTime>2022-03-27T22:34:03.8848599+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-03-27T22:34:13.3606871+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
