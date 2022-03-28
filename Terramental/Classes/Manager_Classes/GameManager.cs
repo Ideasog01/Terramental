@@ -50,7 +50,6 @@ namespace Terramental
 
         protected override void Initialize()
         {
-            _menuManager = new MenuManager(this, _graphics);
 
             base.Initialize();
         }
@@ -59,9 +58,12 @@ namespace Terramental
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            InitialiseManagers();
+            
 
-            LoadNewGame();
+            _menuManager = new MenuManager(this, _graphics);
+
+            InitialiseManagers();
+            // LoadNewGame();
         }
 
         protected override void Update(GameTime gameTime)
