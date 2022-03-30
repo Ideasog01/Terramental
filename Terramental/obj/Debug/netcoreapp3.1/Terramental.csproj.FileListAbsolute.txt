@@ -307,3 +307,4 @@ D:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 D:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Snow_Element.xnb
 D:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Special_PowerUp.xnb
 D:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Water_Element.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\PlayerJump_SFX.xnb

@@ -141,6 +141,8 @@ namespace Terramental
             
 
             gameInProgress = true;
+
+            LoadAudioLibrary();
         }
 
         private void InitialiseManagers()
@@ -157,6 +159,12 @@ namespace Terramental
             _spriteManager.Update(gameTime);
             _mainCam.MoveCamera(playerCharacter);
             SpawnManager.Update(gameTime);
+        }
+
+        private void LoadAudioLibrary()
+        {
+            AudioClip audioClip = new AudioClip("PlayerJump_SFX", "SFXs/PlayerJump_SFX", false, this);
+            AudioManager.AddSound(audioClip);
         }
 
         #endregion

@@ -174,6 +174,7 @@ namespace Terramental
         {
             if (!_isJumping && _isGrounded)
             {
+                AudioManager.PlaySound("PlayerJump_SFX");
                 _isGrounded = false;
                 _isJumping = true;
                 _jumpHeight = SpritePosition.Y - 150;
@@ -184,6 +185,7 @@ namespace Terramental
 
             if (!_isDoubleJumpUsed)
             {
+                AudioManager.PlaySound("PlayerJump_SFX");
                 _jumpHeight = SpritePosition.Y - 150;
                 _jumpSpeed = -5;
                 _isDoubleJumpUsed = true;
