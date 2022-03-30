@@ -1,10 +1,8 @@
 ﻿namespace Terramental
 {
     public class HealthPickup : Pickup
-
     {
         private int _amount;
-
 
         public HealthPickup(PlayerCharacter playerCharacter, int amount)
         {
