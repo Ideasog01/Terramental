@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
@@ -13,7 +11,8 @@ namespace Terramental
         /// 
 
         public static bool cameraActive = false;
-
+        public static Vector2 playerPosition;
+        public static Viewport viewPort;
         public Matrix _transform = Matrix.CreateTranslation(new Vector3(0, 0, 0));
 
         public Matrix Transform
@@ -22,14 +21,19 @@ namespace Terramental
             set { _transform = value; }
         }
 
+        public static Rectangle ViewPortDimensions
+        {
+            get { return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, viewPort.Width, viewPort.Height); }
+        }
+
         public void MoveCamera(Sprite target)
         {
             if(cameraActive)
             {
                 var offset = Matrix.CreateTranslation(GameManager.screenWidth / 2, GameManager.screenHeight / 2, 0);
-                var position = Matrix.CreateTranslation(new Vector3(-target.SpritePosition.X - (target.SpriteRectangle.Width / 2), -target.SpritePosition.Y - (target.SpriteRectangle.Height / 2), 0));
+                var _cameraPosition = Matrix.CreateTranslation(new Vector3(-target.SpritePosition.X - (target.SpriteRectangle.Width / 2), -target.SpritePosition.Y - (target.SpriteRectangle.Height / 2), 0));
 
-                _transform = position * offset;
+                _transform = _cameraPosition * offset;
             }
         }
 
@@ -37,6 +41,12 @@ namespace Terramental
         {
             Matrix invertedMatrix = Matrix.Invert(_transform);
             return Vector2.Transform(point, invertedMatrix);
+        }
+
+        public static bool ObjectIsVisible(Rectangle bounds)
+        {
+            //return ViewPortDimensions.Intersects(bounds);
+            return true;
         }
     }
 }

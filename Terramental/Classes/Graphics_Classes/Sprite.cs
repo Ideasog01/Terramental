@@ -152,21 +152,47 @@ namespace Terramental
         {
             if (_isActive)
             {
-                _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
-
-                if (_spriteAnimations.Count == 0)
+                if(GameManager.gameInProgress)
                 {
-                    spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
+                    if(CameraController.ObjectIsVisible(SpriteRectangle))
+                    {
+                        _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
+
+                        if (_spriteAnimations.Count == 0)
+                        {
+                            spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
+                        }
+                        else
+                        {
+                            if (!_spriteAnimations[_animationIndex].MirrorTexture)
+                            {
+                                spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                            }
+                            else
+                            {
+                                spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    if(!_spriteAnimations[_animationIndex].MirrorTexture)
+                    _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
+
+                    if (_spriteAnimations.Count == 0)
                     {
-                        spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                        spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
                     }
                     else
                     {
-                        spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                        if (!_spriteAnimations[_animationIndex].MirrorTexture)
+                        {
+                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
                 }
             }

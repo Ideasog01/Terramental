@@ -50,7 +50,6 @@ namespace Terramental
 
         protected override void Initialize()
         {
-
             base.Initialize();
         }
 
@@ -76,6 +75,7 @@ namespace Terramental
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
+                CameraController.playerPosition = playerCharacter.SpritePosition;
             }
             
 
@@ -84,7 +84,7 @@ namespace Terramental
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Gray);
+            GraphicsDevice.Clear(Color.SkyBlue);
 
             _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
 
@@ -96,7 +96,6 @@ namespace Terramental
                 playerInterface.DrawCooldownTexts(_spriteBatch);
             }
             
-
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -149,6 +148,7 @@ namespace Terramental
         {
             _spriteManager = new SpriteManager();
             _mainCam = new CameraController();
+            CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
             _inputManager = new InputManager(_mainCam, _menuManager);
         }

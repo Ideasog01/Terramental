@@ -23,7 +23,10 @@ namespace Terramental
         {
             foreach(Sprite sprite in _spriteList)
             {
-                sprite.UpdateSprite(gameTime);
+                if(sprite.IsActive)
+                {
+                    sprite.UpdateSprite(gameTime);
+                }
             }
         }
 
