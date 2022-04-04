@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
 namespace Terramental
@@ -19,13 +20,13 @@ namespace Terramental
             {
                 if(soundName == audioClip.SoundName)
                 {
-                    if(audioClip.IsMusic)
+                    if(audioClip.IsMusic && audioClip.SongAudio != null)
                     {
-                     
+                        MediaPlayer.Play(audioClip.SongAudio);
                     }
                     else
                     {
-                        audioClip.Audio.Play();
+                        audioClip.EffectAudio.Play();
                     }
                 }
                 

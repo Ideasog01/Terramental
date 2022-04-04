@@ -62,7 +62,7 @@ namespace Terramental
             _menuManager = new MenuManager(this, _graphics);
 
             InitialiseManagers();
-            // LoadNewGame();
+            //LoadNewGame();
         }
 
         protected override void Update(GameTime gameTime)

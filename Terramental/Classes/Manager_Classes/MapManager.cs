@@ -55,9 +55,9 @@ namespace Terramental
         {
             int[,] tileData = _mapData._tileMap;
 
-            for(int x = 0; x < _mapData._mapHeight; x++)
+            for(int x = 0; x < _mapData._mapWidth; x++)
             {
-                for(int y = 0; y < _mapData._mapWidth; y++)
+                for(int y = 0; y < _mapData._mapHeight; y++)
                 {                  
                     int tileIndex = tileData[x, y];
 

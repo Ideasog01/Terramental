@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Terramental
 {
@@ -8,6 +9,8 @@ namespace Terramental
         private string _soundName;
 
         private SoundEffect _soundEffect;
+
+        private Song _songEffect;
 
         private bool _isMusic;
 
@@ -24,9 +27,14 @@ namespace Terramental
             get { return _soundName; }
         }
 
-        public SoundEffect Audio
+        public SoundEffect EffectAudio
         {
             get { return _soundEffect; }
+        }
+
+        public Song SongAudio
+        {
+            get { return _songEffect; }
         }
 
         public bool IsMusic
