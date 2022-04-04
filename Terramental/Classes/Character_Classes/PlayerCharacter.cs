@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Terramental
 {
@@ -13,14 +14,50 @@ namespace Terramental
 
         private int _playerScore;
 
+        public float deltaTime;
         //Movement Variables
 
         private bool _isGrounded;
         private float _playerMovementSpeed = 0.5f;
+        private int _horizontalAxisRaw;
+        private int _verticalAxisRaw;
+        private int _lastNonZeroVAR;
+        private int _lastNonZeroHAR;
 
         private bool _disableRight;
         private bool _disableLeft;
         private bool _disableMovement;
+
+        // Dash Variables
+        private float dashVelocity = 10.0f;
+        private float _dashDistance;
+        private int dashTimeMilliseconds = 10;
+        private int timeIncrement = 1;
+        private Vector2 _dashDir;
+        private bool _isDashing;
+        private bool _canDash = true;
+        private bool _isHovering;
+        private int currentTime = 0;
+
+        private int upDashCheck = 0;
+        private int leftDashCheck = 0;
+        private int rightDashCheck = 0;
+        private int downDashCheck = 0;
+
+        private int dashDirX;
+        private int dashDirY;
+
+        private float _dashDistX;
+        private float _dashDistY;
+
+        public enum DashDirections
+        {
+            Up,
+            Left,
+            Down,
+            Right
+        }
+        public DashDirections dashDir = DashDirections.Right;
 
         //Ability Variables
 
@@ -59,7 +96,6 @@ namespace Terramental
             get { return _isDoubleJumpUsed; }
             set { _isDoubleJumpUsed = value; }
         }
-
         public int ElementIndex
         {
             get { return _elementIndex; }
@@ -72,6 +108,36 @@ namespace Terramental
             set { _playerScore = value; }
         }
 
+        public int HorizontalAxisRaw
+        {
+            get { return _horizontalAxisRaw; }
+            set { _horizontalAxisRaw = value;  }
+        }
+
+        public int VerticalAxisRaw
+        {
+            get { return _verticalAxisRaw; }
+            set { _verticalAxisRaw = value; }
+        }
+
+        public int LastNonZeroVAR
+        {
+            get { return _lastNonZeroVAR; }
+            set { _lastNonZeroVAR = value; }
+        }
+
+        public int LastNonZeroHAR
+        {
+            get { return _lastNonZeroHAR; }
+            set { _lastNonZeroHAR = value; }
+        }
+
+        public bool CanDash
+        {
+            get { return _canDash; }
+            set { _canDash = value; }
+        }
+
         #endregion
 
         #region Player Core
@@ -80,14 +146,18 @@ namespace Terramental
         {
             _gameManager = gameManager;
         }
-
         public void UpdatePlayerCharacter(GameTime gameTime)
         {
+            float currentTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             UpdateUltimateStatus(gameTime);
+
+            DashCheck();
 
             ApplyGravity();
 
             PlayerJumpBehavior(gameTime);
+
+            Dash();
 
             CheckGroundCollision();
 
@@ -130,46 +200,49 @@ namespace Terramental
 
         }
 
-        public void PlayerMovement(float vertical, GameTime gameTime)
+        public void PlayerMovement(float horizontal, GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            if (vertical > 0)
-            {
-                // IsFacingRight = true;
-
-                if (!_disableRight)
+            // SpriteVelocity = new Vector2(_playerMovementSpeed * _horizontalAxisRaw * deltaTime, 0);
+            if(!_isHovering) {
+                if (horizontal > 0)
                 {
-                    SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                    // IsFacingRight = true;
+
+                    if (!_disableRight)
+                    {
+                        SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                    }
+                    else
+                    {
+                        SpriteVelocity = new Vector2(0, 0);
+                    }
+
                 }
-                else
+                else if (horizontal < 0)
+                {
+                    // IsFacingRight = false;
+
+                    if (!_disableLeft)
+                    {
+                        SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                    }
+                    else
+                    {
+                        SpriteVelocity = new Vector2(0, 0);
+                    }
+
+                }
+
+                
+                if (horizontal == 0 && !_isDashing)
                 {
                     SpriteVelocity = new Vector2(0, 0);
                 }
-
-            }
-            else if (vertical < 0)
-            {
-                // IsFacingRight = false;
-
-                if (!_disableLeft)
-                {
-                    SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
-                }
-                else
-                {
-                    SpriteVelocity = new Vector2(0, 0);
-                }
-
-            }
-
-            if (vertical == 0)
-            {
-                SpriteVelocity = new Vector2(0, 0);
+                
             }
 
         }
-
         public void PlayerJump()
         {
             if (!_isJumping && _isGrounded)
@@ -207,14 +280,108 @@ namespace Terramental
                 }
             }
         }
+        public void DashStateMachine()
+        {
+            switch (dashDir)
+            {
+                case DashDirections.Up:
+                    upDashCheck++;
+                    Debug.WriteLine(upDashCheck);
+                    Debug.WriteLine("Dashed Up");
+                    DoubleTapToDashCooldown();
+                    break;
+                case DashDirections.Left:
+                    leftDashCheck++;
+                    Debug.WriteLine("Dashed Left");
+                    DoubleTapToDashCooldown();
+                    break;
+                case DashDirections.Down:
+                    downDashCheck++;
+                    Debug.WriteLine("Dashed Down");
+                    DoubleTapToDashCooldown();
+                    break;
+                case DashDirections.Right:
+                    rightDashCheck++;
+                    Debug.WriteLine("Dashed Right");
+                    DoubleTapToDashCooldown();
+                    break;
+            }
+        }
+        public void DashCheck()
+        {
+            if (upDashCheck >= 2)
+            {
+                dashDirY = -1;
+                dashDirX = 0;
+                _dashDistY = SpritePosition.Y - 500;
+                //Dash();
+                _isDashing = true;
+            }
+            if (leftDashCheck >= 2)
+            {
+                dashDirX = -1;
+                dashDirY = 0;
+                _dashDistX = SpritePosition.X - 500;
+                //Dash();
+                _isDashing = true;
+            }
+            if (downDashCheck >= 2)
+            {
+                dashDirY = 1;
+                dashDirX = 0;
+                _dashDistY = SpritePosition.Y + 500;
+                //Dash();
+                _isDashing = true;
+            }
+            if (rightDashCheck >= 2)
+            {
+                dashDirX = 1;
+                dashDirY = 0;
+                _dashDistX = SpritePosition.X + 500;
+                //Dash();
+                _isDashing = true;
+            }
+        }
+        public void Dash()
+        {
+            if (_isDashing)
+            {
+                SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
+            }
 
+            if (Math.Abs(SpritePosition.X) == Math.Abs(_dashDistX))
+            {
+                _isDashing = false;
+            }
+
+            if (Math.Abs(SpritePosition.Y) == Math.Abs(_dashDistY))
+            {
+                _isDashing = false;
+            }
+            _isDashing = false;
+        }
+
+
+        public async void DoubleTapToDashCooldown()
+        {
+            await Task.Delay(500);
+
+            upDashCheck = 0;
+            leftDashCheck = 0;
+            downDashCheck = 0;
+            rightDashCheck = 0;
+        }
         public void ApplyGravity()
         {
             if (!_isGrounded)
             {
                 if (!_isJumping)
                 {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
+                    if (!_isDashing)
+                    {
+                        SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
+                    }
+                    
                 }
             }
         }
@@ -504,19 +671,35 @@ namespace Terramental
             Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //11
         }
 
+        enum AnimationIndexEnum
+        {
+            IdleFire, // 0
+            IdleLeftFire, // 1
+            IdleWater, // 2
+            IdleLeftWater, // 3
+            IdleSnow, // 4
+            IdleLeftSnow, // 5
+            FireWalk, // 6
+            FireLeftWalk, // 7
+            WaterWalk, // 8
+            WaterLeftWalk, // 9
+            SnowWalk, // 10
+            SnowLeftWalk // 11
+
+        }
         private void MovementAnimations()
         {
             if(SpriteVelocity.X > 0)
             {
                 switch(_elementIndex)
                 {
-                    case 0: SetAnimation(6);
+                    case 0: SetAnimation((int)AnimationIndexEnum.FireWalk);
                         break;
-                    case 1: SetAnimation(8);
+                    case 1: SetAnimation((int)AnimationIndexEnum.WaterWalk);
                         break;
-                    case 2: SetAnimation(10);
+                    case 2: SetAnimation((int)AnimationIndexEnum.SnowWalk);
                         break;
-                    default: _elementIndex = 0;
+                    default: _elementIndex = (int)AnimationIndexEnum.IdleFire;
                         break;
                 }
             }
@@ -525,16 +708,16 @@ namespace Terramental
                 switch (_elementIndex)
                 {
                     case 0:
-                        SetAnimation(7);
+                        SetAnimation((int)AnimationIndexEnum.FireLeftWalk);
                         break;
                     case 1:
-                        SetAnimation(9);
+                        SetAnimation((int)AnimationIndexEnum.WaterLeftWalk);
                         break;
                     case 2:
-                        SetAnimation(11);
+                        SetAnimation((int)AnimationIndexEnum.SnowLeftWalk);
                         break;
                     default:
-                        _elementIndex = 0;
+                        _elementIndex = (int)AnimationIndexEnum.IdleFire;
                         break;
                 }
             }
@@ -545,16 +728,16 @@ namespace Terramental
                     switch (_elementIndex)
                     {
                         case 0:
-                            SetAnimation(0);
+                            SetAnimation((int)AnimationIndexEnum.IdleFire);
                             break;
                         case 1:
-                            SetAnimation(2);
+                            SetAnimation((int)AnimationIndexEnum.IdleWater);
                             break;
                         case 2:
-                            SetAnimation(4);
+                            SetAnimation((int)AnimationIndexEnum.IdleSnow);
                             break;
                         default:
-                            _elementIndex = 0;
+                            _elementIndex = (int)AnimationIndexEnum.IdleFire;
                             break;
                     }
                 }
@@ -563,16 +746,16 @@ namespace Terramental
                     switch (_elementIndex)
                     {
                         case 0:
-                            SetAnimation(1);
+                            SetAnimation((int)AnimationIndexEnum.IdleLeftFire);
                             break;
                         case 1:
-                            SetAnimation(3);
+                            SetAnimation((int)AnimationIndexEnum.IdleLeftWater);
                             break;
                         case 2:
-                            SetAnimation(5);
+                            SetAnimation((int)AnimationIndexEnum.IdleLeftSnow);
                             break;
                         default:
-                            _elementIndex = 0;
+                            _elementIndex = (int)AnimationIndexEnum.IdleFire;
                             break;
                     }
                 }

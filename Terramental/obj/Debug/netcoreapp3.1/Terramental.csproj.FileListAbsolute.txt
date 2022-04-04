@@ -116,10 +116,6 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Health_Pickup.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\SnowPickup_SpriteSheet.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\WaterPickup_SpriteSheet.xnb
-C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Fire_SpriteSheet.xnb
-C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Snow_SpriteSheet.xnb
-C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle_Water_SpriteSheet.xnb
-C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Effects\Flame_SpriteSheet.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Projectiles\WaterProjectile_SpriteSheet.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\DefaultTile.xnb
@@ -152,7 +148,6 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
-C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.AssemblyReference.cache
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfoInputs.cache
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfo.cs
@@ -161,7 +156,6 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.pdb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.genruntimeconfig.cache
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
-C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\PlayerCharacter_Sprite_Fire_Left.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Fire_SpriteSheet.xnb
@@ -276,3 +270,49 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Collectible.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.AssemblyReference.cache
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\FrozenEffect.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Collectible.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Fire_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Ultimates\SnowBeam.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.png.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_Walk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpirteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_Walk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MenuButton.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\SpriteFonts\DefaultFont.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\DefaultFont.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\FrozenEffect.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Fire_Idle_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftFire_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftSnow_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftWater_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Snow_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Water_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_LeftWalk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_RightWalk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk-SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_RightWalk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_RightWalk_Spritesheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_Activation_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_Idle_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_LeftActivation_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_LeftIdle_SpriteSheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Achievements_MainMenu_Button.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Credits_MainMenu_Button.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\ExitGame_MainMenu_Button.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\GameTitleText.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\LoadGame_MainMenu_Button.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\MainMenu_FireBackground.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\NewGame_MainMenu_Button.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Options_MainMenu_Button.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Collectible.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Dash_Element.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Fire_Element.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Health.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Snow_Element.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Special_PowerUp.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Water_Element.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.AssemblyReference.cache
