@@ -23,7 +23,7 @@ namespace Terramental
 
         public static Rectangle ViewPortDimensions
         {
-            get { return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, viewPort.Width, viewPort.Height); }
+            get { return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 540, 960); }
         }
 
         public void MoveCamera(Sprite target)
@@ -45,7 +45,6 @@ namespace Terramental
 
         public static bool ObjectIsVisible(Rectangle bounds)
         {
-            //return ViewPortDimensions.Intersects(bounds);
             return true;
         }
     }

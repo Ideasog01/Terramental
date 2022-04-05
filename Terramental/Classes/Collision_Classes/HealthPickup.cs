@@ -15,7 +15,7 @@
         {
             if(Player.SpriteRectangle != null)
             {
-                if (OnCollision(Player.SpriteRectangle) && IsActive)
+                if (OnCollision(Player.SpriteRectangle) && IsActive && Player.CharacterHealth < 3)
                 {
                     Player.Heal(_amount);
                     IsActive = false;
