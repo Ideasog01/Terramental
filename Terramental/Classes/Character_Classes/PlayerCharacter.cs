@@ -82,6 +82,13 @@ namespace Terramental
             _gameManager = gameManager;
         }
 
+        public void ResetPlayer()
+        {
+            CharacterHealth = 3;
+            SpritePosition = _checkpointPosition;
+            _gameManager.playerInterface.UpdatePlayerLives(3);
+        }
+
         public void UpdatePlayerCharacter(GameTime gameTime)
         {
             UpdateUltimateStatus(gameTime);

@@ -6,10 +6,12 @@ namespace Terramental
 {
     class MenuManager
     {
-        public static List<Button> buttonList = new List<Button>();
-        public static List<Sprite> interfaceList = new List<Sprite>();
+        public static List<Button> mainMenuButtonList = new List<Button>();
+        public static List<MenuComponent> mainMenuComponentList = new List<MenuComponent>();
 
-        private bool _mainMenuLoaded;
+        public static List<Button> respawnMenuButtonList = new List<Button>();
+        public static List<MenuComponent> respawnMenuComponentList = new List<MenuComponent>();
+
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
@@ -20,79 +22,161 @@ namespace Terramental
             _graphics = graphics;
 
             LoadMainMenu();
+            LoadRespawnScreen();
+        }
+
+        public void DrawMenus(SpriteBatch spriteBatch)
+        {
+            switch(GameManager.currentGameState)
+            {
+                case GameManager.GameState.MainMenu:
+                     foreach(MenuComponent component in mainMenuComponentList)
+                     {
+                         component.DrawMenuComponent(spriteBatch);
+                     }
+
+                     foreach (Button button in mainMenuButtonList)
+                     {
+                            button.DrawMenuComponent(spriteBatch);
+                     }
+                 break;
+
+                case GameManager.GameState.Respawn:
+                    foreach (MenuComponent component in respawnMenuComponentList)
+                    {
+                        component.DrawMenuComponent(spriteBatch);
+                    }
+
+                    foreach (Button button in respawnMenuButtonList)
+                    {
+                        button.DrawMenuComponent(spriteBatch);
+                    }
+                 break;
+            }
         }
 
         public void MouseClick(Vector2 mousePos)
         {
-            foreach(Button button in buttonList)
+            if(GameManager.currentGameState == GameManager.GameState.MainMenu)
             {
-                button.CheckInteraction(mousePos);
+                foreach (Button button in mainMenuButtonList)
+                {
+                    button.CheckInteraction(mousePos);
+                }
+            }
+
+            if(GameManager.currentGameState == GameManager.GameState.Respawn)
+            {
+                foreach(Button button in respawnMenuButtonList)
+                {
+                    button.CheckInteraction(mousePos);
+                }
             }
         }
 
-        public void ButtonInteraction(int buttonIndex)
+        public void ButtonInteraction(GameManager.ButtonName buttonName)
         {
-            switch(buttonIndex)
+            switch(buttonName)
             {
-                case 0: _gameManager.LoadNewGame();
+                case GameManager.ButtonName.NewGameButton: _gameManager.LoadNewGame();
                     break;
-                case 5: _gameManager.ExitGame();
+                case GameManager.ButtonName.ExitGameButton: _gameManager.ExitGame();
+                    break;
+                case GameManager.ButtonName.RespawnButton: DisplayRespawnScreen(false);
+                    _gameManager.playerCharacter.ResetPlayer();
                     break;
             }
 
-            DestroyMainMenu();
+            DisplayMainMenu(false);
         }
 
-        public void DestroyMainMenu()
+        public void DisplayMainMenu(bool isActive)
         {
-            _gameManager.IsMouseVisible = false;
-
-            foreach(Button button in buttonList)
+            if(isActive)
             {
-                button.IsActive = false;
+                GameManager.currentGameState = GameManager.GameState.MainMenu;
+                _gameManager.IsMouseVisible = true;
             }
-
-            foreach(Sprite sprite in interfaceList)
+            else
             {
-                sprite.IsActive = false;
+                GameManager.currentGameState = GameManager.GameState.Level;
+                _gameManager.IsMouseVisible = false;
+            }
+        }
+
+        public void DisplayRespawnScreen(bool isActive)
+        {
+            if(isActive)
+            {
+                GameManager.currentGameState = GameManager.GameState.Respawn;
+                _gameManager.IsMouseVisible = true;
+            }
+            else
+            {
+                GameManager.currentGameState = GameManager.GameState.Level;
+                _gameManager.IsMouseVisible = false;
             }
         }
 
         private void LoadMainMenu()
         {
-            Sprite mainMenuBackground = new Sprite();
-            mainMenuBackground.Initialise(new Vector2(0, 0), _gameManager.GetTexture("UserInterface/MainMenu/MainMenu_FireBackground"), new Vector2(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight));
-            interfaceList.Add(mainMenuBackground);
+            int viewportCentreX = _graphics.PreferredBackBufferWidth / 2;
 
-            Sprite titleText = new Sprite();
-            titleText.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/GameTitleText").Width / 2), -5), _gameManager.GetTexture("UserInterface/MainMenu/GameTitleText"), new Vector2(400, 84));
-            interfaceList.Add(titleText);
+            Texture2D mainMenuBackgroundTexture = _gameManager.GetTexture("UserInterface/MainMenu/MainMenu_FireBackground");
+            MenuComponent mainMenuBackground = new MenuComponent();
+            mainMenuBackground.InitialiseMenuComponent(mainMenuBackgroundTexture, new Vector2(0, 0), new Vector2(mainMenuBackgroundTexture.Width, mainMenuBackgroundTexture.Height));
+            mainMenuComponentList.Add(mainMenuBackground);
 
-            Button newGameButton = new Button(0, this);
-            newGameButton.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/NewGame_MainMenu_Button").Width / 2), 70), _gameManager.GetTexture("UserInterface/MainMenu/NewGame_MainMenu_Button"), new Vector2(256, 64));
-            buttonList.Add(newGameButton);
+            Texture2D titleTextTexture = _gameManager.GetTexture("UserInterface/MainMenu/GameTitleText");
+            MenuComponent titleText = new MenuComponent();
+            titleText.InitialiseMenuComponent(titleTextTexture, new Vector2(viewportCentreX - (titleTextTexture.Width / 2), 0), new Vector2(titleTextTexture.Width, titleTextTexture.Height));
+            mainMenuComponentList.Add(titleText);
 
-            Button loadGameButton = new Button(1, this);
-            loadGameButton.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/LoadGame_MainMenu_Button").Width / 2), 150), _gameManager.GetTexture("UserInterface/MainMenu/LoadGame_MainMenu_Button"), new Vector2(256, 64));
-            buttonList.Add(loadGameButton);
+            Texture2D newGameButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/NewGame_MainMenu_Button");
+            Button newGameButton = new Button(GameManager.ButtonName.NewGameButton, this);
+            newGameButton.InitialiseMenuComponent(newGameButtonTexture, new Vector2(viewportCentreX - (newGameButtonTexture.Width / 2), 125), new Vector2(256, 64));
+            mainMenuButtonList.Add(newGameButton);
 
-            Button optionsButton = new Button(2, this);
-            optionsButton.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/Options_MainMenu_Button").Width / 2), 230), _gameManager.GetTexture("UserInterface/MainMenu/Options_MainMenu_Button"), new Vector2(256, 64));
-            buttonList.Add(optionsButton);
+            Texture2D loadGameButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/LoadGame_MainMenu_Button");
+            Button loadGameButton = new Button(GameManager.ButtonName.LoadGameButton, this);
+            loadGameButton.InitialiseMenuComponent(loadGameButtonTexture, new Vector2(viewportCentreX - (loadGameButtonTexture.Width / 2), 205), new Vector2(256, 64));
+            mainMenuButtonList.Add(loadGameButton);
 
-            Button achievementsButton = new Button(3, this);
-            achievementsButton.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/Achievements_MainMenu_Button").Width / 2), 310), _gameManager.GetTexture("UserInterface/MainMenu/Achievements_MainMenu_Button"), new Vector2(256, 64));
-            buttonList.Add(achievementsButton);
+            Texture2D optionsButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/Options_MainMenu_Button");
+            Button optionsButton = new Button(GameManager.ButtonName.OptionsButton, this);
+            optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2(viewportCentreX - (optionsButtonTexture.Width / 2), 285), new Vector2(256, 64));
+            mainMenuButtonList.Add(optionsButton);
 
-            Button creditsButton = new Button(4, this);
-            creditsButton.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/Credits_MainMenu_Button").Width / 2), 390), _gameManager.GetTexture("UserInterface/MainMenu/Credits_MainMenu_Button"), new Vector2(256, 64));
-            buttonList.Add(creditsButton);
+            Texture2D achievementsButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/Achievements_MainMenu_Button");
+            Button achievementsButton = new Button(GameManager.ButtonName.AchievementsButton, this);
+            achievementsButton.InitialiseMenuComponent(achievementsButtonTexture, new Vector2(viewportCentreX - (achievementsButtonTexture.Width / 2), 285), new Vector2(256, 64));
+            mainMenuButtonList.Add(achievementsButton);
 
-            Button exitButton = new Button(5, this);
-            exitButton.Initialise(new Vector2((_graphics.PreferredBackBufferWidth / 2) - (_gameManager.GetTexture("UserInterface/MainMenu/ExitGame_MainMenu_Button").Width / 2), 470), _gameManager.GetTexture("UserInterface/MainMenu/ExitGame_MainMenu_Button"), new Vector2(256, 64));
-            buttonList.Add(exitButton);
+            Texture2D creditsButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/Credits_MainMenu_Button");
+            Button creditsButton = new Button(GameManager.ButtonName.CreditsButton, this);
+            creditsButton.InitialiseMenuComponent(creditsButtonTexture, new Vector2(viewportCentreX - (creditsButtonTexture.Width / 2), 365), new Vector2(256, 64));
+            mainMenuButtonList.Add(creditsButton);
 
-            _mainMenuLoaded = true;
+            Texture2D exitButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/ExitGame_MainMenu_Button");
+            Button exitButton = new Button(GameManager.ButtonName.ExitGameButton, this);
+            exitButton.InitialiseMenuComponent(exitButtonTexture, new Vector2(viewportCentreX - (exitButtonTexture.Width / 2), 445), new Vector2(256, 64));
+            mainMenuButtonList.Add(exitButton);
+
+            _gameManager.IsMouseVisible = true;
+        }
+
+        private void LoadRespawnScreen()
+        {
+            Texture2D respawnBackgroundTexture = _gameManager.GetTexture("UserInterface/RespawnScreen/RespawnScreen");
+            MenuComponent respawnBackground = new MenuComponent();
+            respawnBackground.InitialiseMenuComponent(respawnBackgroundTexture, new Vector2(0, 0), new Vector2(respawnBackgroundTexture.Width / 2, respawnBackgroundTexture.Height / 2));
+            respawnMenuComponentList.Add(respawnBackground);
+
+            Texture2D respawnButtonTexture = _gameManager.GetTexture("UserInterface/RespawnScreen/RespawnButton");
+            Button respawnButton = new Button(GameManager.ButtonName.RespawnButton, this);
+            respawnButton.InitialiseMenuComponent(respawnButtonTexture, new Vector2(_graphics.PreferredBackBufferWidth / 2 - (respawnButtonTexture.Width / 2), 365), new Vector2(256, 64));
+            respawnMenuButtonList.Add(respawnButton);
+
             _gameManager.IsMouseVisible = true;
         }
     }

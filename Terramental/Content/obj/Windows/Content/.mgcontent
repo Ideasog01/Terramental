@@ -60,8 +60,12 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Snow_Element.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Special_PowerUp.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Water_Element.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/RespawnScreen/RespawnButton.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/RespawnScreen/RespawnScreen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

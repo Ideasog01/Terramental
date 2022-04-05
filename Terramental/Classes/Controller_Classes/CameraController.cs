@@ -28,12 +28,18 @@ namespace Terramental
 
         public void MoveCamera(Sprite target)
         {
-            if(cameraActive)
+            if(cameraActive && GameManager.currentGameState == GameManager.GameState.Level)
             {
                 var offset = Matrix.CreateTranslation(GameManager.screenWidth / 2, GameManager.screenHeight / 2, 0);
                 var _cameraPosition = Matrix.CreateTranslation(new Vector3(-target.SpritePosition.X - (target.SpriteRectangle.Width / 2), -target.SpritePosition.Y - (target.SpriteRectangle.Height / 2), 0));
 
                 _transform = _cameraPosition * offset;
+            }
+
+            if(GameManager.currentGameState != GameManager.GameState.Level)
+            {
+                var _cameraPosition = Matrix.CreateTranslation(new Vector3(0, 0, 0));
+                _transform = _cameraPosition;
             }
         }
 

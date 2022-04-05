@@ -15,6 +15,11 @@ namespace Terramental
 
         public static bool gameInProgress;
 
+        public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn};
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton };
+
+        public static GameState currentGameState = GameState.MainMenu;
+
         public PlayerInterface playerInterface;
 
         private GraphicsDeviceManager _graphics;
@@ -70,7 +75,7 @@ namespace Terramental
 
             UpdateManagers(gameTime);
 
-            if(gameInProgress)
+            if(currentGameState == GameState.Level && playerInterface != null)
             {
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
@@ -88,14 +93,15 @@ namespace Terramental
 
             _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
 
-            _spriteManager.Draw(gameTime, _spriteBatch);
-
-            if(gameInProgress)
+            if(currentGameState == GameState.Level && playerInterface != null)
             {
+                _spriteManager.Draw(gameTime, _spriteBatch);
                 playerInterface.DrawInterface(_spriteBatch);
                 playerInterface.DrawCooldownTexts(_spriteBatch);
             }
-            
+
+            _menuManager.DrawMenus(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -129,7 +135,7 @@ namespace Terramental
             playerInterface = new PlayerInterface(this);
 
             playerCharacter.DisplayPlayerLives();
-
+            GameManager.currentGameState = GameManager.GameState.Level;
 
             _mapManager = new MapManager(this);
 

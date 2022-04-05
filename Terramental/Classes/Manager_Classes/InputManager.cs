@@ -43,6 +43,13 @@ namespace Terramental
                 _menuManager.MouseClick(_playerCam.ScreenToWorldSpace(new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y)));
             }
 
+            if(oldKeyboardState.IsKeyDown(Keys.F) && _currentKeyboardState.IsKeyUp(Keys.F))
+            {
+                playerCharacter.CharacterHealth = 0;
+
+                _menuManager.DisplayRespawnScreen(true);
+            }
+
             if(playerCharacter != null)
             {
                 if (_currentKeyboardState.IsKeyDown(Keys.D))

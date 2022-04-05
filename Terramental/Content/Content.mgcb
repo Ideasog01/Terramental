@@ -674,3 +674,27 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/PlayerInterface/Water_Element.png
 
+#begin UserInterface/RespawnScreen/RespawnButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/RespawnScreen/RespawnButton.png
+
+#begin UserInterface/RespawnScreen/RespawnScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/RespawnScreen/RespawnScreen.png
+
