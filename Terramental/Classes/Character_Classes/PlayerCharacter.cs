@@ -317,6 +317,17 @@ namespace Terramental
             }
         }
 
+        public void PlayerTakeDamage(int amount)
+        {
+            CharacterHealth -= amount;
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+
+            if (CharacterHealth <= 0)
+            {
+                _gameManager.menuManager.DisplayRespawnScreen(true);
+            }
+        }
+
         #region Fire Ultimate
 
         private void ActivateFireUltimate()
@@ -333,7 +344,7 @@ namespace Terramental
 
                 rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
 
-                foreach (BaseCharacter character in SpawnManager.enemyCharacters)
+                foreach (BaseCharacter character in SpawnManager.knightEnemies)
                 {
                     if (this.OnCollision(character.SpriteRectangle))
                     {

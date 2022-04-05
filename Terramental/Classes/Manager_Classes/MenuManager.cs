@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
-    class MenuManager
+    public class MenuManager
     {
         public static List<Button> mainMenuButtonList = new List<Button>();
         public static List<MenuComponent> mainMenuComponentList = new List<MenuComponent>();

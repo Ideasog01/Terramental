@@ -12,7 +12,7 @@ namespace Terramental
 
         public static GameManager _gameManager;
 
-        public static List<BaseCharacter> enemyCharacters = new List<BaseCharacter>();
+        public static List<KnightCharacter> knightEnemies = new List<KnightCharacter>();
         public static List<HealthPickup> _healthPickups = new List<HealthPickup>();
         public static List<ElementPickup> _elementPickups = new List<ElementPickup>();
         public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
@@ -22,9 +22,10 @@ namespace Terramental
         {
             //Updates all characters in the enemy characters list
 
-            foreach(BaseCharacter character in enemyCharacters)
+            foreach(KnightCharacter knightEnemy in knightEnemies)
             {
-                character.UpdateCharacter(gameTime);
+                knightEnemy.UpdateCharacter(gameTime);
+                knightEnemy.UpdateKnightEnemy(gameTime);
             }
 
             foreach (HealthPickup healthPickup in _healthPickups)
@@ -74,10 +75,22 @@ namespace Terramental
         {
             if(index == 0) //Knight Enemy Character
             {
-                BaseCharacter enemyCharacter = new BaseCharacter();
-                enemyCharacter.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
+                Animation knightIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
+                Animation knightWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"), 7, 120f, true, new Vector2(96, 96));
+                Animation knightAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 7, 150f, false, new Vector2(96, 96));
 
-                enemyCharacters.Add(enemyCharacter);
+                KnightCharacter knightEnemy = new KnightCharacter();
+                knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
+                
+                knightEnemy.AddAnimation(knightIdle);
+                knightEnemy.AddAnimation(knightWalk);
+                knightEnemy.AddAnimation(knightAttack);
+
+                knightEnemy.LayerOrder = -1;
+
+                knightEnemy.playerCharacter = _gameManager.playerCharacter;
+
+                knightEnemies.Add(knightEnemy);
             }
         }
 

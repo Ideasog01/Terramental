@@ -21,6 +21,7 @@ namespace Terramental
         public static GameState currentGameState = GameState.MainMenu;
 
         public PlayerInterface playerInterface;
+        public MenuManager menuManager;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -36,8 +37,6 @@ namespace Terramental
         public static int screenWidth = 960;
 
         private MapManager _mapManager;
-
-        private MenuManager _menuManager;
 
         public GameManager()
         {
@@ -64,7 +63,7 @@ namespace Terramental
             
             
 
-            _menuManager = new MenuManager(this, _graphics);
+            menuManager = new MenuManager(this, _graphics);
 
             InitialiseManagers();
             //LoadNewGame();
@@ -100,7 +99,7 @@ namespace Terramental
                 playerInterface.DrawCooldownTexts(_spriteBatch);
             }
 
-            _menuManager.DrawMenus(_spriteBatch);
+            menuManager.DrawMenus(_spriteBatch);
 
             _spriteBatch.End();
 
@@ -156,7 +155,7 @@ namespace Terramental
             _mainCam = new CameraController();
             CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
-            _inputManager = new InputManager(_mainCam, _menuManager);
+            _inputManager = new InputManager(_mainCam, menuManager);
         }
 
         private void UpdateManagers(GameTime gameTime)
