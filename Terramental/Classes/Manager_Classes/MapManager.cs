@@ -64,7 +64,6 @@ namespace Terramental
                     Tile tile = new Tile();
                     tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
 
-
                     bool isGround = false;
 
                     if(tileIndex == 1 || tileIndex == 2 || tileIndex == 3 || tileIndex == 4 || tileIndex == 5 || tileIndex == 10)
@@ -113,6 +112,11 @@ namespace Terramental
             if(index == 6)
             {
                 SpawnManager.SpawnScorePickup(position);
+            }
+
+            if(index == 7)
+            {
+                _gameManager.playerCharacter.TeleportPlayer(position, true);
             }
         }
     }

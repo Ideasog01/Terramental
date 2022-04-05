@@ -21,6 +21,7 @@ namespace Terramental
         private bool _disableRight;
         private bool _disableLeft;
         private bool _disableMovement;
+        private Vector2 _checkpointPosition;
 
         //Ability Variables
 
@@ -104,14 +105,14 @@ namespace Terramental
                 }
             }
 
-            if(_snowBeam != null)
+            if (_snowBeam != null)
             {
                 _snowBeam.CheckBeamCollisions();
             }
 
-            if(_snowBeam != null && _elementIndex == 2 && ultimateActive)
+            if (_snowBeam != null && _elementIndex == 2 && ultimateActive)
             {
-                if(_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
+                if (_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
                 {
                     if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
                     {
@@ -168,6 +169,16 @@ namespace Terramental
                 SpriteVelocity = new Vector2(0, 0);
             }
 
+        }
+
+        public void TeleportPlayer(Vector2 position, bool setCheckpoint)
+        {
+            SpritePosition = position;
+
+            if(setCheckpoint)
+            {
+                _checkpointPosition = position;
+            }
         }
 
         public void PlayerJump()
