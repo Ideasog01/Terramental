@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Terramental
 {
@@ -49,9 +50,18 @@ namespace Terramental
             return Vector2.Transform(point, invertedMatrix);
         }
 
-        public static bool ObjectIsVisible(Rectangle bounds)
+        public static bool ObjectIsVisible(Vector2 position)
         {
-            return true;
+            float distance = (float)Math.Sqrt(Math.Pow(position.X - playerPosition.X, 2) + MathF.Pow(position.Y - playerPosition.Y, 2));
+
+            if (distance < 700)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
