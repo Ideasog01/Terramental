@@ -28,6 +28,7 @@ namespace Terramental
         public Vector2 ComponentPosition
         {
             get { return _componentPosition; }
+            set { _componentPosition = value; }
         }
 
         public Color ComponentColor

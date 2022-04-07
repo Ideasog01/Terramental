@@ -16,12 +16,13 @@ namespace Terramental
         public static bool gameInProgress;
 
         public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn};
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton };
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton };
 
         public static GameState currentGameState = GameState.MainMenu;
 
         public PlayerInterface playerInterface;
         public MenuManager menuManager;
+        public DialogueManager dialogueManager;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -85,6 +86,12 @@ namespace Terramental
                 {
                     _mapManager.CheckActiveTiles();
                 }
+
+                if(DialogueManager.dialogueActive)
+                {
+                    dialogueManager.UpdatePosition();
+                }
+                
             }
             
 
@@ -105,6 +112,11 @@ namespace Terramental
             }
 
             menuManager.DrawMenus(_spriteBatch);
+
+            if(DialogueManager.dialogueActive && currentGameState == GameState.Level)
+            {
+                dialogueManager.DrawDialogueInterface(_spriteBatch);
+            }
 
             _spriteBatch.End();
 
@@ -143,7 +155,7 @@ namespace Terramental
 
             _mapManager = new MapManager(this);
 
-            
+            dialogueManager = new DialogueManager(this, menuManager);
 
             CameraController.cameraActive = true;
 

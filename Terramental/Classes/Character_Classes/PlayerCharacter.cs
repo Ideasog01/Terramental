@@ -8,6 +8,8 @@ namespace Terramental
 {
     public class PlayerCharacter : BaseCharacter
     {
+        public static bool disableMovement;
+
         public float dashCooldown;
         public float ultimateCooldown;
 
@@ -20,7 +22,6 @@ namespace Terramental
 
         private bool _disableRight;
         private bool _disableLeft;
-        private bool _disableMovement;
         private Vector2 _checkpointPosition;
 
         //Ability Variables

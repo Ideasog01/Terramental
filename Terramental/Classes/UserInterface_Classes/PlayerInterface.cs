@@ -8,6 +8,7 @@ namespace Terramental
     {
 
         public static bool interfaceActive;
+
         public static List<InterfaceComponent> playerInterfaceElements = new List<InterfaceComponent>();
 
         private GameManager _gameManager;
