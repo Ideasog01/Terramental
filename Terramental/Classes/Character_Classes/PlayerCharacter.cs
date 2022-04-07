@@ -439,7 +439,7 @@ namespace Terramental
 
         private void CheckGroundCollision()
         {
-            _tileList = MapManager.tileList;
+            _tileList = MapManager.activeTiles;
 
             foreach(Tile tile in _tileList)
             {
@@ -456,7 +456,7 @@ namespace Terramental
 
         private void CheckJumpCollision()
         {
-            _tileList = MapManager.tileList;
+            _tileList = MapManager.activeTiles;
 
             foreach (Tile tile in _tileList)
             {
@@ -472,7 +472,7 @@ namespace Terramental
 
         private void CheckMovementCollision()
         {
-            _tileList = MapManager.tileList;
+            _tileList = MapManager.activeTiles;
 
             foreach (Tile tile in _tileList)
             {
