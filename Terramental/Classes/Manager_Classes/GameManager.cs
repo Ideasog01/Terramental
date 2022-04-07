@@ -80,6 +80,11 @@ namespace Terramental
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
                 CameraController.playerPosition = playerCharacter.SpritePosition;
+
+                if(_mapManager != null)
+                {
+                    _mapManager.CheckActiveTiles();
+                }
             }
             
 
