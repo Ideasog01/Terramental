@@ -42,7 +42,6 @@ namespace Terramental
         private int upDashCheck = 0;
         private int leftDashCheck = 0;
         private int rightDashCheck = 0;
-        private int downDashCheck = 0;
 
         private int dashDirX;
         private int dashDirY;
@@ -54,7 +53,6 @@ namespace Terramental
         {
             Up,
             Left,
-            Down,
             Right
         }
         public DashDirections dashDir = DashDirections.Right;
@@ -111,7 +109,7 @@ namespace Terramental
         public int HorizontalAxisRaw
         {
             get { return _horizontalAxisRaw; }
-            set { _horizontalAxisRaw = value;  }
+            set { _horizontalAxisRaw = value; }
         }
 
         public int VerticalAxisRaw
@@ -159,9 +157,7 @@ namespace Terramental
 
             Dash();
 
-            CheckGroundCollision();
-
-            CheckMovementCollision();
+            CheckCollisions();
 
             MovementAnimations();
 
@@ -174,14 +170,14 @@ namespace Terramental
                 }
             }
 
-            if(_snowBeam != null)
+            if (_snowBeam != null)
             {
                 _snowBeam.CheckBeamCollisions();
             }
 
-            if(_snowBeam != null && _elementIndex == 2 && ultimateActive)
+            if (_snowBeam != null && _elementIndex == 2 && ultimateActive)
             {
-                if(_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
+                if (_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
                 {
                     if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
                     {
@@ -204,7 +200,8 @@ namespace Terramental
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             // SpriteVelocity = new Vector2(_playerMovementSpeed * _horizontalAxisRaw * deltaTime, 0);
-            if(!_isHovering) {
+            if (!_isHovering)
+            {
                 if (horizontal > 0)
                 {
                     // IsFacingRight = true;
@@ -234,12 +231,12 @@ namespace Terramental
 
                 }
 
-                
+
                 if (horizontal == 0 && !_isDashing)
                 {
                     SpriteVelocity = new Vector2(0, 0);
                 }
-                
+
             }
 
         }
@@ -271,8 +268,6 @@ namespace Terramental
 
                 float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
 
-                CheckJumpCollision();
-
                 if (SpritePosition.Y == _jumpHeight)
                 {
                     _isJumping = false;
@@ -286,89 +281,70 @@ namespace Terramental
             {
                 case DashDirections.Up:
                     upDashCheck++;
-                    Debug.WriteLine(upDashCheck);
-                    Debug.WriteLine("Dashed Up");
                     DoubleTapToDashCooldown();
                     break;
                 case DashDirections.Left:
                     leftDashCheck++;
-                    Debug.WriteLine("Dashed Left");
-                    DoubleTapToDashCooldown();
-                    break;
-                case DashDirections.Down:
-                    downDashCheck++;
-                    Debug.WriteLine("Dashed Down");
                     DoubleTapToDashCooldown();
                     break;
                 case DashDirections.Right:
                     rightDashCheck++;
-                    Debug.WriteLine("Dashed Right");
                     DoubleTapToDashCooldown();
                     break;
             }
         }
         public void DashCheck()
         {
-            if (upDashCheck >= 2)
+            if (!_isDashing)
             {
-                dashDirY = -1;
-                dashDirX = 0;
-                _dashDistY = SpritePosition.Y - 500;
-                //Dash();
-                _isDashing = true;
-            }
-            if (leftDashCheck >= 2)
-            {
-                dashDirX = -1;
-                dashDirY = 0;
-                _dashDistX = SpritePosition.X - 500;
-                //Dash();
-                _isDashing = true;
-            }
-            if (downDashCheck >= 2)
-            {
-                dashDirY = 1;
-                dashDirX = 0;
-                _dashDistY = SpritePosition.Y + 500;
-                //Dash();
-                _isDashing = true;
-            }
-            if (rightDashCheck >= 2)
-            {
-                dashDirX = 1;
-                dashDirY = 0;
-                _dashDistX = SpritePosition.X + 500;
-                //Dash();
-                _isDashing = true;
+                if (upDashCheck >= 2)
+                {
+                    dashDirY = -1;
+                    dashDirX = 0;
+                    _dashDistY = SpritePosition.Y - 500;
+                    //Dash();
+                    _isDashing = true;
+                }
+                if (leftDashCheck >= 2)
+                {
+                    dashDirX = -1;
+                    dashDirY = 0;
+                    _dashDistX = SpritePosition.X - 500;
+                    //Dash();
+                    _isDashing = true;
+                }
+                if (rightDashCheck >= 2)
+                {
+                    dashDirX = 1;
+                    dashDirY = 0;
+                    _dashDistX = SpritePosition.X + 500;
+                    //Dash();
+                    _isDashing = true;
+                }
             }
         }
         public void Dash()
         {
             if (_isDashing)
             {
-                SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
-            }
-
-            if (Math.Abs(SpritePosition.X) == Math.Abs(_dashDistX))
-            {
+                if (!_disableRight && !_disableLeft)
+                {
+                    SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
+                }
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
                 _isDashing = false;
-            }
 
-            if (Math.Abs(SpritePosition.Y) == Math.Abs(_dashDistY))
-            {
-                _isDashing = false;
             }
-            _isDashing = false;
         }
-
-
         public async void DoubleTapToDashCooldown()
         {
             await Task.Delay(500);
 
             upDashCheck = 0;
             leftDashCheck = 0;
-            downDashCheck = 0;
             rightDashCheck = 0;
         }
         public void ApplyGravity()
@@ -381,7 +357,7 @@ namespace Terramental
                     {
                         SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
                     }
-                    
+
                 }
             }
         }
@@ -392,11 +368,11 @@ namespace Terramental
 
         public void ActivateUltimate()
         {
-            if(ultimateCooldown <= 0 && _ultimateActiveTimer <= 0)
+            if (ultimateCooldown <= 0 && _ultimateActiveTimer <= 0)
             {
-                switch(_elementIndex)
+                switch (_elementIndex)
                 {
-                    case 0 :
+                    case 0:
                         ActivateFireUltimate();
                         break;
                     case 1:
@@ -413,7 +389,7 @@ namespace Terramental
 
         public void PrimaryAttack()
         {
-            if(ultimateActive)
+            if (ultimateActive)
             {
                 switch (_elementIndex)
                 {
@@ -447,7 +423,7 @@ namespace Terramental
                 ultimateCooldown = 10;
                 ultimateActive = false;
 
-                if(_elementIndex == 2)
+                if (_elementIndex == 2)
                 {
                     SnowUltimateEnd();
                 }
@@ -505,7 +481,7 @@ namespace Terramental
 
         private void ActivateSnowUltimate()
         {
-            if(_snowBeam == null)
+            if (_snowBeam == null)
             {
                 _snowBeam = new SnowBeam();
                 _snowBeam.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), new Vector2(320, 64));
@@ -526,7 +502,7 @@ namespace Terramental
                 _snowBeam.AddAnimation(snowLeftActivationAnim);
                 _snowBeam.AddAnimation(snowLeftIdleAnim);
 
-                if((AnimationIndex % 2) == 0 || AnimationIndex == 0)
+                if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
                 {
                     _snowBeam.SetAnimation(0);
                     _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
@@ -541,14 +517,14 @@ namespace Terramental
             {
                 _snowBeam.SetAnimation(0);
                 _snowBeam.IsActive = true;
-                
+
 
                 if (SpriteVelocity.X > 0)
                 {
                     _snowBeam.SetAnimation(0);
                     _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
                 }
-                else if(SpriteVelocity.X < 0)
+                else if (SpriteVelocity.X < 0)
                 {
                     _snowBeam.SetAnimation(2);
                     _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
@@ -573,45 +549,27 @@ namespace Terramental
 
         #region Collisions
 
-        private void CheckGroundCollision()
+        private void CheckCollisions()
         {
             _tileList = MapManager.tileList;
-
-            foreach(Tile tile in _tileList)
-            {
-                if(tile.GroundTile)
-                {
-                    if(tile.TopCollision(this))
-                    {
-                        _isGrounded = true;
-                        _groundTile = tile;
-                    }
-                }
-            }
-        }
-
-        private void CheckJumpCollision()
-        {
-            _tileList = MapManager.tileList;
-
             foreach (Tile tile in _tileList)
             {
                 if (tile.GroundTile)
                 {
+                    if (tile.TopCollision(this))
+                    {
+                        _isGrounded = true;
+                        _groundTile = tile;
+                      
+                    }
+
                     if (tile.BottomCollision(this))
                     {
+                        _isJumping = false;
                         _jumpHeight = SpritePosition.Y;
                     }
                 }
-            }
-        }
 
-        private void CheckMovementCollision()
-        {
-            _tileList = MapManager.tileList;
-
-            foreach (Tile tile in _tileList)
-            {
                 if (tile.WallTile)
                 {
                     if (tile.RightCollision(this))
@@ -628,9 +586,9 @@ namespace Terramental
                 }
             }
 
-            if(_disableRight && _rightTile != null)
+            if (_disableRight && _rightTile != null)
             {
-                if(!_rightTile.RightCollision(this))
+                if (!_rightTile.RightCollision(this))
                 {
                     _disableRight = false;
                     _rightTile = null;
@@ -645,10 +603,7 @@ namespace Terramental
                     _leftTile = null;
                 }
             }
-
-
         }
-
 
         #endregion
 
@@ -689,21 +644,25 @@ namespace Terramental
         }
         private void MovementAnimations()
         {
-            if(SpriteVelocity.X > 0)
+            if (SpriteVelocity.X > 0)
             {
-                switch(_elementIndex)
+                switch (_elementIndex)
                 {
-                    case 0: SetAnimation((int)AnimationIndexEnum.FireWalk);
+                    case 0:
+                        SetAnimation((int)AnimationIndexEnum.FireWalk);
                         break;
-                    case 1: SetAnimation((int)AnimationIndexEnum.WaterWalk);
+                    case 1:
+                        SetAnimation((int)AnimationIndexEnum.WaterWalk);
                         break;
-                    case 2: SetAnimation((int)AnimationIndexEnum.SnowWalk);
+                    case 2:
+                        SetAnimation((int)AnimationIndexEnum.SnowWalk);
                         break;
-                    default: _elementIndex = (int)AnimationIndexEnum.IdleFire;
+                    default:
+                        _elementIndex = (int)AnimationIndexEnum.IdleFire;
                         break;
                 }
             }
-            else if(SpriteVelocity.X < 0)
+            else if (SpriteVelocity.X < 0)
             {
                 switch (_elementIndex)
                 {
@@ -721,9 +680,9 @@ namespace Terramental
                         break;
                 }
             }
-            else if(SpriteVelocity.X == 0)
+            else if (SpriteVelocity.X == 0)
             {
-                if(AnimationIndex % 2 == 0)
+                if (AnimationIndex % 2 == 0)
                 {
                     switch (_elementIndex)
                     {

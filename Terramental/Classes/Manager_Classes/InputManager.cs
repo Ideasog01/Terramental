@@ -80,16 +80,10 @@ namespace Terramental
                 {
                     playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
                     playerCharacter.DashStateMachine();
-                    Debug.WriteLine("here");
                 }
                 if (IsKeyPressed(Keys.A, gameTime))
                 {
                     playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
-                    playerCharacter.DashStateMachine();
-                }
-                if (IsKeyPressed(Keys.S, gameTime))
-                {
-                    playerCharacter.dashDir = PlayerCharacter.DashDirections.Down;
                     playerCharacter.DashStateMachine();
                 }
                 if (IsKeyPressed(Keys.D, gameTime))
@@ -98,87 +92,6 @@ namespace Terramental
                     playerCharacter.DashStateMachine();
                 }
 
-                /*
-                if (IsKeyPressed(Keys.A, gameTime))
-                {
-                    leftDashCheck++;
-                    DoubleTapToDashCooldown(doubleTapKeyCooldown, "left");
-                }
-
-                if (IsKeyPressed(Keys.S, gameTime))
-                {
-                    downDashCheck++;
-                    DoubleTapToDashCooldown(doubleTapKeyCooldown, "down");
-                }
-
-                if (IsKeyPressed(Keys.D, gameTime))
-                {
-                    rightDashCheck++;
-                    DoubleTapToDashCooldown(doubleTapKeyCooldown, "right");
-                }
-
-                if (upDashCheck >= 2)
-                {
-                    // Player just dashed
-                    Debug.WriteLine("Up Dash");
-                    playerCharacter.Dash(new Vector2(0, -1));
-                }
-                */
-
-                /*
-                if (IsKeyPressed(Keys.W, gameTime))
-                {
-                    if (isTap == true) {
-                        Debug.WriteLine("t1 " + time1);
-                        Debug.WriteLine("t2 " + time2);
-                        time1 = gameTime.TotalGameTime.TotalMilliseconds;
-                        isTap = false;
-
-                        if (time1 - time2 < keyCooldown)
-                        {
-                            Debug.WriteLine("W DOUBLE TAPPED");
-                            // Double Tapped
-                        }
-                    }
-                    else
-                    {
-                        if (isTap == false)
-                        {
-                            time2 = gameTime.TotalGameTime.TotalMilliseconds;
-                            isTap = true;
-                        }
-                    }
-                    playerCharacter.VerticalAxisRaw = 1;
-                    playerCharacter.LastNonZeroVAR = playerCharacter.VerticalAxisRaw;
-                }
-                
-                if (IsKeyPressed(Keys.S, gameTime))
-                {
-                    if (isTap == true)
-                    {
-                        Debug.WriteLine("t1 " + time1);
-                        Debug.WriteLine("t2 " + time2);
-                        time1 = gameTime.TotalGameTime.TotalMilliseconds;
-                        isTap = false;
-
-                        if (time1 - time2 < keyCooldown)
-                        {
-                            Debug.WriteLine("S DOUBLE TAPPED");
-                            // Double Tapped
-                        }
-                    }
-                    else
-                    {
-                        if (isTap == false)
-                        {
-                            time2 = gameTime.TotalGameTime.TotalMilliseconds;
-                            isTap = true;
-                        }
-                    }
-                    playerCharacter.VerticalAxisRaw = 1;
-                    playerCharacter.LastNonZeroVAR = playerCharacter.VerticalAxisRaw;
-                }
-                */
 
                 if (_currentKeyboardState.IsKeyDown(Keys.S))
                 {
@@ -206,35 +119,6 @@ namespace Terramental
                 {
                     playerCharacter.PlayerJump();
                 }
-                /*
-                if(IsKeyDoublePressed(Keys.W, gameTime)) // Vertical Dash
-                {
-                    Debug.WriteLine("Vertical Dash");
-                    playerCharacter.DashDir = new Vector2(0, -1);
-                    playerCharacter.Dash();
-                }
-                
-                if (IsKeyDoublePressed(Keys.A, gameTime)) // Left Dash
-                {
-                    Debug.WriteLine("Left Dash");
-                    playerCharacter.DashDir = new Vector2(-1, 0);
-                    playerCharacter.Dash();
-                }
-                
-                if (IsKeyDoublePressed(Keys.S, gameTime)) // Down Dash
-                {
-                    Debug.WriteLine("Down Dash");
-                    playerCharacter.DashDir = new Vector2(0, -1);
-                    playerCharacter.Dash();
-                }
-                
-                if (IsKeyDoublePressed(Keys.D, gameTime)) // Right Dash
-                {
-                    Debug.WriteLine("Right Dash");
-                    playerCharacter.DashDir = new Vector2(1, 0);
-                    playerCharacter.Dash();
-                }
-                */
             }
         }
 
