@@ -8,6 +8,7 @@ namespace Terramental
 {
     class MapManager
     {
+        public static List<Tile> activeTiles = new List<Tile>();
         public static List<Tile> tileList = new List<Tile>();
 
         private GameManager _gameManager;
@@ -26,6 +27,22 @@ namespace Terramental
             if(_mapData != null)
             {
                 GenerateMap();
+            }
+        }
+
+        public void CheckActiveTiles()
+        {
+            foreach(Tile tile in tileList)
+            {
+                if(tile.IsActive && !activeTiles.Contains(tile))
+                {
+                    activeTiles.Add(tile);
+                }
+                
+                if(activeTiles.Contains(tile) && !tile.IsActive)
+                {
+                    activeTiles.Remove(tile);
+                }
             }
         }
 
