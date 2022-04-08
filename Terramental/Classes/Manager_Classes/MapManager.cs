@@ -11,6 +11,9 @@ namespace Terramental
         public static List<Tile> activeTiles = new List<Tile>();
         public static List<Tile> tileList = new List<Tile>();
 
+        public static float mapWidth;
+        public static float mapHeight;
+
         private GameManager _gameManager;
         private MapData _mapData;
 
@@ -44,6 +47,11 @@ namespace Terramental
                     activeTiles.Remove(tile);
                 }
             }
+
+            if(_gameManager.playerCharacter.SpritePosition.Y > (_mapData._mapHeight * 64))
+            {
+                _gameManager.playerCharacter.PlayerTakeDamage(3);
+            }
         }
 
         public void LoadMapData(string filePath)
@@ -51,6 +59,9 @@ namespace Terramental
             string strResultJson = File.ReadAllText(@"MapData.json");
             MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
             _mapData = newMapData;
+
+            mapWidth = _mapData._mapWidth;
+            mapHeight = _mapData._mapHeight;
         }
 
         private void LoadTextures()

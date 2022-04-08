@@ -34,6 +34,13 @@ namespace Terramental
                 if (playerCharacter != null)
                 {
                     _cameraCentre = new Vector2(playerCharacter.SpritePosition.X - (viewPort.Width / 2) + (playerCharacter.SpriteRectangle.Width / 2), playerCharacter.SpritePosition.Y - (viewPort.Height / 2) + (playerCharacter.SpriteRectangle.Height / 2));
+                    
+                    float cameraCentreX = MathHelper.Clamp(_cameraCentre.X, 0, (MapManager.mapWidth * 64) - 960);
+                    float cameraCentreY = MathHelper.Clamp(_cameraCentre.Y, 0, (MapManager.mapHeight * 64) - 540);
+
+                    _cameraCentre.X = cameraCentreX;
+                    _cameraCentre.Y = cameraCentreY;
+
                     cameraTransform = Matrix.CreateScale(new Vector3(1, 1, 0)) * Matrix.CreateTranslation(new Vector3(-_cameraCentre.X, -_cameraCentre.Y, 0));
                 }
             }    
@@ -82,7 +89,7 @@ namespace Terramental
         {
             float distance = (float)Math.Sqrt(Math.Pow(position.X - playerCharacter.SpritePosition.X, 2) + MathF.Pow(position.Y - playerCharacter.SpritePosition.Y, 2));
 
-            if (distance < 700)
+            if (distance < 1000)
             {
                 return true;
             }

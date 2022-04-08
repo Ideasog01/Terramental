@@ -34,8 +34,9 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        public static int screenHeight = 540;
         public static int screenWidth = 960;
+        public static int screenHeight = 540;
+  
 
         private MapManager _mapManager;
 
