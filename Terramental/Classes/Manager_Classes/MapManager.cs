@@ -54,6 +54,18 @@ namespace Terramental
             }
         }
 
+        public Tile GetTile(Vector2 position)
+        {
+            foreach (Tile tile in tileList)
+            {
+                if (tile.SpritePosition == position)
+                {
+                    return tile;
+                }
+            }
+            return null;
+        }
+
         public void LoadMapData(string filePath)
         {
             string strResultJson = File.ReadAllText(@"MapData.json");

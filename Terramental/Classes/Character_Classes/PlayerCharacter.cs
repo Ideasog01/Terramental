@@ -62,6 +62,30 @@ namespace Terramental
             set { _isDoubleJumpUsed = value; }
         }
 
+        public bool DisableRight
+        {
+            get { return _disableRight; }
+            set { _disableRight = value; }
+        }
+
+        public bool DisableLeft
+        {
+            get { return _disableLeft; }
+            set { _disableLeft = value; }
+        }
+
+        public Tile LeftTile
+        {
+            get { return _leftTile; }
+            set { _leftTile = value; }
+        }
+
+        public Tile RightTile
+        {
+            get { return _rightTile; }
+            set { _rightTile = value; }
+        }
+
         public int ElementIndex
         {
             get { return _elementIndex; }
@@ -72,6 +96,18 @@ namespace Terramental
         {
             get { return _playerScore; }
             set { _playerScore = value; }
+        }
+
+        public float JumpHeight
+        {
+            get { return _jumpHeight; }
+            set { _jumpHeight = value; }
+
+        }
+        public Tile GroundTile
+        {
+            get { return _groundTile; }
+            set { _groundTile = value; }
         }
 
         #endregion
