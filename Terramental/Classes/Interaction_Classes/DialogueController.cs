@@ -8,19 +8,26 @@ namespace Terramental
         private PlayerCharacter _playerCharacter;
         private DialogueManager _dialogueManager;
         private Rectangle _rectangleTrigger;
+        private bool _dialogueTriggered;
 
-        public DialogueController(PlayerCharacter playerCharacter, Rectangle rectangle, DialogueManager dialogueManager)
+        public DialogueController(PlayerCharacter playerCharacter, Rectangle rectangle, DialogueManager dialogueManager, Dialogue dialogue)
         {
             _playerCharacter = playerCharacter;
             _rectangleTrigger = rectangle;
             _dialogueManager = dialogueManager;
+
+            _dialogue = dialogue;
         }
 
         public void CheckDialogueCollision()
         {
-            if(_playerCharacter.OnCollision(_rectangleTrigger))
+            if(!_dialogueTriggered)
             {
-                _dialogueManager.ActivateDialogue(_dialogue);
+                if (_playerCharacter.OnCollision(_rectangleTrigger))
+                {
+                    _dialogueManager.ActivateDialogue(_dialogue);
+                    _dialogueTriggered = true;
+                }
             }
         }
     }

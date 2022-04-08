@@ -52,6 +52,17 @@ namespace Terramental
 
         }
 
+        public void CheckButtonInteraction(Vector2 mousePos)
+        {
+            if(dialogueActive)
+            {
+                if(_dialogueNextButton.ComponentRectangle.Contains(mousePos))
+                {
+                    NextDialogue();
+                }
+            }
+        }
+
         public void ActivateDialogue(Dialogue dialogue)
         {
             dialogueActive = true;
@@ -60,6 +71,7 @@ namespace Terramental
             PlayerCharacter.disableMovement = true;
 
             _gameManager.IsMouseVisible = true;
+            _dialogueNameText = _currentDialogue.DialogueName;
 
             NextDialogue();
         }
@@ -68,14 +80,13 @@ namespace Terramental
         {
             _dialogueIndex++;
 
-            if(_dialogueIndex > _currentDialogue.DialogueContent.Length)
+            if(_dialogueIndex >= _currentDialogue.DialogueContent.Length)
             {
                 EndDialogue();
             }
             else
             {
                 _dialogueText = _currentDialogue.DialogueContent[_dialogueIndex];
-                _dialogueNameText = _currentDialogue.DialogueName[_dialogueIndex];
             }
         }
 

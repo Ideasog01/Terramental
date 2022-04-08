@@ -39,6 +39,9 @@ namespace Terramental
 
         private MapManager _mapManager;
 
+        private DialogueController _dialogueTrigger;
+        private Dialogue _dialogue;
+
         public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -90,6 +93,10 @@ namespace Terramental
                 if(DialogueManager.dialogueActive)
                 {
                     dialogueManager.UpdatePosition();
+                }
+                else
+                {
+                    _dialogueTrigger.CheckDialogueCollision();
                 }
                 
             }
@@ -147,7 +154,6 @@ namespace Terramental
             playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
             playerCharacter.InitialisePlayerAnimations(this);
             playerCharacter.LayerOrder = -1;
-            _inputManager.playerCharacter = playerCharacter;
             playerInterface = new PlayerInterface(this);
 
             playerCharacter.DisplayPlayerLives();
@@ -159,7 +165,14 @@ namespace Terramental
 
             CameraController.cameraActive = true;
 
-            
+            string[] dialogue = { "Hello, my name is bob.", "How are you?", "That is great", "Bye now..." };
+
+            _dialogue = new Dialogue(dialogue, "Bob");
+
+            _dialogueTrigger = new DialogueController(playerCharacter, new Rectangle(1300, 1100, 64, 64), dialogueManager, _dialogue);
+
+
+
 
             gameInProgress = true;
 
@@ -172,7 +185,7 @@ namespace Terramental
             _mainCam = new CameraController();
             CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
-            _inputManager = new InputManager(_mainCam, menuManager);
+            _inputManager = new InputManager(_mainCam, menuManager, this);
         }
 
         private void UpdateManagers(GameTime gameTime)

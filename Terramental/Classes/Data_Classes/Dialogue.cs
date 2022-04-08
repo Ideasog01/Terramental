@@ -8,12 +8,12 @@ namespace Terramental
     {
         private string[] _dialogueContent;
 
-        private string[] _dialogueName;
+        private string _dialogueName;
 
-        public Dialogue(string[] content, string[] names)
+        public Dialogue(string[] content, string name)
         {
             _dialogueContent = content;
-            _dialogueName = names;
+            _dialogueName = name;
         }
 
         public string[] DialogueContent
@@ -21,7 +21,7 @@ namespace Terramental
             get { return _dialogueContent; }
         }
 
-        public string[] DialogueName
+        public string DialogueName
         {
             get { return _dialogueName; }
         }

@@ -12,17 +12,18 @@ namespace Terramental
         /// InputManager controls all essential player input
         /// </summary>
 
-        public PlayerCharacter playerCharacter;
         private MenuManager _menuManager;
         private CameraController _playerCam;
+        private GameManager _gameManager;
 
         private KeyboardState _currentKeyboardState = Keyboard.GetState();
         private MouseState _currentMouseState = Mouse.GetState();
 
-        public InputManager(CameraController playerCam, MenuManager menuManager)
+        public InputManager(CameraController playerCam, MenuManager menuManager, GameManager gameManager)
         {
             _playerCam = playerCam;
             _menuManager = menuManager;
+            _gameManager = gameManager;
         }
 
         public void Update(GameTime gameTime)
@@ -41,43 +42,51 @@ namespace Terramental
             if(_currentMouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed)
             {
                 _menuManager.MouseClick(_playerCam.ScreenToWorldSpace(new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y)));
+
+                if(DialogueManager.dialogueActive)
+                {
+                    if(_gameManager.dialogueManager != null)
+                    {
+                        _gameManager.dialogueManager.CheckButtonInteraction(_playerCam.ScreenToWorldSpace(new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y)));
+                    }
+                }
             }
 
             if(oldKeyboardState.IsKeyDown(Keys.F) && _currentKeyboardState.IsKeyUp(Keys.F))
             {
-                playerCharacter.CharacterHealth = 0;
+                _gameManager.playerCharacter.CharacterHealth = 0;
 
                 _menuManager.DisplayRespawnScreen(true);
             }
 
-            if(playerCharacter != null)
+            if(_gameManager.playerCharacter != null)
             {
                 if (_currentKeyboardState.IsKeyDown(Keys.D))
                 {
-                    playerCharacter.PlayerMovement(1, gameTime);
+                    _gameManager.playerCharacter.PlayerMovement(1, gameTime);
                 }
                 else if (_currentKeyboardState.IsKeyDown(Keys.A))
                 {
-                    playerCharacter.PlayerMovement(-1, gameTime);
+                    _gameManager.playerCharacter.PlayerMovement(-1, gameTime);
                 }
                 else if (_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
                 {
-                    playerCharacter.PlayerMovement(0, gameTime);
+                    _gameManager.playerCharacter.PlayerMovement(0, gameTime);
                 }
 
                 if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
                 {
-                    playerCharacter.ActivateUltimate();
+                    _gameManager.playerCharacter.ActivateUltimate();
                 }
 
                 if (_currentMouseState.LeftButton == ButtonState.Pressed)
                 {
-                    playerCharacter.PrimaryAttack();
+                    _gameManager.playerCharacter.PrimaryAttack();
                 }
 
                 if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
                 {
-                    playerCharacter.PlayerJump();
+                    _gameManager.playerCharacter.PlayerJump();
                 }
             }
         }
