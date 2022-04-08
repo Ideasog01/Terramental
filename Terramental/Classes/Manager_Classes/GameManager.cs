@@ -83,7 +83,7 @@ namespace Terramental
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
-                CameraController.playerPosition = playerCharacter.SpritePosition;
+                //CameraController.playerPosition = playerCharacter.SpritePosition;
 
                 if(_mapManager != null)
                 {
@@ -100,7 +100,9 @@ namespace Terramental
                 }
                 
             }
-            
+
+
+            _mainCam.UpdateCamera(gameTime);
 
             base.Update(gameTime);
         }
@@ -109,7 +111,7 @@ namespace Terramental
         {
             GraphicsDevice.Clear(Color.SkyBlue);
 
-            _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, _mainCam.cameraTransform);
 
             if(currentGameState == GameState.Level && playerInterface != null)
             {
@@ -163,7 +165,7 @@ namespace Terramental
 
             dialogueManager = new DialogueManager(this, menuManager);
 
-            CameraController.cameraActive = true;
+            //CameraController.cameraActive = true;
 
             string[] dialogue = { "Hello, my name is bob.", "How are you?", "That is great", "Bye now..." };
 
@@ -172,7 +174,7 @@ namespace Terramental
             _dialogueTrigger = new DialogueController(playerCharacter, new Rectangle(1300, 1100, 64, 64), dialogueManager, _dialogue);
 
 
-
+            CameraController.playerCharacter = playerCharacter;
 
             gameInProgress = true;
 
@@ -182,8 +184,8 @@ namespace Terramental
         private void InitialiseManagers()
         {
             _spriteManager = new SpriteManager();
-            _mainCam = new CameraController();
-            CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
+            _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
+          //  CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
             _inputManager = new InputManager(_mainCam, menuManager, this);
         }
@@ -192,7 +194,7 @@ namespace Terramental
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
-            _mainCam.MoveCamera(playerCharacter);
+          //  _mainCam.MoveCamera(playerCharacter);
             SpawnManager.Update(gameTime);
         }
 
