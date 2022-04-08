@@ -11,6 +11,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\Sprites\Obstacles\**" />
+    <Compile Remove="Content\Sprites\Obsticals\**" />
+    <EmbeddedResource Remove="Content\Sprites\Obstacles\**" />
+    <EmbeddedResource Remove="Content\Sprites\Obsticals\**" />
+    <None Remove="Content\Sprites\Obstacles\**" />
+    <None Remove="Content\Sprites\Obsticals\**" />
+  </ItemGroup>
+  <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>

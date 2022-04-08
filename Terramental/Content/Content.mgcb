@@ -86,6 +86,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png
 
+#begin Sprites/FireTile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/FireTile.png
+
 #begin Sprites/Pickups/FirePickup_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -277,6 +289,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/Walk/Water_RightWalk_Spritesheet.png
+
+#begin Sprites/SnowTile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SnowTile.png
 
 #begin Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter
@@ -494,7 +518,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/Tile-Fire.png
 
-#begin UserInterface/Dialogue/DialogueNextButton.png
+#begin Sprites/WaterTile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -504,19 +528,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UserInterface/Dialogue/DialogueNextButton.png
-
-#begin UserInterface/Dialogue/DialoguePanel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UserInterface/Dialogue/DialoguePanel.png
+/build:Sprites/WaterTile.png
 
 #begin UserInterface/MainMenu/Achievements_MainMenu_Button.png
 /importer:TextureImporter

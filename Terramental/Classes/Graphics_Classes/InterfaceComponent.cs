@@ -28,7 +28,6 @@ namespace Terramental
         public Vector2 ComponentPosition
         {
             get { return _componentPosition; }
-            set { _componentPosition = value; }
         }
 
         public Color ComponentColor
@@ -39,7 +38,7 @@ namespace Terramental
 
         public void FollowCamera()
         {
-            _componentPosition = CameraController._cameraCentre + _componentOffset + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
+            _componentPosition = _playerCharacter.SpritePosition + _componentOffset;
             _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
         }
 

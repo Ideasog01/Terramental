@@ -154,7 +154,7 @@ namespace Terramental
             {
                 if(GameManager.gameInProgress)
                 {
-                    if(CameraController.ObjectIsVisible(SpritePosition))
+                    if(CameraController.ObjectIsVisible(SpriteRectangle))
                     {
                         _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
 

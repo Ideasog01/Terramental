@@ -8,16 +8,26 @@ namespace Terramental
 {
     class MapManager
     {
-        public static List<Tile> activeTiles = new List<Tile>();
         public static List<Tile> tileList = new List<Tile>();
-
-        public static float mapWidth;
-        public static float mapHeight;
 
         private GameManager _gameManager;
         private MapData _mapData;
 
+
         private List<Texture2D> _tileMap1 = new List<Texture2D>();
+
+        public Tile GetTile(Vector2 position)
+        {
+            foreach (Tile tile in tileList) 
+            {
+                if (tile.SpritePosition == position)
+                {
+                    return tile;
+                }
+            }
+            return null;
+        }
+
 
         public MapManager(GameManager gameManager)
         {
@@ -33,35 +43,11 @@ namespace Terramental
             }
         }
 
-        public void CheckActiveTiles()
-        {
-            foreach(Tile tile in tileList)
-            {
-                if(tile.IsActive && !activeTiles.Contains(tile))
-                {
-                    activeTiles.Add(tile);
-                }
-                
-                if(activeTiles.Contains(tile) && !tile.IsActive)
-                {
-                    activeTiles.Remove(tile);
-                }
-            }
-
-            if(_gameManager.playerCharacter.SpritePosition.Y > (_mapData._mapHeight * 64))
-            {
-                _gameManager.playerCharacter.PlayerTakeDamage(3);
-            }
-        }
-
         public void LoadMapData(string filePath)
         {
             string strResultJson = File.ReadAllText(@"MapData.json");
             MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
             _mapData = newMapData;
-
-            mapWidth = _mapData._mapWidth;
-            mapHeight = _mapData._mapHeight;
         }
 
         private void LoadTextures()

@@ -8,8 +8,6 @@ namespace Terramental
 {
     public class PlayerCharacter : BaseCharacter
     {
-        public static bool disableMovement;
-
         public float dashCooldown;
         public float ultimateCooldown;
 
@@ -22,6 +20,7 @@ namespace Terramental
 
         private bool _disableRight;
         private bool _disableLeft;
+        private bool _disableMovement;
         private Vector2 _checkpointPosition;
 
         //Ability Variables
@@ -74,7 +73,44 @@ namespace Terramental
             set { _playerScore = value; }
         }
 
+        public bool DisableRight 
+        { 
+            get { return _disableRight; }
+            set { _disableRight = value; }
+        }
+
+        public bool DisableLeft
+        {
+            get { return _disableLeft; }
+            set { _disableLeft = value; }
+        }
+
+        public Tile LeftTile 
+        {
+            get { return _leftTile; }
+            set { _leftTile = value; }
+        }
+
+        public Tile RightTile
+        {
+            get { return _rightTile; }
+            set { _rightTile = value; }
+        }
+
+        public float JumpHeight
+        {
+            get { return _jumpHeight; }
+            set { _jumpHeight = value; }
+
+        }
+         public Tile GroundTile
+        {
+            get { return _groundTile; }
+            set { _groundTile = value; }
+        }
+
         #endregion
+
 
         #region Player Core
 
@@ -147,39 +183,36 @@ namespace Terramental
             {
                 // IsFacingRight = true;
 
-                if(!disableMovement)
+                if (!_disableRight)
                 {
-                    if (!_disableRight)
-                    {
-                        SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
-                    }
-                    else
-                    {
-                        SpriteVelocity = new Vector2(0, 0);
-                    }
+                    SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
                 }
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
+
             }
             else if (vertical < 0)
             {
                 // IsFacingRight = false;
 
-                if(!disableMovement)
+                if (!_disableLeft)
                 {
-                    if (!_disableLeft)
-                    {
-                        SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
-                    }
-                    else
-                    {
-                        SpriteVelocity = new Vector2(0, 0);
-                    }
+                    SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
                 }
+                else
+                {
+                    SpriteVelocity = new Vector2(0, 0);
+                }
+
             }
 
             if (vertical == 0)
             {
                 SpriteVelocity = new Vector2(0, 0);
             }
+
         }
 
         public void TeleportPlayer(Vector2 position, bool setCheckpoint)
@@ -194,26 +227,23 @@ namespace Terramental
 
         public void PlayerJump()
         {
-            if(!disableMovement)
+            if (!_isJumping && _isGrounded)
             {
-                if (!_isJumping && _isGrounded)
-                {
-                    AudioManager.PlaySound("PlayerJump_SFX");
-                    _isGrounded = false;
-                    _isJumping = true;
-                    _jumpHeight = SpritePosition.Y - 150;
-                    _jumpSpeed = -5;
-                    _isDoubleJumpUsed = false;
-                    return;
-                }
+                AudioManager.PlaySound("PlayerJump_SFX");
+                _isGrounded = false;
+                _isJumping = true;
+                _jumpHeight = SpritePosition.Y - 150;
+                _jumpSpeed = -5;
+                _isDoubleJumpUsed = false;
+                return;
+            }
 
-                if (!_isDoubleJumpUsed)
-                {
-                    AudioManager.PlaySound("PlayerJump_SFX");
-                    _jumpHeight = SpritePosition.Y - 150;
-                    _jumpSpeed = -5;
-                    _isDoubleJumpUsed = true;
-                }
+            if (!_isDoubleJumpUsed)
+            {
+                AudioManager.PlaySound("PlayerJump_SFX");
+                _jumpHeight = SpritePosition.Y - 150;
+                _jumpSpeed = -5;
+                _isDoubleJumpUsed = true;
             }
         }
 
@@ -227,7 +257,7 @@ namespace Terramental
 
                 CheckJumpCollision();
 
-                if (SpritePosition.Y == _jumpHeight || disableMovement)
+                if (SpritePosition.Y == _jumpHeight)
                 {
                     _isJumping = false;
                     _isGrounded = false;
@@ -324,17 +354,6 @@ namespace Terramental
             }
         }
 
-        public void PlayerTakeDamage(int amount)
-        {
-            CharacterHealth -= amount;
-            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
-
-            if (CharacterHealth <= 0)
-            {
-                _gameManager.menuManager.DisplayRespawnScreen(true);
-            }
-        }
-
         #region Fire Ultimate
 
         private void ActivateFireUltimate()
@@ -351,7 +370,7 @@ namespace Terramental
 
                 rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
 
-                foreach (BaseCharacter character in SpawnManager.knightEnemies)
+                foreach (BaseCharacter character in SpawnManager.enemyCharacters)
                 {
                     if (this.OnCollision(character.SpriteRectangle))
                     {
@@ -446,7 +465,7 @@ namespace Terramental
 
         private void CheckGroundCollision()
         {
-            _tileList = MapManager.activeTiles;
+            _tileList = MapManager.tileList;
 
             foreach(Tile tile in _tileList)
             {
@@ -463,7 +482,7 @@ namespace Terramental
 
         private void CheckJumpCollision()
         {
-            _tileList = MapManager.activeTiles;
+            _tileList = MapManager.tileList;
 
             foreach (Tile tile in _tileList)
             {
@@ -479,7 +498,7 @@ namespace Terramental
 
         private void CheckMovementCollision()
         {
-            _tileList = MapManager.activeTiles;
+            _tileList = MapManager.tileList;
 
             foreach (Tile tile in _tileList)
             {
@@ -516,6 +535,8 @@ namespace Terramental
                     _leftTile = null;
                 }
             }
+
+            
 
 
         }

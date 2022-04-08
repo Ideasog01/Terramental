@@ -16,13 +16,11 @@ namespace Terramental
         public static bool gameInProgress;
 
         public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn};
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton };
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton };
 
         public static GameState currentGameState = GameState.MainMenu;
 
         public PlayerInterface playerInterface;
-        public MenuManager menuManager;
-        public DialogueManager dialogueManager;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -34,14 +32,16 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        public static int screenWidth = 960;
         public static int screenHeight = 540;
-  
+        public static int screenWidth = 960;
 
         private MapManager _mapManager;
 
-        private DialogueController _dialogueTrigger;
-        private Dialogue _dialogue;
+        private MenuManager _menuManager;
+
+        private ElementWall fireWall;
+        private ElementWall waterWall;
+        private ElementWall snowWall;
 
         public GameManager()
         {
@@ -65,10 +65,12 @@ namespace Terramental
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
             
 
-            menuManager = new MenuManager(this, _graphics);
+            
+
+            _menuManager = new MenuManager(this, _graphics);
 
             InitialiseManagers();
             //LoadNewGame();
@@ -84,26 +86,14 @@ namespace Terramental
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
-                //CameraController.playerPosition = playerCharacter.SpritePosition;
 
-                if(_mapManager != null)
-                {
-                    _mapManager.CheckActiveTiles();
-                }
-
-                if(DialogueManager.dialogueActive)
-                {
-                    dialogueManager.UpdatePosition();
-                }
-                else
-                {
-                    _dialogueTrigger.CheckDialogueCollision();
-                }
+                fireWall.ElementWallCollisions();
+                waterWall.ElementWallCollisions();
+                snowWall.ElementWallCollisions();
                 
+                CameraController.playerPosition = playerCharacter.SpritePosition;
             }
-
-
-            _mainCam.UpdateCamera(gameTime);
+            
 
             base.Update(gameTime);
         }
@@ -112,21 +102,21 @@ namespace Terramental
         {
             GraphicsDevice.Clear(Color.SkyBlue);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, _mainCam.cameraTransform);
+            _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
 
             if(currentGameState == GameState.Level && playerInterface != null)
             {
                 _spriteManager.Draw(gameTime, _spriteBatch);
                 playerInterface.DrawInterface(_spriteBatch);
                 playerInterface.DrawCooldownTexts(_spriteBatch);
+
+                fireWall.Draw(gameTime, _spriteBatch);
+                waterWall.Draw(gameTime, _spriteBatch);
+                snowWall.Draw(gameTime, _spriteBatch);
             }
 
-            menuManager.DrawMenus(_spriteBatch);
-
-            if(DialogueManager.dialogueActive && currentGameState == GameState.Level)
-            {
-                dialogueManager.DrawDialogueInterface(_spriteBatch);
-            }
+            _menuManager.DrawMenus(_spriteBatch);
+            
 
             _spriteBatch.End();
 
@@ -157,6 +147,7 @@ namespace Terramental
             playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
             playerCharacter.InitialisePlayerAnimations(this);
             playerCharacter.LayerOrder = -1;
+            _inputManager.playerCharacter = playerCharacter;
             playerInterface = new PlayerInterface(this);
 
             playerCharacter.DisplayPlayerLives();
@@ -164,18 +155,22 @@ namespace Terramental
 
             _mapManager = new MapManager(this);
 
-            dialogueManager = new DialogueManager(this, menuManager);
-
-            //CameraController.cameraActive = true;
-
-            string[] dialogue = { "Hello, my name is bob.", "How are you?", "That is great", "Bye now..." };
-
-            _dialogue = new Dialogue(dialogue, "Bob");
-
-            _dialogueTrigger = new DialogueController(playerCharacter, new Rectangle(1300, 1100, 64, 64), dialogueManager, _dialogue);
 
 
-            CameraController.playerCharacter = playerCharacter;
+            fireWall = new ElementWall(playerCharacter, _mapManager, 0);
+            fireWall.Initialise(new Vector2(1280, 1024), GetTexture("Sprites/FireTile"), new Vector2(64, 64));
+
+            waterWall = new ElementWall(playerCharacter, _mapManager, 1);
+            waterWall.Initialise(new Vector2(1152, 1024), GetTexture("Sprites/WaterTile"), new Vector2(64, 64));
+
+            snowWall = new ElementWall(playerCharacter, _mapManager, 2);
+            snowWall.Initialise(new Vector2(1408, 1024), GetTexture("Sprites/SnowTile"), new Vector2(64, 64));
+
+
+
+            CameraController.cameraActive = true;
+
+            
 
             gameInProgress = true;
 
@@ -185,17 +180,17 @@ namespace Terramental
         private void InitialiseManagers()
         {
             _spriteManager = new SpriteManager();
-            _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
-          //  CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
+            _mainCam = new CameraController();
+            CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
-            _inputManager = new InputManager(_mainCam, menuManager, this);
+            _inputManager = new InputManager(_mainCam, _menuManager);
         }
 
         private void UpdateManagers(GameTime gameTime)
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
-          //  _mainCam.MoveCamera(playerCharacter);
+            _mainCam.MoveCamera(playerCharacter);
             SpawnManager.Update(gameTime);
         }
 

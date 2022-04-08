@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
-    public class MenuComponent
+    class MenuComponent
     {
         private Texture2D _componentTexture;
         private Vector2 _componentPosition;
@@ -34,13 +34,11 @@ namespace Terramental
         public Vector2 ComponentPosition
         {
             get { return _componentPosition; }
-            set { _componentPosition = value; }
         }
 
         public Rectangle ComponentRectangle
         {
             get { return _componentRectangle; }
-            set { _componentRectangle = value; }
         }
 
         public Color ComponentColor

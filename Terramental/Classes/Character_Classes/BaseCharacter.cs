@@ -12,7 +12,7 @@ namespace Terramental
         /// </summary>
 
         private int _characterMaxHealth = 3;
-        private bool _isPlayer;
+
         private int _characterHealth = 2;
 
         private bool _isBurning;

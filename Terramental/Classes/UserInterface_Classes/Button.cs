@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
-    public class Button : MenuComponent
+    class Button : MenuComponent
     {
         private GameManager.ButtonName _buttonName;
         private MenuManager _menuManager;
