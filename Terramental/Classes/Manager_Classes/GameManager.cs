@@ -16,12 +16,13 @@ namespace Terramental
         public static bool gameInProgress;
 
         public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn};
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton };
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton };
 
         public static GameState currentGameState = GameState.MainMenu;
 
         public PlayerInterface playerInterface;
         public MenuManager menuManager;
+        public DialogueManager dialogueManager;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -33,10 +34,14 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        public static int screenHeight = 540;
         public static int screenWidth = 960;
+        public static int screenHeight = 540;
+  
 
         private MapManager _mapManager;
+
+        private DialogueController _dialogueTrigger;
+        private Dialogue _dialogue;
 
         public GameManager()
         {
@@ -79,14 +84,26 @@ namespace Terramental
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
-                CameraController.playerPosition = playerCharacter.SpritePosition;
+                //CameraController.playerPosition = playerCharacter.SpritePosition;
 
                 if(_mapManager != null)
                 {
                     _mapManager.CheckActiveTiles();
                 }
+
+                if(DialogueManager.dialogueActive)
+                {
+                    dialogueManager.UpdatePosition();
+                }
+                else
+                {
+                    _dialogueTrigger.CheckDialogueCollision();
+                }
+                
             }
-            
+
+
+            _mainCam.UpdateCamera(gameTime);
 
             base.Update(gameTime);
         }
@@ -95,7 +112,7 @@ namespace Terramental
         {
             GraphicsDevice.Clear(Color.SkyBlue);
 
-            _spriteBatch.Begin(transformMatrix: _mainCam.Transform);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, _mainCam.cameraTransform);
 
             if(currentGameState == GameState.Level && playerInterface != null)
             {
@@ -105,6 +122,11 @@ namespace Terramental
             }
 
             menuManager.DrawMenus(_spriteBatch);
+
+            if(DialogueManager.dialogueActive && currentGameState == GameState.Level)
+            {
+                dialogueManager.DrawDialogueInterface(_spriteBatch);
+            }
 
             _spriteBatch.End();
 
@@ -135,7 +157,6 @@ namespace Terramental
             playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
             playerCharacter.InitialisePlayerAnimations(this);
             playerCharacter.LayerOrder = -1;
-            _inputManager.playerCharacter = playerCharacter;
             playerInterface = new PlayerInterface(this);
 
             playerCharacter.DisplayPlayerLives();
@@ -143,11 +164,18 @@ namespace Terramental
 
             _mapManager = new MapManager(this);
 
-            
+            dialogueManager = new DialogueManager(this, menuManager);
 
-            CameraController.cameraActive = true;
+            //CameraController.cameraActive = true;
 
-            
+            string[] dialogue = { "Hello, my name is bob.", "How are you?", "That is great", "Bye now..." };
+
+            _dialogue = new Dialogue(dialogue, "Bob");
+
+            _dialogueTrigger = new DialogueController(playerCharacter, new Rectangle(1300, 1100, 64, 64), dialogueManager, _dialogue);
+
+
+            CameraController.playerCharacter = playerCharacter;
 
             gameInProgress = true;
 
@@ -157,17 +185,17 @@ namespace Terramental
         private void InitialiseManagers()
         {
             _spriteManager = new SpriteManager();
-            _mainCam = new CameraController();
-            CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
+            _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
+          //  CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
-            _inputManager = new InputManager(_mainCam, menuManager);
+            _inputManager = new InputManager(_mainCam, menuManager, this);
         }
 
         private void UpdateManagers(GameTime gameTime)
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
-            _mainCam.MoveCamera(playerCharacter);
+          //  _mainCam.MoveCamera(playerCharacter);
             SpawnManager.Update(gameTime);
         }
 

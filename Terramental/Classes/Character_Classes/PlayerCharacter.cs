@@ -8,6 +8,8 @@ namespace Terramental
 {
     public class PlayerCharacter : BaseCharacter
     {
+        public static bool disableMovement;
+
         public float dashCooldown;
         public float ultimateCooldown;
 
@@ -20,7 +22,6 @@ namespace Terramental
 
         private bool _disableRight;
         private bool _disableLeft;
-        private bool _disableMovement;
         private Vector2 _checkpointPosition;
 
         //Ability Variables
@@ -146,36 +147,39 @@ namespace Terramental
             {
                 // IsFacingRight = true;
 
-                if (!_disableRight)
+                if(!disableMovement)
                 {
-                    SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                    if (!_disableRight)
+                    {
+                        SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                    }
+                    else
+                    {
+                        SpriteVelocity = new Vector2(0, 0);
+                    }
                 }
-                else
-                {
-                    SpriteVelocity = new Vector2(0, 0);
-                }
-
             }
             else if (vertical < 0)
             {
                 // IsFacingRight = false;
 
-                if (!_disableLeft)
+                if(!disableMovement)
                 {
-                    SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                    if (!_disableLeft)
+                    {
+                        SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                    }
+                    else
+                    {
+                        SpriteVelocity = new Vector2(0, 0);
+                    }
                 }
-                else
-                {
-                    SpriteVelocity = new Vector2(0, 0);
-                }
-
             }
 
             if (vertical == 0)
             {
                 SpriteVelocity = new Vector2(0, 0);
             }
-
         }
 
         public void TeleportPlayer(Vector2 position, bool setCheckpoint)
@@ -190,23 +194,26 @@ namespace Terramental
 
         public void PlayerJump()
         {
-            if (!_isJumping && _isGrounded)
+            if(!disableMovement)
             {
-                AudioManager.PlaySound("PlayerJump_SFX");
-                _isGrounded = false;
-                _isJumping = true;
-                _jumpHeight = SpritePosition.Y - 150;
-                _jumpSpeed = -5;
-                _isDoubleJumpUsed = false;
-                return;
-            }
+                if (!_isJumping && _isGrounded)
+                {
+                    AudioManager.PlaySound("PlayerJump_SFX");
+                    _isGrounded = false;
+                    _isJumping = true;
+                    _jumpHeight = SpritePosition.Y - 150;
+                    _jumpSpeed = -5;
+                    _isDoubleJumpUsed = false;
+                    return;
+                }
 
-            if (!_isDoubleJumpUsed)
-            {
-                AudioManager.PlaySound("PlayerJump_SFX");
-                _jumpHeight = SpritePosition.Y - 150;
-                _jumpSpeed = -5;
-                _isDoubleJumpUsed = true;
+                if (!_isDoubleJumpUsed)
+                {
+                    AudioManager.PlaySound("PlayerJump_SFX");
+                    _jumpHeight = SpritePosition.Y - 150;
+                    _jumpSpeed = -5;
+                    _isDoubleJumpUsed = true;
+                }
             }
         }
 
@@ -220,7 +227,7 @@ namespace Terramental
 
                 CheckJumpCollision();
 
-                if (SpritePosition.Y == _jumpHeight)
+                if (SpritePosition.Y == _jumpHeight || disableMovement)
                 {
                     _isJumping = false;
                     _isGrounded = false;
