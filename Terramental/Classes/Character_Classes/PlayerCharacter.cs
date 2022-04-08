@@ -104,6 +104,7 @@ namespace Terramental
             set { _jumpHeight = value; }
 
         }
+
         public Tile GroundTile
         {
             get { return _groundTile; }

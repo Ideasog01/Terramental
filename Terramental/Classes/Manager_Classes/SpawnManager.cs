@@ -17,6 +17,7 @@ namespace Terramental
         public static List<ElementPickup> _elementPickups = new List<ElementPickup>();
         public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
         public static List<Sprite> effects = new List<Sprite>();
+        public static List<ElementWall> elementWallList = new List<ElementWall>();
 
         public static void Update(GameTime gameTime)
         {
@@ -41,6 +42,11 @@ namespace Terramental
             foreach(ScorePickup scorePickup in _scorePickups)
             {
                 scorePickup.UpdateScorePickup();
+            }
+
+            foreach(ElementWall elementWall in elementWallList)
+            {
+                elementWall.ElementWallCollisions();
             }
         }
 
@@ -115,6 +121,28 @@ namespace Terramental
             ElementPickup elementPickup = new ElementPickup(elementIndex, _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), _gameManager.playerCharacter);
             elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));   
             _elementPickups.Add(elementPickup);
+        }
+
+        public static void SpawnElementWall(int elementIndex, Vector2 position)
+        {
+            ElementWall elementWall = new ElementWall(_gameManager.playerCharacter, _gameManager.mapManager, elementIndex);
+
+            switch(elementIndex)
+            {
+                case 0:
+                    elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/FireTile"), new Vector2(64, 64));
+                    break;
+                case 1:
+                    elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/WaterTile"), new Vector2(64, 64));
+                    break;
+                case 2:
+                    elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
+                    break;
+            }
+
+            elementWallList.Add(elementWall);
+            
+            
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Terramental
 {
-    class ElementWall : Sprite
+    public class ElementWall : Sprite
     {
         private PlayerCharacter _playerCharacter;
 
@@ -99,9 +99,9 @@ namespace Terramental
                             _playerCharacter.RightTile = tile;
                         }
                     }
+
                     if (TopCollision(_playerCharacter))
                     {
-
                         Tile tile = _mapManager.GetTile(SpritePosition);
                         if (tile != null)
                         {
@@ -110,6 +110,7 @@ namespace Terramental
                             _playerCharacter.GroundTile = tile;
                         }
                     }
+
                     if (BottomCollision(_playerCharacter))
                     {
                         _playerCharacter.SpriteVelocity = new Vector2(0, 0);

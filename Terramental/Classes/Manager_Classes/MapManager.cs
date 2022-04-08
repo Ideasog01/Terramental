@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Terramental
 {
-    class MapManager
+    public class MapManager
     {
         public static List<Tile> activeTiles = new List<Tile>();
         public static List<Tile> tileList = new List<Tile>();
@@ -157,6 +157,21 @@ namespace Terramental
             if(index == 7)
             {
                 _gameManager.playerCharacter.TeleportPlayer(position, true);
+            }
+
+            if(index == 8)
+            {
+                SpawnManager.SpawnElementWall(0, position);
+            }
+
+            if (index == 9)
+            {
+                SpawnManager.SpawnElementWall(1, position);
+            }
+
+            if (index == 10)
+            {
+                SpawnManager.SpawnElementWall(2, position);
             }
         }
     }

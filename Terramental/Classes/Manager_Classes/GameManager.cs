@@ -20,6 +20,11 @@ namespace Terramental
 
         public static GameState currentGameState = GameState.MainMenu;
 
+        public static int screenWidth = 960;
+        public static int screenHeight = 540;
+
+
+        public MapManager mapManager;
         public PlayerInterface playerInterface;
         public MenuManager menuManager;
         public DialogueManager dialogueManager;
@@ -33,12 +38,6 @@ namespace Terramental
         public PlayerCharacter playerCharacter;
 
         private CameraController _mainCam;
-
-        public static int screenWidth = 960;
-        public static int screenHeight = 540;
-  
-
-        private MapManager _mapManager;
 
         private DialogueController _dialogueTrigger;
         private Dialogue _dialogue;
@@ -86,9 +85,9 @@ namespace Terramental
                 playerCharacter.UpdatePlayerCharacter(gameTime);
                 //CameraController.playerPosition = playerCharacter.SpritePosition;
 
-                if(_mapManager != null)
+                if(mapManager != null)
                 {
-                    _mapManager.CheckActiveTiles();
+                    mapManager.CheckActiveTiles();
                 }
 
                 if(DialogueManager.dialogueActive)
@@ -162,7 +161,7 @@ namespace Terramental
             playerCharacter.DisplayPlayerLives();
             GameManager.currentGameState = GameManager.GameState.Level;
 
-            _mapManager = new MapManager(this);
+            mapManager = new MapManager(this);
 
             dialogueManager = new DialogueManager(this, menuManager);
 
@@ -180,6 +179,8 @@ namespace Terramental
             gameInProgress = true;
 
             LoadAudioLibrary();
+
+            SpawnManager.SpawnElementWall(0, new Vector2(640, 1219));
         }
 
         private void InitialiseManagers()
