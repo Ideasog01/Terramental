@@ -12,6 +12,9 @@ namespace Terramental
         public static List<Button> respawnMenuButtonList = new List<Button>();
         public static List<MenuComponent> respawnMenuComponentList = new List<MenuComponent>();
 
+        public static List<Button> levelSelectButtonList = new List<Button>();
+        public static List<MenuComponent> levelSelectComponentList = new List<MenuComponent>();
+
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
@@ -23,6 +26,7 @@ namespace Terramental
 
             LoadMainMenu();
             LoadRespawnScreen();
+            LoadLevelSelect();
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -52,6 +56,18 @@ namespace Terramental
                         button.DrawMenuComponent(spriteBatch);
                     }
                  break;
+
+                case GameManager.GameState.LevelSelect:
+                    foreach(MenuComponent component in levelSelectComponentList)
+                    {
+                        component.DrawMenuComponent(spriteBatch);
+                    }
+
+                    foreach(Button button in levelSelectButtonList)
+                    {
+                        button.DrawMenuComponent(spriteBatch);
+                    }
+                break;
             }
         }
 
@@ -178,6 +194,16 @@ namespace Terramental
             respawnMenuButtonList.Add(respawnButton);
 
             _gameManager.IsMouseVisible = true;
+        }
+
+        private void LoadLevelSelect()
+        {
+            Texture2D terraMapTexture = _gameManager.GetTexture("UserInterface/LevelSelect/Terra_Map");
+
+            MenuComponent terraMap = new MenuComponent();
+            terraMap.InitialiseMenuComponent(terraMapTexture, new Vector2(0, 0), new Vector2(terraMapTexture.Width / 2, terraMapTexture.Height / 2));
+
+            levelSelectComponentList.Add(terraMap);
         }
     }
 }
