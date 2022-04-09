@@ -2,7 +2,7 @@
 
 namespace Terramental
 {
-    class DialogueController
+    public class DialogueController
     {
         private Dialogue _dialogue;
         private PlayerCharacter _playerCharacter;

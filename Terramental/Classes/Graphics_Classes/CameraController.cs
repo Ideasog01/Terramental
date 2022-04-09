@@ -21,6 +21,11 @@ namespace Terramental
         {
             viewPort = newView;
         }
+        
+        public Vector2 CameraCentre
+        {
+            get { return _cameraCentre; }
+        }
 
         public void UpdateCamera(GameTime gameTime)
         {

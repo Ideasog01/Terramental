@@ -18,6 +18,12 @@ namespace Terramental
         public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
         public static List<Sprite> effects = new List<Sprite>();
         public static List<ElementWall> elementWallList = new List<ElementWall>();
+        public static List<DialogueController> dialogueControllerList = new List<DialogueController>();
+        
+        public static List<Dialogue> levelDialogueList = new List<Dialogue>();
+        public static List<Vector2> dialogueScaleList = new List<Vector2>();
+
+        public static int dialogueTriggersCount;
 
         public static void Update(GameTime gameTime)
         {
@@ -47,6 +53,11 @@ namespace Terramental
             foreach(ElementWall elementWall in elementWallList)
             {
                 elementWall.ElementWallCollisions();
+            }
+
+            foreach(DialogueController dialogueController in dialogueControllerList)
+            {
+                dialogueController.CheckDialogueCollision();
             }
         }
 
@@ -123,9 +134,9 @@ namespace Terramental
             _elementPickups.Add(elementPickup);
         }
 
-        public static void SpawnElementWall(int elementIndex, Vector2 position)
+        public static void SpawnElementWall(int elementIndex, Vector2 position, MapManager mapManager)
         {
-            ElementWall elementWall = new ElementWall(_gameManager.playerCharacter, _gameManager.mapManager, elementIndex);
+            ElementWall elementWall = new ElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
 
             switch(elementIndex)
             {
@@ -141,8 +152,43 @@ namespace Terramental
             }
 
             elementWallList.Add(elementWall);
-            
-            
+        }
+
+        public static void SpawnDialogueTrigger(Vector2 position)
+        {
+            DialogueController dialogueController = new DialogueController(_gameManager.playerCharacter, new Rectangle((int)position.X, (int)position.Y,
+                    (int)dialogueScaleList[dialogueTriggersCount].X, (int)dialogueScaleList[dialogueTriggersCount].Y),
+                    _gameManager.dialogueManager, levelDialogueList[dialogueTriggersCount]);
+
+            dialogueControllerList.Add(dialogueController);
+
+            dialogueTriggersCount++;
+        }
+
+        public static void GenerateDialogue(int levelIndex)
+        {
+            levelDialogueList.Clear();
+            dialogueScaleList.Clear();
+
+            if(levelIndex == 0)
+            {
+                string[] dialogue1Content = { "Hello, my name is Bob.", "How are you?", "It is nice weather.", "Goodbye!"};
+                Dialogue dialogue1 = new Dialogue(dialogue1Content, "Bob");
+
+                string[] dialogue2Content = { "Today is Saturday.", "Nice weather!", "Bye, have a good day!" };
+                Dialogue dialogue2 = new Dialogue(dialogue2Content, "Sam");
+
+                string[] dialogue3Content = { "Hello there!", "It is over Anakin", "I have the high ground!" };
+                Dialogue dialogue3 = new Dialogue(dialogue3Content, "Obi-Wan Kenobi");
+
+                levelDialogueList.Add(dialogue1);
+                levelDialogueList.Add(dialogue2);
+                levelDialogueList.Add(dialogue3);
+
+                dialogueScaleList.Add(new Vector2(64, 64));
+                dialogueScaleList.Add(new Vector2(64, 64));
+                dialogueScaleList.Add(new Vector2(64, 64));
+            }
         }
     }
 }

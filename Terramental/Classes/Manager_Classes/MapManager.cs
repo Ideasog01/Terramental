@@ -27,8 +27,11 @@ namespace Terramental
 
             LoadMapData(@"MapData.jsn");
 
+
             if(_mapData != null)
             {
+                SpawnManager.GenerateDialogue(0);
+
                 GenerateMap();
             }
         }
@@ -95,7 +98,7 @@ namespace Terramental
         {
             int[,] tileData = _mapData._tileMap;
 
-            for(int x = 0; x < _mapData._mapWidth; x++)
+            for (int x = 0; x < _mapData._mapWidth; x++)
             {
                 for(int y = 0; y < _mapData._mapHeight; y++)
                 {                  
@@ -119,7 +122,7 @@ namespace Terramental
                     tileList.Add(tile);
 
                 }
-            }
+            }      
         }
 
         private void SpawnEntity(int index, Vector2 position)
@@ -161,17 +164,22 @@ namespace Terramental
 
             if(index == 8)
             {
-                SpawnManager.SpawnElementWall(0, position);
+                SpawnManager.SpawnElementWall(0, position, this);
             }
 
             if (index == 9)
             {
-                SpawnManager.SpawnElementWall(1, position);
+                SpawnManager.SpawnElementWall(1, position, this);
             }
 
             if (index == 10)
             {
-                SpawnManager.SpawnElementWall(2, position);
+                SpawnManager.SpawnElementWall(2, position, this);
+            }
+
+            if(index == 11)
+            {
+                SpawnManager.SpawnDialogueTrigger(position);
             }
         }
     }

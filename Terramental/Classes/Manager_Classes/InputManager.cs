@@ -55,13 +55,13 @@ namespace Terramental
 
             if(_currentMouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed)
             {
-                _menuManager.MouseClick(_playerCam.ScreenToWorldSpace(new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y)));
+                _menuManager.MouseClick(_playerCam.CameraCentre + new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y));
 
                 if(DialogueManager.dialogueActive)
                 {
                     if(_gameManager.dialogueManager != null)
                     {
-                        _gameManager.dialogueManager.CheckButtonInteraction(_playerCam.ScreenToWorldSpace(new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y)));
+                        _gameManager.dialogueManager.CheckButtonInteraction(_playerCam.CameraCentre + new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y));             
                     }
                 }
             }

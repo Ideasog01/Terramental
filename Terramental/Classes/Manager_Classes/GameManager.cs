@@ -23,7 +23,6 @@ namespace Terramental
         public static int screenWidth = 960;
         public static int screenHeight = 540;
 
-
         public MapManager mapManager;
         public PlayerInterface playerInterface;
         public MenuManager menuManager;
@@ -38,9 +37,6 @@ namespace Terramental
         public PlayerCharacter playerCharacter;
 
         private CameraController _mainCam;
-
-        private DialogueController _dialogueTrigger;
-        private Dialogue _dialogue;
 
         public GameManager()
         {
@@ -157,9 +153,10 @@ namespace Terramental
             playerCharacter.DisplayPlayerLives();
             GameManager.currentGameState = GameManager.GameState.Level;
 
+            dialogueManager = new DialogueManager(this, menuManager);
             mapManager = new MapManager(this);
 
-            dialogueManager = new DialogueManager(this, menuManager);
+
             CameraController.playerCharacter = playerCharacter;
 
             gameInProgress = true;
