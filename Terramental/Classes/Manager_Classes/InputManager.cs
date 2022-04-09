@@ -17,6 +17,7 @@ namespace Terramental
         private MenuManager _menuManager;
         private CameraController _playerCam;
         private GameManager _gameManager;
+        private PlayerCharacter _playerCharacter;
 
         public KeyboardState _currentKeyboardState;
         public KeyboardState oldKeyboardState;
@@ -50,6 +51,7 @@ namespace Terramental
 
             MouseState oldMouseState = _currentMouseState;
             _currentMouseState = Mouse.GetState();
+            
 
             if(_currentMouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed)
             {
@@ -64,82 +66,40 @@ namespace Terramental
                 }
             }
 
-            if(oldKeyboardState.IsKeyDown(Keys.F) && _currentKeyboardState.IsKeyUp(Keys.F))
+            if (_playerCharacter == null)
             {
-                _gameManager.playerCharacter.CharacterHealth = 0;
-
-                _menuManager.DisplayRespawnScreen(true);
+                if (_gameManager.playerCharacter != null)
+                {
+                    _playerCharacter = _gameManager.playerCharacter;
+                }
+                else
+                {
+                    return;
+                }
             }
 
-            if(_gameManager.playerCharacter != null)
+            PlayerMovementInput(gameTime);
+            PlayerDashInput(gameTime);
+
+            if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
             {
-                if (_currentKeyboardState.IsKeyDown(Keys.D))
-                {
-                    playerCharacter.HorizontalAxisRaw = 1;
-                    playerCharacter.LastNonZeroHAR = playerCharacter.HorizontalAxisRaw;
-                    playerCharacter.PlayerMovement(playerCharacter.HorizontalAxisRaw, gameTime);
-                }
-                if (_currentKeyboardState.IsKeyDown(Keys.A))
-                {
-                    playerCharacter.HorizontalAxisRaw = -1;
-                    playerCharacter.LastNonZeroHAR = playerCharacter.HorizontalAxisRaw;
-                    playerCharacter.PlayerMovement(playerCharacter.HorizontalAxisRaw, gameTime);
-                }
-                if (_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
-                {
-                    playerCharacter.HorizontalAxisRaw = 0;
-                    playerCharacter.PlayerMovement(playerCharacter.HorizontalAxisRaw, gameTime);
-                }
+                _playerCharacter.ActivateUltimate();
+            }
 
-                
-                if (IsKeyPressed(Keys.W, gameTime))
-                {
-                    playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
-                    playerCharacter.DashStateMachine();
-                }
-                if (IsKeyPressed(Keys.A, gameTime))
-                {
-                    playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
-                    playerCharacter.DashStateMachine();
-                }
-                if (IsKeyPressed(Keys.D, gameTime))
-                {
-                    playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
-                    playerCharacter.DashStateMachine();
-                }
+            if (_currentMouseState.LeftButton == ButtonState.Pressed)
+            {
+                _playerCharacter.PrimaryAttack();
+            }
 
-
-                if (_currentKeyboardState.IsKeyDown(Keys.S))
-                {
-                    playerCharacter.VerticalAxisRaw = -1;
-                    playerCharacter.LastNonZeroVAR = playerCharacter.VerticalAxisRaw;
-                }
-
-                if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
-                {
-                    playerCharacter.VerticalAxisRaw = 0;
-                }
-
-                if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
-                {
-                    _gameManager.playerCharacter.ActivateUltimate();
-                }
-
-                if (_currentMouseState.LeftButton == ButtonState.Pressed)
-                {
-                    _gameManager.playerCharacter.PrimaryAttack();
-                }
-
-                if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
-                {
-                    _gameManager.playerCharacter.PlayerJump();
-                }
+            if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
+            {
+                _playerCharacter.PlayerJump();
             }
         }
 
         
         // public Keys lastSuccessfulKeyPress;
-        public bool IsKeyPressed(Keys key, GameTime gameTime)
+        public bool IsKeyPressed(Keys key)
         {
             if (_currentKeyboardState.IsKeyUp(key) && oldKeyboardState.IsKeyDown(key))
             {
@@ -149,6 +109,62 @@ namespace Terramental
             }
             return false;
         }
+
+        private void PlayerMovementInput(GameTime gameTime)
+        {
+            if (_currentKeyboardState.IsKeyDown(Keys.D))
+            {
+                _playerCharacter.HorizontalAxisRaw = 1;
+                _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
+                _playerCharacter.PlayerMovement(1, gameTime);
+            }
+
+            if (_currentKeyboardState.IsKeyDown(Keys.A))
+            {
+                _playerCharacter.HorizontalAxisRaw = -1;
+                _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
+                _playerCharacter.PlayerMovement(-1, gameTime);
+            }
+
+            if (_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
+            {
+                _playerCharacter.HorizontalAxisRaw = 0;
+                _playerCharacter.PlayerMovement(0, gameTime);
+            }
+        }
+
+        private void PlayerDashInput(GameTime gameTime)
+        {
+            if (IsKeyPressed(Keys.W))
+            {
+                _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
+                _playerCharacter.DashStateMachine();
+            }
+
+            if (IsKeyPressed(Keys.A))
+            {
+                _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                _playerCharacter.DashStateMachine();
+            }
+
+            if (IsKeyPressed(Keys.D))
+            {
+                _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                _playerCharacter.DashStateMachine();
+            }
+
+            if (_currentKeyboardState.IsKeyDown(Keys.S))
+            {
+                _playerCharacter.VerticalAxisRaw = -1;
+                _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
+            }
+
+            if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
+            {
+                _playerCharacter.VerticalAxisRaw = 0;
+            }
+        }
+
         /*
 
         

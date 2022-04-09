@@ -254,34 +254,35 @@ namespace Terramental
 
                 if(!disableMovement)
                 {
-                    if (!_disableRight)
+                    if(horizontal > 0)
                     {
-                        SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                        if(!_disableRight)
+                        {
+                            SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
+                        }
+                        else
+                        {
+                            SpriteVelocity = new Vector2(0, 0);
+                        }
                     }
-                    else
+                    else if(horizontal < 0)
                     {
-                        SpriteVelocity = new Vector2(0, 0);
+                        if (!disableMovement)
+                        {
+                            if (!_disableLeft)
+                            {
+                                SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
+                            }
+                            else
+                            {
+                                SpriteVelocity = new Vector2(0, 0);
+                            }
+                        }
                     }
                 }
             }
-            else if (vertical < 0)
-            {
-                // IsFacingRight = false;
 
-                if(!disableMovement)
-                {
-                    if (!_disableLeft)
-                    {
-                        SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
-                    }
-                    else
-                    {
-                        SpriteVelocity = new Vector2(0, 0);
-                    }
-                }
-            }
-
-            if (vertical == 0)
+            if (horizontal == 0)
             {
                 SpriteVelocity = new Vector2(0, 0);
             }
@@ -329,8 +330,6 @@ namespace Terramental
                 SpriteVelocity += new Vector2(0, _jumpSpeed);
 
                 float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
-
-                CheckJumpCollision();
 
                 if (SpritePosition.Y == _jumpHeight || disableMovement)
                 {

@@ -94,10 +94,6 @@ namespace Terramental
                 {
                     dialogueManager.UpdatePosition();
                 }
-                else
-                {
-                    _dialogueTrigger.CheckDialogueCollision();
-                }
                 
             }
 
@@ -164,23 +160,11 @@ namespace Terramental
             mapManager = new MapManager(this);
 
             dialogueManager = new DialogueManager(this, menuManager);
-
-            //CameraController.cameraActive = true;
-
-            string[] dialogue = { "Hello, my name is bob.", "How are you?", "That is great", "Bye now..." };
-
-            _dialogue = new Dialogue(dialogue, "Bob");
-
-            _dialogueTrigger = new DialogueController(playerCharacter, new Rectangle(1300, 1100, 64, 64), dialogueManager, _dialogue);
-
-
             CameraController.playerCharacter = playerCharacter;
 
             gameInProgress = true;
 
             LoadAudioLibrary();
-
-            SpawnManager.SpawnElementWall(0, new Vector2(640, 1219));
         }
 
         private void InitialiseManagers()
