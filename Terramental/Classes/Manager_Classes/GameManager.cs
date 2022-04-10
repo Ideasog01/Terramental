@@ -18,7 +18,9 @@ namespace Terramental
         public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect};
         public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton };
 
-        public static GameState currentGameState = GameState.LevelSelect;
+        public enum LevelButton { Level1Button };
+
+        public static GameState currentGameState = GameState.MainMenu;
 
         public static int screenWidth = 960;
         public static int screenHeight = 540;
@@ -60,18 +62,14 @@ namespace Terramental
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            
-
+           
             menuManager = new MenuManager(this, _graphics);
 
-            InitialiseManagers();
-            //LoadNewGame();
+            InitialiseGame();
         }
 
         protected override void Update(GameTime gameTime)
         {
-
             UpdateManagers(gameTime);
 
             if(currentGameState == GameState.Level && playerInterface != null)
@@ -79,7 +77,6 @@ namespace Terramental
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
-                //CameraController.playerPosition = playerCharacter.SpritePosition;
 
                 if(mapManager != null)
                 {
@@ -142,7 +139,7 @@ namespace Terramental
             Exit();
         }
 
-        public void LoadNewGame()
+        public void LoadNewGame(string filePath)
         {
             playerCharacter = new PlayerCharacter(this);
             playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
@@ -156,6 +153,7 @@ namespace Terramental
             dialogueManager = new DialogueManager(this, menuManager);
             mapManager = new MapManager(this);
 
+            mapManager.LoadMapData(filePath);
 
             CameraController.playerCharacter = playerCharacter;
 
@@ -164,11 +162,10 @@ namespace Terramental
             LoadAudioLibrary();
         }
 
-        private void InitialiseManagers()
+        private void InitialiseGame()
         {
             _spriteManager = new SpriteManager();
             _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
-          //  CameraController.viewPort = _graphics.GraphicsDevice.Viewport;
             SpawnManager._gameManager = this;
             _inputManager = new InputManager(_mainCam, menuManager, this);
         }
@@ -177,7 +174,6 @@ namespace Terramental
         {
             _inputManager.Update(gameTime);
             _spriteManager.Update(gameTime);
-          //  _mainCam.MoveCamera(playerCharacter);
             SpawnManager.Update(gameTime);
         }
 

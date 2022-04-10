@@ -26,6 +26,20 @@
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/DefaultFont.spritefont
 
+#begin SpriteFont/LevelNameFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SpriteFont/LevelNameFont.spritefont
+
+#begin SpriteFont/LevelNumberFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SpriteFont/LevelNumberFont.spritefont
+
 #begin Sprites/Effects/FrozenEffect.png
 /importer:TextureImporter
 /processor:TextureProcessor

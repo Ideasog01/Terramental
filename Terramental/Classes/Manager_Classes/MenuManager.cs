@@ -18,11 +18,16 @@ namespace Terramental
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
+        private SpriteFont _levelNameFont;
+        private SpriteFont _levelNumberFont;
 
         public MenuManager(GameManager gameManager, GraphicsDeviceManager graphics)
         {
             _gameManager = gameManager;
             _graphics = graphics;
+
+            _levelNameFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNameFont");
+            _levelNumberFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNumberFont");
 
             LoadMainMenu();
             LoadRespawnScreen();
@@ -34,40 +39,43 @@ namespace Terramental
             switch(GameManager.currentGameState)
             {
                 case GameManager.GameState.MainMenu:
-                     foreach(MenuComponent component in mainMenuComponentList)
+                     foreach(MenuComponent mainComponent in mainMenuComponentList)
                      {
-                         component.DrawMenuComponent(spriteBatch);
+                        mainComponent.DrawMenuComponent(spriteBatch);
                      }
 
-                     foreach (Button button in mainMenuButtonList)
+                     foreach (Button mainButton in mainMenuButtonList)
                      {
-                            button.DrawMenuComponent(spriteBatch);
+                        mainButton.DrawMenuComponent(spriteBatch);
                      }
                  break;
 
                 case GameManager.GameState.Respawn:
-                    foreach (MenuComponent component in respawnMenuComponentList)
+                    foreach (MenuComponent respawnComponent in respawnMenuComponentList)
                     {
-                        component.DrawMenuComponent(spriteBatch);
+                        respawnComponent.DrawMenuComponent(spriteBatch);
                     }
 
-                    foreach (Button button in respawnMenuButtonList)
+                    foreach (Button respawnButton in respawnMenuButtonList)
                     {
-                        button.DrawMenuComponent(spriteBatch);
+                        respawnButton.DrawMenuComponent(spriteBatch);
                     }
                  break;
 
                 case GameManager.GameState.LevelSelect:
-                    foreach(MenuComponent component in levelSelectComponentList)
+                    foreach(MenuComponent selectComponent in levelSelectComponentList)
                     {
-                        component.DrawMenuComponent(spriteBatch);
+                        selectComponent.DrawMenuComponent(spriteBatch);
                     }
 
-                    foreach(Button button in levelSelectButtonList)
+                    foreach(Button selectButton in levelSelectButtonList)
                     {
-                        button.DrawMenuComponent(spriteBatch);
+                        selectButton.DrawMenuComponent(spriteBatch);
                     }
-                break;
+
+                    spriteBatch.DrawString(_levelNameFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
+                    spriteBatch.DrawString(_levelNumberFont, "1", new Vector2(207, 403), Color.White);
+                    break;
             }
         }
 
@@ -88,13 +96,21 @@ namespace Terramental
                     button.CheckInteraction(mousePos);
                 }
             }
+
+            if(GameManager.currentGameState == GameManager.GameState.LevelSelect)
+            {
+                foreach(Button button in levelSelectButtonList)
+                {
+                    button.CheckInteractionLevel(mousePos);
+                }
+            }
         }
 
         public void ButtonInteraction(GameManager.ButtonName buttonName)
         {
             switch(buttonName)
             {
-                case GameManager.ButtonName.NewGameButton: _gameManager.LoadNewGame();
+                case GameManager.ButtonName.NewGameButton: GameManager.currentGameState = GameManager.GameState.LevelSelect;
                     break;
                 case GameManager.ButtonName.ExitGameButton: _gameManager.ExitGame();
                     break;
@@ -103,7 +119,17 @@ namespace Terramental
                     break;
             }
 
-            DisplayMainMenu(false);
+           // DisplayMainMenu(false);
+        }
+
+        public void LevelSelectButtonInteraction(GameManager.LevelButton buttonName)
+        {
+            switch(buttonName)
+            {
+                case GameManager.LevelButton.Level1Button:
+                    _gameManager.LoadNewGame(@"MapData.json");
+                    break;
+            }
         }
 
         public void DisplayMainMenu(bool isActive)
@@ -203,6 +229,10 @@ namespace Terramental
             MenuComponent terraMap = new MenuComponent();
             terraMap.InitialiseMenuComponent(terraMapTexture, new Vector2(0, 0), new Vector2(terraMapTexture.Width / 2, terraMapTexture.Height / 2));
 
+            Button levelOneSelect = new Button(GameManager.LevelButton.Level1Button, this);
+            levelOneSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/LevelSelectButton"), new Vector2(200, 400), new Vector2(24, 24));
+
+            levelSelectButtonList.Add(levelOneSelect);
             levelSelectComponentList.Add(terraMap);
         }
     }

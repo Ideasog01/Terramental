@@ -94,7 +94,7 @@ namespace Terramental
         {
             float distance = (float)Math.Sqrt(Math.Pow(position.X - playerCharacter.SpritePosition.X, 2) + MathF.Pow(position.Y - playerCharacter.SpritePosition.Y, 2));
 
-            if (distance < 1000)
+            if (distance < 1200)
             {
                 return true;
             }

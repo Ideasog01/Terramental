@@ -32,14 +32,9 @@ namespace Terramental
 
         // Dash Variables
         private float dashVelocity = 10.0f;
-        private float _dashDistance;
-        private int dashTimeMilliseconds = 10;
-        private int timeIncrement = 1;
-        private Vector2 _dashDir;
         private bool _isDashing;
         private bool _canDash = true;
         private bool _isHovering;
-        private int currentTime = 0;
 
         private int upDashCheck = 0;
         private int leftDashCheck = 0;
@@ -194,54 +189,60 @@ namespace Terramental
 
         public void UpdatePlayerCharacter(GameTime gameTime)
         {
-            float currentTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            UpdateUltimateStatus(gameTime);
-
-            DashCheck();
-
-            ApplyGravity();
-
-            PlayerJumpBehavior(gameTime);
-
-            Dash();
-
-            CheckCollisions();
-
-            MovementAnimations();
-
-            if (_groundTile != null)
+            if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                if (!_groundTile.TopCollision(this) || _groundTile.RightCollision(this) || _groundTile.LeftCollision(this))
+                float currentTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                UpdateUltimateStatus(gameTime);
+
+                DashCheck();
+
+                ApplyGravity();
+
+                PlayerJumpBehavior(gameTime);
+
+                Dash();
+
+                CheckCollisions();
+
+                MovementAnimations();
+
+                if (_groundTile != null)
                 {
-                    _isGrounded = false;
-                    _groundTile = null;
-                }
-            }
-
-            if (_snowBeam != null)
-            {
-                _snowBeam.CheckBeamCollisions();
-            }
-
-            if (_snowBeam != null && _elementIndex == 2 && ultimateActive)
-            {
-                if (_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
-                {
-                    if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
+                    if (!_groundTile.TopCollision(this) || _groundTile.RightCollision(this) || _groundTile.LeftCollision(this))
                     {
-                        _snowBeam.SetAnimation(1);
-                        _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
-                    }
-                    else
-                    {
-                        _snowBeam.SetAnimation(3);
-                        _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
+                        _isGrounded = false;
+                        _groundTile = null;
                     }
                 }
+
+                if (_snowBeam != null)
+                {
+                    _snowBeam.CheckBeamCollisions();
+                }
+
+                if (_snowBeam != null && _elementIndex == 2 && ultimateActive)
+                {
+                    if (_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
+                    {
+                        if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
+                        {
+                            _snowBeam.SetAnimation(1);
+                            _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
+                        }
+                        else
+                        {
+                            _snowBeam.SetAnimation(3);
+                            _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
+                        }
+                    }
+                }
+
+                SpritePosition += SpriteVelocity;
+
+                float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
+
+                SpritePosition = new Vector2(posX, SpritePosition.Y);
             }
-
-            SpritePosition += SpriteVelocity;
-
         }
 
         public void PlayerMovement(float horizontal, GameTime gameTime)

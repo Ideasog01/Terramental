@@ -25,15 +25,6 @@ namespace Terramental
 
             LoadTextures();
 
-            LoadMapData(@"MapData.jsn");
-
-
-            if(_mapData != null)
-            {
-                SpawnManager.GenerateDialogue(0);
-
-                GenerateMap();
-            }
         }
 
         public void CheckActiveTiles()
@@ -77,6 +68,12 @@ namespace Terramental
 
             mapWidth = _mapData._mapWidth;
             mapHeight = _mapData._mapHeight;
+
+            if (_mapData != null)
+            {
+                SpawnManager.GenerateDialogue(0);
+                GenerateMap();
+            }
         }
 
         private void LoadTextures()
