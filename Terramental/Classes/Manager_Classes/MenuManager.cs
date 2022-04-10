@@ -15,6 +15,9 @@ namespace Terramental
         public static List<Button> levelSelectButtonList = new List<Button>();
         public static List<MenuComponent> levelSelectComponentList = new List<MenuComponent>();
 
+        public static List<Button> confirmLevelButtonList = new List<Button>();
+        public static List<MenuComponent> confirmLevelComponentList = new List<MenuComponent>();
+
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
@@ -76,6 +79,33 @@ namespace Terramental
                     spriteBatch.DrawString(_levelNameFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
                     spriteBatch.DrawString(_levelNumberFont, "1", new Vector2(207, 403), Color.White);
                     break;
+
+                case GameManager.GameState.LevelSelectConfirm:
+                    foreach (MenuComponent selectComponent in levelSelectComponentList)
+                    {
+                        selectComponent.DrawMenuComponent(spriteBatch);
+                    }
+
+                    foreach (Button selectButton in levelSelectButtonList)
+                    {
+                        selectButton.DrawMenuComponent(spriteBatch);
+                    }
+
+                    spriteBatch.DrawString(_levelNameFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
+                    spriteBatch.DrawString(_levelNumberFont, "1", new Vector2(207, 403), Color.White);
+                    
+                    foreach (MenuComponent confirmComponent in confirmLevelComponentList)
+                    {
+                        confirmComponent.DrawMenuComponent(spriteBatch);
+                    }
+
+                    foreach (Button confrimButton in confirmLevelButtonList)
+                    {
+                        confrimButton.DrawMenuComponent(spriteBatch);
+                    }
+
+
+                    break;
             }
         }
 
@@ -127,7 +157,8 @@ namespace Terramental
             switch(buttonName)
             {
                 case GameManager.LevelButton.Level1Button:
-                    _gameManager.LoadNewGame(@"MapData.json");
+                    //_gameManager.LoadNewGame(@"MapData.json");
+                    GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
                     break;
             }
         }
@@ -234,6 +265,11 @@ namespace Terramental
 
             levelSelectButtonList.Add(levelOneSelect);
             levelSelectComponentList.Add(terraMap);
+
+            Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
+            MenuComponent confirmPanel = new MenuComponent();
+            confirmPanel.InitialiseMenuComponent(confirmPanelTexture, new Vector2((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2, (GameManager.screenHeight / 2) - confirmPanelTexture.Height / 2), new Vector2(confirmPanelTexture.Width, confirmPanelTexture.Height));
+            confirmLevelComponentList.Add(confirmPanel);
         }
     }
 }
