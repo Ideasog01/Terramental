@@ -21,16 +21,20 @@ namespace Terramental
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
-        private SpriteFont _levelNameFont;
-        private SpriteFont _levelNumberFont;
+        private SpriteFont _defaultFont;
+        private SpriteFont _levelTitleFont;
+
+        private string _levelNameText;
+        private string _levelDescriptionText;
+        private string _levelDataFilePath;
 
         public MenuManager(GameManager gameManager, GraphicsDeviceManager graphics)
         {
             _gameManager = gameManager;
             _graphics = graphics;
 
-            _levelNameFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNameFont");
-            _levelNumberFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNumberFont");
+            _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNameFont");
+            _levelTitleFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelTitleFont");
 
             LoadMainMenu();
             LoadRespawnScreen();
@@ -76,8 +80,11 @@ namespace Terramental
                         selectButton.DrawMenuComponent(spriteBatch);
                     }
 
-                    spriteBatch.DrawString(_levelNameFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
-                    spriteBatch.DrawString(_levelNumberFont, "1", new Vector2(207, 403), Color.White);
+                    spriteBatch.DrawString(_defaultFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
+                    spriteBatch.DrawString(_defaultFont, "1", new Vector2(207, 403), Color.White);
+
+                    spriteBatch.DrawString(_defaultFont, "The Fire Lands", new Vector2(565, 400), Color.Black);
+                    spriteBatch.DrawString(_defaultFont, "2", new Vector2(609, 423), Color.White);
                     break;
 
                 case GameManager.GameState.LevelSelectConfirm:
@@ -91,9 +98,13 @@ namespace Terramental
                         selectButton.DrawMenuComponent(spriteBatch);
                     }
 
-                    spriteBatch.DrawString(_levelNameFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
-                    spriteBatch.DrawString(_levelNumberFont, "1", new Vector2(207, 403), Color.White);
-                    
+                    spriteBatch.DrawString(_defaultFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
+                    spriteBatch.DrawString(_defaultFont, "1", new Vector2(207, 403), Color.White);
+
+                    spriteBatch.DrawString(_defaultFont, "The Fire Lands", new Vector2(550, 430), Color.Black);
+                    spriteBatch.DrawString(_defaultFont, "2", new Vector2(607, 453), Color.White);
+
+
                     foreach (MenuComponent confirmComponent in confirmLevelComponentList)
                     {
                         confirmComponent.DrawMenuComponent(spriteBatch);
@@ -104,6 +115,8 @@ namespace Terramental
                         confrimButton.DrawMenuComponent(spriteBatch);
                     }
 
+                    spriteBatch.DrawString(_levelTitleFont, _levelNameText, new Vector2((GameManager.screenWidth / 2) - 130, 120), Color.White);
+                    spriteBatch.DrawString(_defaultFont, _levelDescriptionText, new Vector2((GameManager.screenWidth / 2) - 150, 180), Color.White);
 
                     break;
             }
@@ -134,6 +147,14 @@ namespace Terramental
                     button.CheckInteractionLevel(mousePos);
                 }
             }
+
+            if (GameManager.currentGameState == GameManager.GameState.LevelSelectConfirm)
+            {
+                foreach (Button button in confirmLevelButtonList)
+                {
+                    button.CheckInteraction(mousePos);
+                }
+            }
         }
 
         public void ButtonInteraction(GameManager.ButtonName buttonName)
@@ -147,9 +168,11 @@ namespace Terramental
                 case GameManager.ButtonName.RespawnButton: DisplayRespawnScreen(false);
                     _gameManager.playerCharacter.ResetPlayer();
                     break;
+                case GameManager.ButtonName.LevelSelectConfirm: LoadLevel();
+                    break;
+                case GameManager.ButtonName.LevelSelectExit: GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                    break;
             }
-
-           // DisplayMainMenu(false);
         }
 
         public void LevelSelectButtonInteraction(GameManager.LevelButton buttonName)
@@ -157,7 +180,15 @@ namespace Terramental
             switch(buttonName)
             {
                 case GameManager.LevelButton.Level1Button:
-                    //_gameManager.LoadNewGame(@"MapData.json");
+                    _levelDataFilePath = @"MapData.json";
+                    _levelNameText = "The Golden Shores";
+                    _levelDescriptionText = "Explore the golden shores, and defeat \nthe armies of the Fire Lands.";
+                    GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                    break;
+                case GameManager.LevelButton.Level2Button:
+                    _levelDataFilePath = @"MapData.json";
+                    _levelNameText = "The Fire Lands";
+                    _levelDescriptionText = "Venture to the fire lands, and use the \nelements to defeat the armies \nof Magnus.";
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
                     break;
             }
@@ -189,6 +220,11 @@ namespace Terramental
                 GameManager.currentGameState = GameManager.GameState.Level;
                 _gameManager.IsMouseVisible = false;
             }
+        }
+
+        private void LoadLevel()
+        {
+            _gameManager.LoadNewGame(@"MapData.json");
         }
 
         private void LoadMainMenu()
@@ -260,16 +296,35 @@ namespace Terramental
             MenuComponent terraMap = new MenuComponent();
             terraMap.InitialiseMenuComponent(terraMapTexture, new Vector2(0, 0), new Vector2(terraMapTexture.Width / 2, terraMapTexture.Height / 2));
 
+            levelSelectComponentList.Add(terraMap);
+
             Button levelOneSelect = new Button(GameManager.LevelButton.Level1Button, this);
             levelOneSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/LevelSelectButton"), new Vector2(200, 400), new Vector2(24, 24));
 
             levelSelectButtonList.Add(levelOneSelect);
-            levelSelectComponentList.Add(terraMap);
+
+            Button levelTwoSelect = new Button(GameManager.LevelButton.Level2Button, this);
+            levelTwoSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/LevelSelectButton"), new Vector2(600, 420), new Vector2(24, 24));
+
+            levelSelectButtonList.Add(levelTwoSelect);
 
             Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
             MenuComponent confirmPanel = new MenuComponent();
             confirmPanel.InitialiseMenuComponent(confirmPanelTexture, new Vector2((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2, (GameManager.screenHeight / 2) - confirmPanelTexture.Height / 2), new Vector2(confirmPanelTexture.Width, confirmPanelTexture.Height));
+
+            Texture2D confirmExitTexture = _gameManager.GetTexture("UserInterface/LevelSelect/ExitButton");
+            Button confirmExitButton = new Button(GameManager.ButtonName.LevelSelectExit, this);
+            confirmExitButton.InitialiseMenuComponent(confirmExitTexture, new Vector2((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2, (GameManager.screenHeight / 2) - confirmPanelTexture.Height / 2), new Vector2(confirmExitTexture.Width / 2, confirmExitTexture.Height / 2));
+
+            Texture2D confirmButtonTexture = _gameManager.GetTexture("UserInterface/LevelSelect/StartButton");
+            Button confirmButton = new Button(GameManager.ButtonName.LevelSelectConfirm, this);
+            confirmButton.InitialiseMenuComponent(confirmButtonTexture, new Vector2(((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2) + (confirmPanelTexture.Width / 2) - (confirmButtonTexture.Width / 2), 400), new Vector2(confirmButtonTexture.Width, confirmButtonTexture.Height));
+
             confirmLevelComponentList.Add(confirmPanel);
+
+            confirmLevelButtonList.Add(confirmExitButton);
+            confirmLevelButtonList.Add(confirmButton);
+
         }
     }
 }

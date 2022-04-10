@@ -26,19 +26,19 @@
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/DefaultFont.spritefont
 
-#begin SpriteFont/LevelNameFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:SpriteFont/LevelNameFont.spritefont
-
 #begin SpriteFont/LevelNumberFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/LevelNumberFont.spritefont
+
+#begin SpriteFont/LevelTitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SpriteFont/LevelTitleFont.spritefont
 
 #begin Sprites/Effects/FrozenEffect.png
 /importer:TextureImporter
@@ -568,6 +568,18 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/Dialogue/DialoguePanel.png
 
+#begin UserInterface/LevelSelect/ExitButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/LevelSelect/ExitButton.png
+
 #begin UserInterface/LevelSelect/LevelDetailsPanel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -591,6 +603,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UserInterface/LevelSelect/LevelSelectButton.png
+
+#begin UserInterface/LevelSelect/StartButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/LevelSelect/StartButton.png
 
 #begin UserInterface/LevelSelect/Terra_Map.png
 /importer:TextureImporter

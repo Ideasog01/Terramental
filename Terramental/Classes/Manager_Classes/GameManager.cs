@@ -16,9 +16,9 @@ namespace Terramental
         public static bool gameInProgress;
 
         public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm};
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton };
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm };
 
-        public enum LevelButton { Level1Button };
+        public enum LevelButton { Level1Button, Level2Button };
 
         public static GameState currentGameState = GameState.MainMenu;
 
