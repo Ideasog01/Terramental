@@ -28,6 +28,9 @@ namespace Terramental
         public static int screenWidth = 960;
         public static int screenHeight = 540;
 
+        public static int levelIndex;
+        public static Vector2 playerCheckpoint;
+
         public MapManager mapManager;
         public PlayerInterface playerInterface;
         public MenuManager menuManager;

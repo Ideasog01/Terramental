@@ -27,7 +27,6 @@ namespace Terramental
 
         private bool _disableRight;
         private bool _disableLeft;
-        private Vector2 _checkpointPosition;
 
         // Dash Variables
         private float dashVelocity = 10.0f;
@@ -182,8 +181,10 @@ namespace Terramental
         public void ResetPlayer()
         {
             CharacterHealth = 3;
-            SpritePosition = _checkpointPosition;
+            SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
+            DialogueManager.dialogueActive = false;
+            disableMovement = false;
         }
 
         public void UpdatePlayerCharacter(GameTime gameTime)
@@ -294,7 +295,7 @@ namespace Terramental
 
             if(setCheckpoint)
             {
-                _checkpointPosition = position;
+                GameManager.playerCheckpoint = position;
             }
         }
 

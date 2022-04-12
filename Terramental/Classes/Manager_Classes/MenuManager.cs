@@ -245,7 +245,7 @@ namespace Terramental
         {
             switch(buttonName)
             {
-                case GameManager.ButtonName.NewGameButton: GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                case GameManager.ButtonName.NewGameButton: //Display New Game Menu
                     break;
                 case GameManager.ButtonName.ExitGameButton: _gameManager.ExitGame();
                     break;
@@ -276,6 +276,7 @@ namespace Terramental
                     _levelDataFilePath = @"MapData.json";
                     _levelNameText = "The Golden Shores";
                     _levelDescriptionText = "Explore the golden shores, and defeat \nthe armies of the Fire Lands.";
+                    GameManager.levelIndex = 0;
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
                     break;
                 case GameManager.LevelButton.Level2Button:
@@ -283,6 +284,7 @@ namespace Terramental
                     _levelNameText = "The Fire Lands";
                     _levelDescriptionText = "Venture to the fire lands, and use the \nelements to defeat the armies \nof Magnus.";
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                    GameManager.levelIndex = 1;
                     break;
             }
         }
