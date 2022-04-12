@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace Terramental
 {
@@ -686,20 +685,29 @@ namespace Terramental
         #region Animations
 
         public void InitialisePlayerAnimations(GameManager gameManager)
-        {                                                                                                          //Index
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //0
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftFire_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //1
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //2
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftWater_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //3
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_Snow_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //4
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Idle/Idle_LeftSnow_SpriteSheet"), 5, 120f, true, new Vector2(64, 64))); //5
+        {
+            Texture2D idleFire = gameManager.GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet");
+            Texture2D idleWater = gameManager.GetTexture("Sprites/Player/Idle/Idle_Water_SpriteSheet");
+            Texture2D idleSnow = gameManager.GetTexture("Sprites/Player/Idle/Idle_Snow_SpriteSheet");
 
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_Walk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //6
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Fire_LeftWalk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //7
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_Walk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //8
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Water_LeftWalk_SpirteSheet"), 4, 120f, true, new Vector2(64, 64))); //9
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_Walk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //10
-            Animations.Add(new Animation(gameManager.GetTexture("Sprites/Player/Walk/Snow_LeftWalk_SpriteSheet"), 4, 120f, true, new Vector2(64, 64))); //11
+            Texture2D walkFire = gameManager.GetTexture("Sprites/Player/Walk/Fire_Walk_SpriteSheet");
+            Texture2D walkWater = gameManager.GetTexture("Sprites/Player/Walk/Water_Walk_SpriteSheet");
+            Texture2D walkSnow = gameManager.GetTexture("Sprites/Player/Walk/Snow_Walk_SpriteSheet");
+
+            //Index
+            Animations.Add(new Animation(idleFire, 5, 120f, true, new Vector2(64, 64))); //0
+            Animations.Add(new Animation(idleFire, 5, 120f, true, new Vector2(64, 64), true)); //1
+            Animations.Add(new Animation(idleWater, 5, 120f, true, new Vector2(64, 64))); //2
+            Animations.Add(new Animation(idleWater, 5, 120f, true, new Vector2(64, 64), true)); //3
+            Animations.Add(new Animation(idleSnow, 5, 120f, true, new Vector2(64, 64))); //4
+            Animations.Add(new Animation(idleSnow, 5, 120f, true, new Vector2(64, 64), true)); //5
+
+            Animations.Add(new Animation(walkFire, 4, 120f, true, new Vector2(64, 64))); //6
+            Animations.Add(new Animation(walkFire, 4, 120f, true, new Vector2(64, 64), true)); //7
+            Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64))); //8
+            Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64), true)); //9
+            Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64))); //10
+            Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64), true)); //11
         }
 
         enum AnimationIndexEnum

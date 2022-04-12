@@ -23,6 +23,8 @@ namespace Terramental
 
         public static List<Button> loadGameButtonList = new List<Button>();
 
+        public Button levelSelectReturnButton;
+
         public Button creditsReturnButton;
         public MenuComponent creditsBackground;
 
@@ -95,6 +97,8 @@ namespace Terramental
                         selectButton.DrawMenuComponent(spriteBatch);
                     }
 
+                    levelSelectReturnButton.DrawMenuComponent(spriteBatch);
+
                     spriteBatch.DrawString(_defaultFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
                     spriteBatch.DrawString(_defaultFont, "1", new Vector2(207, 403), Color.White);
 
@@ -112,6 +116,8 @@ namespace Terramental
                     {
                         selectButton.DrawMenuComponent(spriteBatch);
                     }
+
+                    levelSelectReturnButton.DrawMenuComponent(spriteBatch);
 
                     spriteBatch.DrawString(_defaultFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
                     spriteBatch.DrawString(_defaultFont, "1", new Vector2(207, 403), Color.White);
@@ -198,6 +204,7 @@ namespace Terramental
                 foreach(Button button in levelSelectButtonList)
                 {
                     button.CheckInteractionLevel(mousePos);
+                    levelSelectReturnButton.CheckInteraction(mousePos);
                 }
             }
 
@@ -206,6 +213,7 @@ namespace Terramental
                 foreach (Button button in confirmLevelButtonList)
                 {
                     button.CheckInteraction(mousePos);
+                    levelSelectReturnButton.CheckInteraction(mousePos);
                 }
             }
 
@@ -405,8 +413,14 @@ namespace Terramental
             Button confirmButton = new Button(GameManager.ButtonName.LevelSelectConfirm, this);
             confirmButton.InitialiseMenuComponent(confirmButtonTexture, new Vector2(((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2) + (confirmPanelTexture.Width / 2) - (confirmButtonTexture.Width / 2), 380), new Vector2(confirmButtonTexture.Width, confirmButtonTexture.Height));
 
+            Texture2D returnButtonTexture = _gameManager.GetTexture("UserInterface/LevelSelect/ExitButton");
+            levelSelectReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            levelSelectReturnButton.InitialiseMenuComponent(returnButtonTexture, new Vector2(0, 0), new Vector2(returnButtonTexture.Width / 2, returnButtonTexture.Height / 2));
+
+
             confirmLevelComponentList.Add(confirmPanel);
 
+            
             confirmLevelButtonList.Add(confirmExitButton);
             confirmLevelButtonList.Add(confirmButton);
 

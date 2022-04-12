@@ -31,6 +31,17 @@ namespace Terramental
             _frameDimensions = frameDimensions;
         }
 
+        public Animation(Texture2D spriteSheet, int frameCount, float frameDuration, bool loopActive, Vector2 frameDimensions, bool mirror)
+        {
+            _spriteSheet = spriteSheet;
+            _frameCount = frameCount;
+            _frameDuration = frameDuration;
+            _loopActive = loopActive;
+            _animationActive = true;
+            _frameDimensions = frameDimensions;
+            _mirrorTexture = mirror;
+        }
+
         public Texture2D SpriteSheet
         {
             get { return _spriteSheet; }
