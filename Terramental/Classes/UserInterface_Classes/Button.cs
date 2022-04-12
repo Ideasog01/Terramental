@@ -7,6 +7,8 @@ namespace Terramental
     {
         private GameManager.ButtonName _buttonName;
         private GameManager.LevelButton _levelButtonName;
+        private GameManager.GameData _gameData;
+        
 
         private MenuManager _menuManager;
 
@@ -24,6 +26,13 @@ namespace Terramental
             ComponentColor = Color.White;
         }
 
+        public Button(GameManager.GameData gameData, MenuManager menuManager)
+        {
+            _gameData = gameData;
+            _menuManager = menuManager;
+            ComponentColor = Color.White;
+        }
+
         public void CheckInteraction(Vector2 mousePos)
         {
             if(ComponentRectangle.Contains(mousePos))
@@ -37,6 +46,14 @@ namespace Terramental
             if (ComponentRectangle.Contains(mousePos))
             {
                 _menuManager.LevelSelectButtonInteraction(_levelButtonName);
+            }
+        }
+
+        public void CheckInteractionLoad(Vector2 mousePos)
+        {
+            if (ComponentRectangle.Contains(mousePos))
+            {
+                SaveManager.LoadGame(_gameData);
             }
         }
     }

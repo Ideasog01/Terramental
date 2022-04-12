@@ -19,6 +19,8 @@ namespace Terramental
 
         public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame };
 
+        public enum GameData { Game1, Game2, Game3, Game4};
+
         public enum LevelButton { Level1Button, Level2Button };
 
         public static GameState currentGameState = GameState.MainMenu;
@@ -170,6 +172,7 @@ namespace Terramental
 
         private void InitialiseGame()
         {
+            SaveManager.gameManager = this;
             _spriteManager = new SpriteManager();
             _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
             SpawnManager._gameManager = this;

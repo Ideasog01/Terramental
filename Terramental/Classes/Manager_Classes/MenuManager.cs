@@ -21,8 +21,14 @@ namespace Terramental
         public static List<Button> pauseMenuButtonList = new List<Button>();
         public static List<MenuComponent> pauseMenuComponentList = new List<MenuComponent>();
 
-        public Button returnMainMenuButton;
+        public static List<Button> loadGameButtonList = new List<Button>();
+
+        public Button creditsReturnButton;
         public MenuComponent creditsBackground;
+
+        public Button loadGameReturnButton;
+
+        public MenuComponent loadGameBackground;
 
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
@@ -47,6 +53,7 @@ namespace Terramental
             LoadLevelSelect();
             LoadPauseMenu();
             LoadCreditsMenu();
+            LoadLoadGameMenu();
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -147,9 +154,24 @@ namespace Terramental
                 case GameManager.GameState.Credits:
 
                     creditsBackground.DrawMenuComponent(spriteBatch);
-                    returnMainMenuButton.DrawMenuComponent(spriteBatch);
+                    creditsReturnButton.DrawMenuComponent(spriteBatch);
 
                     break;
+
+                case GameManager.GameState.LoadGame:
+
+                    loadGameBackground.DrawMenuComponent(spriteBatch);
+                    loadGameReturnButton.DrawMenuComponent(spriteBatch);
+
+                    foreach (Button loadButton in loadGameButtonList)
+                    {
+                        loadButton.DrawMenuComponent(spriteBatch);
+                    }
+
+                    
+
+                    break;
+                
             }
         }
 
@@ -197,7 +219,17 @@ namespace Terramental
 
             if (GameManager.currentGameState == GameManager.GameState.Credits)
             {
-                returnMainMenuButton.CheckInteraction(mousePos);
+                creditsReturnButton.CheckInteraction(mousePos);
+            }
+
+            if(GameManager.currentGameState == GameManager.GameState.LoadGame)
+            {
+                foreach(Button button in loadGameButtonList)
+                {
+                    button.CheckInteractionLoad(mousePos);
+                }
+
+                loadGameReturnButton.CheckInteraction(mousePos);
             }
         }
 
@@ -222,6 +254,8 @@ namespace Terramental
                     _gameManager.IsMouseVisible = false;
                     break;
                 case GameManager.ButtonName.CreditsButton: GameManager.currentGameState = GameManager.GameState.Credits;
+                    break;
+                case GameManager.ButtonName.LoadGameButton: GameManager.currentGameState = GameManager.GameState.LoadGame;
                     break;
             }
         }
@@ -411,8 +445,40 @@ namespace Terramental
             creditsBackground.InitialiseMenuComponent(creditsBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
 
             Texture2D creditsReturnTexture = _gameManager.GetTexture("UserInterface/CreditsMenu/ReturnButton");
-            returnMainMenuButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
-            returnMainMenuButton.InitialiseMenuComponent(creditsReturnTexture, new Vector2(10, 460), new Vector2(creditsReturnTexture.Width, creditsReturnTexture.Height));
+            creditsReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            creditsReturnButton.InitialiseMenuComponent(creditsReturnTexture, new Vector2(10, 460), new Vector2(creditsReturnTexture.Width, creditsReturnTexture.Height));
+        }
+
+        private void LoadLoadGameMenu()
+        {
+            Texture2D loadGameBackgroundTexture = _gameManager.GetTexture("UserInterface/LoadGameMenu/LoadGameBackground");
+            loadGameBackground = new MenuComponent();
+            loadGameBackground.InitialiseMenuComponent(loadGameBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
+
+            Texture2D loadGameReturnButtonTexture = _gameManager.GetTexture("UserInterface/CreditsMenu/ReturnButton");
+            loadGameReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            loadGameReturnButton.InitialiseMenuComponent(loadGameReturnButtonTexture, new Vector2((GameManager.screenWidth / 2) - (loadGameReturnButtonTexture.Width / 2), 470), new Vector2(loadGameReturnButtonTexture.Width, loadGameReturnButtonTexture.Height));
+
+            Texture2D game1ButtonTexture = _gameManager.GetTexture("UserInterface/LoadGameMenu/Game1Button");
+            Button game1Button = new Button(GameManager.GameData.Game1, this);
+            game1Button.InitialiseMenuComponent(game1ButtonTexture, new Vector2((GameManager.screenWidth / 2) - (loadGameReturnButtonTexture.Width / 2), 140), new Vector2(game1ButtonTexture.Width, game1ButtonTexture.Height));
+
+            Texture2D game2ButtonTexture = _gameManager.GetTexture("UserInterface/LoadGameMenu/Game2Button");
+            Button game2Button = new Button(GameManager.GameData.Game2, this);
+            game2Button.InitialiseMenuComponent(game2ButtonTexture, new Vector2((GameManager.screenWidth / 2) - (loadGameReturnButtonTexture.Width / 2), 210), new Vector2(game2ButtonTexture.Width, game2ButtonTexture.Height));
+
+            Texture2D game3ButtonTexture = _gameManager.GetTexture("UserInterface/LoadGameMenu/Game3Button");
+            Button game3Button = new Button(GameManager.GameData.Game3, this);
+            game3Button.InitialiseMenuComponent(game3ButtonTexture, new Vector2((GameManager.screenWidth / 2) - (loadGameReturnButtonTexture.Width / 2), 280), new Vector2(game3ButtonTexture.Width, game3ButtonTexture.Height));
+
+            Texture2D game4ButtonTexture = _gameManager.GetTexture("UserInterface/LoadGameMenu/Game4Button");
+            Button game4Button = new Button(GameManager.GameData.Game4, this);
+            game4Button.InitialiseMenuComponent(game4ButtonTexture, new Vector2((GameManager.screenWidth / 2) - (loadGameReturnButtonTexture.Width / 2), 350), new Vector2(game4ButtonTexture.Width, game4ButtonTexture.Height));
+
+            loadGameButtonList.Add(game1Button);
+            loadGameButtonList.Add(game2Button);
+            loadGameButtonList.Add(game3Button);
+            loadGameButtonList.Add(game4Button);
         }
     }
 }
