@@ -142,15 +142,7 @@ namespace Terramental
 
         public static void PauseGame()
         {
-            if(currentGameState == GameState.Level)
-            {
-                currentGameState = GameState.LevelPause;
-            }
-            else if(currentGameState == GameState.LevelPause)
-            {
-                currentGameState = GameState.Level;
-            }
-            
+            currentGameState = GameState.LevelPause;
         }
 
         public void LoadNewGame(string filePath)

@@ -129,11 +129,13 @@ namespace Terramental
                     foreach (MenuComponent pauseComponent in pauseMenuComponentList)
                     {
                         pauseComponent.DrawMenuComponent(spriteBatch);
+                        pauseComponent.FollowCamera();
                     }
 
                     foreach (Button pauseButton in pauseMenuButtonList)
                     {
                         pauseButton.DrawMenuComponent(spriteBatch);
+                        pauseButton.FollowCamera();
                     }
 
                     break;
@@ -173,6 +175,14 @@ namespace Terramental
                     button.CheckInteraction(mousePos);
                 }
             }
+
+            if(GameManager.currentGameState == GameManager.GameState.LevelPause)
+            {
+                foreach(Button button in pauseMenuButtonList)
+                {
+                    button.CheckInteraction(mousePos);
+                }
+            }
         }
 
         public void ButtonInteraction(GameManager.ButtonName buttonName)
@@ -193,6 +203,7 @@ namespace Terramental
                 case GameManager.ButtonName.ReturnMainMenu: GameManager.currentGameState = GameManager.GameState.MainMenu;
                     break;
                 case GameManager.ButtonName.ResumeGame: GameManager.currentGameState = GameManager.GameState.Level;
+                    _gameManager.IsMouseVisible = false;
                     break;
             }
         }
@@ -353,19 +364,19 @@ namespace Terramental
         {
             Texture2D pauseMenuPanelTexture = _gameManager.GetTexture("UserInterface/PauseMenu/PauseMenu");
             MenuComponent pauseMenuPanel = new MenuComponent();
-            pauseMenuPanel.InitialiseMenuComponent(pauseMenuPanelTexture, new Vector2(CameraController._cameraCentre.X, CameraController._cameraCentre.Y), new Vector2(pauseMenuPanelTexture.Width, pauseMenuPanelTexture.Height));
+            pauseMenuPanel.InitialiseMenuComponent(pauseMenuPanelTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2), (GameManager.screenHeight / 2) - (pauseMenuPanelTexture.Height / 2)), new Vector2(pauseMenuPanelTexture.Width, pauseMenuPanelTexture.Height));
 
             Texture2D resumeButtonTexture = _gameManager.GetTexture("UserInterface/PauseMenu/ResumeButton");
-            Button resumeButton = new Button(GameManager.ButtonName.RespawnButton, this);
-            resumeButton.InitialiseMenuComponent(resumeButtonTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2), (GameManager.screenHeight / 2) - (resumeButtonTexture.Height / 2)), new Vector2(resumeButtonTexture.Width, resumeButtonTexture.Height));
+            Button resumeButton = new Button(GameManager.ButtonName.ResumeGame, this);
+            resumeButton.InitialiseMenuComponent(resumeButtonTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2) + 50, (GameManager.screenHeight / 2) - (pauseMenuPanelTexture.Height / 2) + 157), new Vector2(resumeButtonTexture.Width, resumeButtonTexture.Height));
 
             Texture2D optionsButtonTexture = _gameManager.GetTexture("UserInterface/PauseMenu/OptionsButton");
             Button optionsButton = new Button(GameManager.ButtonName.OptionsButton, this);
-            optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2((GameManager.screenWidth / 2) - (optionsButtonTexture.Width / 2), (GameManager.screenHeight / 2) - (optionsButtonTexture.Height / 2)), new Vector2(optionsButtonTexture.Width, optionsButtonTexture.Height));
+            optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2) + 49, (GameManager.screenHeight / 2) - (pauseMenuPanelTexture.Height / 2) + 245), new Vector2(optionsButtonTexture.Width, optionsButtonTexture.Height));
 
             Texture2D mainMenuTexture = _gameManager.GetTexture("UserInterface/PauseMenu/MainMenuButton");
             Button mainMenuButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
-            mainMenuButton.InitialiseMenuComponent(mainMenuTexture, new Vector2((GameManager.screenWidth / 2) - (mainMenuTexture.Width / 2), (GameManager.screenHeight / 2) - (mainMenuTexture.Height / 2)), new Vector2(mainMenuTexture.Width, mainMenuTexture.Height));
+            mainMenuButton.InitialiseMenuComponent(mainMenuTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2) + 50, (GameManager.screenHeight / 2) - (pauseMenuPanelTexture.Height / 2) + 332), new Vector2(mainMenuTexture.Width, mainMenuTexture.Height));
 
             pauseMenuButtonList.Add(resumeButton);
             pauseMenuButtonList.Add(optionsButton);

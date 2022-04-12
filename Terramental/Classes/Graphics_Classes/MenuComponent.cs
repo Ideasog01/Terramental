@@ -9,6 +9,7 @@ namespace Terramental
         private Vector2 _componentPosition;
         private Vector2 _componentScale;
         private Rectangle _componentRectangle;
+        private Vector2 _componentOffset;
         private Color _componentColor;
 
         public void InitialiseMenuComponent(Texture2D texture, Vector2 position, Vector2 scale)
@@ -47,6 +48,18 @@ namespace Terramental
         {
             get { return _componentColor; }
             set { _componentColor = value; }
+        }
+
+        public void FollowCamera()
+        {
+            if(_componentOffset == Vector2.Zero)
+            {
+                _componentOffset = _componentPosition;
+            }
+
+            int centreX = (int)CameraController._cameraCentre.X;
+            int centreY = (int)CameraController._cameraCentre.Y;
+            _componentRectangle = new Rectangle(centreX + (int)_componentOffset.X, centreY + (int)_componentOffset.Y, _componentTexture.Width, _componentTexture.Height);
         }
 
         public void DrawMenuComponent(SpriteBatch spriteBatch)
