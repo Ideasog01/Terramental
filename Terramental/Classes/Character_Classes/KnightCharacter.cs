@@ -60,8 +60,6 @@ namespace Terramental
                 {
                     SpriteVelocity = new Vector2(SpriteVelocity.X, 3);
                 }
-
-                
             }
             else
             {
@@ -87,7 +85,7 @@ namespace Terramental
 
         private void KnightStateMachine()
         {
-            if(DistanceToPlayer() < 50)
+            if(DistanceToPlayer() < 40)
             {
                 CurrentState = AIState.Attack;
             }
