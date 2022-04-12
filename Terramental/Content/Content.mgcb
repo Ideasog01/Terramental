@@ -544,6 +544,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/Tile-Fire.png
 
+#begin UserInterface/CreditsMenu/Credits.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/CreditsMenu/Credits.png
+
+#begin UserInterface/CreditsMenu/ReturnButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/CreditsMenu/ReturnButton.png
+
 #begin UserInterface/Dialogue/DialogueNextButton.png
 /importer:TextureImporter
 /processor:TextureProcessor

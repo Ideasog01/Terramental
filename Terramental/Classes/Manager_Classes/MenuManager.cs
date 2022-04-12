@@ -21,6 +21,9 @@ namespace Terramental
         public static List<Button> pauseMenuButtonList = new List<Button>();
         public static List<MenuComponent> pauseMenuComponentList = new List<MenuComponent>();
 
+        public Button returnMainMenuButton;
+        public MenuComponent creditsBackground;
+
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
@@ -43,6 +46,7 @@ namespace Terramental
             LoadRespawnScreen();
             LoadLevelSelect();
             LoadPauseMenu();
+            LoadCreditsMenu();
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -139,6 +143,13 @@ namespace Terramental
                     }
 
                     break;
+
+                case GameManager.GameState.Credits:
+
+                    creditsBackground.DrawMenuComponent(spriteBatch);
+                    returnMainMenuButton.DrawMenuComponent(spriteBatch);
+
+                    break;
             }
         }
 
@@ -183,6 +194,11 @@ namespace Terramental
                     button.CheckInteraction(mousePos);
                 }
             }
+
+            if (GameManager.currentGameState == GameManager.GameState.Credits)
+            {
+                returnMainMenuButton.CheckInteraction(mousePos);
+            }
         }
 
         public void ButtonInteraction(GameManager.ButtonName buttonName)
@@ -204,6 +220,8 @@ namespace Terramental
                     break;
                 case GameManager.ButtonName.ResumeGame: GameManager.currentGameState = GameManager.GameState.Level;
                     _gameManager.IsMouseVisible = false;
+                    break;
+                case GameManager.ButtonName.CreditsButton: GameManager.currentGameState = GameManager.GameState.Credits;
                     break;
             }
         }
@@ -266,7 +284,7 @@ namespace Terramental
 
             Texture2D mainMenuBackgroundTexture = _gameManager.GetTexture("UserInterface/MainMenu/MainMenu_FireBackground");
             MenuComponent mainMenuBackground = new MenuComponent();
-            mainMenuBackground.InitialiseMenuComponent(mainMenuBackgroundTexture, new Vector2(0, 0), new Vector2(mainMenuBackgroundTexture.Width, mainMenuBackgroundTexture.Height));
+            mainMenuBackground.InitialiseMenuComponent(mainMenuBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
             mainMenuComponentList.Add(mainMenuBackground);
 
             Texture2D titleTextTexture = _gameManager.GetTexture("UserInterface/MainMenu/GameTitleText");
@@ -351,7 +369,7 @@ namespace Terramental
 
             Texture2D confirmButtonTexture = _gameManager.GetTexture("UserInterface/LevelSelect/StartButton");
             Button confirmButton = new Button(GameManager.ButtonName.LevelSelectConfirm, this);
-            confirmButton.InitialiseMenuComponent(confirmButtonTexture, new Vector2(((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2) + (confirmPanelTexture.Width / 2) - (confirmButtonTexture.Width / 2), 400), new Vector2(confirmButtonTexture.Width, confirmButtonTexture.Height));
+            confirmButton.InitialiseMenuComponent(confirmButtonTexture, new Vector2(((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2) + (confirmPanelTexture.Width / 2) - (confirmButtonTexture.Width / 2), 380), new Vector2(confirmButtonTexture.Width, confirmButtonTexture.Height));
 
             confirmLevelComponentList.Add(confirmPanel);
 
@@ -384,6 +402,17 @@ namespace Terramental
 
             pauseMenuComponentList.Add(pauseMenuPanel);
         
+        }
+
+        private void LoadCreditsMenu()
+        {
+            Texture2D creditsBackgroundTexture = _gameManager.GetTexture("UserInterface/CreditsMenu/Credits");
+            creditsBackground = new MenuComponent();
+            creditsBackground.InitialiseMenuComponent(creditsBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
+
+            Texture2D creditsReturnTexture = _gameManager.GetTexture("UserInterface/CreditsMenu/ReturnButton");
+            returnMainMenuButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            returnMainMenuButton.InitialiseMenuComponent(creditsReturnTexture, new Vector2(10, 460), new Vector2(creditsReturnTexture.Width, creditsReturnTexture.Height));
         }
     }
 }
