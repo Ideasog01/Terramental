@@ -18,6 +18,9 @@ namespace Terramental
         public static List<Button> confirmLevelButtonList = new List<Button>();
         public static List<MenuComponent> confirmLevelComponentList = new List<MenuComponent>();
 
+        public static List<Button> pauseMenuButtonList = new List<Button>();
+        public static List<MenuComponent> pauseMenuComponentList = new List<MenuComponent>();
+
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
 
@@ -39,6 +42,7 @@ namespace Terramental
             LoadMainMenu();
             LoadRespawnScreen();
             LoadLevelSelect();
+            LoadPauseMenu();
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -119,6 +123,20 @@ namespace Terramental
                     spriteBatch.DrawString(_defaultFont, _levelDescriptionText, new Vector2((GameManager.screenWidth / 2) - 150, 180), Color.White);
 
                     break;
+
+                case GameManager.GameState.LevelPause:
+
+                    foreach (MenuComponent pauseComponent in pauseMenuComponentList)
+                    {
+                        pauseComponent.DrawMenuComponent(spriteBatch);
+                    }
+
+                    foreach (Button pauseButton in pauseMenuButtonList)
+                    {
+                        pauseButton.DrawMenuComponent(spriteBatch);
+                    }
+
+                    break;
             }
         }
 
@@ -171,6 +189,10 @@ namespace Terramental
                 case GameManager.ButtonName.LevelSelectConfirm: LoadLevel();
                     break;
                 case GameManager.ButtonName.LevelSelectExit: GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                    break;
+                case GameManager.ButtonName.ReturnMainMenu: GameManager.currentGameState = GameManager.GameState.MainMenu;
+                    break;
+                case GameManager.ButtonName.ResumeGame: GameManager.currentGameState = GameManager.GameState.Level;
                     break;
             }
         }
@@ -325,6 +347,32 @@ namespace Terramental
             confirmLevelButtonList.Add(confirmExitButton);
             confirmLevelButtonList.Add(confirmButton);
 
+        }
+
+        private void LoadPauseMenu()
+        {
+            Texture2D pauseMenuPanelTexture = _gameManager.GetTexture("UserInterface/PauseMenu/PauseMenu");
+            MenuComponent pauseMenuPanel = new MenuComponent();
+            pauseMenuPanel.InitialiseMenuComponent(pauseMenuPanelTexture, new Vector2(CameraController._cameraCentre.X, CameraController._cameraCentre.Y), new Vector2(pauseMenuPanelTexture.Width, pauseMenuPanelTexture.Height));
+
+            Texture2D resumeButtonTexture = _gameManager.GetTexture("UserInterface/PauseMenu/ResumeButton");
+            Button resumeButton = new Button(GameManager.ButtonName.RespawnButton, this);
+            resumeButton.InitialiseMenuComponent(resumeButtonTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2), (GameManager.screenHeight / 2) - (resumeButtonTexture.Height / 2)), new Vector2(resumeButtonTexture.Width, resumeButtonTexture.Height));
+
+            Texture2D optionsButtonTexture = _gameManager.GetTexture("UserInterface/PauseMenu/OptionsButton");
+            Button optionsButton = new Button(GameManager.ButtonName.OptionsButton, this);
+            optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2((GameManager.screenWidth / 2) - (optionsButtonTexture.Width / 2), (GameManager.screenHeight / 2) - (optionsButtonTexture.Height / 2)), new Vector2(optionsButtonTexture.Width, optionsButtonTexture.Height));
+
+            Texture2D mainMenuTexture = _gameManager.GetTexture("UserInterface/PauseMenu/MainMenuButton");
+            Button mainMenuButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            mainMenuButton.InitialiseMenuComponent(mainMenuTexture, new Vector2((GameManager.screenWidth / 2) - (mainMenuTexture.Width / 2), (GameManager.screenHeight / 2) - (mainMenuTexture.Height / 2)), new Vector2(mainMenuTexture.Width, mainMenuTexture.Height));
+
+            pauseMenuButtonList.Add(resumeButton);
+            pauseMenuButtonList.Add(optionsButton);
+            pauseMenuButtonList.Add(mainMenuButton);
+
+            pauseMenuComponentList.Add(pauseMenuPanel);
+        
         }
     }
 }

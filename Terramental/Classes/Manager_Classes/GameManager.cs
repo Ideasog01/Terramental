@@ -15,8 +15,9 @@ namespace Terramental
 
         public static bool gameInProgress;
 
-        public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm};
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm };
+        public enum GameState { MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause};
+
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame };
 
         public enum LevelButton { Level1Button, Level2Button };
 
@@ -102,7 +103,7 @@ namespace Terramental
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, _mainCam.cameraTransform);
 
-            if(currentGameState == GameState.Level && playerInterface != null)
+            if(currentGameState == GameState.Level || currentGameState == GameState.LevelPause && playerInterface != null)
             {
                 _spriteManager.Draw(gameTime, _spriteBatch);
                 playerInterface.DrawInterface(_spriteBatch);
@@ -139,6 +140,19 @@ namespace Terramental
             Exit();
         }
 
+        public static void PauseGame()
+        {
+            if(currentGameState == GameState.Level)
+            {
+                currentGameState = GameState.LevelPause;
+            }
+            else if(currentGameState == GameState.LevelPause)
+            {
+                currentGameState = GameState.Level;
+            }
+            
+        }
+
         public void LoadNewGame(string filePath)
         {
             playerCharacter = new PlayerCharacter(this);
@@ -173,8 +187,12 @@ namespace Terramental
         private void UpdateManagers(GameTime gameTime)
         {
             _inputManager.Update(gameTime);
-            _spriteManager.Update(gameTime);
-            SpawnManager.Update(gameTime);
+
+            if(currentGameState == GameState.Level)
+            {
+                _spriteManager.Update(gameTime);
+                SpawnManager.Update(gameTime);
+            }
         }
 
         private void LoadAudioLibrary()

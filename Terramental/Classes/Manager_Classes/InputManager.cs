@@ -30,8 +30,6 @@ namespace Terramental
         private int sameKeyDownCount = 0;
         private double lastKeyPressTime;
 
-        // private int dashCheck = 0;
-
         public InputManager(CameraController playerCam, MenuManager menuManager, GameManager gameManager)
         {
             _playerCam = playerCam;
@@ -52,6 +50,10 @@ namespace Terramental
             MouseState oldMouseState = _currentMouseState;
             _currentMouseState = Mouse.GetState();
             
+            if(_currentKeyboardState.IsKeyUp(Keys.Escape) && oldKeyboardState.IsKeyDown(Keys.Escape) && GameManager.currentGameState == GameManager.GameState.Level)
+            {
+                GameManager.PauseGame();
+            }
 
             if(_currentMouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed)
             {

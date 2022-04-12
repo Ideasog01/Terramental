@@ -29,7 +29,7 @@ namespace Terramental
 
         public void UpdateCamera(GameTime gameTime)
         {
-            if (GameManager.currentGameState != GameManager.GameState.Level)
+            if(GameManager.currentGameState != GameManager.GameState.Level && GameManager.currentGameState != GameManager.GameState.LevelPause)
             {
                 var _cameraPosition = Matrix.CreateTranslation(new Vector3(0, 0, 0));
                 cameraTransform = _cameraPosition;
