@@ -65,6 +65,7 @@ namespace Terramental
         private Tile _groundTile;
         private Tile _leftTile;
         private Tile _rightTile;
+        private ElementWall _elementWall;
         private SnowBeam _snowBeam;
 
         private List<Tile> _tileList;
@@ -106,6 +107,12 @@ namespace Terramental
         {
             get { return _leftTile; }
             set { _leftTile = value; }
+        }
+
+        public ElementWall ElementWall
+        {
+            get { return _elementWall; }
+            set { _elementWall = value; }
         }
 
         public Tile RightTile
@@ -662,6 +669,8 @@ namespace Terramental
                 }
             }
 
+
+
             if (_disableRight && _rightTile != null)
             {
                 if (!_rightTile.RightCollision(this))
@@ -677,6 +686,16 @@ namespace Terramental
                 {
                     _disableLeft = false;
                     _leftTile = null;
+                }
+            }
+
+            if(_elementWall != null)
+            {
+                if(!_elementWall.RightCollision(this) && !_elementWall.LeftCollision(this))
+                {
+                    _disableRight = false;
+                    _disableLeft = false;
+                    _elementWall = null;
                 }
             }
         }

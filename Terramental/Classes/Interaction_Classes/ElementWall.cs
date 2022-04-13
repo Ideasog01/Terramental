@@ -79,25 +79,16 @@ namespace Terramental
                 {
                     if (LeftCollision(_playerCharacter))
                     {
-                        Tile tile = _mapManager.GetTile(SpritePosition);
-                        if (tile != null)
-                        {
-                            _playerCharacter.SpriteVelocity = new Vector2(0, 0);
-                            _playerCharacter.DisableLeft = true;
-                            _playerCharacter.LeftTile = tile;
-                        }
-
+                        _playerCharacter.SpriteVelocity = new Vector2(0, _playerCharacter.SpriteVelocity.Y);
+                        _playerCharacter.DisableLeft = true;
+                        _playerCharacter.ElementWall = this;
                     }
 
                     if (RightCollision(_playerCharacter))
                     {
-                        Tile tile = _mapManager.GetTile(SpritePosition);
-                        if (tile != null)
-                        {
-                            _playerCharacter.SpriteVelocity = new Vector2(0, 0);
-                            _playerCharacter.DisableRight = true;
-                            _playerCharacter.RightTile = tile;
-                        }
+                        _playerCharacter.SpriteVelocity = new Vector2(0, _playerCharacter.SpriteVelocity.Y);
+                        _playerCharacter.DisableRight = true;
+                        _playerCharacter.ElementWall = this;
                     }
 
                     if (TopCollision(_playerCharacter))
@@ -105,7 +96,7 @@ namespace Terramental
                         Tile tile = _mapManager.GetTile(SpritePosition);
                         if (tile != null)
                         {
-                            _playerCharacter.SpriteVelocity = new Vector2(0, 0);
+                            _playerCharacter.SpriteVelocity = new Vector2(_playerCharacter.SpriteVelocity.X, 0);
                             _playerCharacter.IsGrounded = true;
                             _playerCharacter.GroundTile = tile;
                         }
@@ -113,7 +104,7 @@ namespace Terramental
 
                     if (BottomCollision(_playerCharacter))
                     {
-                        _playerCharacter.SpriteVelocity = new Vector2(0, 0);
+                        _playerCharacter.SpriteVelocity = new Vector2(_playerCharacter.SpriteVelocity.X, 0);
                         if (_playerCharacter.IsJumping)
                         {
                             _playerCharacter.JumpHeight = _playerCharacter.SpritePosition.Y;
