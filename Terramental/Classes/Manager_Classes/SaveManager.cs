@@ -13,32 +13,35 @@ namespace Terramental
 
         public static void LoadGame(GameManager.GameData gameData)
         {
-            if(gameData == GameManager.GameData.Game1)
+            if(GameManager.currentGameState == GameManager.GameState.LoadGame)
             {
-                string strResultJson = File.ReadAllText(@"GameSave1.json");
-                playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
-            }
+                if (gameData == GameManager.GameData.Game1)
+                {
+                    string strResultJson = File.ReadAllText(@"GameSave1.json");
+                    playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
+                }
 
-            if (gameData == GameManager.GameData.Game2)
-            {
-                string strResultJson = File.ReadAllText(@"GameSave2.json");
-                playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
-            }
+                if (gameData == GameManager.GameData.Game2)
+                {
+                    string strResultJson = File.ReadAllText(@"GameSave2.json");
+                    playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
+                }
 
-            if (gameData == GameManager.GameData.Game3)
-            {
-                string strResultJson = File.ReadAllText(@"GameSave3.json");
-                playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
-            }
+                if (gameData == GameManager.GameData.Game3)
+                {
+                    string strResultJson = File.ReadAllText(@"GameSave3.json");
+                    playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
+                }
 
-            if (gameData == GameManager.GameData.Game4)
-            {
-                string strResultJson = File.ReadAllText(@"GameSave4.json");
-                playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
-            }
+                if (gameData == GameManager.GameData.Game4)
+                {
+                    string strResultJson = File.ReadAllText(@"GameSave4.json");
+                    playerData = JsonConvert.DeserializeObject<PlayerData>(strResultJson);
+                }
 
-            GameManager.currentGameState = GameManager.GameState.LevelSelect;
-            currentData = gameData;
+                GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                currentData = gameData;
+            }
         }
 
         public static void UnlockLevel(int levelIndex)

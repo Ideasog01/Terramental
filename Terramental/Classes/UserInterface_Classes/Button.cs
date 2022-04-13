@@ -51,10 +51,14 @@ namespace Terramental
 
         public void CheckInteractionLoad(Vector2 mousePos)
         {
-            if (ComponentRectangle.Contains(mousePos))
+            if(GameManager.currentGameState == GameManager.GameState.LoadGame)
             {
-                SaveManager.LoadGame(_gameData);
+                if (ComponentRectangle.Contains(mousePos))
+                {
+                    SaveManager.LoadGame(_gameData);
+                }
             }
+           
         }
     }
 }

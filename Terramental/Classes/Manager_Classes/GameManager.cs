@@ -96,6 +96,7 @@ namespace Terramental
                 
             }
 
+            menuManager.UpdateMenuButtons(gameTime);
 
             _mainCam.UpdateCamera(gameTime);
 

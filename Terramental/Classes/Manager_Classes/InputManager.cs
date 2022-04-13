@@ -56,7 +56,7 @@ namespace Terramental
                 _gameManager.IsMouseVisible = true;
             }
 
-            if(_currentMouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed)
+            if(oldMouseState.LeftButton == ButtonState.Released && _currentMouseState.LeftButton == ButtonState.Pressed)
             {
                 if(GameManager.currentGameState != GameManager.GameState.Level && GameManager.currentGameState != GameManager.GameState.LevelPause)
                 {

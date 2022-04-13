@@ -42,6 +42,8 @@ namespace Terramental
         private string _levelDescriptionText;
         private string _levelDataFilePath;
 
+        private float _buttonBuffer;
+
         public MenuManager(GameManager gameManager, GraphicsDeviceManager graphics)
         {
             _gameManager = gameManager;
@@ -174,98 +176,122 @@ namespace Terramental
                         loadButton.DrawMenuComponent(spriteBatch);
                     }
 
-                    
-
                     break;
                 
             }
         }
 
+        public void UpdateMenuButtons(GameTime gameTime)
+        {
+            if(_buttonBuffer > 0)
+            {
+                _buttonBuffer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+        }
+
         public void MouseClick(Vector2 mousePos)
         {
-            if(GameManager.currentGameState == GameManager.GameState.MainMenu)
+            if(_buttonBuffer <= 0)
             {
-                foreach (Button button in mainMenuButtonList)
+                if (GameManager.currentGameState == GameManager.GameState.MainMenu)
                 {
-                    button.CheckInteraction(mousePos);
+                    foreach (Button button in mainMenuButtonList)
+                    {
+                        button.CheckInteraction(mousePos);
+                    }
+                }
+
+                if (GameManager.currentGameState == GameManager.GameState.Respawn)
+                {
+                    foreach (Button button in respawnMenuButtonList)
+                    {
+                        button.CheckInteraction(mousePos);
+                    }
+                }
+
+                if (GameManager.currentGameState == GameManager.GameState.LevelSelect)
+                {
+                    foreach (Button button in levelSelectButtonList)
+                    {
+                        button.CheckInteractionLevel(mousePos);
+                        levelSelectReturnButton.CheckInteraction(mousePos);
+                    }
+                }
+
+                if (GameManager.currentGameState == GameManager.GameState.LevelSelectConfirm)
+                {
+                    foreach (Button button in confirmLevelButtonList)
+                    {
+                        button.CheckInteraction(mousePos);
+                        levelSelectReturnButton.CheckInteraction(mousePos);
+                    }
+                }
+
+                if (GameManager.currentGameState == GameManager.GameState.LevelPause)
+                {
+                    foreach (Button button in pauseMenuButtonList)
+                    {
+                        button.CheckInteraction(mousePos);
+                    }
+                }
+
+                if (GameManager.currentGameState == GameManager.GameState.Credits)
+                {
+                    creditsReturnButton.CheckInteraction(mousePos);
+                }
+
+                if (GameManager.currentGameState == GameManager.GameState.LoadGame && _buttonBuffer <= 0)
+                {
+                    foreach (Button button in loadGameButtonList)
+                    {
+                        button.CheckInteractionLoad(mousePos);
+                    }
+
+                    loadGameReturnButton.CheckInteraction(mousePos);
                 }
             }
 
-            if(GameManager.currentGameState == GameManager.GameState.Respawn)
-            {
-                foreach(Button button in respawnMenuButtonList)
-                {
-                    button.CheckInteraction(mousePos);
-                }
-            }
-
-            if(GameManager.currentGameState == GameManager.GameState.LevelSelect)
-            {
-                foreach(Button button in levelSelectButtonList)
-                {
-                    button.CheckInteractionLevel(mousePos);
-                    levelSelectReturnButton.CheckInteraction(mousePos);
-                }
-            }
-
-            if (GameManager.currentGameState == GameManager.GameState.LevelSelectConfirm)
-            {
-                foreach (Button button in confirmLevelButtonList)
-                {
-                    button.CheckInteraction(mousePos);
-                    levelSelectReturnButton.CheckInteraction(mousePos);
-                }
-            }
-
-            if(GameManager.currentGameState == GameManager.GameState.LevelPause)
-            {
-                foreach(Button button in pauseMenuButtonList)
-                {
-                    button.CheckInteraction(mousePos);
-                }
-            }
-
-            if (GameManager.currentGameState == GameManager.GameState.Credits)
-            {
-                creditsReturnButton.CheckInteraction(mousePos);
-            }
-
-            if(GameManager.currentGameState == GameManager.GameState.LoadGame)
-            {
-                foreach(Button button in loadGameButtonList)
-                {
-                    button.CheckInteractionLoad(mousePos);
-                }
-
-                loadGameReturnButton.CheckInteraction(mousePos);
-            }
         }
 
         public void ButtonInteraction(GameManager.ButtonName buttonName)
         {
-            switch(buttonName)
+            if(_buttonBuffer <= 0)
             {
-                case GameManager.ButtonName.NewGameButton: //Display New Game Menu
-                    break;
-                case GameManager.ButtonName.ExitGameButton: _gameManager.ExitGame();
-                    break;
-                case GameManager.ButtonName.RespawnButton: DisplayRespawnScreen(false);
-                    _gameManager.playerCharacter.ResetPlayer();
-                    break;
-                case GameManager.ButtonName.LevelSelectConfirm: LoadLevel();
-                    break;
-                case GameManager.ButtonName.LevelSelectExit: GameManager.currentGameState = GameManager.GameState.LevelSelect;
-                    break;
-                case GameManager.ButtonName.ReturnMainMenu: GameManager.currentGameState = GameManager.GameState.MainMenu;
-                    break;
-                case GameManager.ButtonName.ResumeGame: GameManager.currentGameState = GameManager.GameState.Level;
-                    _gameManager.IsMouseVisible = false;
-                    break;
-                case GameManager.ButtonName.CreditsButton: GameManager.currentGameState = GameManager.GameState.Credits;
-                    break;
-                case GameManager.ButtonName.LoadGameButton: GameManager.currentGameState = GameManager.GameState.LoadGame;
-                    break;
+                switch (buttonName)
+                {
+                    case GameManager.ButtonName.NewGameButton: //Display New Game Menu
+                        break;
+                    case GameManager.ButtonName.ExitGameButton:
+                        _gameManager.ExitGame();
+                        break;
+                    case GameManager.ButtonName.RespawnButton:
+                        DisplayRespawnScreen(false);
+                        _gameManager.playerCharacter.ResetPlayer();
+                        break;
+                    case GameManager.ButtonName.LevelSelectConfirm:
+                        LoadLevel();
+                        break;
+                    case GameManager.ButtonName.LevelSelectExit:
+                        GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                        break;
+                    case GameManager.ButtonName.ReturnMainMenu:
+                        GameManager.currentGameState = GameManager.GameState.MainMenu;
+                        break;
+                    case GameManager.ButtonName.ResumeGame:
+                        GameManager.currentGameState = GameManager.GameState.Level;
+                        _gameManager.IsMouseVisible = false;
+                        break;
+                    case GameManager.ButtonName.CreditsButton:
+                        GameManager.currentGameState = GameManager.GameState.Credits;
+                        break;
+                    case GameManager.ButtonName.LoadGameButton:
+                        GameManager.currentGameState = GameManager.GameState.LoadGame;
+                        break;
+                }
+
+                _buttonBuffer = 0.5f;
             }
+            
         }
 
         public void LevelSelectButtonInteraction(GameManager.LevelButton buttonName)
