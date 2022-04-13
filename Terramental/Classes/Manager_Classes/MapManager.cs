@@ -178,6 +178,11 @@ namespace Terramental
             {
                 SpawnManager.SpawnDialogueTrigger(position);
             }
+
+            if(index == 12)
+            {
+                SpawnManager.SpawnCheckpoint(position);
+            }
         }
     }
 }

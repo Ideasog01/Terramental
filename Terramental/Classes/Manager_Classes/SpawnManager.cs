@@ -19,6 +19,7 @@ namespace Terramental
         public static List<Sprite> effects = new List<Sprite>();
         public static List<ElementWall> elementWallList = new List<ElementWall>();
         public static List<DialogueController> dialogueControllerList = new List<DialogueController>();
+        public static List<Checkpoint> levelCheckpointList = new List<Checkpoint>();
         
         public static List<Dialogue> levelDialogueList = new List<Dialogue>();
         public static List<Vector2> dialogueScaleList = new List<Vector2>();
@@ -31,33 +32,56 @@ namespace Terramental
 
             foreach(KnightCharacter knightEnemy in knightEnemies)
             {
-                knightEnemy.UpdateCharacter(gameTime);
-                knightEnemy.UpdateKnightEnemy(gameTime);
+                if(knightEnemy.IsActive)
+                {
+                    knightEnemy.UpdateCharacter(gameTime);
+                    knightEnemy.UpdateKnightEnemy(gameTime);
+                }
             }
 
             foreach (HealthPickup healthPickup in _healthPickups)
             {
-                healthPickup.CheckHealthPickupCollision();
+                if(healthPickup.IsActive)
+                {
+                    healthPickup.CheckHealthPickupCollision();
+                }
             }
 
             foreach (ElementPickup elementPickup in _elementPickups)
             {
-                elementPickup.CheckElementPickupCollision(gameTime);
+                if(elementPickup.IsActive)
+                {
+                    elementPickup.CheckElementPickupCollision(gameTime);
+                }
             }
 
             foreach(ScorePickup scorePickup in _scorePickups)
             {
-                scorePickup.UpdateScorePickup();
+                if(scorePickup.IsActive)
+                {
+                    scorePickup.UpdateScorePickup();
+                }
             }
 
             foreach(ElementWall elementWall in elementWallList)
             {
-                elementWall.ElementWallCollisions();
+                if(elementWall.IsActive)
+                {
+                    elementWall.ElementWallCollisions();
+                }
             }
 
             foreach(DialogueController dialogueController in dialogueControllerList)
             {
                 dialogueController.CheckDialogueCollision();
+            }
+
+            foreach(Checkpoint checkpoint in levelCheckpointList)
+            {
+                if(checkpoint.IsActive)
+                {
+                    checkpoint.CheckCollision();
+                }
             }
         }
 
@@ -189,6 +213,12 @@ namespace Terramental
                 dialogueScaleList.Add(new Vector2(64, 64));
                 dialogueScaleList.Add(new Vector2(64, 64));
             }
+        }
+
+        public static void SpawnCheckpoint(Vector2 position)
+        {
+            Checkpoint checkpoint = new Checkpoint();
+            checkpoint.Initialise(position, _gameManager.GetTexture(""), new Vector2(64, 64));
         }
     }
 }

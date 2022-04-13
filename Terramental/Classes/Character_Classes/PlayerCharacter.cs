@@ -339,7 +339,7 @@ namespace Terramental
 
                 float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
 
-                if (SpritePosition.Y == _jumpHeight || disableMovement)
+                if (SpritePosition.Y <= _jumpHeight || disableMovement)
                 {
                     _isJumping = false;
                     _isGrounded = false;
