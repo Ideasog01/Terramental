@@ -21,7 +21,9 @@ namespace Terramental
 
         public KeyboardState _currentKeyboardState;
         public KeyboardState oldKeyboardState;
-        private MouseState _currentMouseState = Mouse.GetState();
+        private MouseState _currentMouseState;
+        private GamePadState _currentGamepadState;
+        private GamePadState _oldGamepadState;
 
         private bool isTap = false;
         private double time1;
@@ -49,12 +51,27 @@ namespace Terramental
 
             MouseState oldMouseState = _currentMouseState;
             _currentMouseState = Mouse.GetState();
+
+            _oldGamepadState = _currentGamepadState;
+            _currentGamepadState = GamePad.GetState(PlayerIndex.One);
             
-            if(_currentKeyboardState.IsKeyUp(Keys.Escape) && oldKeyboardState.IsKeyDown(Keys.Escape) && GameManager.currentGameState == GameManager.GameState.Level)
+            if(!_currentGamepadState.IsConnected)
             {
-                GameManager.PauseGame();
-                _gameManager.IsMouseVisible = true;
+                if (_currentKeyboardState.IsKeyUp(Keys.Escape) && oldKeyboardState.IsKeyDown(Keys.Escape) && GameManager.currentGameState == GameManager.GameState.Level)
+                {
+                    GameManager.PauseGame();
+                    _gameManager.IsMouseVisible = true;
+                }
             }
+            else
+            {
+                if(_currentGamepadState.Buttons.Start == ButtonState.Pressed && _oldGamepadState.Buttons.Start == ButtonState.Released && GameManager.currentGameState == GameManager.GameState.Level)
+                {
+                    GameManager.PauseGame();
+                    _gameManager.IsMouseVisible = true;
+                }
+            }
+            
 
             if(oldMouseState.LeftButton == ButtonState.Released && _currentMouseState.LeftButton == ButtonState.Pressed)
             {
@@ -102,10 +119,21 @@ namespace Terramental
                 _playerCharacter.PrimaryAttack();
             }
 
-            if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
+            if(!_currentGamepadState.IsConnected)
             {
-                _playerCharacter.PlayerJump();
+                if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
+                {
+                    _playerCharacter.PlayerJump();
+                }
             }
+            else
+            {
+                if (_oldGamepadState.Buttons.A == ButtonState.Pressed && _currentGamepadState.Buttons.A == ButtonState.Released)
+                {
+                    _playerCharacter.PlayerJump();
+                }
+            }
+            
         }
 
         
@@ -123,57 +151,120 @@ namespace Terramental
 
         private void PlayerMovementInput(GameTime gameTime)
         {
-            if (_currentKeyboardState.IsKeyDown(Keys.D))
+            if(!_currentGamepadState.IsConnected)
             {
-                _playerCharacter.HorizontalAxisRaw = 1;
-                _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
-                _playerCharacter.PlayerMovement(1, gameTime);
-            }
+                if (_currentKeyboardState.IsKeyDown(Keys.D))
+                {
+                    _playerCharacter.HorizontalAxisRaw = 1;
+                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
+                    _playerCharacter.PlayerMovement(1, gameTime);
+                }
 
-            if (_currentKeyboardState.IsKeyDown(Keys.A))
-            {
-                _playerCharacter.HorizontalAxisRaw = -1;
-                _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
-                _playerCharacter.PlayerMovement(-1, gameTime);
-            }
+                if (_currentKeyboardState.IsKeyDown(Keys.A))
+                {
+                    _playerCharacter.HorizontalAxisRaw = -1;
+                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
+                    _playerCharacter.PlayerMovement(-1, gameTime);
+                }
 
-            if (_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
+                if (_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
+                {
+                    _playerCharacter.HorizontalAxisRaw = 0;
+                    _playerCharacter.PlayerMovement(0, gameTime);
+                }
+            }
+            else
             {
-                _playerCharacter.HorizontalAxisRaw = 0;
-                _playerCharacter.PlayerMovement(0, gameTime);
+                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
+
+                if(leftStick.X > 0)
+                {
+                    _playerCharacter.HorizontalAxisRaw = 1;
+                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
+                    _playerCharacter.PlayerMovement(1, gameTime);
+                }
+                else if(leftStick.X < 0)
+                {
+                    _playerCharacter.HorizontalAxisRaw = -1;
+                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
+                    _playerCharacter.PlayerMovement(-1, gameTime);
+                }
+                else if(leftStick.X == 0)
+                {
+                    _playerCharacter.HorizontalAxisRaw = 0;
+                    _playerCharacter.PlayerMovement(0, gameTime);
+                }
             }
         }
 
         private void PlayerDashInput(GameTime gameTime)
         {
-            if (IsKeyPressed(Keys.W))
+            if(!_currentGamepadState.IsConnected)
             {
-                _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
-                _playerCharacter.DashStateMachine();
-            }
+                if (IsKeyPressed(Keys.W))
+                {
+                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
+                    _playerCharacter.DashStateMachine();
+                }
 
-            if (IsKeyPressed(Keys.A))
-            {
-                _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
-                _playerCharacter.DashStateMachine();
-            }
+                if (IsKeyPressed(Keys.A))
+                {
+                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                    _playerCharacter.DashStateMachine();
+                }
 
-            if (IsKeyPressed(Keys.D))
-            {
-                _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
-                _playerCharacter.DashStateMachine();
-            }
+                if (IsKeyPressed(Keys.D))
+                {
+                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                    _playerCharacter.DashStateMachine();
+                }
 
-            if (_currentKeyboardState.IsKeyDown(Keys.S))
-            {
-                _playerCharacter.VerticalAxisRaw = -1;
-                _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
-            }
+                if (_currentKeyboardState.IsKeyDown(Keys.S))
+                {
+                    _playerCharacter.VerticalAxisRaw = -1;
+                    _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
+                }
 
-            if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
-            {
-                _playerCharacter.VerticalAxisRaw = 0;
+                if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
+                {
+                    _playerCharacter.VerticalAxisRaw = 0;
+                }
             }
+            else
+            {
+                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
+                Vector2 oldLeftStick = _oldGamepadState.ThumbSticks.Left;
+
+                if(leftStick.X > 0 && oldLeftStick.X == 0)
+                {
+                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                    _playerCharacter.DashStateMachine();
+                }
+
+                if(leftStick.X < 0 && oldLeftStick.X == 0)
+                {
+                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                    _playerCharacter.DashStateMachine();
+                }
+
+                if(leftStick.Y > 0 && oldLeftStick.Y == 0)
+                {
+                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
+                    _playerCharacter.DashStateMachine();
+                }
+
+                if (leftStick.Y < 0 && oldLeftStick.Y == 0)
+                {
+                    _playerCharacter.VerticalAxisRaw = -1;
+                    _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
+                }
+
+                if(leftStick.Y == 0)
+                {
+                    _playerCharacter.VerticalAxisRaw = 0;
+                }
+            }
+            
         }
 
         /*
