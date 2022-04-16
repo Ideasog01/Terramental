@@ -153,25 +153,32 @@ namespace Terramental
 
         public void LoadNewGame(string filePath)
         {
-            playerCharacter = new PlayerCharacter(this);
-            playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
-            playerCharacter.InitialisePlayerAnimations(this);
-            playerCharacter.LayerOrder = -1;
-            playerInterface = new PlayerInterface(this);
+            if(!gameInProgress)
+            {
+                playerCharacter = new PlayerCharacter(this);
+                playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
+                playerCharacter.InitialisePlayerAnimations(this);
+                playerCharacter.LayerOrder = -1;
+                playerInterface = new PlayerInterface(this);
 
-            playerCharacter.DisplayPlayerLives();
-            GameManager.currentGameState = GameManager.GameState.Level;
 
-            dialogueManager = new DialogueManager(this, menuManager);
-            mapManager = new MapManager(this);
+                dialogueManager = new DialogueManager(this, menuManager);
+                mapManager = new MapManager(this);
 
-            mapManager.LoadMapData(filePath);
+                mapManager.LoadMapData(filePath);
 
-            CameraController.playerCharacter = playerCharacter;
+                CameraController.playerCharacter = playerCharacter;
 
-            gameInProgress = true;
+                gameInProgress = true;
 
-            LoadAudioLibrary();
+                LoadAudioLibrary();
+            }
+            else
+            {
+                playerCharacter.ResetPlayer();
+                playerCharacter.DisplayPlayerLives();
+                GameManager.currentGameState = GameManager.GameState.Level;
+            }
         }
 
         private void InitialiseGame()

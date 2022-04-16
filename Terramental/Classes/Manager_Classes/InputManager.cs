@@ -70,7 +70,40 @@ namespace Terramental
                     GameManager.PauseGame();
                     _gameManager.IsMouseVisible = true;
                 }
+
+                if(_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
+                {
+                    if(DialogueManager.dialogueActive)
+                    {
+                        _gameManager.dialogueManager.NextDialogue();
+                    }
+                    else
+                    {
+                        _menuManager.InteractSelectedButton();
+                    }
+                }
+
+                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
+
+                if (leftStick.X > 0)
+                {
+                    _menuManager.ChangeSelectedButton(1, false);
+                }
+                else if (leftStick.X < 0)
+                {
+                    _menuManager.ChangeSelectedButton(-1, false);
+                }
+
+                if(leftStick.Y > 0)
+                {
+                    _menuManager.ChangeSelectedButton(1, true);
+                }
+                else if(leftStick.Y < 0)
+                {
+                    _menuManager.ChangeSelectedButton(-1, true);
+                }
             }
+            
             
 
             if(oldMouseState.LeftButton == ButtonState.Released && _currentMouseState.LeftButton == ButtonState.Pressed)
