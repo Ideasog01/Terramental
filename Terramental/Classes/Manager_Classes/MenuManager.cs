@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Terramental
 {
@@ -23,6 +24,11 @@ namespace Terramental
 
         public static List<Button> loadGameButtonList = new List<Button>();
 
+        public Video splashScreenVideo;
+        public VideoPlayer videoPlayer;
+        public Texture2D videoTexture;
+        public Rectangle videoRectangle;
+
         public Button levelSelectReturnButton;
 
         public Button creditsReturnButton;
@@ -31,6 +37,8 @@ namespace Terramental
         public Button loadGameReturnButton;
 
         public MenuComponent loadGameBackground;
+
+
 
         private GameManager _gameManager;
         private GraphicsDeviceManager _graphics;
@@ -41,6 +49,9 @@ namespace Terramental
         private string _levelNameText;
         private string _levelDescriptionText;
         private string _levelDataFilePath;
+
+        private float videoTimer;
+        private bool videoPlaying;
 
         private float _buttonBuffer;
 
@@ -58,6 +69,7 @@ namespace Terramental
             LoadPauseMenu();
             LoadCreditsMenu();
             LoadLoadGameMenu();
+            LoadSplashScreens();
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -177,6 +189,21 @@ namespace Terramental
                     }
 
                     break;
+
+                case GameManager.GameState.SplashScreen:
+
+                    if (videoPlayer.State == MediaState.Stopped)
+                    {
+                        videoPlayer.Play(splashScreenVideo);
+                    }
+
+                    if (videoPlayer.State == MediaState.Playing)
+                    {
+                        videoTexture = videoPlayer.GetTexture();
+                        spriteBatch.Draw(videoTexture, videoRectangle, Color.White);
+                    }
+                    
+                    break;
                 
             }
         }
@@ -187,6 +214,20 @@ namespace Terramental
             {
                 _buttonBuffer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
+
+            if(videoPlaying)
+            {
+                if (videoTimer > 0)
+                {
+                    videoTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    GameManager.currentGameState = GameManager.GameState.MainMenu;
+                    videoPlaying = false;
+                }
+            }
+            
         }
 
         public void MouseClick(Vector2 mousePos)
@@ -521,6 +562,17 @@ namespace Terramental
             loadGameButtonList.Add(game2Button);
             loadGameButtonList.Add(game3Button);
             loadGameButtonList.Add(game4Button);
+        }
+
+        private void LoadSplashScreens()
+        {
+            videoPlayer = new VideoPlayer();
+            splashScreenVideo = _gameManager.Content.Load<Video>("Videos/SplashScreen_Video");
+            videoRectangle = new Rectangle(0, 0, GameManager.screenWidth, GameManager.screenHeight);
+            videoPlayer.Play(splashScreenVideo);
+
+            videoTimer = 13;
+            videoPlaying = true;
         }
     }
 }

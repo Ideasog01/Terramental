@@ -109,18 +109,18 @@ namespace Terramental
             PlayerMovementInput(gameTime);
             PlayerDashInput(gameTime);
 
-            if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
-            {
-                _playerCharacter.ActivateUltimate();
-            }
-
-            if (_currentMouseState.LeftButton == ButtonState.Pressed)
-            {
-                _playerCharacter.PrimaryAttack();
-            }
-
             if(!_currentGamepadState.IsConnected)
             {
+                if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
+                {
+                    _playerCharacter.ActivateUltimate();
+                }
+
+                if (_currentMouseState.LeftButton == ButtonState.Pressed)
+                {
+                    _playerCharacter.PrimaryAttack();
+                }
+
                 if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
                 {
                     _playerCharacter.PlayerJump();
@@ -128,16 +128,23 @@ namespace Terramental
             }
             else
             {
+                if(_currentGamepadState.IsButtonDown(Buttons.Y) && _oldGamepadState.IsButtonUp(Buttons.Y))
+                {
+                    _playerCharacter.ActivateUltimate();
+                }
+
+                if(_currentGamepadState.IsButtonDown(Buttons.RightTrigger) && _oldGamepadState.IsButtonUp(Buttons.RightTrigger))
+                {
+                    _playerCharacter.PrimaryAttack();
+                }
+
                 if (_oldGamepadState.Buttons.A == ButtonState.Pressed && _currentGamepadState.Buttons.A == ButtonState.Released)
                 {
                     _playerCharacter.PlayerJump();
                 }
             }
-            
         }
 
-        
-        // public Keys lastSuccessfulKeyPress;
         public bool IsKeyPressed(Keys key)
         {
             if (_currentKeyboardState.IsKeyUp(key) && oldKeyboardState.IsKeyDown(key))
@@ -146,6 +153,7 @@ namespace Terramental
                 // lastSuccessfulKeyPressTime = gameTime.ElapsedGameTime.TotalMilliseconds;
                 return true;
             }
+
             return false;
         }
 

@@ -892,3 +892,8 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/RespawnScreen/RespawnScreen.png
 
+#begin Videos/SplashScreen_Video.wmv
+/importer:WmvImporter
+/processor:VideoProcessor
+/build:Videos/SplashScreen_Video.wmv
+
