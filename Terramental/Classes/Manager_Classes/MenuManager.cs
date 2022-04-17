@@ -234,6 +234,11 @@ namespace Terramental
             
         }
 
+        public void EndLevel()
+        {
+            GameManager.currentGameState = GameManager.GameState.LevelSelect;
+        }
+
         public void ChangeSelectedButton(int amount, bool vertical)
         {
             if (GameManager.currentGameState != GameManager.GameState.SplashScreen && GameManager.currentGameState != GameManager.GameState.Level && _gamePadButtonTimer <= 0)

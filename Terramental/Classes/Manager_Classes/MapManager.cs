@@ -183,6 +183,11 @@ namespace Terramental
             {
                 SpawnManager.SpawnCheckpoint(position);
             }
+
+            if(index == 13)
+            {
+                SpawnManager.SpawnFragment(position);
+            }
         }
     }
 }

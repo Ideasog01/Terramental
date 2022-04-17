@@ -13,6 +13,13 @@ namespace Terramental
         private Tile _groundTile;
         private bool _rightPathBlocked;
         private bool _leftPathBlocked;
+        private int _elementIndex;
+
+        public int ElementIndex
+        {
+            get { return _elementIndex; }
+            set { _elementIndex = value; }
+        }
 
         public void UpdateKnightEnemy(GameTime gameTime)
         {

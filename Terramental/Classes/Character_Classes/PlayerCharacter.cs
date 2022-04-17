@@ -33,6 +33,7 @@ namespace Terramental
         private bool _isDashing;
         private bool _canDash = true;
         private bool _isHovering;
+        private bool _dashActive;
 
         private int upDashCheck = 0;
         private int leftDashCheck = 0;
@@ -201,6 +202,73 @@ namespace Terramental
                 float currentTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 UpdateUltimateStatus(gameTime);
 
+                if(_dashActive)
+                {
+                    foreach (KnightCharacter knight in SpawnManager.knightEnemies)
+                    {
+                        if (knight.IsActive)
+                        {
+                            bool checkCollision = false;
+
+                            if (_elementIndex == 0)
+                            {
+                                if (knight.ElementIndex == 0)
+                                {
+                                    checkCollision = true;
+                                }
+                                else if (knight.ElementIndex == 1)
+                                {
+                                    checkCollision = true;
+                                }
+                                else if (knight.ElementIndex == 2)
+                                {
+                                    checkCollision = false;
+                                }
+                            }
+
+                            if (_elementIndex == 1)
+                            {
+                                if (knight.ElementIndex == 0)
+                                {
+                                    checkCollision = false;
+                                }
+                                else if (knight.ElementIndex == 1)
+                                {
+                                    checkCollision = true;
+                                }
+                                else if (knight.ElementIndex == 2)
+                                {
+                                    checkCollision = true;
+                                }
+                            }
+
+                            if (_elementIndex == 2)
+                            {
+                                if (knight.ElementIndex == 0)
+                                {
+                                    checkCollision = true;
+                                }
+                                else if (knight.ElementIndex == 1)
+                                {
+                                    checkCollision = false;
+                                }
+                                else if (knight.ElementIndex == 2)
+                                {
+                                    checkCollision = true;
+                                }
+                            }
+
+                            if(!checkCollision)
+                            {
+                                if (knight.OnCollision(this.SpriteRectangle))
+                                {
+                                    knight.TakeDamage(25);
+                                }
+                            }
+                        }
+                    }
+                }
+
                 DashCheck();
 
                 ApplyGravity();
@@ -364,6 +432,7 @@ namespace Terramental
                     break;
             }
         }
+
         public void DashCheck()
         {
             if (!_isDashing)
@@ -374,6 +443,7 @@ namespace Terramental
                     dashDirX = 0;
                     _dashDistY = SpritePosition.Y - 500;
                     //Dash();
+                    _dashActive = true;
                     _isDashing = true;
                 }
                 if (leftDashCheck >= 2)
@@ -382,6 +452,7 @@ namespace Terramental
                     dashDirY = 0;
                     _dashDistX = SpritePosition.X - 500;
                     //Dash();
+                    _dashActive = true;
                     _isDashing = true;
                 }
                 if (rightDashCheck >= 2)
@@ -390,10 +461,12 @@ namespace Terramental
                     dashDirY = 0;
                     _dashDistX = SpritePosition.X + 500;
                     //Dash();
+                    _dashActive = true;
                     _isDashing = true;
                 }
             }
         }
+
         public void Dash()
         {
             if (_isDashing)
@@ -406,10 +479,11 @@ namespace Terramental
                 {
                     SpriteVelocity = new Vector2(0, 0);
                 }
-                _isDashing = false;
 
+                _isDashing = false;
             }
         }
+
         public async void DoubleTapToDashCooldown()
         {
             await Task.Delay(500);
@@ -417,7 +491,9 @@ namespace Terramental
             upDashCheck = 0;
             leftDashCheck = 0;
             rightDashCheck = 0;
+            _dashActive = false;
         }
+
         public void ApplyGravity()
         {
             if (!_isGrounded)

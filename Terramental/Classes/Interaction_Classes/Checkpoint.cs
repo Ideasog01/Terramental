@@ -6,6 +6,11 @@ namespace Terramental
 {
     public class Checkpoint : Pickup
     {
+        public Checkpoint(PlayerCharacter player)
+        {
+            Player = player;
+        }
+
         public void CheckCollision()
         {
             if(OnCollision(Player.SpriteRectangle))

@@ -24,6 +24,8 @@ namespace Terramental
         private float _damageTimer;
         private float _damageWaitTime;
 
+        private float _takeDamageCooldown;
+
         private int _statusIndex;
 
         public bool IsBurning
@@ -57,11 +59,16 @@ namespace Terramental
 
         public void TakeDamage(int amount)
         {
-            _characterHealth -= amount;
-
-            if(_characterHealth <= 0)
+            if(_takeDamageCooldown <= 0)
             {
-                IsActive = false;
+                _characterHealth -= amount;
+
+                _takeDamageCooldown = 2f;
+
+                if (_characterHealth <= 0)
+                {
+                    IsActive = false;
+                }
             }
         }
 
@@ -128,6 +135,11 @@ namespace Terramental
             else if (SpriteVelocity.X < 0)  // Facing left 
             {
                 SetAnimation(1);
+            }
+
+            if(_takeDamageCooldown > 0)
+            {
+                _takeDamageCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Terramental
 {
@@ -20,6 +21,7 @@ namespace Terramental
         public static List<ElementWall> elementWallList = new List<ElementWall>();
         public static List<DialogueController> dialogueControllerList = new List<DialogueController>();
         public static List<Checkpoint> levelCheckpointList = new List<Checkpoint>();
+        public static Fragment levelFragment;
         
         public static List<Dialogue> levelDialogueList = new List<Dialogue>();
         public static List<Vector2> dialogueScaleList = new List<Vector2>();
@@ -28,61 +30,68 @@ namespace Terramental
 
         public static void Update(GameTime gameTime)
         {
-            //Updates all characters in the enemy characters list
-
-            foreach(KnightCharacter knightEnemy in knightEnemies)
+            if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                if(knightEnemy.IsActive)
+                foreach (KnightCharacter knightEnemy in knightEnemies)
                 {
-                    knightEnemy.UpdateCharacter(gameTime);
-                    knightEnemy.UpdateKnightEnemy(gameTime);
+                    if (knightEnemy.IsActive)
+                    {
+                        knightEnemy.UpdateCharacter(gameTime);
+                        knightEnemy.UpdateKnightEnemy(gameTime);
+                    }
+                }
+
+                foreach (HealthPickup healthPickup in _healthPickups)
+                {
+                    if (healthPickup.IsActive)
+                    {
+                        healthPickup.CheckHealthPickupCollision();
+                    }
+                }
+
+                foreach (ElementPickup elementPickup in _elementPickups)
+                {
+                    if (elementPickup.IsActive)
+                    {
+                        elementPickup.CheckElementPickupCollision(gameTime);
+                    }
+                }
+
+                foreach (ScorePickup scorePickup in _scorePickups)
+                {
+                    if (scorePickup.IsActive)
+                    {
+                        scorePickup.UpdateScorePickup();
+                    }
+                }
+
+                foreach (ElementWall elementWall in elementWallList)
+                {
+                    if (elementWall.IsActive)
+                    {
+                        elementWall.ElementWallCollisions();
+                    }
+                }
+
+                foreach (DialogueController dialogueController in dialogueControllerList)
+                {
+                    dialogueController.CheckDialogueCollision();
+                }
+
+                foreach (Checkpoint checkpoint in levelCheckpointList)
+                {
+                    if (checkpoint.IsActive)
+                    {
+                        checkpoint.CheckCollision();
+                    }
+                }
+
+                if(levelFragment != null)
+                {
+                    levelFragment.CheckFragmentCollision();
                 }
             }
 
-            foreach (HealthPickup healthPickup in _healthPickups)
-            {
-                if(healthPickup.IsActive)
-                {
-                    healthPickup.CheckHealthPickupCollision();
-                }
-            }
-
-            foreach (ElementPickup elementPickup in _elementPickups)
-            {
-                if(elementPickup.IsActive)
-                {
-                    elementPickup.CheckElementPickupCollision(gameTime);
-                }
-            }
-
-            foreach(ScorePickup scorePickup in _scorePickups)
-            {
-                if(scorePickup.IsActive)
-                {
-                    scorePickup.UpdateScorePickup();
-                }
-            }
-
-            foreach(ElementWall elementWall in elementWallList)
-            {
-                if(elementWall.IsActive)
-                {
-                    elementWall.ElementWallCollisions();
-                }
-            }
-
-            foreach(DialogueController dialogueController in dialogueControllerList)
-            {
-                dialogueController.CheckDialogueCollision();
-            }
-
-            foreach(Checkpoint checkpoint in levelCheckpointList)
-            {
-                if(checkpoint.IsActive)
-                {
-                    checkpoint.CheckCollision();
-                }
-            }
         }
 
         public static void SpawnAttachEffect(string texturePath, Vector2 position, Vector2 scale, Sprite attachSprite, float duration, bool animation)
@@ -116,6 +125,9 @@ namespace Terramental
         {
             if(index == 0) //Knight Enemy Character
             {
+                Random rand = new Random();
+                int elementIndex = rand.Next(0, 2);
+
                 Animation knightIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
                 Animation knightWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"), 7, 120f, true, new Vector2(96, 96));
                 Animation knightAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 7, 150f, true, new Vector2(96, 96));
@@ -131,6 +143,7 @@ namespace Terramental
 
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
 
+                knightEnemy.ElementIndex = elementIndex;
                 knightEnemies.Add(knightEnemy);
             }
         }
@@ -217,8 +230,15 @@ namespace Terramental
 
         public static void SpawnCheckpoint(Vector2 position)
         {
-            Checkpoint checkpoint = new Checkpoint();
-            checkpoint.Initialise(position, _gameManager.GetTexture(""), new Vector2(64, 64));
+            Checkpoint checkpoint = new Checkpoint(_gameManager.playerCharacter);
+            checkpoint.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
+            levelCheckpointList.Add(checkpoint);
+        }
+
+        public static void SpawnFragment(Vector2 position)
+        {
+            levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
+            levelFragment.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
         }
     }
 }
