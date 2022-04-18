@@ -4,84 +4,92 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/PlayerJump_SFX.wav</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/DefaultFont.spritefont</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/LevelNumberFont.spritefont</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/LevelTitleFont.spritefont</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/FrozenEffect.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Obstacles/FireTile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Obstacles/SnowTile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Obstacles/WaterTile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/FirePickup_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/Health_Pickup.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/SnowPickup_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/WaterPickup_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Fire_Idle_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_Snow_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_Water_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Snow_RightWalk_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Water_RightWalk_Spritesheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Projectiles/WaterProjectile_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_LeftActivation_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_LeftIdle_SpriteSheet.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/DefaultTile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/First_Sky_Tile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Fourth_Sky_Tile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Left_Corner.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Left_Slide.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Right_Corner.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Right_Slide.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Second_Sky_Tile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Third_Sky_Tile.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Tile_Filler.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Tile_Sand.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Tile-Fire.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/CreditsMenu/Credits.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/CreditsMenu/ReturnButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/Dialogue/DialogueNextButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/Dialogue/DialoguePanel.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/ExitButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/LevelDetailsPanel.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/LevelSelectButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/StartButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/Terra_Map.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game1Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game2Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game3Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game4Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/LoadGameBackground.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/Achievements_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/Credits_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/ExitGame_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/GameTitleText.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/LoadGame_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/MainMenu_FireBackground.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/NewGame_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/Options_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PauseMenu/MainMenuButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PauseMenu/OptionsButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PauseMenu/PauseMenu.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PauseMenu/ResumeButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Collectible.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Dash_Element.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Fire_Element.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Health.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Snow_Element.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Special_PowerUp.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Water_Element.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/RespawnScreen/RespawnButton.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/RespawnScreen/RespawnScreen.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Video.wmv</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/SFXs/PlayerJump_SFX.wav</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/SpriteFont/DefaultFont.spritefont</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/SpriteFont/LevelNumberFont.spritefont</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/SpriteFont/LevelTitleFont.spritefont</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Effects/FrozenEffect.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Bullet_LeftExample.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Bullet_RightExample.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Cannon_LeftExample.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Cannon_RightExample.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/FireTile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/SnowTile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/WaterTile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Pickups/FirePickup_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Pickups/Health_Pickup.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Pickups/SnowPickup_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Pickups/WaterPickup_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Idle/Fire_Idle_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_Snow_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Idle/Idle_Water_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Walk/Snow_RightWalk_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Walk/Water_RightWalk_Spritesheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/SpriteSheets/Projectiles/WaterProjectile_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_LeftActivation_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/SpriteSheets/Ultimates/SnowBeam_LeftIdle_SpriteSheet.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/DefaultTile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/First_Sky_Tile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Fourth_Sky_Tile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Left_Corner.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Left_Slide.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Right_Corner.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Right_Slide.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Second_Sky_Tile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Third_Sky_Tile.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Tile_Filler.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Tile_Sand.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Tile-Fire.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/CreditsMenu/Credits.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/CreditsMenu/ReturnButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/Dialogue/DialogueNextButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/Dialogue/DialoguePanel.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelSelect/ExitButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelSelect/LevelDetailsPanel.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelSelect/LevelSelectButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelSelect/StartButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelSelect/Terra_Map.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game1Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game2Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game3Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game4Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LoadGameMenu/LoadGameBackground.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/Achievements_MainMenu_Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/Credits_MainMenu_Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/ExitGame_MainMenu_Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/GameTitleText.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/LoadGame_MainMenu_Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/MainMenu_FireBackground.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/NewGame_MainMenu_Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/MainMenu/Options_MainMenu_Button.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PauseMenu/MainMenuButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PauseMenu/OptionsButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PauseMenu/PauseMenu.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PauseMenu/ResumeButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Collectible.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Dash_Element.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Fire_Element.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Health.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Snow_Element.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Special_PowerUp.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Water_Element.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/RespawnScreen/RespawnButton.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/RespawnScreen/RespawnScreen.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Videos/SplashScreen_Video.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -188,6 +188,18 @@ namespace Terramental
             {
                 SpawnManager.SpawnFragment(position);
             }
+
+            if (index == 14) // Left facing cannon
+            {
+                SpawnManager.SpawnCannonObstacle(0, position);
+            }
+
+            if (index == 15) // Right facing cannon
+            {
+                SpawnManager.SpawnCannonObstacle(1, position);
+            }
+
+
         }
     }
 }

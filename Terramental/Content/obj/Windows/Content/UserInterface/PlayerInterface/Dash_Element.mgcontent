@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/PlayerInterface/Dash_Element.png</SourceFile>
-  <SourceTime>2022-04-08T18:49:52.2569532+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/PlayerInterface/Dash_Element.xnb</DestFile>
-  <DestTime>2022-04-13T16:25:59.1678173+01:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/PlayerInterface/Dash_Element.png</SourceFile>
+  <SourceTime>2022-03-28T16:06:01.4912863+01:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/PlayerInterface/Dash_Element.xnb</DestFile>
+  <DestTime>2022-04-18T19:12:41.7327102+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

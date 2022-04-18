@@ -15,6 +15,8 @@ namespace Terramental
 
         public static List<KnightCharacter> knightEnemies = new List<KnightCharacter>();
         public static List<HealthPickup> _healthPickups = new List<HealthPickup>();
+        public static List<Cannon> _cannons = new List<Cannon>();
+        public static List<CannonProjectile> _cannonProjectiles = new List<CannonProjectile>();
         public static List<ElementPickup> _elementPickups = new List<ElementPickup>();
         public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
         public static List<Sprite> effects = new List<Sprite>();
@@ -48,6 +50,25 @@ namespace Terramental
                         healthPickup.CheckHealthPickupCollision();
                     }
                 }
+
+                foreach (Cannon cannon in _cannons)
+                {
+                    if (cannon.IsActive)
+                    {
+                        cannon.UpdateCannon(gameTime);
+
+                    }
+                }
+
+                foreach (CannonProjectile cannonProjectile in _cannonProjectiles)
+                {
+                    if (cannonProjectile.IsActive)
+                    {
+                        cannonProjectile.UpdateCannonProjectile();
+                        cannonProjectile.CheckCannonProjectileCollisions();
+                    }
+                }
+
 
                 foreach (ElementPickup elementPickup in _elementPickups)
                 {
@@ -155,6 +176,43 @@ namespace Terramental
 
             _healthPickups.Add(healthPickup);
         }
+
+        public static void SpawnCannonObstacle(int cannonDir, Vector2 position)
+        {
+            Cannon cannonObstacle = new Cannon(_gameManager, _gameManager.playerCharacter, cannonDir);
+
+            switch (cannonDir)
+            {
+                case 0: // Left facing cannon
+                    cannonObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Cannon_LeftExample"), new Vector2(64, 64)); break;
+                case 1: // Right facing cannon
+                    cannonObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Cannon_RightExample"), new Vector2(64, 64)); break;
+                default: break;
+            }
+
+            _cannons.Add(cannonObstacle);
+        }
+
+        public static void SpawnCannonProjectile(int cannonDir, Vector2 position)
+        {
+            CannonProjectile cannonProj = new CannonProjectile(_gameManager.playerCharacter, cannonDir);
+
+            switch (cannonDir)
+            {
+                case 0: // Left facing cannon
+                    cannonProj.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Bullet_LeftExample"), new Vector2(64, 64));
+                    break;
+                case 1: // Right facing cannon
+                    cannonProj.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Bullet_RightExample"), new Vector2(64, 64));
+                    break;
+
+                default:
+                    break;
+            }
+
+            _cannonProjectiles.Add(cannonProj);
+        }
+
 
         public static void SpawnScorePickup(Vector2 position)
         {
