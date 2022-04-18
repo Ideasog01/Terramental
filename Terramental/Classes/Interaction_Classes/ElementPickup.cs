@@ -12,6 +12,7 @@ namespace Terramental
         private int _elementIndex;
 
         private float _pickupTimer;
+        private int _originalElementIndex;
 
         public ElementPickup(int elementIndex, Texture2D fireTexture, Texture2D waterTexture, Texture2D snowTexture, PlayerCharacter playerCharacter)
         {
@@ -24,10 +25,16 @@ namespace Terramental
             Animations.Add(new Animation(_snowTexture, 4, 120f, true, new Vector2(64, 64)));
 
             _elementIndex = elementIndex;
+            _originalElementIndex = elementIndex;
 
             Player = playerCharacter;
 
             SetAnimation(_elementIndex);
+        }
+
+        public void ResetPickup()
+        {
+            ChangeElement(_originalElementIndex);
         }
 
         public void CheckElementPickupCollision(GameTime gameTime)

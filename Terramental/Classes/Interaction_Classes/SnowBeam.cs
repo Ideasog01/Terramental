@@ -6,10 +6,9 @@ namespace Terramental
 {
     class SnowBeam : Sprite
     {
-
         public void CheckBeamCollisions()
         {
-            foreach (BaseCharacter enemy in SpawnManager.knightEnemies)
+            foreach (BaseCharacter enemy in SpawnManager._gameManager.currentLevelData.knightEnemies)
             {
                 if (OnCollision(enemy.SpriteRectangle))
                 {

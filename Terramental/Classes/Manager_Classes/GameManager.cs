@@ -17,7 +17,7 @@ namespace Terramental
 
         public enum GameState { SplashScreen, MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete};
 
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame };
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue };
 
         public enum GameData { Game1, Game2, Game3, Game4};
 
@@ -36,6 +36,8 @@ namespace Terramental
         public MenuManager menuManager;
         public DialogueManager dialogueManager;
 
+        public LevelData currentLevelData;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -45,6 +47,8 @@ namespace Terramental
         public PlayerCharacter playerCharacter;
 
         private CameraController _mainCam;
+
+        private bool skipToLevel = true;
 
         public GameManager()
         {
@@ -72,6 +76,12 @@ namespace Terramental
             menuManager = new MenuManager(this, _graphics);
 
             InitialiseGame();
+
+            if(skipToLevel)
+            {
+                LoadNewGame(@"MapData.json");
+                currentGameState = GameState.Level;
+            }
         }
 
         protected override void Update(GameTime gameTime)
@@ -155,6 +165,7 @@ namespace Terramental
         {
             if(!gameInProgress)
             {
+                currentLevelData = new LevelData();
                 playerCharacter = new PlayerCharacter(this);
                 playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
                 playerCharacter.InitialisePlayerAnimations(this);

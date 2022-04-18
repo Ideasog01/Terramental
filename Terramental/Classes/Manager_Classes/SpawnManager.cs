@@ -13,26 +13,13 @@ namespace Terramental
 
         public static GameManager _gameManager;
 
-        public static List<KnightCharacter> knightEnemies = new List<KnightCharacter>();
-        public static List<HealthPickup> _healthPickups = new List<HealthPickup>();
-        public static List<ElementPickup> _elementPickups = new List<ElementPickup>();
-        public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
-        public static List<Sprite> effects = new List<Sprite>();
-        public static List<ElementWall> elementWallList = new List<ElementWall>();
-        public static List<DialogueController> dialogueControllerList = new List<DialogueController>();
-        public static List<Checkpoint> levelCheckpointList = new List<Checkpoint>();
-        public static Fragment levelFragment;
-        
-        public static List<Dialogue> levelDialogueList = new List<Dialogue>();
-        public static List<Vector2> dialogueScaleList = new List<Vector2>();
-
         public static int dialogueTriggersCount;
 
         public static void Update(GameTime gameTime)
         {
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                foreach (KnightCharacter knightEnemy in knightEnemies)
+                foreach (KnightCharacter knightEnemy in _gameManager.currentLevelData.knightEnemies)
                 {
                     if (knightEnemy.IsActive)
                     {
@@ -41,7 +28,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (HealthPickup healthPickup in _healthPickups)
+                foreach (HealthPickup healthPickup in _gameManager.currentLevelData._healthPickups)
                 {
                     if (healthPickup.IsActive)
                     {
@@ -49,7 +36,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (ElementPickup elementPickup in _elementPickups)
+                foreach (ElementPickup elementPickup in _gameManager.currentLevelData._elementPickups)
                 {
                     if (elementPickup.IsActive)
                     {
@@ -57,7 +44,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (ScorePickup scorePickup in _scorePickups)
+                foreach (ScorePickup scorePickup in _gameManager.currentLevelData._scorePickups)
                 {
                     if (scorePickup.IsActive)
                     {
@@ -65,7 +52,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (ElementWall elementWall in elementWallList)
+                foreach (ElementWall elementWall in _gameManager.currentLevelData.elementWallList)
                 {
                     if (elementWall.IsActive)
                     {
@@ -73,12 +60,12 @@ namespace Terramental
                     }
                 }
 
-                foreach (DialogueController dialogueController in dialogueControllerList)
+                foreach (DialogueController dialogueController in _gameManager.currentLevelData.dialogueControllerList)
                 {
                     dialogueController.CheckDialogueCollision();
                 }
 
-                foreach (Checkpoint checkpoint in levelCheckpointList)
+                foreach (Checkpoint checkpoint in _gameManager.currentLevelData.levelCheckpointList)
                 {
                     if (checkpoint.IsActive)
                     {
@@ -86,9 +73,9 @@ namespace Terramental
                     }
                 }
 
-                if(levelFragment != null)
+                if(_gameManager.currentLevelData.levelFragment != null)
                 {
-                    levelFragment.CheckFragmentCollision();
+                    _gameManager.currentLevelData.levelFragment.CheckFragmentCollision(gameTime);
                 }
             }
 
@@ -121,6 +108,7 @@ namespace Terramental
 
             effectSprite.Destroy(duration);
         }
+
         public static void SpawnEnemy(int index, Vector2 position)
         {
             if(index == 0) //Knight Enemy Character
@@ -134,7 +122,8 @@ namespace Terramental
 
                 KnightCharacter knightEnemy = new KnightCharacter();
                 knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
-                
+                knightEnemy.SetProperties();
+
                 knightEnemy.AddAnimation(knightIdle);
                 knightEnemy.AddAnimation(knightWalk);
                 knightEnemy.AddAnimation(knightAttack);
@@ -144,7 +133,7 @@ namespace Terramental
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
 
                 knightEnemy.ElementIndex = elementIndex;
-                knightEnemies.Add(knightEnemy);
+                _gameManager.currentLevelData.knightEnemies.Add(knightEnemy);
             }
         }
 
@@ -153,7 +142,7 @@ namespace Terramental
             HealthPickup healthPickup = new HealthPickup(_gameManager.playerCharacter, 1);
             healthPickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64, 64));
 
-            _healthPickups.Add(healthPickup);
+            _gameManager.currentLevelData._healthPickups.Add(healthPickup);
         }
 
         public static void SpawnScorePickup(Vector2 position)
@@ -161,14 +150,14 @@ namespace Terramental
             ScorePickup scorePickup = new ScorePickup(_gameManager.playerCharacter);
             scorePickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
 
-            _scorePickups.Add(scorePickup);
+            _gameManager.currentLevelData._scorePickups.Add(scorePickup);
         }
 
         public static void SpawnElementPickup(int elementIndex, Vector2 position)
         {
             ElementPickup elementPickup = new ElementPickup(elementIndex, _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), _gameManager.playerCharacter);
-            elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));   
-            _elementPickups.Add(elementPickup);
+            elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));
+            _gameManager.currentLevelData._elementPickups.Add(elementPickup);
         }
 
         public static void SpawnElementWall(int elementIndex, Vector2 position, MapManager mapManager)
@@ -188,24 +177,24 @@ namespace Terramental
                     break;
             }
 
-            elementWallList.Add(elementWall);
+            _gameManager.currentLevelData.elementWallList.Add(elementWall);
         }
 
         public static void SpawnDialogueTrigger(Vector2 position)
         {
             DialogueController dialogueController = new DialogueController(_gameManager.playerCharacter, new Rectangle((int)position.X, (int)position.Y,
-                    (int)dialogueScaleList[dialogueTriggersCount].X, (int)dialogueScaleList[dialogueTriggersCount].Y),
-                    _gameManager.dialogueManager, levelDialogueList[dialogueTriggersCount]);
+                    (int)_gameManager.currentLevelData.dialogueScaleList[dialogueTriggersCount].X, (int)_gameManager.currentLevelData.dialogueScaleList[dialogueTriggersCount].Y),
+                    _gameManager.dialogueManager, _gameManager.currentLevelData.levelDialogueList[dialogueTriggersCount]);
 
-            dialogueControllerList.Add(dialogueController);
+            _gameManager.currentLevelData.dialogueControllerList.Add(dialogueController);
 
             dialogueTriggersCount++;
         }
 
         public static void GenerateDialogue(int levelIndex)
         {
-            levelDialogueList.Clear();
-            dialogueScaleList.Clear();
+            _gameManager.currentLevelData.levelDialogueList.Clear();
+            _gameManager.currentLevelData.dialogueScaleList.Clear();
 
             if(levelIndex == 0)
             {
@@ -218,13 +207,13 @@ namespace Terramental
                 string[] dialogue3Content = { "Hello there!", "It is over Anakin", "I have the high ground!" };
                 Dialogue dialogue3 = new Dialogue(dialogue3Content, "Obi-Wan Kenobi");
 
-                levelDialogueList.Add(dialogue1);
-                levelDialogueList.Add(dialogue2);
-                levelDialogueList.Add(dialogue3);
+                _gameManager.currentLevelData.levelDialogueList.Add(dialogue1);
+                _gameManager.currentLevelData.levelDialogueList.Add(dialogue2);
+                _gameManager.currentLevelData.levelDialogueList.Add(dialogue3);
 
-                dialogueScaleList.Add(new Vector2(64, 64));
-                dialogueScaleList.Add(new Vector2(64, 64));
-                dialogueScaleList.Add(new Vector2(64, 64));
+                _gameManager.currentLevelData.dialogueScaleList.Add(new Vector2(64, 64));
+                _gameManager.currentLevelData.dialogueScaleList.Add(new Vector2(64, 64));
+                _gameManager.currentLevelData.dialogueScaleList.Add(new Vector2(64, 64));
             }
         }
 
@@ -232,13 +221,38 @@ namespace Terramental
         {
             Checkpoint checkpoint = new Checkpoint(_gameManager.playerCharacter);
             checkpoint.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
-            levelCheckpointList.Add(checkpoint);
+            _gameManager.currentLevelData.levelCheckpointList.Add(checkpoint);
         }
 
         public static void SpawnFragment(Vector2 position)
         {
-            levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
-            levelFragment.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
+            _gameManager.currentLevelData.levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
+            _gameManager.currentLevelData.levelFragment.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
+        }
+
+        public static void ResetEntities()
+        {
+            foreach(KnightCharacter character in _gameManager.currentLevelData.knightEnemies)
+            {
+                character.ResetCharacter();
+            }
+
+            foreach(ElementPickup elementPickup in _gameManager.currentLevelData._elementPickups)
+            {
+                elementPickup.ResetPickup();
+            }
+
+            foreach(HealthPickup healthPickup in _gameManager.currentLevelData._healthPickups)
+            {
+                healthPickup.IsActive = true;
+            }
+
+            foreach(ScorePickup scorePickup in _gameManager.currentLevelData._scorePickups)
+            {
+                scorePickup.IsActive = true;
+            }
+
+            _gameManager.currentLevelData.levelFragment.IsActive = true;
         }
     }
 }

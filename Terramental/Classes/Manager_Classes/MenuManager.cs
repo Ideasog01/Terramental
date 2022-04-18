@@ -22,6 +22,9 @@ namespace Terramental
         public static List<Button> pauseMenuButtonList = new List<Button>();
         public static List<MenuComponent> pauseMenuComponentList = new List<MenuComponent>();
 
+        public static List<MenuComponent> completeMenuComponentList = new List<MenuComponent>();
+        public static List<Button> completeMenuButtonList = new List<Button>();
+
         public static List<Button> loadGameButtonList = new List<Button>();
 
         public int currentButtonIndex;
@@ -71,6 +74,7 @@ namespace Terramental
             LoadCreditsMenu();
             LoadLoadGameMenu();
             LoadSplashScreens();
+            LoadLevelCompleteMenu();
 
             currentButtonIndex = 0;
             mainMenuButtonList[0].ComponentColor = Color.Gray;
@@ -203,6 +207,22 @@ namespace Terramental
                     }
                     
                     break;
+
+                case GameManager.GameState.LevelComplete:
+
+                    foreach(MenuComponent completeComponent in completeMenuComponentList)
+                    {
+                        completeComponent.DrawMenuComponent(spriteBatch);
+                    }
+
+                    foreach (Button completeButton in completeMenuButtonList)
+                    {
+                        completeButton.DrawMenuComponent(spriteBatch);
+                    }
+
+                    spriteBatch.DrawString(_levelTitleFont, "Score: " + _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2(200, 200), Color.White);
+
+                    break;
                 
             }
         }
@@ -219,7 +239,7 @@ namespace Terramental
                 _gamePadButtonTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if(videoPlaying)
+            if(videoPlaying && GameManager.currentGameState == GameManager.GameState.SplashScreen)
             {
                 if (videoTimer > 0)
                 {
@@ -236,7 +256,8 @@ namespace Terramental
 
         public void EndLevel()
         {
-            GameManager.currentGameState = GameManager.GameState.LevelSelect;
+            GameManager.currentGameState = GameManager.GameState.LevelComplete;
+            _gameManager.IsMouseVisible = true;
         }
 
         public void ChangeSelectedButton(int amount, bool vertical)
@@ -268,6 +289,10 @@ namespace Terramental
                     case GameManager.GameState.Respawn:
                         _buttonList = respawnMenuButtonList;
                         _verticalMenu = false;
+                        break;
+                    case GameManager.GameState.LevelComplete:
+                        _buttonList = completeMenuButtonList;
+                        _verticalMenu = true;
                         break;
                 }
 
@@ -375,6 +400,14 @@ namespace Terramental
                         button.CheckInteractionLoad(mousePos);
                     }
                 }
+
+                if(GameManager.currentGameState == GameManager.GameState.LevelComplete)
+                {
+                    foreach(Button button in completeMenuButtonList)
+                    {
+                        button.CheckInteraction(mousePos);
+                    }
+                }
             }
 
         }
@@ -414,6 +447,13 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.LoadGameButton:
                         GameManager.currentGameState = GameManager.GameState.LoadGame;
+                        break;
+                    case GameManager.ButtonName.Replay:
+                        GameManager.currentGameState = GameManager.GameState.Level;
+                        _gameManager.mapManager.ResetLevel();
+                        break;
+                    case GameManager.ButtonName.Continue:
+                        GameManager.currentGameState = GameManager.GameState.LevelSelect;
                         break;
                 }
 
@@ -659,6 +699,26 @@ namespace Terramental
 
             videoTimer = 13;
             videoPlaying = true;
+        }
+
+        private void LoadLevelCompleteMenu()
+        {
+            Texture2D backgroundTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/LevelCompleteBackground");
+            MenuComponent background = new MenuComponent();
+            background.InitialiseMenuComponent(backgroundTexture, Vector2.Zero, new Vector2(GameManager.screenWidth, GameManager.screenHeight));
+
+            completeMenuComponentList.Add(background);
+
+            Texture2D replayButtonTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/ReplayButton");
+            Button replayButton = new Button(GameManager.ButtonName.Replay, this);
+            replayButton.InitialiseMenuComponent(replayButtonTexture, new Vector2((GameManager.screenWidth / 2) - (replayButtonTexture.Width / 2) - 160, 380), new Vector2(replayButtonTexture.Width, replayButtonTexture.Height));
+
+            Texture2D continueButtonTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/ContinueButton");
+            Button continueButton = new Button(GameManager.ButtonName.Continue, this);
+            continueButton.InitialiseMenuComponent(continueButtonTexture, new Vector2((GameManager.screenWidth / 2) - (replayButtonTexture.Width / 2) + 160, 380), new Vector2(continueButtonTexture.Width, continueButtonTexture.Height));
+
+            completeMenuButtonList.Add(replayButton);
+            completeMenuButtonList.Add(continueButton);
         }
     }
 }

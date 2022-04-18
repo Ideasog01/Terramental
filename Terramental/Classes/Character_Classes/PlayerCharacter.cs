@@ -193,6 +193,9 @@ namespace Terramental
             _gameManager.playerInterface.UpdatePlayerLives(3);
             DialogueManager.dialogueActive = false;
             disableMovement = false;
+            _isGrounded = true;
+            _isJumping = false;
+            _playerScore = 0;
         }
 
         public void UpdatePlayerCharacter(GameTime gameTime)
@@ -204,7 +207,7 @@ namespace Terramental
 
                 if(_dashActive)
                 {
-                    foreach (KnightCharacter knight in SpawnManager.knightEnemies)
+                    foreach (KnightCharacter knight in _gameManager.currentLevelData.knightEnemies)
                     {
                         if (knight.IsActive)
                         {
@@ -614,7 +617,7 @@ namespace Terramental
 
                 rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
 
-                foreach (BaseCharacter character in SpawnManager.knightEnemies)
+                foreach (BaseCharacter character in _gameManager.currentLevelData.knightEnemies)
                 {
                     if (this.OnCollision(character.SpriteRectangle))
                     {

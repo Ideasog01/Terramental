@@ -28,6 +28,19 @@ namespace Terramental
 
         private int _statusIndex;
 
+        private Vector2 _startPosition;
+
+        public void SetProperties()
+        {
+            _startPosition = SpritePosition;
+        }
+
+        public void ResetCharacter()
+        {
+            _characterHealth = _characterMaxHealth;
+            SpritePosition = _startPosition;
+        }
+
         public bool IsBurning
         {
             get { return _isBurning; }

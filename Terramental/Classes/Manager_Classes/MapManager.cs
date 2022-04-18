@@ -27,6 +27,13 @@ namespace Terramental
 
         }
 
+        public void ResetLevel()
+        {
+            SpawnManager.ResetEntities();
+            _gameManager.IsMouseVisible = true;
+            _gameManager.playerCharacter.ResetPlayer();
+        }
+
         public void CheckActiveTiles()
         {
             foreach(Tile tile in tileList)
