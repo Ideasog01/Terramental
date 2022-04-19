@@ -122,7 +122,7 @@ namespace Terramental
 
                 KnightCharacter knightEnemy = new KnightCharacter();
                 knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
-                knightEnemy.SetProperties();
+                knightEnemy.SetProperties(position + new Vector2(0, -32));
 
                 knightEnemy.AddAnimation(knightIdle);
                 knightEnemy.AddAnimation(knightWalk);

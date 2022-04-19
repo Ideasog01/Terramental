@@ -30,9 +30,9 @@ namespace Terramental
 
         private Vector2 _startPosition;
 
-        public void SetProperties()
+        public void SetProperties(Vector2 position)
         {
-            _startPosition = SpritePosition;
+            _startPosition = position;
         }
 
         public void ResetCharacter()
