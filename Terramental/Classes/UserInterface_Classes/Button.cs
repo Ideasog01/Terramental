@@ -77,6 +77,17 @@ namespace Terramental
            
         }
 
+        public void SetPlayerData(Vector2 mousePos)
+        {
+            if (GameManager.currentGameState == GameManager.GameState.NewGame)
+            {
+                if (ComponentRectangle.Contains(mousePos))
+                {
+                    _menuManager.SetPlayerData(GameData);
+                }
+            }
+        }
+
         public void LoadGame()
         {
             SaveManager.LoadGame(_gameData);

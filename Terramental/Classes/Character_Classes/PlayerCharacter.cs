@@ -189,12 +189,12 @@ namespace Terramental
         public void ResetPlayer()
         {
             CharacterHealth = 3;
-            SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
             DialogueManager.dialogueActive = false;
             disableMovement = false;
-            _isGrounded = true;
+            _isGrounded = false;
             _isJumping = false;
+            SpritePosition = GameManager.playerCheckpoint;
             _playerScore = 0;
         }
 

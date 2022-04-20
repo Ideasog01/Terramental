@@ -15,9 +15,9 @@ namespace Terramental
 
         public static bool gameInProgress;
 
-        public enum GameState { SplashScreen, MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete};
+        public enum GameState { SplashScreen, MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, DifficultySelect};
 
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue };
+        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ApprenticeButton, HeroButton, MasterButton };
 
         public enum GameData { Game1, Game2, Game3, Game4};
 
@@ -37,6 +37,7 @@ namespace Terramental
         public DialogueManager dialogueManager;
 
         public LevelData currentLevelData;
+        public int difficultyIndex;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -48,7 +49,7 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        private bool skipToLevel = true;
+        private bool skipToLevel = false;
 
         public GameManager()
         {

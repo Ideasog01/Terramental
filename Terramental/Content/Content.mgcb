@@ -520,6 +520,54 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/Dialogue/DialoguePanel.png
 
+#begin UserInterface/DifficultySelectMenu/Apprentice_Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/DifficultySelectMenu/Apprentice_Button.png
+
+#begin UserInterface/DifficultySelectMenu/Hero_Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/DifficultySelectMenu/Hero_Button.png
+
+#begin UserInterface/DifficultySelectMenu/Master_Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/DifficultySelectMenu/Master_Button.png
+
+#begin UserInterface/DifficultySelectMenu/SelectDifficultyBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/DifficultySelectMenu/SelectDifficultyBackground.png
+
 #begin UserInterface/LevelCompleteMenu/ContinueButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -772,6 +820,18 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/MainMenu/Options_MainMenu_Button.png
 
+#begin UserInterface/NewGameMenu/NewGameMenuBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/NewGameMenu/NewGameMenuBackground.png
+
 #begin UserInterface/PauseMenu/MainMenuButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -927,6 +987,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UserInterface/RespawnScreen/RespawnScreen.png
+
+#begin UserInterface/Slider/HealthBarBorder.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/Slider/HealthBarBorder.png
+
+#begin UserInterface/Slider/HealthBarFill.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/Slider/HealthBarFill.png
 
 #begin Videos/SplashScreen_Video.wmv
 /importer:WmvImporter
