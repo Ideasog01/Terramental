@@ -261,7 +261,7 @@ namespace Terramental
 
         public static void SpawnMovingPlatform(Vector2 position, MapManager mapManager)
         {
-            MovingPlatform movingPlatform = new MovingPlatform(_gameManager.playerCharacter, mapManager);
+            MovingPlatform movingPlatform = new MovingPlatform(_gameManager.playerCharacter, mapManager, position, 0);
             movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
             movingPlatform.LayerOrder = -2;
 
