@@ -21,6 +21,8 @@ namespace Terramental
         public static List<ScorePickup> _scorePickups = new List<ScorePickup>();
         public static List<Sprite> effects = new List<Sprite>();
         public static List<ElementWall> elementWallList = new List<ElementWall>();
+        public static List<MovingPlatform> _movingPlatforms = new List<MovingPlatform>();
+
         public static List<DialogueController> dialogueControllerList = new List<DialogueController>();
         public static List<Checkpoint> levelCheckpointList = new List<Checkpoint>();
         public static Fragment levelFragment;
@@ -91,6 +93,14 @@ namespace Terramental
                     if (elementWall.IsActive)
                     {
                         elementWall.ElementWallCollisions();
+                    }
+                }
+
+                foreach (MovingPlatform movingPlatform in _movingPlatforms)
+                {
+                    if (movingPlatform.IsActive)
+                    {
+                        movingPlatform.UpdateMovingPlatform();
                     }
                 }
 
@@ -247,6 +257,15 @@ namespace Terramental
             }
 
             elementWallList.Add(elementWall);
+        }
+
+        public static void SpawnMovingPlatform(Vector2 position, MapManager mapManager)
+        {
+            MovingPlatform movingPlatform = new MovingPlatform(_gameManager.playerCharacter, mapManager);
+            movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
+            movingPlatform.LayerOrder = -2;
+
+            _movingPlatforms.Add(movingPlatform);
         }
 
         public static void SpawnDialogueTrigger(Vector2 position)

@@ -9,9 +9,6 @@ namespace Terramental
     {
         private PlayerCharacter _playerCharacter;
         private float _cannonSpeed = 5.0f;
-        private int _cannonDamage = 1;
-        private int _cannonRange;
-
         private int _cannonDir;
 
         public CannonProjectile(PlayerCharacter playerCharacter, int cannonDir)

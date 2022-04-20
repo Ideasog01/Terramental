@@ -199,6 +199,11 @@ namespace Terramental
                 SpawnManager.SpawnCannonObstacle(1, position);
             }
 
+            if (index == 16)
+            {
+                SpawnManager.SpawnMovingPlatform(position, this);
+            }
+
 
         }
     }

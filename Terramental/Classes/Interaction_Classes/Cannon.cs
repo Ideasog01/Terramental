@@ -29,7 +29,7 @@ namespace Terramental
         public void UpdateCannon(GameTime gameTime)
         {
             _cannonCooldownLeft -= 1 * (int)gameTime.ElapsedGameTime.TotalMilliseconds;
-            Debug.WriteLine(_cannonCooldownLeft);
+            // Debug.WriteLine(_cannonCooldownLeft);
             if (_cannonCooldownLeft <= 0)
             {
                 SpawnManager.SpawnCannonProjectile(_cannonDir, SpritePosition);
