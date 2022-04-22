@@ -15,7 +15,9 @@
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Bullet_LeftExample.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Bullet_RightExample.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Cannon_Left.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Cannon_LeftExample.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Cannon_Right.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/Cannon/Cannon_RightExample.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/FireTile.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Obstacles/SnowTile.png</File>
@@ -86,6 +88,8 @@
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Videos/SplashScreen_Video.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

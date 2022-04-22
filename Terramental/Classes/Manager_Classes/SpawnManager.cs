@@ -194,9 +194,9 @@ namespace Terramental
             switch (cannonDir)
             {
                 case 0: // Left facing cannon
-                    cannonObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Cannon_LeftExample"), new Vector2(64, 64)); break;
+                    cannonObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Cannon_Left"), new Vector2(64, 64)); break;
                 case 1: // Right facing cannon
-                    cannonObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Cannon_RightExample"), new Vector2(64, 64)); break;
+                    cannonObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Cannon/Cannon_Right"), new Vector2(64, 64)); break;
                 default: break;
             }
 

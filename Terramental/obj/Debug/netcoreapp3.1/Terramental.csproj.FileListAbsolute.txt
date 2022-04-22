@@ -471,3 +471,7 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\Cannon\Bullet_RightExample.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\Cannon\Cannon_LeftExample.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\Cannon\Cannon_RightExample.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Cannon_Left.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Cannon_Right.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\Cannon\Cannon_Left.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\Cannon\Cannon_Right.xnb

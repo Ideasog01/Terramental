@@ -787,7 +787,7 @@ namespace Terramental
                 {
                     _disableRight = false;
                     _disableLeft = false;
-                    _movingPlatform = null;
+                    // _movingPlatform = null;
                 }
             }
         }

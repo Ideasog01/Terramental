@@ -65,22 +65,10 @@ namespace Terramental
 
                 if (TopCollision(_playerCharacter))
                 {
-                    /*
-                    Tile tile = _mapManager.GetTile(SpritePosition);
-                    if (tile != null)
-                    {
-                        Debug.WriteLine("here");
-                        _playerCharacter.SpriteVelocity = new Vector2(_playerCharacter.SpriteVelocity.X, 0);
-                        _playerCharacter.IsGrounded = true;
-                        _playerCharacter.GroundTile = tile;
-                    }
-                    */
-                    _playerCharacter.SpriteVelocity = new Vector2(SpriteVelocity.X, SpriteVelocity.Y);
+                    
+                    
+                    _playerCharacter.SpriteVelocity += new Vector2(SpriteVelocity.X, SpriteVelocity.Y);
                     _playerCharacter.IsGrounded = true;
-                }
-                else
-                {
-
                 }
 
                 if (BottomCollision(_playerCharacter))
