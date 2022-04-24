@@ -638,7 +638,6 @@ namespace Terramental
                 _attackTimer = 2;
             }
         }
-
         #endregion
 
         #region Snow Ultimate
@@ -750,8 +749,6 @@ namespace Terramental
                     }
                 }
             }
-
-
 
             if (_disableRight && _rightTile != null)
             {
