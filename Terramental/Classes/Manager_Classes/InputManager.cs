@@ -62,10 +62,27 @@ namespace Terramental
                     GameManager.PauseGame();
                     _gameManager.IsMouseVisible = true;
                 }
+
+                if(GameManager.currentGameState == GameManager.GameState.StartScreen)
+                {
+                    if (_currentKeyboardState.GetPressedKeys().Length > 0)
+                    {
+                        GameManager.currentGameState = GameManager.GameState.MainMenu;
+                    }
+                }
+                
             }
             else
             {
-                if(_currentGamepadState.Buttons.Start == ButtonState.Pressed && _oldGamepadState.Buttons.Start == ButtonState.Released && GameManager.currentGameState == GameManager.GameState.Level)
+                if (GameManager.currentGameState == GameManager.GameState.StartScreen)
+                {
+                    if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
+                    {
+                        GameManager.currentGameState = GameManager.GameState.MainMenu;
+                    }
+                }
+
+                if (_currentGamepadState.Buttons.Start == ButtonState.Pressed && _oldGamepadState.Buttons.Start == ButtonState.Released && GameManager.currentGameState == GameManager.GameState.Level)
                 {
                     GameManager.PauseGame();
                     _gameManager.IsMouseVisible = true;

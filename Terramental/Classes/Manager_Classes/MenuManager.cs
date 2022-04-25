@@ -45,6 +45,8 @@ namespace Terramental
         private SpriteFont _defaultFont;
         private SpriteFont _levelTitleFont;
 
+        private MenuComponent _startScreen;
+
         private string _levelNameText;
         private string _levelDescriptionText;
         private string _levelDataFilePath;
@@ -67,6 +69,7 @@ namespace Terramental
             _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNameFont");
             _levelTitleFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelTitleFont");
 
+            LoadStartScreen();
             LoadMainMenu();
             LoadRespawnScreen();
             LoadLevelSelect();
@@ -84,6 +87,12 @@ namespace Terramental
         {
             switch(GameManager.currentGameState)
             {
+                case GameManager.GameState.StartScreen:
+
+                    _startScreen.DrawMenuComponent(spriteBatch);
+
+                    break;
+
                 case GameManager.GameState.MainMenu:
                      foreach(MenuComponent mainComponent in mainMenuComponentList)
                      {
@@ -247,7 +256,7 @@ namespace Terramental
                 }
                 else
                 {
-                    GameManager.currentGameState = GameManager.GameState.MainMenu;
+                    GameManager.currentGameState = GameManager.GameState.StartScreen;
                     videoPlaying = false;
                 }
             }
@@ -719,6 +728,12 @@ namespace Terramental
 
             completeMenuButtonList.Add(replayButton);
             completeMenuButtonList.Add(continueButton);
+        }
+
+        private void LoadStartScreen()
+        {
+            _startScreen = new MenuComponent();
+            _startScreen.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/StartScreen"), Vector2.Zero, new Vector2(GameManager.screenWidth, GameManager.screenHeight));
         }
     }
 }
