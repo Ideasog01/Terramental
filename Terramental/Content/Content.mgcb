@@ -292,6 +292,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/Walk/Water_RightWalk_Spritesheet.png
 
+#begin Sprites/Projectiles/Fireball_Projectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/Fireball_Projectile.png
+
 #begin Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

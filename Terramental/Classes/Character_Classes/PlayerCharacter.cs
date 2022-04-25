@@ -207,7 +207,7 @@ namespace Terramental
 
                 if(_dashActive)
                 {
-                    foreach (KnightCharacter knight in _gameManager.currentLevelData.knightEnemies)
+                    foreach (EnemyCharacter knight in _gameManager.currentLevelData.knightEnemies)
                     {
                         if (knight.IsActive)
                         {

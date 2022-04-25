@@ -5,7 +5,7 @@ namespace Terramental
 {
     public class LevelData
     {
-        public List<KnightCharacter> knightEnemies = new List<KnightCharacter>();
+        public List<EnemyCharacter> knightEnemies = new List<EnemyCharacter>();
         public List<HealthPickup> _healthPickups = new List<HealthPickup>();
         public List<ElementPickup> _elementPickups = new List<ElementPickup>();
         public List<ScorePickup> _scorePickups = new List<ScorePickup>();

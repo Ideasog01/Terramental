@@ -15,11 +15,14 @@ namespace Terramental
 
         public static int dialogueTriggersCount;
 
+        public static List<Projectile> activeProjectileList = new List<Projectile>();
+        public static List<Projectile> inactiveProjectileList = new List<Projectile>();
+
         public static void Update(GameTime gameTime)
         {
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                foreach (KnightCharacter knightEnemy in _gameManager.currentLevelData.knightEnemies)
+                foreach (EnemyCharacter knightEnemy in _gameManager.currentLevelData.knightEnemies)
                 {
                     if (knightEnemy.IsActive)
                     {
@@ -32,6 +35,22 @@ namespace Terramental
                     {
                         knightEnemy.EnableHealthBar(false);
                     }
+                }
+
+                foreach(Projectile projectile in activeProjectileList)
+                {
+                    if(projectile != null)
+                    {
+                        if (projectile.IsActive)
+                        {
+                            projectile.UpdateProjectile(gameTime);
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                     
                 }
 
                 foreach (HealthPickup healthPickup in _gameManager.currentLevelData._healthPickups)
@@ -139,9 +158,12 @@ namespace Terramental
                 knightEnemy.LayerOrder = -1;
 
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
+                knightEnemy.AttackThreshold = 40;
 
                 knightEnemy.ElementIndex = elementIndex;
                 _gameManager.currentLevelData.knightEnemies.Add(knightEnemy);
+                knightEnemy.AttackCooldown = 1;
+                knightEnemy.EnemyIndex = 0;
             }
             else if(index == 1)
             {
@@ -150,7 +172,7 @@ namespace Terramental
 
                 Animation mageIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
                 Animation mageWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
-               //Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 8, 250f, true, new Vector2(64, 64));
+                Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 8, 140f, true, new Vector2(64, 64));
 
                 DarkMageCharacter darkMageCharacter = new DarkMageCharacter();
                 darkMageCharacter.Initialise(position + new Vector2(0, -86), _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
@@ -158,11 +180,18 @@ namespace Terramental
 
                 darkMageCharacter.AddAnimation(mageIdle);
                 darkMageCharacter.AddAnimation(mageWalk);
-                //darkMageCharacter.AddAnimation(mageAttack);
+                darkMageCharacter.AddAnimation(mageAttack);
+
+                darkMageCharacter.AttackThreshold = 300;
 
                 darkMageCharacter.LoadHealthBar(_gameManager);
                 darkMageCharacter.LayerOrder = -1;
                 darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
+
+                darkMageCharacter.EnemyIndex = 1;
+                darkMageCharacter.AttackCooldown = 3;
+
+                _gameManager.currentLevelData.knightEnemies.Add(darkMageCharacter);
             }
         }
 
@@ -261,7 +290,7 @@ namespace Terramental
 
         public static void ResetEntities()
         {
-            foreach(KnightCharacter character in _gameManager.currentLevelData.knightEnemies)
+            foreach(EnemyCharacter character in _gameManager.currentLevelData.knightEnemies)
             {
                 character.ResetCharacter();
             }
@@ -282,6 +311,24 @@ namespace Terramental
             }
 
             _gameManager.currentLevelData.levelFragment.IsActive = true;
+        }
+
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile)
+        {
+            if(inactiveProjectileList.Count > 0)
+            {
+                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile);
+                activeProjectileList.Add(inactiveProjectileList[0]);
+                inactiveProjectileList.RemoveAt(0);
+            }
+            else
+            {
+                Projectile projectile = new Projectile();
+                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile);
+                projectile.Initialise(position, texture, scale);
+
+                activeProjectileList.Add(projectile);
+            }
         }
     }
 }
