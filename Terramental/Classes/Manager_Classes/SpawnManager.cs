@@ -143,6 +143,27 @@ namespace Terramental
                 knightEnemy.ElementIndex = elementIndex;
                 _gameManager.currentLevelData.knightEnemies.Add(knightEnemy);
             }
+            else if(index == 1)
+            {
+                Random rand = new Random();
+                int elementIndex = rand.Next(0, 2);
+
+                Animation mageIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
+                Animation mageWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
+               //Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 8, 250f, true, new Vector2(64, 64));
+
+                DarkMageCharacter darkMageCharacter = new DarkMageCharacter();
+                darkMageCharacter.Initialise(position + new Vector2(0, -86), _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
+                darkMageCharacter.SetProperties(position + new Vector2(0, -86), 100, 100);
+
+                darkMageCharacter.AddAnimation(mageIdle);
+                darkMageCharacter.AddAnimation(mageWalk);
+                //darkMageCharacter.AddAnimation(mageAttack);
+
+                darkMageCharacter.LoadHealthBar(_gameManager);
+                darkMageCharacter.LayerOrder = -1;
+                darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
+            }
         }
 
         public static void SpawnHealthPickup(Vector2 position)
