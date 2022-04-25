@@ -25,6 +25,12 @@ namespace Terramental
                     {
                         knightEnemy.UpdateCharacter(gameTime);
                         knightEnemy.UpdateKnightEnemy(gameTime);
+                        knightEnemy.UpdateHealthBar();
+                        knightEnemy.EnableHealthBar(true);
+                    }
+                    else
+                    {
+                        knightEnemy.EnableHealthBar(false);
                     }
                 }
 
@@ -122,11 +128,13 @@ namespace Terramental
 
                 KnightCharacter knightEnemy = new KnightCharacter();
                 knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
-                knightEnemy.SetProperties(position + new Vector2(0, -32));
+                knightEnemy.SetProperties(position + new Vector2(0, -32), 100, 100);
 
                 knightEnemy.AddAnimation(knightIdle);
                 knightEnemy.AddAnimation(knightWalk);
                 knightEnemy.AddAnimation(knightAttack);
+
+                knightEnemy.LoadHealthBar(_gameManager);
 
                 knightEnemy.LayerOrder = -1;
 

@@ -30,9 +30,11 @@ namespace Terramental
 
         private Vector2 _startPosition;
 
-        public void SetProperties(Vector2 position)
+        public void SetProperties(Vector2 position, int maxHealth, int currentHealth)
         {
             _startPosition = position;
+            _characterMaxHealth = maxHealth;
+            _characterHealth = currentHealth;
         }
 
         public void ResetCharacter()
