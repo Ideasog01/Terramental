@@ -85,17 +85,25 @@ namespace Terramental
 
         private void LoadLevel1Textures()
         {
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/DefaultTile")); //0
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Sand")); //1
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Filler")); //2
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Right_Corner")); //3
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Left_Slide")); //4
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Right_Slide")); //5
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/First_Sky_Tile")); //6
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Second_Sky_Tile")); //7
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Third_Sky_Tile")); //8
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Fourth_Sky_Tile")); //9
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Left_Corner")); //10
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/First_Sky_Tile")); //0
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/First_Sky_Tile")); //0
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Fourth_Sky_Tile")); //1
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_BottomLeft_CornerTile")); //2
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_BottomRight_CornerTile")); //3
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_Left_CornerTile")); //4
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_LeftSide_Tile")); //5
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_Right_CornerTile")); //6
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_RightSlide_Tile")); //7
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Grass_Tile")); //8
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Left_Corner")); //9
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Left_Slide")); //10
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Right_Corner")); //11
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Right_Slide")); //12
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Second_Sky_Tile")); //13
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Thin_Tile_64x32")); //14
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Third_Sky_Tile")); //15
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Filler")); //16
+            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Sand")); //17
         }
 
         private void GenerateMap()
