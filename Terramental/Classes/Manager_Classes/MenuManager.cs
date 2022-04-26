@@ -27,6 +27,8 @@ namespace Terramental
 
         public static List<Button> loadGameButtonList = new List<Button>();
 
+        public static GameManager.LevelButton currentLevel;
+
         public int currentButtonIndex;
 
         public Video splashScreenVideo;
@@ -437,7 +439,7 @@ namespace Terramental
                         _gameManager.playerCharacter.ResetPlayer();
                         break;
                     case GameManager.ButtonName.LevelSelectConfirm:
-                        LoadLevel();
+                        _gameManager.LoadNewGame();
                         break;
                     case GameManager.ButtonName.LevelSelectExit:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
@@ -490,6 +492,8 @@ namespace Terramental
                     GameManager.levelIndex = 1;
                     break;
             }
+
+            currentLevel = buttonName;
         }
 
         public void DisplayMainMenu(bool isActive)
@@ -518,11 +522,6 @@ namespace Terramental
                 GameManager.currentGameState = GameManager.GameState.Level;
                 _gameManager.IsMouseVisible = false;
             }
-        }
-
-        private void LoadLevel()
-        {
-            _gameManager.LoadNewGame(@"MapData.json");
         }
 
         private void LoadMainMenu()

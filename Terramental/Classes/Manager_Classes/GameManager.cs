@@ -79,7 +79,8 @@ namespace Terramental
 
             if(skipToLevel)
             {
-                LoadNewGame(@"MapData.json");
+                MenuManager.currentLevel = LevelButton.Level1Button;
+                LoadNewGame();
                 currentGameState = GameState.Level;
             }
         }
@@ -161,7 +162,7 @@ namespace Terramental
             currentGameState = GameState.LevelPause;
         }
 
-        public void LoadNewGame(string filePath)
+        public void LoadNewGame()
         {
             if(!gameInProgress)
             {
@@ -178,7 +179,16 @@ namespace Terramental
                 dialogueManager = new DialogueManager(this, menuManager);
                 mapManager = new MapManager(this);
 
-                mapManager.LoadMapData(filePath);
+                if(MenuManager.currentLevel == LevelButton.Level1Button)
+                {
+                    mapManager.LoadMapData(@"Level1Map.json");
+                }
+                else if(MenuManager.currentLevel == LevelButton.Level2Button)
+                {
+                    mapManager.LoadMapData(@"MapData.json");
+                }
+
+                
 
                 CameraController.playerCharacter = playerCharacter;
 

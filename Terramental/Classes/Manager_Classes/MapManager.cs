@@ -23,7 +23,7 @@ namespace Terramental
         {
             _gameManager = gameManager;
 
-            LoadTextures();
+            LoadLevel1Textures();
 
         }
 
@@ -69,7 +69,7 @@ namespace Terramental
 
         public void LoadMapData(string filePath)
         {
-            string strResultJson = File.ReadAllText(@"MapData.json");
+            string strResultJson = File.ReadAllText(filePath);
             MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
             _mapData = newMapData;
 
@@ -83,7 +83,7 @@ namespace Terramental
             }
         }
 
-        private void LoadTextures()
+        private void LoadLevel1Textures()
         {
             _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/DefaultTile")); //0
             _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Sand")); //1
@@ -194,6 +194,11 @@ namespace Terramental
             if(index == 13)
             {
                 SpawnManager.SpawnFragment(position);
+            }
+
+            if(index == 14)
+            {
+                SpawnManager.SpawnEnemy(1, position);
             }
         }
     }
