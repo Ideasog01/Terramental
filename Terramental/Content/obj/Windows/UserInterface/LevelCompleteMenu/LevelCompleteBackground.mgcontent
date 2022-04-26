@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelCompleteMenu/LevelCompleteBackground.png</SourceFile>
-  <SourceTime>2022-04-25T15:20:45.2967452+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/UserInterface/LevelCompleteMenu/LevelCompleteBackground.xnb</DestFile>
-  <DestTime>2022-04-25T21:51:50.2145556+01:00</DestTime>
+  <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/UserInterface/LevelCompleteMenu/LevelCompleteBackground.png</SourceFile>
+  <SourceTime>2022-04-21T21:11:29.8409596+00:00</SourceTime>
+  <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/UserInterface/LevelCompleteMenu/LevelCompleteBackground.xnb</DestFile>
+  <DestTime>2022-04-26T19:29:05.7024136+00:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
+  <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T17:17:54+01:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T16:17:54+00:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
