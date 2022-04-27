@@ -15,9 +15,9 @@ namespace Terramental
 
         public static bool gameInProgress;
 
-        public enum GameState { SplashScreen, MainMenu, Options, Credits, NewGame, LoadGame, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen};
+        public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen};
 
-        public enum ButtonName { NewGameButton, LoadGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue };
+        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue };
 
         public enum GameData { Game1, Game2, Game3, Game4};
 
@@ -36,8 +36,6 @@ namespace Terramental
         public MenuManager menuManager;
         public DialogueManager dialogueManager;
 
-        public LevelData currentLevelData;
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -48,7 +46,7 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        private bool skipToLevel = true;
+        private bool skipToLevel = false;
 
         public GameManager()
         {
@@ -165,7 +163,6 @@ namespace Terramental
         {
             if(!gameInProgress)
             {
-                currentLevelData = new LevelData();
                 playerCharacter = new PlayerCharacter(this);
                 playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
                 playerCharacter.InitialisePlayerAnimations(this);
@@ -196,7 +193,6 @@ namespace Terramental
 
         private void InitialiseGame()
         {
-            SaveManager.gameManager = this;
             _spriteManager = new SpriteManager();
             _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
             SpawnManager._gameManager = this;

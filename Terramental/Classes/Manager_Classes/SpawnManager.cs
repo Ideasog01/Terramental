@@ -18,11 +18,19 @@ namespace Terramental
         public static List<Projectile> activeProjectileList = new List<Projectile>();
         public static List<Projectile> inactiveProjectileList = new List<Projectile>();
 
+        public static List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
+        public static List<HealthPickup> healthPickupList = new List<HealthPickup>();
+        public static List<ScorePickup> scorePickupList = new List<ScorePickup>();
+        public static List<ElementWall> elementWallList = new List<ElementWall>();
+        public static List<ElementPickup> elementPickupList = new List<ElementPickup>();
+        public static List<Checkpoint> checkpointList = new List<Checkpoint>();
+        public static Fragment levelFragment;
+
         public static void Update(GameTime gameTime)
         {
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                foreach (EnemyCharacter knightEnemy in _gameManager.currentLevelData.knightEnemies)
+                foreach (EnemyCharacter knightEnemy in enemyList)
                 {
                     if (knightEnemy.IsActive)
                     {
@@ -53,7 +61,7 @@ namespace Terramental
                      
                 }
 
-                foreach (HealthPickup healthPickup in _gameManager.currentLevelData._healthPickups)
+                foreach (HealthPickup healthPickup in healthPickupList)
                 {
                     if (healthPickup.IsActive)
                     {
@@ -61,7 +69,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (ElementPickup elementPickup in _gameManager.currentLevelData._elementPickups)
+                foreach (ElementPickup elementPickup in elementPickupList)
                 {
                     if (elementPickup.IsActive)
                     {
@@ -69,7 +77,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (ScorePickup scorePickup in _gameManager.currentLevelData._scorePickups)
+                foreach (ScorePickup scorePickup in scorePickupList)
                 {
                     if (scorePickup.IsActive)
                     {
@@ -77,7 +85,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (ElementWall elementWall in _gameManager.currentLevelData.elementWallList)
+                foreach (ElementWall elementWall in elementWallList)
                 {
                     if (elementWall.IsActive)
                     {
@@ -85,12 +93,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (DialogueController dialogueController in _gameManager.currentLevelData.dialogueControllerList)
-                {
-                    dialogueController.CheckDialogueCollision();
-                }
-
-                foreach (Checkpoint checkpoint in _gameManager.currentLevelData.levelCheckpointList)
+                foreach (Checkpoint checkpoint in checkpointList)
                 {
                     if (checkpoint.IsActive)
                     {
@@ -98,9 +101,9 @@ namespace Terramental
                     }
                 }
 
-                if(_gameManager.currentLevelData.levelFragment != null)
+                if(levelFragment != null)
                 {
-                    _gameManager.currentLevelData.levelFragment.CheckFragmentCollision(gameTime);
+                    levelFragment.CheckFragmentCollision(gameTime);
                 }
             }
 
@@ -161,7 +164,7 @@ namespace Terramental
                 knightEnemy.AttackThreshold = 40;
 
                 knightEnemy.ElementIndex = elementIndex;
-                _gameManager.currentLevelData.knightEnemies.Add(knightEnemy);
+                enemyList.Add(knightEnemy);
                 knightEnemy.AttackCooldown = 1;
                 knightEnemy.EnemyIndex = 0;
             }
@@ -191,7 +194,7 @@ namespace Terramental
                 darkMageCharacter.EnemyIndex = 1;
                 darkMageCharacter.AttackCooldown = 3;
 
-                _gameManager.currentLevelData.knightEnemies.Add(darkMageCharacter);
+                enemyList.Add(darkMageCharacter);
             }
         }
 
@@ -200,7 +203,7 @@ namespace Terramental
             HealthPickup healthPickup = new HealthPickup(_gameManager.playerCharacter, 1);
             healthPickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64, 64));
 
-            _gameManager.currentLevelData._healthPickups.Add(healthPickup);
+            healthPickupList.Add(healthPickup);
         }
 
         public static void SpawnScorePickup(Vector2 position)
@@ -208,14 +211,14 @@ namespace Terramental
             ScorePickup scorePickup = new ScorePickup(_gameManager.playerCharacter);
             scorePickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
 
-            _gameManager.currentLevelData._scorePickups.Add(scorePickup);
+            scorePickupList.Add(scorePickup);
         }
 
         public static void SpawnElementPickup(int elementIndex, Vector2 position)
         {
             ElementPickup elementPickup = new ElementPickup(elementIndex, _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), _gameManager.playerCharacter);
             elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));
-            _gameManager.currentLevelData._elementPickups.Add(elementPickup);
+            elementPickupList.Add(elementPickup);
         }
 
         public static void SpawnElementWall(int elementIndex, Vector2 position, MapManager mapManager)
@@ -235,82 +238,45 @@ namespace Terramental
                     break;
             }
 
-            _gameManager.currentLevelData.elementWallList.Add(elementWall);
-        }
-
-        public static void SpawnDialogueTrigger(Vector2 position)
-        {
-            DialogueController dialogueController = new DialogueController(_gameManager.playerCharacter, new Rectangle((int)position.X, (int)position.Y,
-                    (int)_gameManager.currentLevelData.dialogueScaleList[dialogueTriggersCount].X, (int)_gameManager.currentLevelData.dialogueScaleList[dialogueTriggersCount].Y),
-                    _gameManager.dialogueManager, _gameManager.currentLevelData.levelDialogueList[dialogueTriggersCount]);
-
-            _gameManager.currentLevelData.dialogueControllerList.Add(dialogueController);
-
-            dialogueTriggersCount++;
-        }
-
-        public static void GenerateDialogue(int levelIndex)
-        {
-            _gameManager.currentLevelData.levelDialogueList.Clear();
-            _gameManager.currentLevelData.dialogueScaleList.Clear();
-
-            if(levelIndex == 0)
-            {
-                string[] dialogue1Content = { "Hello, my name is Bob.", "How are you?", "It is nice weather.", "Goodbye!"};
-                Dialogue dialogue1 = new Dialogue(dialogue1Content, "Bob");
-
-                string[] dialogue2Content = { "Today is Saturday.", "Nice weather!", "Bye, have a good day!" };
-                Dialogue dialogue2 = new Dialogue(dialogue2Content, "Sam");
-
-                string[] dialogue3Content = { "Hello there!", "It is over Anakin", "I have the high ground!" };
-                Dialogue dialogue3 = new Dialogue(dialogue3Content, "Obi-Wan Kenobi");
-
-                _gameManager.currentLevelData.levelDialogueList.Add(dialogue1);
-                _gameManager.currentLevelData.levelDialogueList.Add(dialogue2);
-                _gameManager.currentLevelData.levelDialogueList.Add(dialogue3);
-
-                _gameManager.currentLevelData.dialogueScaleList.Add(new Vector2(64, 64));
-                _gameManager.currentLevelData.dialogueScaleList.Add(new Vector2(64, 64));
-                _gameManager.currentLevelData.dialogueScaleList.Add(new Vector2(64, 64));
-            }
+            elementWallList.Add(elementWall);
         }
 
         public static void SpawnCheckpoint(Vector2 position)
         {
             Checkpoint checkpoint = new Checkpoint(_gameManager.playerCharacter);
             checkpoint.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
-            _gameManager.currentLevelData.levelCheckpointList.Add(checkpoint);
+            checkpointList.Add(checkpoint);
         }
 
         public static void SpawnFragment(Vector2 position)
         {
-            _gameManager.currentLevelData.levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
-            _gameManager.currentLevelData.levelFragment.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
+            levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
+            levelFragment.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
         }
 
         public static void ResetEntities()
         {
-            foreach(EnemyCharacter character in _gameManager.currentLevelData.knightEnemies)
+            foreach(EnemyCharacter character in enemyList)
             {
                 character.ResetCharacter();
             }
 
-            foreach(ElementPickup elementPickup in _gameManager.currentLevelData._elementPickups)
+            foreach(ElementPickup elementPickup in elementPickupList)
             {
                 elementPickup.ResetPickup();
             }
 
-            foreach(HealthPickup healthPickup in _gameManager.currentLevelData._healthPickups)
+            foreach(HealthPickup healthPickup in healthPickupList)
             {
                 healthPickup.IsActive = true;
             }
 
-            foreach(ScorePickup scorePickup in _gameManager.currentLevelData._scorePickups)
+            foreach(ScorePickup scorePickup in scorePickupList)
             {
                 scorePickup.IsActive = true;
             }
 
-            _gameManager.currentLevelData.levelFragment.IsActive = true;
+            levelFragment.IsActive = true;
         }
 
         public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile)

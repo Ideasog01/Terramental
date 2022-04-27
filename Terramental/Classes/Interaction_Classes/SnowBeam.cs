@@ -8,7 +8,7 @@ namespace Terramental
     {
         public void CheckBeamCollisions()
         {
-            foreach (BaseCharacter enemy in SpawnManager._gameManager.currentLevelData.knightEnemies)
+            foreach (BaseCharacter enemy in SpawnManager.enemyList)
             {
                 if (OnCollision(enemy.SpriteRectangle))
                 {

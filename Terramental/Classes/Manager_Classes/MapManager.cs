@@ -78,7 +78,6 @@ namespace Terramental
 
             if (_mapData != null)
             {
-                SpawnManager.GenerateDialogue(0);
                 GenerateMap();
             }
         }
@@ -179,11 +178,6 @@ namespace Terramental
             if (index == 10)
             {
                 SpawnManager.SpawnElementWall(2, position, this);
-            }
-
-            if(index == 11)
-            {
-                SpawnManager.SpawnDialogueTrigger(position);
             }
 
             if(index == 12)

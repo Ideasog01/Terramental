@@ -207,7 +207,7 @@ namespace Terramental
 
                 if(_dashActive)
                 {
-                    foreach (EnemyCharacter knight in _gameManager.currentLevelData.knightEnemies)
+                    foreach (EnemyCharacter knight in SpawnManager.enemyList)
                     {
                         if (knight.IsActive)
                         {
@@ -617,7 +617,7 @@ namespace Terramental
 
                 rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
 
-                foreach (BaseCharacter character in _gameManager.currentLevelData.knightEnemies)
+                foreach (BaseCharacter character in SpawnManager.enemyList)
                 {
                     if (this.OnCollision(character.SpriteRectangle))
                     {
