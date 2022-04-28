@@ -46,7 +46,7 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        private bool skipToLevel = false;
+        private bool skipToLevel = true;
 
         public GameManager()
         {

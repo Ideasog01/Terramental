@@ -446,7 +446,7 @@ namespace Terramental
             switch(buttonName)
             {
                 case GameManager.LevelButton.Level1Button:
-                    _levelDataFilePath = @"MapData.json";
+                    _levelDataFilePath = @"Level1Map.json";
                     _levelNameText = "The Golden Shores";
                     _levelDescriptionText = "Explore the golden shores, and defeat \nthe armies of the Fire Lands.";
                     GameManager.levelIndex = 0;
@@ -492,7 +492,7 @@ namespace Terramental
 
         private void LoadLevel()
         {
-            _gameManager.LoadNewGame(@"MapData.json");
+            _gameManager.LoadNewGame(_levelDataFilePath);
         }
 
         private void LoadMainMenu()

@@ -24,6 +24,7 @@ namespace Terramental
         public static List<ElementWall> elementWallList = new List<ElementWall>();
         public static List<ElementPickup> elementPickupList = new List<ElementPickup>();
         public static List<Checkpoint> checkpointList = new List<Checkpoint>();
+        public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
         public static Fragment levelFragment;
 
         public static void Update(GameTime gameTime)
@@ -43,6 +44,11 @@ namespace Terramental
                     {
                         knightEnemy.EnableHealthBar(false);
                     }
+                }
+
+                foreach(SpikeObstacle spikeObstacle in spikeObstacleList)
+                {
+                    spikeObstacle.CheckCollision(gameTime);
                 }
 
                 foreach(Projectile projectile in activeProjectileList)
@@ -295,6 +301,13 @@ namespace Terramental
 
                 activeProjectileList.Add(projectile);
             }
+        }
+
+        public static void SpawnSpikeObstacle(Vector2 position)
+        {
+            SpikeObstacle spikeObstacle = new SpikeObstacle();
+            spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
+            spikeObstacleList.Add(spikeObstacle);
         }
     }
 }
