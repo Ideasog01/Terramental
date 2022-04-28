@@ -511,6 +511,22 @@ namespace Terramental
             }
         }
 
+        public void PlayerTakeDamage(int amount)
+        {
+            CharacterHealth -= amount;
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+
+            if (CharacterHealth <= 0)
+            {
+                _gameManager.menuManager.DisplayRespawnScreen(true);
+            }
+        }
+
+        public void DisplayPlayerLives()
+        {
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+        }
+
         #endregion
 
         #region Ultimate Functions
@@ -519,46 +535,58 @@ namespace Terramental
         {
             if (ultimateCooldown <= 0 && _ultimateActiveTimer <= 0)
             {
-                switch (_elementIndex)
-                {
-                    case 0:
-                        ActivateFireUltimate();
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        ActivateSnowUltimate();
-                        break;
-                    default:
-                        Console.WriteLine("ERROR: Element index is invalid during ultimate activatation");
-                        break;
-                }
+                _ultimateActiveTimer = 10;
+                ultimateActive = true;
             }
         }
 
-        public void PrimaryAttack()
+        public void PrimaryUltimateAttack()
         {
             if (ultimateActive)
             {
                 switch (_elementIndex)
                 {
                     case 0:
-                        FireSwordAttack();
+
+                        if(SpriteVelocity.X >= 0)
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false);
+                        }
+                        else
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false);
+                        }
+                       
                         break;
                     case 1:
+
+                        if (SpriteVelocity.X >= 0)
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false);
+                        }
+                        else
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false);
+                        }
+
                         break;
                     case 2:
+
+                        if (SpriteVelocity.X >= 0)
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false);
+                        }
+                        else
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false);
+                        }
+
                         break;
                     default:
                         Console.WriteLine("ERROR: Element index is invalid during ultimate attack");
                         break;
                 }
             }
-        }
-
-        public void DisplayPlayerLives()
-        {
-            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
         }
 
         private void UpdateUltimateStatus(GameTime gameTime)
@@ -571,11 +599,6 @@ namespace Terramental
             {
                 ultimateCooldown = 10;
                 ultimateActive = false;
-
-                if (_elementIndex == 2)
-                {
-                    SnowUltimateEnd();
-                }
             }
 
             if (_attackTimer > 0)
@@ -588,122 +611,6 @@ namespace Terramental
                 ultimateCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
-
-        public void PlayerTakeDamage(int amount)
-        {
-            CharacterHealth -= amount;
-            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
-
-            if (CharacterHealth <= 0)
-            {
-                _gameManager.menuManager.DisplayRespawnScreen(true);
-            }
-        }
-
-        #region Fire Ultimate
-
-        private void ActivateFireUltimate()
-        {
-            ultimateActive = true;
-            _ultimateActiveTimer = 10;
-        }
-
-        public void FireSwordAttack()
-        {
-            if (_attackTimer <= 0)
-            {
-                Rectangle rect;
-
-                rect = new Rectangle((int)SpritePosition.X + 2, (int)SpritePosition.Y, 96, 96);
-
-                foreach (BaseCharacter character in SpawnManager.enemyList)
-                {
-                    if (this.OnCollision(character.SpriteRectangle))
-                    {
-                        character.TakeDamage(20);
-                        if (!character.IsBurning)
-                        {
-                            Vector2 scale = new Vector2(64, 128);
-                            SpawnManager.SpawnAttachEffect("Sprites/SpriteSheets/Effects/Flame_SpriteSheet", character.SpritePosition, scale, character, 5, true);
-                            character.SetStatus(0, 5, 1.5f);
-                        }
-
-                    }
-                }
-
-                _attackTimer = 2;
-            }
-        }
-
-        #endregion
-
-        #region Snow Ultimate
-
-        private void ActivateSnowUltimate()
-        {
-            if (_snowBeam == null)
-            {
-                _snowBeam = new SnowBeam();
-                _snowBeam.Initialise(SpritePosition + new Vector2(5, 5), _gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), new Vector2(320, 64));
-
-
-                Animation snowActivationAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), 8, 100f, false, new Vector2(320, 64));
-                Animation snowIdleAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet"), 8, 100f, true, new Vector2(320, 64));
-                snowActivationAnim.NextAnimation = true;
-
-                Animation snowLeftActivationAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Activation_SpriteSheet"), 8, 100f, false, new Vector2(320, 64));
-                Animation snowLeftIdleAnim = new Animation(_gameManager.GetTexture("Sprites/SpriteSheets/Ultimates/SnowBeam_Idle_SpriteSheet"), 8, 100f, true, new Vector2(320, 64));
-                snowLeftActivationAnim.NextAnimation = true;
-                snowLeftActivationAnim.MirrorTexture = true;
-                snowLeftIdleAnim.MirrorTexture = true;
-
-                _snowBeam.AddAnimation(snowActivationAnim);
-                _snowBeam.AddAnimation(snowIdleAnim);
-                _snowBeam.AddAnimation(snowLeftActivationAnim);
-                _snowBeam.AddAnimation(snowLeftIdleAnim);
-
-                if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
-                {
-                    _snowBeam.SetAnimation(0);
-                    _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
-                }
-                else
-                {
-                    _snowBeam.SetAnimation(2);
-                    _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
-                }
-            }
-            else
-            {
-                _snowBeam.SetAnimation(0);
-                _snowBeam.IsActive = true;
-
-
-                if (SpriteVelocity.X > 0)
-                {
-                    _snowBeam.SetAnimation(0);
-                    _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
-                }
-                else if (SpriteVelocity.X < 0)
-                {
-                    _snowBeam.SetAnimation(2);
-                    _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
-                }
-            }
-
-            _snowBeam.AttachSprite = this;
-
-
-            ultimateActive = true;
-            _ultimateActiveTimer = 10;
-        }
-
-        private void SnowUltimateEnd()
-        {
-            _snowBeam.IsActive = false;
-        }
-
-        #endregion
 
         #endregion
 

@@ -12,13 +12,28 @@ namespace Terramental
         {
             if(IsActive)
             {
-                SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                SpritePosition += SpriteVelocity;
 
-                if(OnCollision(_playerCharacter.SpriteRectangle))
+                if(_isEnemyProjectile)
                 {
-                    _playerCharacter.PlayerTakeDamage(1);
-                    DestroyProjectile();
+                    if (OnCollision(_playerCharacter.SpriteRectangle))
+                    {
+                        _playerCharacter.PlayerTakeDamage(1);
+                        DestroyProjectile();
+                    }
                 }
+                else
+                {
+                    foreach(EnemyCharacter enemy in SpawnManager.enemyList)
+                    {
+                        if(OnCollision(enemy.SpriteRectangle))
+                        {
+                            enemy.TakeDamage(20);
+                            DestroyProjectile();
+                        }
+                    }
+                }
+                
             }
         }
 

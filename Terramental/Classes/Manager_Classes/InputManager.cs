@@ -166,9 +166,9 @@ namespace Terramental
                     _playerCharacter.ActivateUltimate();
                 }
 
-                if (_currentMouseState.LeftButton == ButtonState.Pressed)
+                if (_currentMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
                 {
-                    _playerCharacter.PrimaryAttack();
+                    _playerCharacter.PrimaryUltimateAttack();
                 }
 
                 if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
@@ -185,7 +185,7 @@ namespace Terramental
 
                 if(_currentGamepadState.IsButtonDown(Buttons.RightTrigger) && _oldGamepadState.IsButtonUp(Buttons.RightTrigger))
                 {
-                    _playerCharacter.PrimaryAttack();
+                    _playerCharacter.PrimaryUltimateAttack();
                 }
 
                 if (_oldGamepadState.Buttons.A == ButtonState.Pressed && _currentGamepadState.Buttons.A == ButtonState.Released)
