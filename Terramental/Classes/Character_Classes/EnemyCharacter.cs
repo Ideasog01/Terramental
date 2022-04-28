@@ -127,9 +127,9 @@ namespace Terramental
         {
             if (!_isGrounded)
             {
-                foreach (Tile tile in MapManager.activeTiles)
+                foreach (Tile tile in MapManager.tileList)
                 {
-                    if (tile.IsActive && tile.GroundTile)
+                    if (tile.WallTile)
                     {
                         if (tile.TopCollision(this))
                         {

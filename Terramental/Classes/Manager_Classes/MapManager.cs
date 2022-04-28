@@ -133,7 +133,7 @@ namespace Terramental
 
                     Tile tile = new Tile();
                     tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
-
+                    tile.LayerOrder = 0;
                     bool isGround = false;
 
                     if(tileIndex <= 13 || tileIndex > 20)

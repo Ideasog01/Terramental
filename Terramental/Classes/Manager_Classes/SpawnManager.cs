@@ -33,7 +33,7 @@ namespace Terramental
             {
                 foreach(EnemyCharacter enemy in enemyList)
                 {
-                    if (enemy.IsActive)
+                    if (CameraController.ObjectIsVisible(enemy.SpritePosition) && enemy.CharacterHealth > 0)
                     {
                         enemy.UpdateCharacter(gameTime);
                         enemy.UpdateKnightEnemy(gameTime);
@@ -64,7 +64,6 @@ namespace Terramental
                     {
                         break;
                     }
-                     
                 }
 
                 foreach (HealthPickup healthPickup in healthPickupList)
@@ -156,7 +155,7 @@ namespace Terramental
 
                 KnightCharacter knightEnemy = new KnightCharacter();
                 knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
-                knightEnemy.SetProperties(position + new Vector2(0, -32), 100, 100);
+                knightEnemy.SetProperties(position, 100, 100);
 
                 knightEnemy.AddAnimation(knightIdle);
                 knightEnemy.AddAnimation(knightWalk);
@@ -168,7 +167,6 @@ namespace Terramental
                 knightEnemy.LayerOrder = -1;
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
                 knightEnemy.AttackThreshold = 40;
-                knightEnemy.IsActive = true;
                 knightEnemy.ElementIndex = elementIndex;
                 enemyList.Add(knightEnemy);
                 knightEnemy.AttackCooldown = 1;
@@ -184,20 +182,19 @@ namespace Terramental
                 Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 8, 140f, true, new Vector2(64, 64));
 
                 DarkMageCharacter darkMageCharacter = new DarkMageCharacter();
-                darkMageCharacter.Initialise(position + new Vector2(0, -86), _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
-                darkMageCharacter.SetProperties(position + new Vector2(0, -86), 100, 100);
+                darkMageCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
+                darkMageCharacter.SetProperties(position, 100, 100);
 
                 darkMageCharacter.AddAnimation(mageIdle);
                 darkMageCharacter.AddAnimation(mageWalk);
                 darkMageCharacter.AddAnimation(mageAttack);
                 darkMageCharacter.SetAnimation(0);
 
-                darkMageCharacter.AttackThreshold = 300;
+                darkMageCharacter.AttackThreshold = 400;
 
                 darkMageCharacter.LoadHealthBar(_gameManager);
                 darkMageCharacter.LayerOrder = -1;
                 darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
-                darkMageCharacter.IsActive = true;
                 darkMageCharacter.EnemyIndex = 1;
                 darkMageCharacter.AttackCooldown = 3;
 
