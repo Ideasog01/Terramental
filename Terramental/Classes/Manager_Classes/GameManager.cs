@@ -46,7 +46,7 @@ namespace Terramental
 
         private CameraController _mainCam;
 
-        private bool skipToLevel = true;
+        private bool skipToLevel = false;
 
         public GameManager()
         {
@@ -168,9 +168,6 @@ namespace Terramental
                 playerCharacter.InitialisePlayerAnimations(this);
                 playerCharacter.LayerOrder = -1;
                 playerInterface = new PlayerInterface(this);
-
-                SpawnManager.SpawnEnemy(1, new Vector2(100, 128));
-
 
                 dialogueManager = new DialogueManager(this, menuManager);
                 mapManager = new MapManager(this);

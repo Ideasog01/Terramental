@@ -118,6 +118,7 @@ namespace Terramental
             _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_2"));
             _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_3"));
             _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
         }
 
         private void GenerateMap()
@@ -225,6 +226,11 @@ namespace Terramental
             }
 
             if(index == 14)
+            {
+                SpawnManager.SpawnEnemy(1, position);
+            }
+
+            if(index == 15)
             {
                 SpawnManager.SpawnSpikeObstacle(position);
             }

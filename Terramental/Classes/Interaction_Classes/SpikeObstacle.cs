@@ -4,7 +4,7 @@ namespace Terramental
 {
     public class SpikeObstacle : Pickup
     {
-        private float _collisionTimer;
+        private float _collisionTimer = 0;
 
         public void CheckCollision(GameTime gameTime)
         {
@@ -12,8 +12,8 @@ namespace Terramental
             {
                 if (OnCollision(Player.SpriteRectangle))
                 {
-                    Player.CharacterHealth -= 40;
-                    _collisionTimer = 2;
+                    Player.PlayerTakeDamage(1);
+                    _collisionTimer = 0.75f;
                 }
             } 
 

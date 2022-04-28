@@ -193,7 +193,6 @@ namespace Terramental
             _gameManager.playerInterface.UpdatePlayerLives(3);
             DialogueManager.dialogueActive = false;
             disableMovement = false;
-            _isGrounded = true;
             _isJumping = false;
             _playerScore = 0;
         }

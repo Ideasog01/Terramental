@@ -31,18 +31,18 @@ namespace Terramental
         {
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                foreach (EnemyCharacter knightEnemy in enemyList)
+                foreach(EnemyCharacter enemy in enemyList)
                 {
-                    if (knightEnemy.IsActive)
+                    if (enemy.IsActive)
                     {
-                        knightEnemy.UpdateCharacter(gameTime);
-                        knightEnemy.UpdateKnightEnemy(gameTime);
-                        knightEnemy.UpdateHealthBar();
-                        knightEnemy.EnableHealthBar(true);
+                        enemy.UpdateCharacter(gameTime);
+                        enemy.UpdateKnightEnemy(gameTime);
+                        enemy.UpdateHealthBar();
+                        enemy.EnableHealthBar(true);
                     }
                     else
                     {
-                        knightEnemy.EnableHealthBar(false);
+                        enemy.EnableHealthBar(false);
                     }
                 }
 
@@ -161,20 +161,20 @@ namespace Terramental
                 knightEnemy.AddAnimation(knightIdle);
                 knightEnemy.AddAnimation(knightWalk);
                 knightEnemy.AddAnimation(knightAttack);
+                knightEnemy.SetAnimation(0);
 
                 knightEnemy.LoadHealthBar(_gameManager);
 
                 knightEnemy.LayerOrder = -1;
-
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
                 knightEnemy.AttackThreshold = 40;
-
+                knightEnemy.IsActive = true;
                 knightEnemy.ElementIndex = elementIndex;
                 enemyList.Add(knightEnemy);
                 knightEnemy.AttackCooldown = 1;
                 knightEnemy.EnemyIndex = 0;
             }
-            else if(index == 1)
+            else if(index == 1) //Dark Mage Character
             {
                 Random rand = new Random();
                 int elementIndex = rand.Next(0, 2);
@@ -190,17 +190,21 @@ namespace Terramental
                 darkMageCharacter.AddAnimation(mageIdle);
                 darkMageCharacter.AddAnimation(mageWalk);
                 darkMageCharacter.AddAnimation(mageAttack);
+                darkMageCharacter.SetAnimation(0);
 
                 darkMageCharacter.AttackThreshold = 300;
 
                 darkMageCharacter.LoadHealthBar(_gameManager);
                 darkMageCharacter.LayerOrder = -1;
                 darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
-
+                darkMageCharacter.IsActive = true;
                 darkMageCharacter.EnemyIndex = 1;
                 darkMageCharacter.AttackCooldown = 3;
 
+                darkMageCharacter.ElementIndex = elementIndex;
                 enemyList.Add(darkMageCharacter);
+                darkMageCharacter.AttackCooldown = 1;
+                darkMageCharacter.EnemyIndex = 0;
             }
         }
 
@@ -306,6 +310,7 @@ namespace Terramental
         public static void SpawnSpikeObstacle(Vector2 position)
         {
             SpikeObstacle spikeObstacle = new SpikeObstacle();
+            spikeObstacle.Player = _gameManager.playerCharacter;
             spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
             spikeObstacleList.Add(spikeObstacle);
         }
