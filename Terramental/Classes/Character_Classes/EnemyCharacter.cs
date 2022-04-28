@@ -21,6 +21,17 @@ namespace Terramental
         private int _enemyIndex;
         private float _attackCooldown;
 
+        private float attackTimer;
+        private bool _knightAttacked;
+        private bool _isGrounded;
+        private bool _faceRight;
+        private Tile _groundTile;
+        private bool _rightPathBlocked;
+        private bool _leftPathBlocked;
+        private int _elementIndex;
+        private float _attackThreshold;
+        private float _chaseThreshold;
+
         public AIState CurrentState
         {
             get { return _currentState; }
@@ -66,16 +77,6 @@ namespace Terramental
             enemyHealthBarFill.IsActive = active;
         }
 
-        private float attackTimer;
-        private bool _knightAttacked;
-        private bool _isGrounded;
-        private bool _faceRight;
-        private Tile _groundTile;
-        private bool _rightPathBlocked;
-        private bool _leftPathBlocked;
-        private int _elementIndex;
-        private float _attackThreshold;
-
         public float AttackCooldown
         {
             set { _attackCooldown = value; }
@@ -84,6 +85,11 @@ namespace Terramental
         public float AttackThreshold
         {
             set { _attackThreshold = value; }
+        }
+
+        public float ChaseThreshold
+        {
+            set { _chaseThreshold = value; }
         }
 
         public int ElementIndex
@@ -173,12 +179,12 @@ namespace Terramental
                 CurrentState = AIState.Attack;
             }
 
-            if (DistanceToPlayer() >= _attackThreshold + 10)
+            if (DistanceToPlayer() >= _attackThreshold && DistanceToPlayer() < _chaseThreshold)
             {
                 CurrentState = AIState.Chase;
             }
 
-            if (DistanceToPlayer() > _attackThreshold * 2)
+            if (DistanceToPlayer() > _chaseThreshold)
             {
                 CurrentState = AIState.Idle;
             }

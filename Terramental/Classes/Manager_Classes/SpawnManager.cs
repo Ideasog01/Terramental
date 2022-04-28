@@ -167,6 +167,7 @@ namespace Terramental
                 knightEnemy.LayerOrder = -1;
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
                 knightEnemy.AttackThreshold = 40;
+                knightEnemy.ChaseThreshold = 400;
                 knightEnemy.ElementIndex = elementIndex;
                 enemyList.Add(knightEnemy);
                 knightEnemy.AttackCooldown = 1;
@@ -191,6 +192,7 @@ namespace Terramental
                 darkMageCharacter.SetAnimation(0);
 
                 darkMageCharacter.AttackThreshold = 400;
+                darkMageCharacter.ChaseThreshold = 600;
 
                 darkMageCharacter.LoadHealthBar(_gameManager);
                 darkMageCharacter.LayerOrder = -1;
