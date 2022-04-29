@@ -47,6 +47,14 @@ namespace Terramental
                     sprite.Draw(gameTime, _spriteBatch);
                 }
             }
+
+            foreach (Sprite sprite in _spriteList)
+            {
+                if (sprite.LayerOrder == -2)
+                {
+                    sprite.Draw(gameTime, _spriteBatch);
+                }
+            }
         }
 
         public void DestroySprite(Sprite sprite)

@@ -67,7 +67,7 @@ namespace Terramental
         private Tile _leftTile;
         private Tile _rightTile;
         private ElementWall _elementWall;
-        private SnowBeam _snowBeam;
+        private float _ultimateUsedTimer;
 
         private List<Tile> _tileList;
         private GameManager _gameManager;
@@ -192,6 +192,9 @@ namespace Terramental
             SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
             DialogueManager.dialogueActive = false;
+            _ultimateActiveTimer = 0;
+            ultimateActive = false;
+            ultimateCooldown = 0;
             disableMovement = false;
             _isJumping = false;
             _playerScore = 0;
@@ -281,7 +284,10 @@ namespace Terramental
 
                 CheckCollisions();
 
-                MovementAnimations();
+                if(_ultimateUsedTimer <= 0)
+                {
+                    MovementAnimations();
+                }
 
                 if (_groundTile != null)
                 {
@@ -292,25 +298,23 @@ namespace Terramental
                     }
                 }
 
-                if (_snowBeam != null)
+                if(_ultimateUsedTimer > 0)
                 {
-                    _snowBeam.CheckBeamCollisions();
-                }
-
-                if (_snowBeam != null && _elementIndex == 2 && ultimateActive)
-                {
-                    if (_snowBeam.AnimationIndex != 0 && _snowBeam.AnimationIndex != 2)
+                    switch (_elementIndex)
                     {
-                        if ((AnimationIndex % 2) == 0 || AnimationIndex == 0)
-                        {
-                            _snowBeam.SetAnimation(1);
-                            _snowBeam.AttachSpriteOffset = new Vector2(40, 5);
-                        }
-                        else
-                        {
-                            _snowBeam.SetAnimation(3);
-                            _snowBeam.AttachSpriteOffset = new Vector2(-310, 5);
-                        }
+                        case 0:
+                            SetAnimation((int)AnimationIndexEnum.FireUltimate);
+
+                            break;
+                        case 1:
+
+                            SetAnimation((int)AnimationIndexEnum.WaterUltimate);
+
+                            break;
+                        case 2:
+                            SetAnimation((int)AnimationIndexEnum.SnowUltimate);
+
+                            break;
                     }
                 }
 
@@ -319,6 +323,19 @@ namespace Terramental
                 float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
 
                 SpritePosition = new Vector2(posX, SpritePosition.Y);
+
+                if(SpriteVelocity.X != 0)
+                {
+                    if (SpriteVelocity.X > 0)
+                    {
+                        Animations[AnimationIndex].MirrorTexture = false;
+                    }
+
+                    if (SpriteVelocity.X < 0)
+                    {
+                        Animations[AnimationIndex].MirrorTexture = true;
+                    }
+                }
             }
         }
 
@@ -548,7 +565,7 @@ namespace Terramental
                 {
                     case 0:
 
-                        if(SpriteVelocity.X >= 0)
+                        if(!Animations[AnimationIndex].MirrorTexture)
                         {
                             SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 1);
                         }
@@ -569,6 +586,7 @@ namespace Terramental
                         break;
                 }
 
+                _ultimateUsedTimer = 0.5f;
                 _attackTimer = 2;
             }
         }
@@ -582,6 +600,7 @@ namespace Terramental
             else if (ultimateActive)
             {
                 ultimateCooldown = 10;
+                _ultimateUsedTimer = 0;
                 ultimateActive = false;
             }
 
@@ -593,6 +612,11 @@ namespace Terramental
             if (ultimateCooldown > 0 && !ultimateActive)
             {
                 ultimateCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if(_ultimateUsedTimer > 0)
+            {
+                _ultimateUsedTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 
@@ -689,43 +713,34 @@ namespace Terramental
 
             //Index
             Animations.Add(new Animation(idleFire, 5, 120f, true, new Vector2(64, 64))); //0
-            Animations.Add(new Animation(idleFire, 5, 120f, true, new Vector2(64, 64), true)); //1
-            Animations.Add(new Animation(idleWater, 5, 120f, true, new Vector2(64, 64))); //2
-            Animations.Add(new Animation(idleWater, 5, 120f, true, new Vector2(64, 64), true)); //3
-            Animations.Add(new Animation(idleSnow, 5, 120f, true, new Vector2(64, 64))); //4
-            Animations.Add(new Animation(idleSnow, 5, 120f, true, new Vector2(64, 64), true)); //5
+            Animations.Add(new Animation(idleWater, 5, 120f, true, new Vector2(64, 64))); //1 //Idle Animations
+            Animations.Add(new Animation(idleSnow, 5, 120f, true, new Vector2(64, 64))); //2
 
-            Animations.Add(new Animation(walkFire, 4, 120f, true, new Vector2(64, 64))); //6
-            Animations.Add(new Animation(walkFire, 4, 120f, true, new Vector2(64, 64), true)); //7
-            Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64))); //8
-            Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64), true)); //9
-            Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64))); //10
-            Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64), true)); //11
+            Animations.Add(new Animation(walkFire, 4, 120f, true, new Vector2(64, 64))); //3
+            Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64))); //4 //Walking Animations
+            Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64))); //5
 
-            Animations.Add(new Animation(fireUltimateActivation, 4, 120f, true, new Vector2(64, 64), true)); //12
-            Animations.Add(new Animation(waterUltimateActivation, 4, 120f, true, new Vector2(64, 64), true)); //13
-            Animations.Add(new Animation(snowUltimateActivation, 4, 120f, true, new Vector2(64, 64), true)); //14
+            Animations.Add(new Animation(fireUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //6
+            Animations.Add(new Animation(waterUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //7 //Ultimate Activation Animations
+            Animations.Add(new Animation(snowUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //8
         }
 
         enum AnimationIndexEnum
         {
             IdleFire, // 0
-            IdleLeftFire, // 1
-            IdleWater, // 2
-            IdleLeftWater, // 3
-            IdleSnow, // 4
-            IdleLeftSnow, // 5
-            FireWalk, // 6
-            FireLeftWalk, // 7
-            WaterWalk, // 8
-            WaterLeftWalk, // 9
-            SnowWalk, // 10
-            SnowLeftWalk // 11
-
+            IdleWater, // 1
+            IdleSnow, // 2
+            FireWalk, // 3
+            WaterWalk, // 4
+            SnowWalk, // 5
+            FireUltimate, //6
+            WaterUltimate, //7
+            SnowUltimate, //8
         }
+
         private void MovementAnimations()
         {
-            if (SpriteVelocity.X > 0)
+            if (SpriteVelocity.X != 0)
             {
                 switch (_elementIndex)
                 {
@@ -743,66 +758,26 @@ namespace Terramental
                         break;
                 }
             }
-            else if (SpriteVelocity.X < 0)
+            else
             {
                 switch (_elementIndex)
                 {
                     case 0:
-                        SetAnimation((int)AnimationIndexEnum.FireLeftWalk);
+                        SetAnimation((int)AnimationIndexEnum.IdleFire);
                         break;
                     case 1:
-                        SetAnimation((int)AnimationIndexEnum.WaterLeftWalk);
+                        SetAnimation((int)AnimationIndexEnum.IdleWater);
                         break;
                     case 2:
-                        SetAnimation((int)AnimationIndexEnum.SnowLeftWalk);
+                        SetAnimation((int)AnimationIndexEnum.IdleSnow);
                         break;
                     default:
                         _elementIndex = (int)AnimationIndexEnum.IdleFire;
                         break;
                 }
             }
-            else if (SpriteVelocity.X == 0)
-            {
-                if (AnimationIndex % 2 == 0)
-                {
-                    switch (_elementIndex)
-                    {
-                        case 0:
-                            SetAnimation((int)AnimationIndexEnum.IdleFire);
-                            break;
-                        case 1:
-                            SetAnimation((int)AnimationIndexEnum.IdleWater);
-                            break;
-                        case 2:
-                            SetAnimation((int)AnimationIndexEnum.IdleSnow);
-                            break;
-                        default:
-                            _elementIndex = (int)AnimationIndexEnum.IdleFire;
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (_elementIndex)
-                    {
-                        case 0:
-                            SetAnimation((int)AnimationIndexEnum.IdleLeftFire);
-                            break;
-                        case 1:
-                            SetAnimation((int)AnimationIndexEnum.IdleLeftWater);
-                            break;
-                        case 2:
-                            SetAnimation((int)AnimationIndexEnum.IdleLeftSnow);
-                            break;
-                        default:
-                            _elementIndex = (int)AnimationIndexEnum.IdleFire;
-                            break;
-                    }
-                }
-            }
         }
 
         #endregion
-
     }
 }

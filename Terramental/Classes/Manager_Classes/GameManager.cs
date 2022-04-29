@@ -166,6 +166,7 @@ namespace Terramental
                 playerCharacter = new PlayerCharacter(this);
                 playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
                 playerCharacter.InitialisePlayerAnimations(this);
+                playerCharacter.LoadStatusEffects();
                 playerCharacter.LayerOrder = -1;
                 playerInterface = new PlayerInterface(this);
 

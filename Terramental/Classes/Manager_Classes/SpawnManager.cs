@@ -169,6 +169,7 @@ namespace Terramental
                 knightEnemy.AttackThreshold = 40;
                 knightEnemy.ChaseThreshold = 400;
                 knightEnemy.ElementIndex = elementIndex;
+                knightEnemy.LoadStatusEffects();
                 enemyList.Add(knightEnemy);
                 knightEnemy.AttackCooldown = 1;
                 knightEnemy.EnemyIndex = 0;
@@ -201,6 +202,7 @@ namespace Terramental
                 darkMageCharacter.AttackCooldown = 3;
 
                 darkMageCharacter.ElementIndex = elementIndex;
+                darkMageCharacter.LoadStatusEffects();
                 enemyList.Add(darkMageCharacter);
                 darkMageCharacter.AttackCooldown = 1;
                 darkMageCharacter.EnemyIndex = 0;
