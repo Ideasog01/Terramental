@@ -574,3 +574,10 @@ C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\De
 C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Return_Button.xnb
 C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\RightButton.xnb
 C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\SFXVol_Button.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Controls_Button.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\LeftButton.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Music_Button.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Resolution_Button.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Return_Button.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\RightButton.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\SFXVol_Button.xnb
