@@ -68,6 +68,8 @@ namespace Terramental
         private Tile _rightTile;
         private ElementWall _elementWall;
         private float _ultimateUsedTimer;
+        private MovingPlatform _movingPlatform;
+        private SnowBeam _snowBeam;
 
         private List<Tile> _tileList;
         private GameManager _gameManager;
@@ -116,6 +118,11 @@ namespace Terramental
             set { _elementWall = value; }
         }
 
+        public MovingPlatform MovingPlatform
+        {
+            get { return _movingPlatform; }
+            set { _movingPlatform = value; }
+        }
         public Tile RightTile
         {
             get { return _rightTile; }
@@ -662,8 +669,6 @@ namespace Terramental
                 }
             }
 
-
-
             if (_disableRight && _rightTile != null)
             {
                 if (!_rightTile.RightCollision(this))
@@ -689,6 +694,16 @@ namespace Terramental
                     _disableRight = false;
                     _disableLeft = false;
                     _elementWall = null;
+                }
+            }
+
+            if (_movingPlatform != null)
+            {
+                if (!_movingPlatform.RightCollision(this) && !_movingPlatform.LeftCollision(this))
+                {
+                    _disableRight = false;
+                    _disableLeft = false;
+                    // _movingPlatform = null;
                 }
             }
         }

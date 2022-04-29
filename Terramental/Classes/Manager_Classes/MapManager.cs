@@ -234,6 +234,22 @@ namespace Terramental
             {
                 SpawnManager.SpawnSpikeObstacle(position);
             }
+            if (index == 16) // Left facing cannon
+            {
+                SpawnManager.SpawnCannonObstacle(0, position);
+            }
+
+            if (index == 17) // Right facing cannon
+            {
+                SpawnManager.SpawnCannonObstacle(1, position);
+            }
+
+            if (index == 18)
+            {
+                SpawnManager.SpawnMovingPlatform(position, this);
+            }
+
+
         }
     }
 }
