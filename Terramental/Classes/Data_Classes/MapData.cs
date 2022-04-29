@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-
-namespace Terramental
+﻿namespace Terramental
 {
     public class MapData
     {
@@ -10,9 +7,6 @@ namespace Terramental
 
         public int[,] _tileMap;
         public int[,] _entityMap;
-
-        public List<int> assetList = new List<int>();
-        public List<Vector2> assetPositionList = new List<Vector2>();
 
         public string _levelName;
 

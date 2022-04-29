@@ -31,12 +31,6 @@ namespace Terramental
             set { _componentPosition = value; }
         }
 
-        public Vector2 ComponentScale
-        {
-            get { return _componentScale; }
-            set { _componentScale = value; }
-        }
-
         public Color ComponentColor
         {
             get { return _componentColor; }

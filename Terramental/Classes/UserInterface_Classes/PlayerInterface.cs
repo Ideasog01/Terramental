@@ -25,9 +25,6 @@ namespace Terramental
         private InterfaceComponent _thirdLife;
         private InterfaceComponent _playerScoreComponent;
 
-        private InterfaceComponent _ultimateSlider;
-        private InterfaceComponent _ultimateSliderFill;
-
         private SpriteFont _dashCooldown;
         private SpriteFont _ultimateCooldown;
         private SpriteFont _playerScore;
@@ -56,24 +53,6 @@ namespace Terramental
             foreach(InterfaceComponent component in playerInterfaceElements)
             {
                 component.FollowCamera();
-
-                if(_gameManager.playerCharacter.ultimateActive)
-                {
-                    _ultimateSlider.FollowCamera();
-                    _ultimateSliderFill.FollowCamera();
-
-                    _ultimateSliderFill.ComponentScale = new Vector2(40 * _gameManager.playerCharacter.ultimateActiveTimer, 40);
-
-                    switch(_gameManager.playerCharacter.ElementIndex)
-                    {
-                        case 0: _ultimateSliderFill.ComponentColor = Color.IndianRed;
-                            break;
-                        case 1: _ultimateSliderFill.ComponentColor = Color.DeepSkyBlue;
-                            break;
-                        case 2: _ultimateSliderFill.ComponentColor = Color.AliceBlue;
-                            break;
-                    }
-                }
             }
         }
 
@@ -82,12 +61,6 @@ namespace Terramental
             foreach(InterfaceComponent component in playerInterfaceElements)
             {
                 component.DrawComponent(spriteBatch);
-            }
-
-            if(_gameManager.playerCharacter.ultimateActive)
-            {
-                _ultimateSlider.DrawComponent(spriteBatch);
-                _ultimateSliderFill.DrawComponent(spriteBatch);
             }
         }
 
@@ -166,10 +139,6 @@ namespace Terramental
 
             _playerScoreComponent = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(-435, -180), new Vector2(32, 32), _gameManager.GetTexture("Sprites/Pickups/Collectible"));
             playerInterfaceElements.Add(_playerScoreComponent);
-
-            _ultimateSlider = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(-150, -200), new Vector2(400, 40), _gameManager.GetTexture("UserInterface/Sliders/UltimateSliderBorder"));
-
-            _ultimateSliderFill = new InterfaceComponent(_gameManager.playerCharacter, _ultimateSlider.ComponentPosition, new Vector2(400, 40), _gameManager.GetTexture("UserInterface/Sliders/BlankSliderFill"));
 
             _dashCooldown = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
             _ultimateCooldown = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
