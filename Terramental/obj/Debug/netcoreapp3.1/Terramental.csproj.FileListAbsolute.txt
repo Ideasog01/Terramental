@@ -633,10 +633,3 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\Flame_SpriteSheet.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\BlankSliderFill.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\UltimateSliderBorder.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Controls_Button.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\LeftButton.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Music_Button.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Resolution_Button.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Return_Button.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\RightButton.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\SFXVol_Button.xnb
