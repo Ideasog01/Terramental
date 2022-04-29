@@ -18,6 +18,8 @@ namespace Terramental
         private float _statusDamageTimer;
         private int _statusDamageAmount;
 
+        private bool _disableMovement;
+
         private List<Sprite> _statusEffects = new List<Sprite>();
 
         private int _characterMaxHealth = 3;
@@ -33,6 +35,12 @@ namespace Terramental
             set { _characterHealth = value; }
         }
 
+        public bool DisableMovement
+        {
+            get { return  _disableMovement; }
+            set { _disableMovement = value; }
+        }
+
         public void LoadStatusEffects()
         {
             Sprite flameEffect = new Sprite();
@@ -44,6 +52,14 @@ namespace Terramental
             flameEffect.LayerOrder = -2;
             flameEffect.IsActive = false;
             _statusEffects.Add(flameEffect);
+
+            Sprite frozenEffect = new Sprite();
+            frozenEffect.Initialise(SpritePosition, SpawnManager._gameManager.GetTexture("Sprites/Effects/FrozenEffect"), new Vector2(96, 96));
+            frozenEffect.AttachSpriteOffset = new Vector2(10, 10);
+            frozenEffect.AttachSprite = this;
+            frozenEffect.LayerOrder = -2;
+            frozenEffect.IsActive = false;
+            _statusEffects.Add(frozenEffect);
         }
 
         public void SetProperties(Vector2 position, int maxHealth, int currentHealth)
@@ -94,6 +110,12 @@ namespace Terramental
             {
                 _statusEffects[0].IsActive = true;
             }
+
+            if(_currentStatus == CharacterStatus.Frozen)
+            {
+                _statusEffects[1].IsActive = true;
+                _disableMovement = true;
+            }
         }
 
         public void TakeDamage(int amount)
@@ -125,7 +147,6 @@ namespace Terramental
             else
             {
                 _characterHealth += amount;
-                
             }
         }
 
@@ -142,19 +163,28 @@ namespace Terramental
                     _statusEffects[0].IsActive = false;
                 }
 
+                if(_currentStatus == CharacterStatus.Frozen)
+                {
+                    _statusEffects[1].IsActive = false;
+                    _disableMovement = false;
+                }
+
                 _currentStatus = CharacterStatus.Default;
             }
 
-            if(_statusDamageTimer > 0)
+            if(_statusDamageAmount > 0)
             {
-                _statusDamageTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else
-            {
-                if(_currentStatus != CharacterStatus.Default)
+                if (_statusDamageTimer > 0)
                 {
-                    TakeDamage(_statusDamageAmount);
-                    _statusDamageTimer = _statusDamageDuration;
+                    _statusDamageTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    if (_currentStatus != CharacterStatus.Default)
+                    {
+                        TakeDamage(_statusDamageAmount);
+                        _statusDamageTimer = _statusDamageDuration;
+                    }
                 }
             }
         }

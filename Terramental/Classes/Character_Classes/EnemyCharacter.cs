@@ -144,8 +144,11 @@ namespace Terramental
 
             if (CurrentState == AIState.Chase)
             {
-                CheckPath();
-                Chase();
+                if(!DisableMovement)
+                {
+                    CheckPath();
+                    Chase();
+                }
             }
 
             GroundCheck();

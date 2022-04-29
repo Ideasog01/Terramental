@@ -577,8 +577,26 @@ namespace Terramental
                         break;
                     case 1:
 
+                        if(!Animations[AnimationIndex].MirrorTexture)
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 2, 6);
+                        }
+                        else
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false, true, 2, 6);
+                        }
+
                         break;
                     case 2:
+
+                        if (!Animations[AnimationIndex].MirrorTexture)
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 3, 6);
+                        }
+                        else
+                        {
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false, true, 3, 6);
+                        }
 
                         break;
                     default:
