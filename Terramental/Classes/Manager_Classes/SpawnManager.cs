@@ -288,19 +288,35 @@ namespace Terramental
             levelFragment.IsActive = true;
         }
 
-        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile)
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger)
         {
             if(inactiveProjectileList.Count > 0)
             {
-                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile);
+                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger);
+
+                if(hasAnimation)
+                {
+                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
+                    inactiveProjectileList[0].Animations.Clear();
+                    inactiveProjectileList[0].Animations.Add(projectileAnimation);
+                    inactiveProjectileList[0].SetAnimation(0);
+                }
+
                 activeProjectileList.Add(inactiveProjectileList[0]);
                 inactiveProjectileList.RemoveAt(0);
             }
             else
             {
                 Projectile projectile = new Projectile();
-                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile);
+                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger);
                 projectile.Initialise(position, texture, scale);
+
+                if (hasAnimation)
+                {
+                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
+                    projectile.Animations.Add(projectileAnimation);
+                    projectile.SetAnimation(0);
+                }
 
                 activeProjectileList.Add(projectile);
             }

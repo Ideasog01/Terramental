@@ -340,6 +340,42 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/Idle/Idle_Water_SpriteSheet.png
 
+#begin Sprites/Player/UltimateActivations/Fire_Activation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/UltimateActivations/Fire_Activation.png
+
+#begin Sprites/Player/UltimateActivations/Snow_Activation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/UltimateActivations/Snow_Activation.png
+
+#begin Sprites/Player/UltimateActivations/Water_Activation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Player/UltimateActivations/Water_Activation.png
+
 #begin Sprites/Player/Walk/Fire_RightWalk_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -375,6 +411,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/Walk/Water_RightWalk_Spritesheet.png
+
+#begin Sprites/Projectiles/Fire_Projectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/Fire_Projectile.png
 
 #begin Sprites/Projectiles/Fireball_Projectile.png
 /importer:TextureImporter

@@ -135,7 +135,7 @@ namespace Terramental
             {
                 foreach (Tile tile in MapManager.tileList)
                 {
-                    if (tile.WallTile)
+                    if (tile.GroundTile)
                     {
                         if (tile.TopCollision(this))
                         {
@@ -238,12 +238,12 @@ namespace Terramental
 
                     if(_faceRight)
                     {
-                        SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(6, 0), true);
+                        SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(6, 0), true, false, 0);
                         _knightAttacked = true;
                     }
                     else
                     {
-                        SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(-40, 20), new Vector2(40, 40), new Vector2(-6, 0), true);
+                        SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(-40, 20), new Vector2(40, 40), new Vector2(-6, 0), true, false, 0);
                         _knightAttacked = true;
                     }
 

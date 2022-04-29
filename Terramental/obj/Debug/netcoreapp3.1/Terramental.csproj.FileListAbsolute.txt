@@ -626,3 +626,7 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_Filler.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_Sand.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_SandReverse.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Fire_Projectile.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Fire_Activation.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Snow_Activation.xnb
+F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Water_Activation.xnb

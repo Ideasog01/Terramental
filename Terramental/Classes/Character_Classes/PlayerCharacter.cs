@@ -550,42 +550,26 @@ namespace Terramental
 
                         if(SpriteVelocity.X >= 0)
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 1);
                         }
                         else
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false, true, 1);
                         }
                        
                         break;
                     case 1:
 
-                        if (SpriteVelocity.X >= 0)
-                        {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false);
-                        }
-                        else
-                        {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false);
-                        }
-
                         break;
                     case 2:
-
-                        if (SpriteVelocity.X >= 0)
-                        {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false);
-                        }
-                        else
-                        {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false);
-                        }
 
                         break;
                     default:
                         Console.WriteLine("ERROR: Element index is invalid during ultimate attack");
                         break;
                 }
+
+                _attackTimer = 2;
             }
         }
 
@@ -699,6 +683,10 @@ namespace Terramental
             Texture2D walkWater = gameManager.GetTexture("Sprites/Player/Walk/Water_Walk_SpriteSheet");
             Texture2D walkSnow = gameManager.GetTexture("Sprites/Player/Walk/Snow_Walk_SpriteSheet");
 
+            Texture2D fireUltimateActivation = gameManager.GetTexture("Sprites/Player/UltimateActivations/Fire_Activation");
+            Texture2D waterUltimateActivation = gameManager.GetTexture("Sprites/Player/UltimateActivations/Water_Activation");
+            Texture2D snowUltimateActivation = gameManager.GetTexture("Sprites/Player/UltimateActivations/Snow_Activation");
+
             //Index
             Animations.Add(new Animation(idleFire, 5, 120f, true, new Vector2(64, 64))); //0
             Animations.Add(new Animation(idleFire, 5, 120f, true, new Vector2(64, 64), true)); //1
@@ -713,6 +701,10 @@ namespace Terramental
             Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64), true)); //9
             Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64))); //10
             Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64), true)); //11
+
+            Animations.Add(new Animation(fireUltimateActivation, 4, 120f, true, new Vector2(64, 64), true)); //12
+            Animations.Add(new Animation(waterUltimateActivation, 4, 120f, true, new Vector2(64, 64), true)); //13
+            Animations.Add(new Animation(snowUltimateActivation, 4, 120f, true, new Vector2(64, 64), true)); //14
         }
 
         enum AnimationIndexEnum
