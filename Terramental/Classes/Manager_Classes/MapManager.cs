@@ -10,6 +10,7 @@ namespace Terramental
     {
         public static List<Tile> activeTiles = new List<Tile>();
         public static List<Tile> tileList = new List<Tile>();
+        public static List<bool> isWall = new List<bool>();
 
         public static float mapWidth;
         public static float mapHeight;
@@ -18,6 +19,7 @@ namespace Terramental
         private MapData _mapData;
 
         private List<Texture2D> _tileMap1 = new List<Texture2D>();
+        private List<Texture2D> _assetTextureList = new List<Texture2D>();
 
         public MapManager(GameManager gameManager)
         {
@@ -69,7 +71,7 @@ namespace Terramental
 
         public void LoadMapData(string filePath)
         {
-            string strResultJson = File.ReadAllText(@"MapData.json");
+            string strResultJson = File.ReadAllText(filePath);
             MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
             _mapData = newMapData;
 
@@ -84,17 +86,39 @@ namespace Terramental
 
         private void LoadTextures()
         {
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/DefaultTile")); //0
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Sand")); //1
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Tile_Filler")); //2
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Right_Corner")); //3
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Left_Slide")); //4
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Right_Slide")); //5
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/First_Sky_Tile")); //6
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Second_Sky_Tile")); //7
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Third_Sky_Tile")); //8
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Fourth_Sky_Tile")); //9
-            _tileMap1.Add(_gameManager.GetTexture("Sprites/Tiles/Left_Corner")); //10
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsLeft")); //0
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsRight")); //1
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_BottomLeft_CornerTile")); //2
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_BottomRight_CornerTile")); //3
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Left_CornerTile")); //4
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_LeftSide_Tile")); //5
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Right_CornerTile")); //6
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_RightSlide_Tile")); //7
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Tile")); //8
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Left_Corner")); //9
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Left_Slide")); //10
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Right_Corner")); //11
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Right_Slide")); //12
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //13
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FirstTile")); //14
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FourthTile")); //15
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SecondTile")); //16
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SeventhTile")); //17
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SixthTile")); //18
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_ThirdTile")); //19
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Thin_Tile_64x32")); //20
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Filler")); //21
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Sand")); //22
+            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_SandReverse")); //23
+
+            _assetTextureList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_1"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_2"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_3"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
         }
 
         private void GenerateMap()
@@ -109,10 +133,10 @@ namespace Terramental
 
                     Tile tile = new Tile();
                     tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
-
+                    tile.LayerOrder = 0;
                     bool isGround = false;
 
-                    if(tileIndex == 1 || tileIndex == 2 || tileIndex == 3 || tileIndex == 4 || tileIndex == 5 || tileIndex == 10)
+                    if(tileIndex <= 13 || tileIndex > 20)
                     {
                         isGround = true;
                     }
@@ -125,7 +149,18 @@ namespace Terramental
                     tileList.Add(tile);
 
                 }
-            }      
+            }
+
+            int assetCount = 0;
+            
+            foreach(int assetIndex in _mapData.assetList)
+            {
+                Texture2D assetTexture = _assetTextureList[assetIndex];
+
+                Sprite assetSprite = new Sprite();
+                assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetTextureList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                assetCount++;
+            }
         }
 
         private void SpawnEntity(int index, Vector2 position)
@@ -188,6 +223,16 @@ namespace Terramental
             if(index == 13)
             {
                 SpawnManager.SpawnFragment(position);
+            }
+
+            if(index == 14)
+            {
+                SpawnManager.SpawnEnemy(1, position);
+            }
+
+            if(index == 15)
+            {
+                SpawnManager.SpawnSpikeObstacle(position);
             }
         }
     }

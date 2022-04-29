@@ -24,25 +24,31 @@ namespace Terramental
         public static List<ElementWall> elementWallList = new List<ElementWall>();
         public static List<ElementPickup> elementPickupList = new List<ElementPickup>();
         public static List<Checkpoint> checkpointList = new List<Checkpoint>();
+        public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
         public static Fragment levelFragment;
 
         public static void Update(GameTime gameTime)
         {
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                foreach (EnemyCharacter knightEnemy in enemyList)
+                foreach(EnemyCharacter enemy in enemyList)
                 {
-                    if (knightEnemy.IsActive)
+                    if (CameraController.ObjectIsVisible(enemy.SpritePosition) && enemy.CharacterHealth > 0)
                     {
-                        knightEnemy.UpdateCharacter(gameTime);
-                        knightEnemy.UpdateKnightEnemy(gameTime);
-                        knightEnemy.UpdateHealthBar();
-                        knightEnemy.EnableHealthBar(true);
+                        enemy.UpdateCharacter(gameTime);
+                        enemy.UpdateKnightEnemy(gameTime);
+                        enemy.UpdateHealthBar();
+                        enemy.EnableHealthBar(true);
                     }
                     else
                     {
-                        knightEnemy.EnableHealthBar(false);
+                        enemy.EnableHealthBar(false);
                     }
+                }
+
+                foreach(SpikeObstacle spikeObstacle in spikeObstacleList)
+                {
+                    spikeObstacle.CheckCollision(gameTime);
                 }
 
                 foreach(Projectile projectile in activeProjectileList)
@@ -58,7 +64,6 @@ namespace Terramental
                     {
                         break;
                     }
-                     
                 }
 
                 foreach (HealthPickup healthPickup in healthPickupList)
@@ -150,25 +155,26 @@ namespace Terramental
 
                 KnightCharacter knightEnemy = new KnightCharacter();
                 knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
-                knightEnemy.SetProperties(position + new Vector2(0, -32), 100, 100);
+                knightEnemy.SetProperties(position, 100, 100);
 
                 knightEnemy.AddAnimation(knightIdle);
                 knightEnemy.AddAnimation(knightWalk);
                 knightEnemy.AddAnimation(knightAttack);
+                knightEnemy.SetAnimation(0);
 
                 knightEnemy.LoadHealthBar(_gameManager);
 
                 knightEnemy.LayerOrder = -1;
-
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
                 knightEnemy.AttackThreshold = 40;
-
+                knightEnemy.ChaseThreshold = 400;
                 knightEnemy.ElementIndex = elementIndex;
+                knightEnemy.LoadStatusEffects();
                 enemyList.Add(knightEnemy);
                 knightEnemy.AttackCooldown = 1;
                 knightEnemy.EnemyIndex = 0;
             }
-            else if(index == 1)
+            else if(index == 1) //Dark Mage Character
             {
                 Random rand = new Random();
                 int elementIndex = rand.Next(0, 2);
@@ -178,23 +184,28 @@ namespace Terramental
                 Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 8, 140f, true, new Vector2(64, 64));
 
                 DarkMageCharacter darkMageCharacter = new DarkMageCharacter();
-                darkMageCharacter.Initialise(position + new Vector2(0, -86), _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
-                darkMageCharacter.SetProperties(position + new Vector2(0, -86), 100, 100);
+                darkMageCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
+                darkMageCharacter.SetProperties(position, 100, 100);
 
                 darkMageCharacter.AddAnimation(mageIdle);
                 darkMageCharacter.AddAnimation(mageWalk);
                 darkMageCharacter.AddAnimation(mageAttack);
+                darkMageCharacter.SetAnimation(0);
 
-                darkMageCharacter.AttackThreshold = 300;
+                darkMageCharacter.AttackThreshold = 400;
+                darkMageCharacter.ChaseThreshold = 600;
 
                 darkMageCharacter.LoadHealthBar(_gameManager);
                 darkMageCharacter.LayerOrder = -1;
                 darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
-
                 darkMageCharacter.EnemyIndex = 1;
                 darkMageCharacter.AttackCooldown = 3;
 
+                darkMageCharacter.ElementIndex = elementIndex;
+                darkMageCharacter.LoadStatusEffects();
                 enemyList.Add(darkMageCharacter);
+                darkMageCharacter.AttackCooldown = 1;
+                darkMageCharacter.EnemyIndex = 0;
             }
         }
 
@@ -279,22 +290,46 @@ namespace Terramental
             levelFragment.IsActive = true;
         }
 
-        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile)
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger)
         {
             if(inactiveProjectileList.Count > 0)
             {
-                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile);
+                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger);
+
+                if(hasAnimation)
+                {
+                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
+                    inactiveProjectileList[0].Animations.Clear();
+                    inactiveProjectileList[0].Animations.Add(projectileAnimation);
+                    inactiveProjectileList[0].SetAnimation(0);
+                }
+
                 activeProjectileList.Add(inactiveProjectileList[0]);
                 inactiveProjectileList.RemoveAt(0);
             }
             else
             {
                 Projectile projectile = new Projectile();
-                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile);
+                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger);
                 projectile.Initialise(position, texture, scale);
+
+                if (hasAnimation)
+                {
+                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
+                    projectile.Animations.Add(projectileAnimation);
+                    projectile.SetAnimation(0);
+                }
 
                 activeProjectileList.Add(projectile);
             }
+        }
+
+        public static void SpawnSpikeObstacle(Vector2 position)
+        {
+            SpikeObstacle spikeObstacle = new SpikeObstacle();
+            spikeObstacle.Player = _gameManager.playerCharacter;
+            spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
+            spikeObstacleList.Add(spikeObstacle);
         }
     }
 }

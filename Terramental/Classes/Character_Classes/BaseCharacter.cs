@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace Terramental
@@ -10,25 +9,42 @@ namespace Terramental
         /// <summary>
         /// All characters inherit from BaseCharacter class
         /// </summary>
+        /// 
+        public enum CharacterStatus { Default, Burning, Frozen }
+
+        private CharacterStatus _currentStatus = CharacterStatus.Default;
+        private float _statusDuration;
+        private float _statusDamageDuration;
+        private float _statusDamageTimer;
+        private int _statusDamageAmount;
+
+        private List<Sprite> _statusEffects = new List<Sprite>();
 
         private int _characterMaxHealth = 3;
         private int _characterHealth = 2;
 
-        private bool _isBurning;
-        private float _burnTimer;
-
-        private bool _isFrozen;
-        private bool _snowBeamCollision;
-        private float _frozenTimer;
-
-        private float _damageTimer;
-        private float _damageWaitTime;
-
         private float _takeDamageCooldown;
 
-        private int _statusIndex;
-
         private Vector2 _startPosition;
+
+        public int CharacterHealth
+        {
+            get { return _characterHealth; }
+            set { _characterHealth = value; }
+        }
+
+        public void LoadStatusEffects()
+        {
+            Sprite flameEffect = new Sprite();
+            flameEffect.Initialise(SpritePosition, SpawnManager._gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), new Vector2(64, 64));
+            flameEffect.Animations.Add(new Animation(SpawnManager._gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), 4, 120f, true, new Vector2(64, 64)));
+            flameEffect.SetAnimation(0);
+            flameEffect.AttachSpriteOffset = new Vector2(40, 24);
+            flameEffect.AttachSprite = this;
+            flameEffect.LayerOrder = -2;
+            flameEffect.IsActive = false;
+            _statusEffects.Add(flameEffect);
+        }
 
         public void SetProperties(Vector2 position, int maxHealth, int currentHealth)
         {
@@ -43,33 +59,41 @@ namespace Terramental
             SpritePosition = _startPosition;
         }
 
-        public bool IsBurning
+        public void UpdateCharacter(GameTime gameTime)
         {
-            get { return _isBurning; }
-            set { _isBurning = value; }
+            if (SpriteVelocity.X > 0) // Facing right
+            {
+                SetAnimation(0);
+            }
+            else if (SpriteVelocity.X < 0)  // Facing left 
+            {
+                SetAnimation(1);
+            }
+
+            if (_takeDamageCooldown > 0)
+            {
+                _takeDamageCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if(_currentStatus != CharacterStatus.Default)
+            {
+                UpdateStatus(gameTime);
+            }
         }
 
-        public void SetStatus(int index, float statusTime, float damageTime)
+        public void SetStatus(CharacterStatus status, float statusDuration, float statusDamageDuration, int statusDamageAmount)
         {
-            if(index != _statusIndex)
+            _currentStatus = status;
+            _statusDuration = statusDuration;
+
+            _statusDamageDuration = statusDamageDuration;
+            _statusDamageTimer = _statusDamageDuration;
+            _statusDamageAmount = statusDamageAmount;
+
+            if(_currentStatus == CharacterStatus.Burning)
             {
-                if (index == 0)
-                {
-                    _isBurning = true;
-                    _burnTimer = statusTime;
-                    _damageTimer = damageTime;
-                    _damageWaitTime = damageTime;
-                }
-
-                if (index == 1)
-                {
-                    _frozenTimer = statusTime;
-                    _snowBeamCollision = true;
-                }
-
-                _statusIndex = index;
+                _statusEffects[0].IsActive = true;
             }
-            
         }
 
         public void TakeDamage(int amount)
@@ -80,81 +104,15 @@ namespace Terramental
 
                 _takeDamageCooldown = 2f;
 
-                if (_characterHealth <= 0)
+                if(_characterHealth <= 0)
                 {
                     IsActive = false;
-                }
-            }
-        }
 
-        public void UpdateCharacter(GameTime gameTime)
-        {
-            if(_isBurning)
-            {
-                if(_burnTimer > 0)
-                {
-                    _burnTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                    if(_damageTimer > 0)
+                    foreach(Sprite effect in _statusEffects)
                     {
-                        _damageTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    }
-                    else
-                    {
-                        TakeDamage(10);
-                        _damageTimer = _damageWaitTime;
+                        effect.IsActive = false;
                     }
                 }
-                else
-                {
-                    _isBurning = false;
-                    _burnTimer = 0;
-                    _statusIndex = 0;
-                }
-            }
-
-            if(_snowBeamCollision)
-            {
-                if (_frozenTimer > 0)
-                {
-                    _frozenTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    _isFrozen = true;
-                    _snowBeamCollision = false;
-                    _frozenTimer = 4;
-                    SpawnManager.SpawnAttachEffect("Sprites/Effects/FrozenEffect", SpritePosition, SpriteScale, this, 4, false);
-                }
-            }
-
-            if(_isFrozen)
-            {
-                if(_frozenTimer > 0)
-                {
-                    _frozenTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    _isFrozen = false;
-
-                    _statusIndex = 0;
-                }
-            }
-            
-
-            if (SpriteVelocity.X > 0) // Facing right
-            {
-                SetAnimation(0);
-            }
-            else if (SpriteVelocity.X < 0)  // Facing left 
-            {
-                SetAnimation(1);
-            }
-
-            if(_takeDamageCooldown > 0)
-            {
-                _takeDamageCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 
@@ -171,10 +129,34 @@ namespace Terramental
             }
         }
 
-        public int CharacterHealth
+        private void UpdateStatus(GameTime gameTime)
         {
-            get { return _characterHealth; }
-            set { _characterHealth = value; }
+            if(_statusDuration > 0)
+            {
+                _statusDuration -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                if(_currentStatus == CharacterStatus.Burning)
+                {
+                    _statusEffects[0].IsActive = false;
+                }
+
+                _currentStatus = CharacterStatus.Default;
+            }
+
+            if(_statusDamageTimer > 0)
+            {
+                _statusDamageTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                if(_currentStatus != CharacterStatus.Default)
+                {
+                    TakeDamage(_statusDamageAmount);
+                    _statusDamageTimer = _statusDamageDuration;
+                }
+            }
         }
     }
 }
