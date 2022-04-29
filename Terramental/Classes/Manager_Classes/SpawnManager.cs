@@ -172,7 +172,7 @@ namespace Terramental
 
                 knightEnemy.LayerOrder = -1;
                 knightEnemy.playerCharacter = _gameManager.playerCharacter;
-                knightEnemy.AttackThreshold = 40;
+                knightEnemy.AttackThreshold = 60;
                 knightEnemy.ChaseThreshold = 400;
                 knightEnemy.ElementIndex = elementIndex;
                 knightEnemy.LoadStatusEffects();

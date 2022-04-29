@@ -14,6 +14,7 @@ namespace Terramental
 
         private Sprite enemyHealthBar;
         private Sprite enemyHealthBarFill;
+        private Sprite enemyElement;
 
         private Texture2D enemyHealthBarTexture;
         private Texture2D enemyHealthBarFillTexture;
@@ -51,6 +52,10 @@ namespace Terramental
 
             enemyHealthBar.LayerOrder = -1;
             enemyHealthBarFill.LayerOrder = -1;
+
+            enemyElement = new Sprite();
+            enemyElement.Initialise(SpritePosition + new Vector2(0, -70), gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element"), new Vector2(20, 20));
+            enemyElement.LayerOrder = -1;
         }
 
         public void UpdateHealthBar()
@@ -59,10 +64,12 @@ namespace Terramental
             if(!Animations[AnimationIndex].MirrorTexture)
             {
                 enemyHealthBar.SpritePosition = SpritePosition + new Vector2(0, -30);
+                enemyElement.SpritePosition = enemyHealthBar.SpritePosition + new Vector2(60, -5);
             }
             else
             {
                 enemyHealthBar.SpritePosition = SpritePosition + new Vector2(48, -30);
+                enemyElement.SpritePosition = enemyHealthBar.SpritePosition + new Vector2(60, -5);
             }
 
             enemyHealthBarFill.SpritePosition = enemyHealthBar.SpritePosition;
@@ -94,8 +101,25 @@ namespace Terramental
 
         public int ElementIndex
         {
-            get { return _elementIndex; }
-            set { _elementIndex = value; }
+            get
+            { return _elementIndex; }
+            set 
+            { 
+                if(value == 0)
+                {
+                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element");
+                }
+                else if(value == 1)
+                {
+                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element");
+                }
+                else if(value == 2)
+                {
+                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element");
+                }
+
+                _elementIndex = value;
+            }
         }
 
         public int EnemyIndex
