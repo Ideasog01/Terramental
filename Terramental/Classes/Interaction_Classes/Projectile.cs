@@ -8,6 +8,7 @@ namespace Terramental
         private bool _isEnemyProjectile;
         private PlayerCharacter _playerCharacter;
         private int _projectileTrigger;
+        private float _destroyTimer;
 
         public void UpdateProjectile(GameTime gameTime)
         {
@@ -36,11 +37,20 @@ namespace Terramental
                         }
                     }
                 }
+
+                if(_destroyTimer > 0)
+                {
+                    _destroyTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    DestroyProjectile();
+                }
                 
             }
         }
 
-        public void ResetProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, int projectileTrigger)
+        public void ResetProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, int projectileTrigger, float projectileDuration)
         {
             SpriteTexture = texture;
             SpritePosition = position;
@@ -49,6 +59,7 @@ namespace Terramental
             _isEnemyProjectile = isEnemyProjectile;
             IsActive = true;
             _projectileTrigger = projectileTrigger;
+            _destroyTimer = projectileDuration;
             _playerCharacter = SpawnManager._gameManager.playerCharacter;
         }
 

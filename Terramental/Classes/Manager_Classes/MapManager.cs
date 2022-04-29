@@ -234,6 +234,16 @@ namespace Terramental
             {
                 SpawnManager.SpawnSpikeObstacle(position);
             }
+
+            if(index == 16)
+            {
+                SpawnManager.SpawnCannonObstacle(position, 1);
+            }
+
+            if (index == 17)
+            {
+                SpawnManager.SpawnCannonObstacle(position, -1);
+            }
         }
     }
 }

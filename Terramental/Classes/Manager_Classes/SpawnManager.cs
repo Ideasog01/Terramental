@@ -25,6 +25,7 @@ namespace Terramental
         public static List<ElementPickup> elementPickupList = new List<ElementPickup>();
         public static List<Checkpoint> checkpointList = new List<Checkpoint>();
         public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
+        public static List<Cannon> cannonObstacleList = new List<Cannon>();
         public static Fragment levelFragment;
 
         public static void Update(GameTime gameTime)
@@ -109,6 +110,11 @@ namespace Terramental
                 if(levelFragment != null)
                 {
                     levelFragment.CheckFragmentCollision(gameTime);
+                }
+
+                foreach(Cannon cannon in cannonObstacleList)
+                {
+                    cannon.UpdateCannon(gameTime);
                 }
             }
 
@@ -290,11 +296,11 @@ namespace Terramental
             levelFragment.IsActive = true;
         }
 
-        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger)
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration)
         {
             if(inactiveProjectileList.Count > 0)
             {
-                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger);
+                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration);
 
                 if(hasAnimation)
                 {
@@ -310,7 +316,7 @@ namespace Terramental
             else
             {
                 Projectile projectile = new Projectile();
-                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger);
+                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration);
                 projectile.Initialise(position, texture, scale);
 
                 if (hasAnimation)
@@ -330,6 +336,25 @@ namespace Terramental
             spikeObstacle.Player = _gameManager.playerCharacter;
             spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
             spikeObstacleList.Add(spikeObstacle);
+        }
+
+        public static void SpawnCannonObstacle(Vector2 position, int cannonDir)
+        {
+            Cannon cannon = new Cannon(_gameManager, _gameManager.playerCharacter, cannonDir);
+            Texture2D cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right");
+
+            if (cannonDir == 1)
+            {
+                cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right");
+            }
+            else if(cannonDir == -1)
+            {
+                cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Left");
+            }
+            
+
+            cannon.Initialise(position - new Vector2(0, 50), cannonTexture, new Vector2(cannonTexture.Width, cannonTexture.Height));
+            cannonObstacleList.Add(cannon);
         }
     }
 }

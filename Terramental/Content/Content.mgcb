@@ -220,6 +220,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png
 
+#begin Sprites/Obstacles/Cannon_Left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/Cannon_Left.png
+
+#begin Sprites/Obstacles/Cannon_Right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/Cannon_Right.png
+
 #begin Sprites/Obstacles/FireTile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -423,6 +447,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/Walk/Water_RightWalk_Spritesheet.png
+
+#begin Sprites/Projectiles/Bullet_RightExample.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/Bullet_RightExample.png
 
 #begin Sprites/Projectiles/Fire_Projectile.png
 /importer:TextureImporter

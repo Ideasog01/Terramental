@@ -54,6 +54,11 @@ namespace Terramental
 
             _oldGamepadState = _currentGamepadState;
             _currentGamepadState = GamePad.GetState(PlayerIndex.One);
+
+            if(oldKeyboardState.IsKeyDown(Keys.C) && _currentKeyboardState.IsKeyUp(Keys.C))
+            {
+                SpawnManager.SpawnCannonObstacle(_gameManager.playerCharacter.SpritePosition, 1);
+            }
             
             if(!_currentGamepadState.IsConnected)
             {
