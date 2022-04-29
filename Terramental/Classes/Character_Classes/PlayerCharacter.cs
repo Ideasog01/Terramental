@@ -56,7 +56,7 @@ namespace Terramental
         //Ability Variables
 
         public bool ultimateActive;
-        private float _ultimateActiveTimer = 0;
+        public float ultimateActiveTimer = 0;
         private float _attackTimer;
         private int _elementIndex = 0;
         private bool _isJumping;
@@ -192,7 +192,7 @@ namespace Terramental
             SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
             DialogueManager.dialogueActive = false;
-            _ultimateActiveTimer = 0;
+            ultimateActiveTimer = 0;
             ultimateActive = false;
             ultimateCooldown = 0;
             disableMovement = false;
@@ -550,9 +550,9 @@ namespace Terramental
 
         public void ActivateUltimate()
         {
-            if (ultimateCooldown <= 0 && _ultimateActiveTimer <= 0)
+            if (ultimateCooldown <= 0 && ultimateActiveTimer <= 0)
             {
-                _ultimateActiveTimer = 10;
+                ultimateActiveTimer = 10;
                 ultimateActive = true;
             }
         }
@@ -593,9 +593,9 @@ namespace Terramental
 
         private void UpdateUltimateStatus(GameTime gameTime)
         {
-            if (_ultimateActiveTimer > 0)
+            if (ultimateActiveTimer > 0)
             {
-                _ultimateActiveTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                ultimateActiveTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (ultimateActive)
             {
