@@ -73,8 +73,7 @@ namespace Terramental
         {
             if(_projectileTrigger == 1)
             {
-                character.SetStatus(BaseCharacter.CharacterStatus.Frozen, 2, 0, 0);
-                //character.SetStatus(BaseCharacter.CharacterStatus.Burning, 5, 2, 20);
+                character.SetStatus(BaseCharacter.CharacterStatus.Burning, 5, 2, 20);
             }
 
             if(_projectileTrigger == 3)
