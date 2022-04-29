@@ -407,229 +407,170 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SixthTile.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_ThirdTile.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_SandReverse.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\CharacterName.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\LevelNameFont.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Collectible.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FlamePickup_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Fire_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftFire_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftSnow_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftWater_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Ultimates\SnowBeam.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_LeftWalk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.png.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk-SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpirteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\First_Sky_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Fourth_Sky_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Second_Sky_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MenuButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\SpriteFonts\DefaultFont.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\SplashScreen_Video.mp4
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\SplashScreen_Video.wmv
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\PlayerJump_SFX.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\DefaultFont.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\LevelNumberFont.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\LevelTitleFont.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\FrozenEffect.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\DarkMage\DarkMage_Attack_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\DarkMage\DarkMage_Idle_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\DarkMage\DarkMage_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Sprite_Default.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Attack_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Idle_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Walk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\FireTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\SnowTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\WaterTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FirePickup_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Health_Pickup.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\SnowPickup_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\WaterPickup_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Fire_Idle_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Snow_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Water_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_RightWalk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_RightWalk_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_RightWalk_Spritesheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Fireball_Projectile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Effects\Flame_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Projectiles\WaterProjectile_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_Activation_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_Idle_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_LeftActivation_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_LeftIdle_SpriteSheet.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Corner_Tile_UpwardsLeft.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Corner_Tile_UpwardsRight.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\DefaultTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Floating_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Left_Corner.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Left_Slide.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Right_Corner.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Right_Slide.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_FifthTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_FirstTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_FourthTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SecondTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SeventhTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SixthTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_ThirdTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Third_Sky_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile-Fire.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_Filler.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_Sand.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_SandReverse.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\CreditsMenu\Credits.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\CreditsMenu\ReturnButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Dialogue\DialogueNextButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Dialogue\DialoguePanel.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelCompleteMenu\ContinueButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelCompleteMenu\LevelCompleteBackground.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelCompleteMenu\ReplayButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\ExitButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\LevelDetailsPanel.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\LevelSelectButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\StartButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Terra_Map.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game1Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game2Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game3Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game4Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\LoadGameBackground.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Achievements_MainMenu_Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Credits_MainMenu_Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\ExitGame_MainMenu_Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\GameTitleText.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\LoadGame_MainMenu_Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\MainMenu_FireBackground.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\NewGame_MainMenu_Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Options_MainMenu_Button.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\MainMenuButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\OptionsButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\PauseMenu.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\ResumeButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Collectible.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Dash_Element.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Fire_Element.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Health.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Snow_Element.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Special_PowerUp.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Water_Element.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\RespawnScreen\RespawnButton.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\RespawnScreen\RespawnScreen.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\HealthBarBorder.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\HealthBarFill.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\StartScreen.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\SplashScreen_Video.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.exe
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.deps.json
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.runtimeconfig.json
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.runtimeconfig.dev.json
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.pdb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.VisualBasic.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Microsoft.VisualBasic.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct2D1.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct3D11.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct3D9.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.DXGI.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Mathematics.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.MediaFoundation.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.XAudio2.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\SharpDX.XInput.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\debian-x64\native\libuv.so
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\fedora-x64\native\libuv.so
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\opensuse-x64\native\libuv.so
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\osx\native\libuv.dylib
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\rhel-x64\native\libuv.so
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.AssemblyReference.cache
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.GeneratedMSBuildEditorConfig.editorconfig
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfoInputs.cache
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfo.cs
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.CoreCompileInputs.cache
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.CopyComplete
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.dll
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.pdb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.genruntimeconfig.cache
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Corner_Tile_UpwardsLeft.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Corner_Tile_UpwardsRight.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\DefaultTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_BottomLeft_CornerTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_BottomRight_CornerTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_LeftSide_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_Left_CornerTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_RightSlide_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_Right_CornerTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_Tile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Left_Corner.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Left_Slide.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Right_Corner.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Right_Slide.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_FifthTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_FirstTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_FourthTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_SecondTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_SeventhTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_SixthTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_ThirdTile.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Thin_Tile_64x32.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_Filler.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_Sand.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_SandReverse.xnb
-E:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\DefaultTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\DefaultTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\WaterLevel\Big_Palm.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\WaterLevel\Grass_1.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\WaterLevel\Grass_2.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\WaterLevel\Grass_3.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\WaterLevel\Palm_Tree.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\WaterLevel\Palm_Tree2.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\Spikes.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\DefaultTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Corner_Tile_UpwardsLeft.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Corner_Tile_UpwardsRight.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_BottomLeft_CornerTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_BottomRight_CornerTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_LeftSide_Tile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_Left_CornerTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_RightSlide_Tile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_Right_CornerTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Grass_Tile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Left_Corner.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Left_Slide.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Right_Corner.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Right_Slide.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_FifthTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_FirstTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_FourthTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_SecondTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_SeventhTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_SixthTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Sky_ThirdTile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Thin_Tile_64x32.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_Filler.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_Sand.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Tiles\WaterLevel\Tile_SandReverse.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Fire_Projectile.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Fire_Activation.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Snow_Activation.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Water_Activation.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\Flame_SpriteSheet.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\BlankSliderFill.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\UltimateSliderBorder.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerCharacter_Sprite_Fire_Left.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\CharacterName.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\LevelNameFont.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Collectible.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FlamePickup_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Fire_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftFire_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftSnow_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_LeftWater_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Ultimates\SnowBeam.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_LeftWalk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.png.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk-SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_LeftWalk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpirteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_LeftWalk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\First_Sky_Tile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Fourth_Sky_Tile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Second_Sky_Tile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MenuButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\SpriteFonts\DefaultFont.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\SplashScreen_Video.mp4
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\SplashScreen_Video.wmv
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\PlayerJump_SFX.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\DefaultFont.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\LevelNumberFont.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\LevelTitleFont.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\FrozenEffect.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\DarkMage\DarkMage_Attack_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\DarkMage\DarkMage_Idle_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\DarkMage\DarkMage_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\KnightCharacter_Sprite_Default.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Attack_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Idle_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Enemies\Knight\Knight_Character_Walk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\FireTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\SnowTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\WaterTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\FirePickup_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Health_Pickup.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\SnowPickup_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\WaterPickup_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Fire_Idle_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Snow_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Idle\Idle_Water_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_RightWalk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_RightWalk_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_RightWalk_Spritesheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Fireball_Projectile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Effects\Flame_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Projectiles\WaterProjectile_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_Activation_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_Idle_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_LeftActivation_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\SpriteSheets\Ultimates\SnowBeam_LeftIdle_SpriteSheet.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Corner_Tile_UpwardsLeft.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Corner_Tile_UpwardsRight.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\DefaultTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Floating_Tile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Left_Corner.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Left_Slide.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Right_Corner.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Right_Slide.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_FifthTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_FirstTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_FourthTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SecondTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SeventhTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_SixthTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Sky_ThirdTile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Third_Sky_Tile.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile-Fire.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_Filler.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_Sand.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Tiles\Tile_SandReverse.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\CreditsMenu\Credits.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\CreditsMenu\ReturnButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Dialogue\DialogueNextButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Dialogue\DialoguePanel.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelCompleteMenu\ContinueButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelCompleteMenu\LevelCompleteBackground.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelCompleteMenu\ReplayButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\ExitButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\LevelDetailsPanel.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\LevelSelectButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\StartButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Terra_Map.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game1Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game2Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game3Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\Game4Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LoadGameMenu\LoadGameBackground.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Achievements_MainMenu_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Credits_MainMenu_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\ExitGame_MainMenu_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\GameTitleText.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\LoadGame_MainMenu_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\MainMenu_FireBackground.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\NewGame_MainMenu_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\MainMenu\Options_MainMenu_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\MainMenuButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\OptionsButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\PauseMenu.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PauseMenu\ResumeButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Collectible.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Dash_Element.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Fire_Element.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Health.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Snow_Element.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Special_PowerUp.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\PlayerInterface\Water_Element.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\RespawnScreen\RespawnButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\RespawnScreen\RespawnScreen.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\HealthBarBorder.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\Sliders\HealthBarFill.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\StartScreen.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\SplashScreen_Video.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Terramental.exe
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Terramental.deps.json
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Terramental.runtimeconfig.json
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Terramental.runtimeconfig.dev.json
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Terramental.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Terramental.pdb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Microsoft.VisualBasic.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct2D1.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct3D11.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Direct3D9.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.DXGI.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.Mathematics.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.MediaFoundation.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.XAudio2.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\SharpDX.XInput.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\debian-x64\native\libuv.so
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\fedora-x64\native\libuv.so
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\opensuse-x64\native\libuv.so
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\osx\native\libuv.dylib
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\rhel-x64\native\libuv.so
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.AssemblyReference.cache
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfoInputs.cache
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.AssemblyInfo.cs
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.CoreCompileInputs.cache
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.csproj.CopyComplete
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.dll
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.pdb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\obj\Debug\netcoreapp3.1\Terramental.genruntimeconfig.cache
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Controls_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\LeftButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Music_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Resolution_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\Return_Button.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\RightButton.xnb
+C:\Users\w1828821\Downloads\Terramental-main\Terramental-main\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\OptionsMenu\SFXVol_Button.xnb

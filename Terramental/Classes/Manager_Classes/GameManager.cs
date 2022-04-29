@@ -17,7 +17,7 @@ namespace Terramental
 
         public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen};
 
-        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue };
+        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ResumeGame, Replay, Continue, OptionsReturn, ReturnMainMenu, MusicButton, ResolutionButton, SFXVolButton, ControlsButton, LeftButton, RightButton, LeftButton2, LeftButton3, RightButton2, RightButton3 };
 
         public enum GameData { Game1, Game2, Game3, Game4};
 
@@ -166,9 +166,11 @@ namespace Terramental
                 playerCharacter = new PlayerCharacter(this);
                 playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
                 playerCharacter.InitialisePlayerAnimations(this);
-                playerCharacter.LoadStatusEffects();
                 playerCharacter.LayerOrder = -1;
                 playerInterface = new PlayerInterface(this);
+
+                SpawnManager.SpawnEnemy(1, new Vector2(100, 128));
+
 
                 dialogueManager = new DialogueManager(this, menuManager);
                 mapManager = new MapManager(this);
