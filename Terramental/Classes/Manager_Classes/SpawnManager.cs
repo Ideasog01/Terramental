@@ -34,7 +34,7 @@ namespace Terramental
             {
                 foreach(EnemyCharacter enemy in enemyList)
                 {
-                    if (CameraController.ObjectIsVisible(enemy.SpritePosition) && enemy.CharacterHealth > 0)
+                    if (enemy.IsVisible && enemy.CharacterHealth > 0)
                     {
                         enemy.UpdateCharacter(gameTime);
                         enemy.UpdateKnightEnemy(gameTime);
@@ -49,16 +49,22 @@ namespace Terramental
 
                 foreach(SpikeObstacle spikeObstacle in spikeObstacleList)
                 {
-                    spikeObstacle.CheckCollision(gameTime);
+                    if(spikeObstacle.IsVisible)
+                    {
+                        spikeObstacle.CheckCollision(gameTime);
+                    }
                 }
 
                 foreach(Projectile projectile in activeProjectileList)
                 {
                     if(projectile != null)
                     {
-                        if (projectile.IsActive)
+                        if(projectile.IsVisible)
                         {
-                            projectile.UpdateProjectile(gameTime);
+                            if (projectile.IsActive)
+                            {
+                                projectile.UpdateProjectile(gameTime);
+                            }
                         }
                     }
                     else
@@ -69,52 +75,76 @@ namespace Terramental
 
                 foreach (HealthPickup healthPickup in healthPickupList)
                 {
-                    if (healthPickup.IsActive)
+                    if(healthPickup.IsVisible)
                     {
-                        healthPickup.CheckHealthPickupCollision();
+                        if (healthPickup.IsActive)
+                        {
+                            healthPickup.CheckHealthPickupCollision();
+                        }
                     }
                 }
 
                 foreach (ElementPickup elementPickup in elementPickupList)
                 {
-                    if (elementPickup.IsActive)
+                    if(elementPickup.IsVisible)
                     {
-                        elementPickup.CheckElementPickupCollision(gameTime);
+                        if (elementPickup.IsActive)
+                        {
+                            elementPickup.CheckElementPickupCollision(gameTime);
+                        }
                     }
                 }
 
                 foreach (ScorePickup scorePickup in scorePickupList)
                 {
-                    if (scorePickup.IsActive)
+                    if(scorePickup.IsVisible)
                     {
-                        scorePickup.UpdateScorePickup();
+                        if (scorePickup.IsActive)
+                        {
+                            scorePickup.UpdateScorePickup();
+                        }
                     }
                 }
 
                 foreach (ElementWall elementWall in elementWallList)
                 {
-                    if (elementWall.IsActive)
+                    if(elementWall.IsVisible)
                     {
-                        elementWall.ElementWallCollisions();
-                    }
+                        if (elementWall.IsActive)
+                        {
+                            elementWall.ElementWallCollisions();
+                        }
+                    } 
                 }
 
                 foreach (Checkpoint checkpoint in checkpointList)
                 {
-                    if (checkpoint.IsActive)
+                    if(checkpoint.IsVisible)
                     {
-                        checkpoint.CheckCollision();
-                    }
+                        if (checkpoint.IsActive)
+                        {
+                            checkpoint.CheckCollision();
+                        }
+                    } 
                 }
 
                 if(levelFragment != null)
                 {
-                    levelFragment.CheckFragmentCollision(gameTime);
+                    if(levelFragment.IsVisible)
+                    {
+                        levelFragment.CheckFragmentCollision(gameTime);
+                    }
                 }
 
                 foreach(Cannon cannon in cannonObstacleList)
                 {
-                    cannon.UpdateCannon(gameTime);
+                    if(cannon.IsVisible)
+                    {
+                        if(cannon.IsActive)
+                        {
+                            cannon.UpdateCannon(gameTime);
+                        }
+                    }
                 }
             }
 
@@ -318,6 +348,7 @@ namespace Terramental
                 Projectile projectile = new Projectile();
                 projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration);
                 projectile.Initialise(position, texture, scale);
+                projectile.LayerOrder = -1;
 
                 if (hasAnimation)
                 {
@@ -354,6 +385,7 @@ namespace Terramental
             
 
             cannon.Initialise(position - new Vector2(0, 50), cannonTexture, new Vector2(cannonTexture.Width, cannonTexture.Height));
+            cannon.LayerOrder = -1;
             cannonObstacleList.Add(cannon);
         }
     }

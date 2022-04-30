@@ -17,7 +17,7 @@ namespace Terramental
         public static bool gameInProgress;
         public static bool gameLoaded;
 
-        public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu};
+        public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen};
 
         public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown };
 
@@ -50,6 +50,8 @@ namespace Terramental
         private CameraController _mainCam;
 
         private bool skipToLevel = false;
+        private float loadLevelDelay;
+        private bool levelLoaded;
 
         public GameManager()
         {
@@ -106,6 +108,22 @@ namespace Terramental
                     dialogueManager.UpdatePosition();
                 }
                 
+            }
+
+            if(levelLoaded)
+            {
+                if(loadLevelDelay > 0)
+                {
+                    loadLevelDelay -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    playerCharacter.ResetPlayer();
+                    playerCharacter.DisplayPlayerLives();
+                    currentGameState = GameManager.GameState.Level;
+                    menuManager.videoPlayer.Stop();
+                    levelLoaded = false;
+                }
             }
 
             menuManager.UpdateMenuButtons(gameTime);
@@ -183,16 +201,12 @@ namespace Terramental
                 mapManager.LoadMapData(filePath);
 
                 CameraController.playerCharacter = playerCharacter;
-
                 gameInProgress = true;
             }
-            else
-            {
-                playerCharacter.ResetPlayer();
-                playerCharacter.DisplayPlayerLives();
-                GameManager.currentGameState = GameManager.GameState.Level;
-            }
 
+            currentGameState = GameState.LoadingScreen;
+            loadLevelDelay = 10;
+            levelLoaded = true;
             gameLoaded = true;
         }
 

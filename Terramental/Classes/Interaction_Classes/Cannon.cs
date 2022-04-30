@@ -28,7 +28,7 @@ namespace Terramental
 
             if (_cannonCooldownLeft <= 0)
             {
-                SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140 * _cannonDir, 20), new Vector2(40, 40), new Vector2(15 * _cannonDir, -1), true, false, 0, 2);
+                SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140 * _cannonDir, 20), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2);
                 _cannonCooldownLeft = _cannonCooldown;
             }
         }

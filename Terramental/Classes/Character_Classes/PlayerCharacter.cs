@@ -205,6 +205,7 @@ namespace Terramental
             disableMovement = false;
             _isJumping = false;
             _playerScore = 0;
+            _isGrounded = false;
             _enemiesDefeated = 0;
         }
 
@@ -575,11 +576,11 @@ namespace Terramental
 
                         if(!Animations[AnimationIndex].MirrorTexture)
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 1, 6);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(4, 0), false, true, 1, 6);
                         }
                         else
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false, true, 1, 6);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-4, 0), false, true, 1, 6);
                         }
                        
                         break;
@@ -587,11 +588,11 @@ namespace Terramental
 
                         if(!Animations[AnimationIndex].MirrorTexture)
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 2, 6);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(4, 0), false, true, 2, 6);
                         }
                         else
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false, true, 2, 6);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-4, 0), false, true, 2, 6);
                         }
 
                         break;
@@ -599,11 +600,11 @@ namespace Terramental
 
                         if (!Animations[AnimationIndex].MirrorTexture)
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Snow_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(10, 0), false, true, 3, 6);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Snow_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(4, 0), false, true, 3, 6);
                         }
                         else
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Snow_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-10, 0), false, true, 3, 6);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Snow_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-4, 0), false, true, 3, 6);
                         }
 
                         break;
@@ -652,9 +653,7 @@ namespace Terramental
 
         private void CheckCollisions()
         {
-            _tileList = MapManager.activeTiles;
-
-            foreach(Tile tile in _tileList)
+            foreach(Tile tile in MapManager.activeTiles)
             {
                 if (tile.GroundTile)
                 {

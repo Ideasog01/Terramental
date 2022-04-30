@@ -35,6 +35,8 @@ namespace Terramental
         public int currentButtonIndex;
 
         public Video splashScreenVideo;
+        public Video loadingScreenVideo;
+
         public VideoPlayer videoPlayer;
         public Texture2D videoTexture;
         public Rectangle videoRectangle;
@@ -87,6 +89,7 @@ namespace Terramental
             LoadSplashScreens();
             LoadLevelCompleteMenu();
             LoadHelpScreen();
+            LoadLoadingScreen();
 
             currentButtonIndex = 0;
             mainMenuButtonList[0].ComponentColor = Color.Gray;
@@ -224,6 +227,21 @@ namespace Terramental
                     
                     break;
 
+                case GameManager.GameState.LoadingScreen:
+
+                    if (videoPlayer.State == MediaState.Stopped)
+                    {
+                        videoPlayer.Play(loadingScreenVideo);
+                    }
+
+                    if (videoPlayer.State == MediaState.Playing)
+                    {
+                        videoTexture = videoPlayer.GetTexture();
+                        spriteBatch.Draw(videoTexture, videoRectangle, Color.White);
+                    }
+
+                    break;
+
                 case GameManager.GameState.LevelComplete:
 
                     foreach(MenuComponent completeComponent in completeMenuComponentList)
@@ -280,6 +298,7 @@ namespace Terramental
                 {
                     GameManager.currentGameState = GameManager.GameState.StartScreen;
                     videoPlaying = false;
+                    videoPlayer.Stop();
                 }
             }
             
@@ -463,7 +482,7 @@ namespace Terramental
                         _gameManager.playerCharacter.ResetPlayer();
                         break;
                     case GameManager.ButtonName.LevelSelectConfirm:
-                        LoadLevel();
+                        _gameManager.LoadNewGame(_levelDataFilePath);
                         break;
                     case GameManager.ButtonName.LevelSelectExit:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
@@ -554,11 +573,6 @@ namespace Terramental
                 GameManager.currentGameState = GameManager.GameState.Level;
                 _gameManager.IsMouseVisible = false;
             }
-        }
-
-        private void LoadLevel()
-        {
-            _gameManager.LoadNewGame(_levelDataFilePath);
         }
 
         private void LoadMainMenu()
@@ -710,6 +724,12 @@ namespace Terramental
 
             videoTimer = 13;
             videoPlaying = true;
+        }
+
+        private void LoadLoadingScreen()
+        {
+            loadingScreenVideo = _gameManager.Content.Load<Video>("Videos/LoadingScreen");
+            videoRectangle = new Rectangle(0, 0, GameManager.screenWidth, GameManager.screenHeight);
         }
 
         private void LoadLevelCompleteMenu()

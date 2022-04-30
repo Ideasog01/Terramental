@@ -1750,6 +1750,11 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/StartScreen.png
 
+#begin Videos/LoadingScreen.wmv
+/importer:WmvImporter
+/processor:VideoProcessor
+/build:Videos/LoadingScreen.wmv
+
 #begin Videos/SplashScreen_Video.wmv
 /importer:WmvImporter
 /processor:VideoProcessor

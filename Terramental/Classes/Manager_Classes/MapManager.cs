@@ -42,10 +42,13 @@ namespace Terramental
             {
                 if(tile.IsVisible && !activeTiles.Contains(tile))
                 {
-                    activeTiles.Add(tile);
+                    if(tile.WallTile || tile.GroundTile)
+                    {
+                        activeTiles.Add(tile);
+                    }
                 }
                 
-                if(activeTiles.Contains(tile) && !tile.IsActive)
+                if(activeTiles.Contains(tile) && !tile.IsVisible)
                 {
                     activeTiles.Remove(tile);
                 }
