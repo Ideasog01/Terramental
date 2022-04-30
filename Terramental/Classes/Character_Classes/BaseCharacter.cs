@@ -120,7 +120,7 @@ namespace Terramental
 
         public void TakeDamage(int amount)
         {
-            if(_takeDamageCooldown <= 0)
+            if(_takeDamageCooldown <= 0 && IsActive)
             {
                 _characterHealth -= amount;
 
@@ -129,6 +129,7 @@ namespace Terramental
                 if(_characterHealth <= 0)
                 {
                     IsActive = false;
+                    SpawnManager._gameManager.playerCharacter.EnemiesDefeated++;
 
                     foreach(Sprite effect in _statusEffects)
                     {

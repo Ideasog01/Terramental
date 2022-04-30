@@ -14,6 +14,7 @@ namespace Terramental
         public float ultimateCooldown;
 
         private int _playerScore;
+        private int _enemiesDefeated;
 
         public float deltaTime;
         //Movement Variables
@@ -134,6 +135,12 @@ namespace Terramental
             set { _playerScore = value; }
         }
 
+        public int EnemiesDefeated
+        {
+            get { return _enemiesDefeated; }
+            set { _enemiesDefeated = value; }
+        }
+
         public float JumpHeight
         {
             get { return _jumpHeight; }
@@ -198,6 +205,7 @@ namespace Terramental
             disableMovement = false;
             _isJumping = false;
             _playerScore = 0;
+            _enemiesDefeated = 0;
         }
 
         public void UpdatePlayerCharacter(GameTime gameTime)

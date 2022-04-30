@@ -50,6 +50,9 @@ namespace Terramental
 
         private MenuComponent _startScreen;
 
+        private MenuComponent _helpScreen;
+        private Button _helpScreenReturnButton;
+
         private string _levelNameText;
         private string _levelDescriptionText;
         private string _levelDataFilePath;
@@ -81,6 +84,7 @@ namespace Terramental
             LoadCreditsMenu();
             LoadSplashScreens();
             LoadLevelCompleteMenu();
+            LoadHelpScreen();
 
             currentButtonIndex = 0;
             mainMenuButtonList[0].ComponentColor = Color.Gray;
@@ -93,6 +97,13 @@ namespace Terramental
                 case GameManager.GameState.StartScreen:
 
                     _startScreen.DrawMenuComponent(spriteBatch);
+
+                    break;
+
+                case GameManager.GameState.HelpMenu:
+
+                    _helpScreen.DrawMenuComponent(spriteBatch);
+                    _helpScreenReturnButton.DrawMenuComponent(spriteBatch);
 
                     break;
 
@@ -222,6 +233,7 @@ namespace Terramental
                     }
 
                     spriteBatch.DrawString(_levelTitleFont, "Score: " + _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 50, 200), Color.White);
+                    spriteBatch.DrawString(_levelTitleFont, "Enemies Defeated: " + _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) - 150, 300), Color.White);
 
                     break;
 
@@ -462,6 +474,9 @@ namespace Terramental
                     case GameManager.ButtonName.Continue:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
                         break;
+                    case GameManager.ButtonName.HelpScreenButton:
+                        GameManager.currentGameState = GameManager.GameState.HelpMenu;
+                        break;
                 }
 
                 _buttonBuffer = 0.5f;
@@ -637,7 +652,7 @@ namespace Terramental
             optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2) + 49, (GameManager.screenHeight / 2) - (pauseMenuPanelTexture.Height / 2) + 245), new Vector2(optionsButtonTexture.Width, optionsButtonTexture.Height));
 
             Texture2D mainMenuTexture = _gameManager.GetTexture("UserInterface/PauseMenu/MainMenuButton");
-            Button mainMenuButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            Button mainMenuButton = new Button(GameManager.ButtonName.HelpScreenButton, this);
             mainMenuButton.InitialiseMenuComponent(mainMenuTexture, new Vector2((GameManager.screenWidth / 2) - (pauseMenuPanelTexture.Width / 2) + 50, (GameManager.screenHeight / 2) - (pauseMenuPanelTexture.Height / 2) + 332), new Vector2(mainMenuTexture.Width, mainMenuTexture.Height));
 
             pauseMenuButtonList.Add(resumeButton);
@@ -773,6 +788,17 @@ namespace Terramental
 
 
             _gameManager.IsMouseVisible = true;
+        }
+
+        private void LoadHelpScreen()
+        {
+            Texture2D helpScreenTexture = _gameManager.GetTexture("UserInterface/HelpScreen/HelpMenuScreen");
+            _helpScreen = new MenuComponent();
+            _helpScreen.InitialiseMenuComponent(helpScreenTexture, Vector2.Zero, new Vector2(GameManager.screenWidth, GameManager.screenHeight));
+
+            Texture2D returnButtonTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/ContinueButton");
+            _helpScreenReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
+            _helpScreenReturnButton.InitialiseMenuComponent(returnButtonTexture, new Vector2(20, GameManager.screenHeight - 150), new Vector2(256, 64));
         }
     }
 }
