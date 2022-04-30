@@ -512,14 +512,14 @@ namespace Terramental
             switch(buttonName)
             {
                 case GameManager.LevelButton.Level1Button:
-                    _levelDataFilePath = @"Level1Map.json";
+                    _levelDataFilePath = @"Content/Level1Map.json";
                     _levelNameText = "The Golden Shores";
                     _levelDescriptionText = "Explore the golden shores, and defeat \nthe armies of the Fire Lands.";
                     GameManager.levelIndex = 0;
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
                     break;
                 case GameManager.LevelButton.Level2Button:
-                    _levelDataFilePath = @"Level2Map.json";
+                    _levelDataFilePath = @"Content/Level2Map.json";
                     _levelNameText = "The Fire Lands";
                     _levelDescriptionText = "Venture to the fire lands, and use the \nelements to defeat the armies \nof Magnus.";
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
