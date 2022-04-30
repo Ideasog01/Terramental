@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Terramental
 {
@@ -40,6 +40,19 @@ namespace Terramental
             if(ComponentRectangle.Contains(mousePos))
             {
                 _menuManager.ButtonInteraction(_buttonName);
+
+                if(_buttonName == GameManager.ButtonName.ReturnMainMenu)
+                {
+                    if(!GameManager.gameLoaded || GameManager.currentGameState == GameManager.GameState.LevelPause)
+                    {
+                        _menuManager.DisplayMainMenu(true);
+                        GameManager.gameLoaded = false;
+                    }
+                    else
+                    {
+                        GameManager.currentGameState = GameManager.GameState.LevelPause;
+                    }
+                }
             }
         }
 

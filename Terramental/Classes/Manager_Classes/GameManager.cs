@@ -14,16 +14,18 @@ namespace Terramental
         public const int gravity = 3;
 
         public static bool gameInProgress;
+        public static bool gameLoaded;
 
         public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu};
 
-        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, RightButton, LeftButton, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton };
+        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown };
 
         public enum GameData { Game1, Game2, Game3, Game4};
 
         public enum LevelButton { Level1Button, Level2Button };
 
         public static GameState currentGameState = GameState.SplashScreen;
+        public static GameState previousGameState = GameState.SplashScreen;
 
         public static int screenWidth = 960;
         public static int screenHeight = 540;
@@ -74,6 +76,7 @@ namespace Terramental
             menuManager = new MenuManager(this, _graphics);
 
             InitialiseGame();
+            LoadAudioLibrary();
 
             if(skipToLevel)
             {
@@ -178,8 +181,6 @@ namespace Terramental
                 CameraController.playerCharacter = playerCharacter;
 
                 gameInProgress = true;
-
-                LoadAudioLibrary();
             }
             else
             {
@@ -187,6 +188,8 @@ namespace Terramental
                 playerCharacter.DisplayPlayerLives();
                 GameManager.currentGameState = GameManager.GameState.Level;
             }
+
+            gameLoaded = true;
         }
 
         private void InitialiseGame()
@@ -212,6 +215,8 @@ namespace Terramental
         {
             AudioClip audioClip = new AudioClip("PlayerJump_SFX", "SFXs/PlayerJump_SFX", false, this);
             AudioManager.AddSound(audioClip);
+            AudioClip beepSound = new AudioClip("BeepTone_SFX", "SFXs/BeepTone", false, this);
+            AudioManager.AddSound(beepSound);
         }
 
         #endregion

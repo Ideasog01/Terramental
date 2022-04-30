@@ -85,6 +85,12 @@
 /processorParam:TextureFormat=Color
 /build:Assets/WaterLevel/Palm_Tree2.png
 
+#begin SFXs/BeepTone.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/BeepTone.wav
+
 #begin SFXs/PlayerJump_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1420,7 +1426,7 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/MainMenu/Options_MainMenu_Button.png
 
-#begin UserInterface/OptionsMenu/Controls_Button.png
+#begin UserInterface/OptionsMenu/ControlsButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1430,7 +1436,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UserInterface/OptionsMenu/Controls_Button.png
+/build:UserInterface/OptionsMenu/ControlsButton.png
 
 #begin UserInterface/OptionsMenu/LeftButton.png
 /importer:TextureImporter
@@ -1444,7 +1450,7 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/OptionsMenu/LeftButton.png
 
-#begin UserInterface/OptionsMenu/Music_Button.png
+#begin UserInterface/OptionsMenu/MusicVolumeButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1454,9 +1460,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UserInterface/OptionsMenu/Music_Button.png
+/build:UserInterface/OptionsMenu/MusicVolumeButton.png
 
-#begin UserInterface/OptionsMenu/Resolution_Button.png
+#begin UserInterface/OptionsMenu/ResolutionButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1466,9 +1472,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UserInterface/OptionsMenu/Resolution_Button.png
+/build:UserInterface/OptionsMenu/ResolutionButton.png
 
-#begin UserInterface/OptionsMenu/Return_Button.png
+#begin UserInterface/OptionsMenu/ReturnButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1478,7 +1484,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UserInterface/OptionsMenu/Return_Button.png
+/build:UserInterface/OptionsMenu/ReturnButton.png
 
 #begin UserInterface/OptionsMenu/RightButton.png
 /importer:TextureImporter
@@ -1492,7 +1498,7 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/OptionsMenu/RightButton.png
 
-#begin UserInterface/OptionsMenu/SFXVol_Button.png
+#begin UserInterface/OptionsMenu/SFXVolumeButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1502,7 +1508,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UserInterface/OptionsMenu/SFXVol_Button.png
+/build:UserInterface/OptionsMenu/SFXVolumeButton.png
+
+#begin UserInterface/PauseMenu/ExitGame_Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/PauseMenu/ExitGame_Button.png
+
+#begin UserInterface/PauseMenu/HelpMenu_Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/PauseMenu/HelpMenu_Button.png
 
 #begin UserInterface/PauseMenu/MainMenuButton.png
 /importer:TextureImporter
