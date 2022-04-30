@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 namespace Terramental
 {
@@ -135,6 +136,9 @@ namespace Terramental
             }
 
             _spriteBatch.End();
+
+
+            System.Diagnostics.Debug.WriteLine("Draw Count = " + GraphicsDevice.Metrics.DrawCount.ToString());
 
             base.Draw(gameTime);
         }

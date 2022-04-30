@@ -23,10 +23,12 @@ namespace Terramental
         {
             foreach(Sprite sprite in _spriteList)
             {
-                if(sprite.IsActive)
+                if(sprite.IsVisible && sprite.IsActive)
                 {
                     sprite.UpdateSprite(gameTime);
                 }
+
+                sprite.IsVisible = CameraController.ObjectIsVisible(sprite.SpritePosition);
             }
         }
 
@@ -34,25 +36,34 @@ namespace Terramental
         {
             foreach(Sprite sprite in _spriteList)
             {
-                if(sprite.LayerOrder == 0)
+                if(sprite.IsVisible && sprite.IsActive)
                 {
-                    sprite.Draw(gameTime, _spriteBatch);
+                    if (sprite.LayerOrder == 0)
+                    {
+                        sprite.Draw(gameTime, _spriteBatch);
+                    }
                 }
             }
 
             foreach (Sprite sprite in _spriteList)
             {
-                if (sprite.LayerOrder == -1)
+                if (sprite.IsVisible && sprite.IsActive)
                 {
-                    sprite.Draw(gameTime, _spriteBatch);
+                    if (sprite.LayerOrder == -1)
+                    {
+                        sprite.Draw(gameTime, _spriteBatch);
+                    }
                 }
             }
 
             foreach (Sprite sprite in _spriteList)
             {
-                if (sprite.LayerOrder == -2)
+                if (sprite.IsVisible && sprite.IsActive)
                 {
-                    sprite.Draw(gameTime, _spriteBatch);
+                    if (sprite.LayerOrder == -2)
+                    {
+                        sprite.Draw(gameTime, _spriteBatch);
+                    }
                 }
             }
         }

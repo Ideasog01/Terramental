@@ -40,7 +40,7 @@ namespace Terramental
         {
             foreach(Tile tile in tileList)
             {
-                if(tile.IsActive && !activeTiles.Contains(tile))
+                if(tile.IsVisible && !activeTiles.Contains(tile))
                 {
                     activeTiles.Add(tile);
                 }
