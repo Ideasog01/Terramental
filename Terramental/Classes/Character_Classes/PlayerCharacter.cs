@@ -46,6 +46,8 @@ namespace Terramental
         private float _dashDistX;
         private float _dashDistY;
 
+        private bool _isFacingRight;
+
         public enum DashDirections
         {
             Up,
@@ -333,18 +335,7 @@ namespace Terramental
 
                 SpritePosition = new Vector2(posX, SpritePosition.Y);
 
-                if(SpriteVelocity.X != 0)
-                {
-                    if (SpriteVelocity.X > 0)
-                    {
-                        Animations[AnimationIndex].MirrorTexture = false;
-                    }
-
-                    if (SpriteVelocity.X < 0)
-                    {
-                        Animations[AnimationIndex].MirrorTexture = true;
-                    }
-                }
+                Animations[AnimationIndex].MirrorTexture = !_isFacingRight;
             }
         }
 
@@ -368,6 +359,8 @@ namespace Terramental
                         {
                             SpriteVelocity = new Vector2(0, 0);
                         }
+
+                        _isFacingRight = true;
                     }
                     else if(horizontal < 0)
                     {
@@ -382,6 +375,8 @@ namespace Terramental
                                 SpriteVelocity = new Vector2(0, 0);
                             }
                         }
+
+                        _isFacingRight = false;
                     }
                 }
             }

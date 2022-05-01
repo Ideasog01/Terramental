@@ -34,16 +34,19 @@ namespace Terramental
             {
                 foreach(EnemyCharacter enemy in enemyList)
                 {
-                    if (enemy.IsVisible && enemy.CharacterHealth > 0)
+                    if (enemy.IsVisible)
                     {
-                        enemy.UpdateCharacter(gameTime);
-                        enemy.UpdateKnightEnemy(gameTime);
-                        enemy.UpdateHealthBar();
-                        enemy.EnableHealthBar(true);
-                    }
-                    else
-                    {
-                        enemy.EnableHealthBar(false);
+                        if(enemy.CharacterHealth > 0)
+                        {
+                            enemy.UpdateCharacter(gameTime);
+                            enemy.UpdateKnightEnemy(gameTime);
+                            enemy.UpdateHealthBar();
+                            enemy.EnableWorldCanvas(true);
+                        }
+                        else
+                        {
+                            enemy.EnableWorldCanvas(false);
+                        }
                     }
                 }
 

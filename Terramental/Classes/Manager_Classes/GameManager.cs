@@ -198,12 +198,11 @@ namespace Terramental
                 dialogueManager = new DialogueManager(this, menuManager);
                 mapManager = new MapManager(this);
 
-                mapManager.LoadMapData(filePath);
-
                 CameraController.playerCharacter = playerCharacter;
                 gameInProgress = true;
             }
 
+            mapManager.LoadMapData(filePath);
             currentGameState = GameState.LoadingScreen;
             loadLevelDelay = 10;
             levelLoaded = true;

@@ -78,10 +78,11 @@ namespace Terramental
             enemyHealthBarFill.SpriteScale = new Vector2(CharacterHealth / 2, enemyHealthBarFill.SpriteScale.Y);
         }
 
-        public void EnableHealthBar(bool active)
+        public void EnableWorldCanvas(bool active)
         {
             enemyHealthBar.IsActive = active;
             enemyHealthBarFill.IsActive = active;
+            enemyElement.IsActive = active;
         }
 
         public float AttackCooldown
