@@ -1,14 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace Terramental
 {
     public class EnemyCharacter : BaseCharacter
     {
+        #region Variables
+
         public PlayerCharacter playerCharacter;
 
-        public enum AIState { Patrol, Chase, Attack, Dead, Idle};
+        public enum AIState { Patrol, Chase, Attack, Dead, Idle };
 
         private AIState _currentState;
 
@@ -19,27 +22,82 @@ namespace Terramental
         private Texture2D enemyHealthBarTexture;
         private Texture2D enemyHealthBarFillTexture;
 
-        private int _enemyIndex;
-        private float _attackCooldown;
-
-        private float attackTimer;
-        private bool _knightAttacked;
-        private bool _isGrounded;
-        private bool _faceRight;
         private Tile _groundTile;
-        private bool _rightPathBlocked;
-        private bool _leftPathBlocked;
-        private int _elementIndex;
+
+        private bool _knightAttacked;
+
+        private float _attackTimer;
+
+        private bool _isGrounded;
+
         private float _attackThreshold;
         private float _chaseThreshold;
+        private float _attackCooldown;
+
         private float _enemyMovementSpeed;
         private float _enemyGravity;
+        private int _enemyIndex;
+        private int _elementIndex;
+
+        private List<Tile> pathList = new List<Tile>();
+
+        #endregion
+
+        #region Properties
 
         public AIState CurrentState
         {
             get { return _currentState; }
             set { _currentState = value; }
         }
+
+        public float AttackCooldown
+        {
+            set { _attackCooldown = value; }
+        }
+
+        public float AttackThreshold
+        {
+            set { _attackThreshold = value; }
+        }
+
+        public float ChaseThreshold
+        {
+            set { _chaseThreshold = value; }
+        }
+
+        public int ElementIndex
+        {
+            get
+            { return _elementIndex; }
+            set
+            {
+                if (value == 0)
+                {
+                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element");
+                }
+                else if (value == 1)
+                {
+                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element");
+                }
+                else if (value == 2)
+                {
+                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element");
+                }
+
+                _elementIndex = value;
+            }
+        }
+
+        public int EnemyIndex
+        {
+            get { return _enemyIndex; }
+            set { _enemyIndex = value; }
+        }
+
+        #endregion
+
+        #region HealthBar
 
         public void LoadHealthBar(GameManager gameManager)
         {
@@ -62,8 +120,7 @@ namespace Terramental
 
         public void UpdateHealthBar()
         {
-           
-            if(!Animations[AnimationIndex].MirrorTexture)
+            if (!Animations[AnimationIndex].MirrorTexture)
             {
                 enemyHealthBar.SpritePosition = SpritePosition + new Vector2(0, -30);
                 enemyElement.SpritePosition = enemyHealthBar.SpritePosition + new Vector2(60, -5);
@@ -87,84 +144,15 @@ namespace Terramental
             enemyElement.IsActive = active;
         }
 
-        public float AttackCooldown
-        {
-            set { _attackCooldown = value; }
-        }
+        #endregion
 
-        public float AttackThreshold
-        {
-            set { _attackThreshold = value; }
-        }
-
-        public float ChaseThreshold
-        {
-            set { _chaseThreshold = value; }
-        }
-
-        public int ElementIndex
-        {
-            get
-            { return _elementIndex; }
-            set 
-            { 
-                if(value == 0)
-                {
-                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element");
-                }
-                else if(value == 1)
-                {
-                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element");
-                }
-                else if(value == 2)
-                {
-                    enemyElement.SpriteTexture = SpawnManager._gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element");
-                }
-
-                _elementIndex = value;
-            }
-        }
-
-        public int EnemyIndex
-        {
-            get { return _enemyIndex; }
-            set { _enemyIndex = value; }
-        }
-
-        public void UpdateKnightEnemy(GameTime gameTime)
-        {
-            EnemyStateMachine();
-            FacePlayer();
-
-            if (CurrentState == AIState.Attack)
-            {
-                Attack(gameTime);
-            }
-
-            if (CurrentState == AIState.Idle)
-            {
-                Idle();
-            }
-
-            if (CurrentState == AIState.Chase)
-            {
-                if(!DisableMovement)
-                {
-                    CheckPath();
-                    Chase();
-                }
-            }
-
-            GroundCheck();
-
-            SpritePosition += SpriteVelocity;
-        }
+        #region Utilities
 
         private void GroundCheck()
         {
             if (!_isGrounded)
             {
-                foreach (Tile tile in MapManager.tileList)
+                foreach (Tile tile in MapManager.activeTiles)
                 {
                     if (tile.GroundTile)
                     {
@@ -203,6 +191,63 @@ namespace Terramental
             return distance;
         }
 
+        private void FacePlayer()
+        {
+            if (DistanceToPlayer() > 60)
+            {
+                Animations[AnimationIndex].MirrorTexture = SpritePosition.X > playerCharacter.SpritePosition.X;
+            }
+        }
+
+        #endregion
+
+        #region Enemy
+
+        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth, float enemyMovementSpeed, float enemyGravity)
+        {
+            SpriteTexture = texture;
+            SpritePosition = position;
+            SpawnPosition = position;
+            SpriteScale = scale;
+            CharacterMaxHealth = enemyMaxHealth;
+            CharacterHealth = enemyHealth;
+            _enemyMovementSpeed = enemyMovementSpeed;
+            _enemyGravity = enemyGravity;
+            IsActive = true;
+        }
+
+        public void UpdateEnemy(GameTime gameTime)
+        {
+            EnemyStateMachine();
+            FacePlayer();
+
+            if (CurrentState == AIState.Attack)
+            {
+                Attack(gameTime);
+            }
+
+            if (CurrentState == AIState.Idle)
+            {
+                Idle();
+            }
+
+            if (CurrentState == AIState.Chase)
+            {
+                if (!DisableMovement)
+                {
+                    Chase();
+                }
+            }
+
+            GroundCheck();
+
+            SpritePosition += SpriteVelocity;
+        }
+
+        #endregion
+
+        #region AI
+
         private void EnemyStateMachine()
         {
             if (DistanceToPlayer() < _attackThreshold)
@@ -215,7 +260,7 @@ namespace Terramental
                 CurrentState = AIState.Chase;
             }
 
-            if (DistanceToPlayer() > _chaseThreshold)
+            if (DistanceToPlayer() >= _chaseThreshold)
             {
                 CurrentState = AIState.Idle;
             }
@@ -223,51 +268,40 @@ namespace Terramental
 
         private void Chase()
         {
-            if (_rightPathBlocked && _faceRight || _leftPathBlocked && !_faceRight)
+            if(!Animations[AnimationIndex].MirrorTexture)
             {
-                CurrentState = AIState.Idle;
-                return;
+                SpriteVelocity = new Vector2(_enemyMovementSpeed, 0);
+            }
+            else
+            {
+                SpriteVelocity = new Vector2(-_enemyMovementSpeed, 0);
             }
 
-            float yPositionDistance = SpritePosition.Y - playerCharacter.SpritePosition.Y;
-
-            if (CurrentState == AIState.Chase && yPositionDistance < 4f && DistanceToPlayer() > 50f)
-            {
-                if(_faceRight)
-                {
-                    SpriteVelocity = new Vector2(_enemyMovementSpeed, 0);
-                }
-                else
-                {
-                    SpriteVelocity = new Vector2(-_enemyMovementSpeed, 0);
-                }
-
-                SetAnimation(1);
-            }
+            SetAnimation(1);
         }
 
         private void Attack(GameTime gameTime)
         {
-            if (attackTimer <= 0)
+            if (_attackTimer <= 0)
             {
-                attackTimer = _attackCooldown;
+                _attackTimer = _attackCooldown;
                 _knightAttacked = false;
             }
             else
             {
-                attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if(OnCollision(playerCharacter.SpriteRectangle) && !_knightAttacked && _enemyIndex == 0)
+                if (OnCollision(playerCharacter.SpriteRectangle) && !_knightAttacked && _enemyIndex == 0)
                 {
                     playerCharacter.PlayerTakeDamage(1);
                     _knightAttacked = true;
                 }
 
-                if(_enemyIndex == 1 && !_knightAttacked)
+                if (_enemyIndex == 1 && !_knightAttacked)
                 {
                     Vector2 velocity = new Vector2(0, 0);
 
-                    if(_faceRight)
+                    if(!Animations[AnimationIndex].MirrorTexture)
                     {
                         SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(6, 0), true, false, 0, 3, 1);
                         _knightAttacked = true;
@@ -278,7 +312,7 @@ namespace Terramental
                         _knightAttacked = true;
                     }
 
-                    
+
                 }
             }
 
@@ -293,89 +327,29 @@ namespace Terramental
             SpriteVelocity = new Vector2(0, SpriteVelocity.Y);
         }
 
-        private void FacePlayer()
+        #endregion
+
+        #region A* Pathfinding
+
+        public void GeneratePath(Tile destinationTile)
         {
-            if (DistanceToPlayer() > 60)
+            float gCost;
+            float hCost;
+
+            Tile currentTile = null;
+
+            foreach(Tile tile in MapManager.activeTiles)
             {
-                float yPositionDistance = SpritePosition.Y - playerCharacter.SpritePosition.Y;
+                float distance = MathF.Sqrt(MathF.Pow(tile.SpritePosition.X - SpritePosition.X, 2) + MathF.Pow(tile.SpritePosition.Y - SpritePosition.Y, 2));
 
-                if (yPositionDistance < 4f)
+                if(distance < 32)
                 {
-                    _faceRight = SpritePosition.X <= playerCharacter.SpritePosition.X;
-
-                    if (_faceRight)
-                    {
-                        foreach (Animation anim in Animations)
-                        {
-                            anim.MirrorTexture = false;
-                        }
-                    }
-                    else
-                    {
-
-                        foreach (Animation anim in Animations)
-                        {
-                            anim.MirrorTexture = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void CheckPath()
-        {
-            if (_faceRight)
-            {
-                foreach (Tile tile in MapManager.activeTiles)
-                {
-                    if (tile.IsActive && tile.WallTile)
-                    {
-                        if (tile.LeftCollision(this))
-                        {
-                            _rightPathBlocked = true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (Tile tile in MapManager.activeTiles)
-                {
-                    if (tile.IsActive && tile.WallTile)
-                    {
-                        if (tile.LeftCollision(this))
-                        {
-                            _leftPathBlocked = true;
-                        }
-                    }
+                    currentTile = tile;
                 }
             }
 
-            if (_leftPathBlocked && _faceRight)
-            {
-                _leftPathBlocked = false;
-            }
-
-            if (_rightPathBlocked && !_faceRight)
-            {
-                _rightPathBlocked = false;
-            }
         }
 
-        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth)
-        {
-            SpriteTexture = texture;
-            SpritePosition = position;
-            SpawnPosition = position;
-            SpriteScale = scale;
-            CharacterMaxHealth = enemyMaxHealth;
-            CharacterHealth = enemyHealth;
-            IsActive = true;
-        }
-
-        public void DestroyEnemy()
-        {
-            IsActive = false;
-        }
+        #endregion
     }
 }

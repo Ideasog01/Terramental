@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Terramental
 {
@@ -15,6 +14,8 @@ namespace Terramental
         private bool _isGroundTile;
 
         private bool _isWallTile;
+
+        private List<Tile> neighborTiles = new List<Tile>();
 
         #endregion
 
@@ -56,5 +57,59 @@ namespace Terramental
         }
 
         #endregion
+
+        public void SetNeighborTiles()
+        {
+            foreach(Tile tile in MapManager.tileList)
+            {
+                //North Tile
+                if(tile.SpritePosition == SpritePosition + new Vector2(0, -64))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //South Tile
+                if(tile.SpritePosition == SpritePosition + new Vector2(0, 64))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //East Tile
+                if (tile.SpritePosition == SpritePosition + new Vector2(64, 0))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //West Tile
+                if (tile.SpritePosition == SpritePosition + new Vector2(-64, 0))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //NorthEast Tile
+                if (tile.SpritePosition == SpritePosition + new Vector2(64, -64))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //SouthEast Tile
+                if (tile.SpritePosition == SpritePosition + new Vector2(64, 64))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //SouthWest Tile
+                if (tile.SpritePosition == SpritePosition + new Vector2(-64, 64))
+                {
+                    neighborTiles.Add(tile);
+                }
+
+                //NorthWest Tile
+                if (tile.SpritePosition == SpritePosition + new Vector2(-64, -64))
+                {
+                    neighborTiles.Add(tile);
+                }
+            }
+        }
     }
 }

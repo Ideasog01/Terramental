@@ -39,7 +39,7 @@ namespace Terramental
                         if (enemy.CharacterHealth > 0)
                         {
                             enemy.UpdateCharacter(gameTime);
-                            enemy.UpdateKnightEnemy(gameTime);
+                            enemy.UpdateEnemy(gameTime);
                             enemy.UpdateHealthBar();
                             enemy.EnableWorldCanvas(true);
                         }
@@ -169,7 +169,7 @@ namespace Terramental
 
                     if (index == 0)
                     {
-                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100);
+                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 3);
 
                         if (index != enemy.EnemyIndex)
                         {
@@ -201,7 +201,7 @@ namespace Terramental
                     }
                     else if (index == 1)
                     {
-                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100);
+                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2);
 
                         if (index != enemy.EnemyIndex)
                         {
@@ -252,14 +252,14 @@ namespace Terramental
                     EnemyCharacter knightEnemy = new EnemyCharacter();
                     knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
                     knightEnemy.SetProperties(position, 100, 100);
+                    knightEnemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 3);
 
                     knightEnemy.AddAnimation(knightIdle);
                     knightEnemy.AddAnimation(knightWalk);
                     knightEnemy.AddAnimation(knightAttack);
                     knightEnemy.SetAnimation(0);
-
+                    
                     knightEnemy.LoadHealthBar(_gameManager);
-
                     knightEnemy.LayerOrder = -1;
                     knightEnemy.playerCharacter = _gameManager.playerCharacter;
                     knightEnemy.AttackThreshold = 60;
@@ -279,6 +279,7 @@ namespace Terramental
                     EnemyCharacter darkMageCharacter = new EnemyCharacter();
                     darkMageCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
                     darkMageCharacter.SetProperties(position, 100, 100);
+                    darkMageCharacter.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2);
 
                     darkMageCharacter.AddAnimation(mageIdle);
                     darkMageCharacter.AddAnimation(mageWalk);
