@@ -298,6 +298,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Obstacles/WaterTile.png
 
+#begin Sprites/Pickups/Checkpoint.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Pickups/Checkpoint.png
+
 #begin Sprites/Pickups/FirePickup_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

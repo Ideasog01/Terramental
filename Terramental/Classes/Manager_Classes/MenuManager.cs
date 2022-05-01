@@ -69,6 +69,8 @@ namespace Terramental
 
         private float _buttonBuffer;
 
+        GameManager.GameState videoPlayerAfterState;
+
         private List<Button> _buttonList = new List<Button>();
 
         public MenuManager(GameManager gameManager, GraphicsDeviceManager graphics)
@@ -93,6 +95,15 @@ namespace Terramental
 
             currentButtonIndex = 0;
             mainMenuButtonList[0].ComponentColor = Color.Gray;
+        }
+
+        public void ActivateLoadingScreen(float duration, GameManager.GameState afterState)
+        {
+            videoTimer = duration;
+            videoPlaying = true;
+            videoPlayer.Play(loadingScreenVideo);
+            videoPlayerAfterState = afterState;
+            GameManager.currentGameState = GameManager.GameState.LoadingScreen;
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -216,7 +227,14 @@ namespace Terramental
 
                     if (videoPlayer.State == MediaState.Stopped)
                     {
-                        videoPlayer.Play(splashScreenVideo);
+                        if(GameManager.currentGameState == GameManager.GameState.SplashScreen)
+                        {
+                            videoPlayer.Play(splashScreenVideo);
+                        }
+                        else if(GameManager.currentGameState == GameManager.GameState.LoadingScreen)
+                        {
+                            videoPlayer.Play(loadingScreenVideo);
+                        }
                     }
 
                     if (videoPlayer.State == MediaState.Playing)
@@ -288,7 +306,7 @@ namespace Terramental
                 _gamePadButtonTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if(videoPlaying && GameManager.currentGameState == GameManager.GameState.SplashScreen)
+            if(videoPlaying)
             {
                 if (videoTimer > 0)
                 {
@@ -296,7 +314,7 @@ namespace Terramental
                 }
                 else
                 {
-                    GameManager.currentGameState = GameManager.GameState.StartScreen;
+                    GameManager.currentGameState = videoPlayerAfterState;
                     videoPlaying = false;
                     videoPlayer.Stop();
                 }
@@ -722,7 +740,7 @@ namespace Terramental
             splashScreenVideo = _gameManager.Content.Load<Video>("Videos/SplashScreen_Video");
             videoRectangle = new Rectangle(0, 0, GameManager.screenWidth, GameManager.screenHeight);
             videoPlayer.Play(splashScreenVideo);
-
+            videoPlayerAfterState = GameManager.GameState.StartScreen;
             videoTimer = 13;
             videoPlaying = true;
         }

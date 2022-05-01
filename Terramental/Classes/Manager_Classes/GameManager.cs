@@ -49,8 +49,6 @@ namespace Terramental
         private CameraController _mainCam;
 
         private bool skipToLevel = false;
-        private float loadLevelDelay;
-        private bool levelLoaded;
 
         public GameManager()
         {
@@ -100,22 +98,6 @@ namespace Terramental
                 if(mapManager != null)
                 {
                     mapManager.CheckActiveTiles();
-                }
-            }
-
-            if(levelLoaded)
-            {
-                if(loadLevelDelay > 0)
-                {
-                    loadLevelDelay -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    playerCharacter.ResetPlayer();
-                    playerCharacter.DisplayPlayerLives();
-                    currentGameState = GameManager.GameState.Level;
-                    menuManager.videoPlayer.Stop();
-                    levelLoaded = false;
                 }
             }
 
@@ -174,7 +156,9 @@ namespace Terramental
 
         public void LoadNewGame(string filePath)
         {
-            if(!gameInProgress)
+            menuManager.ActivateLoadingScreen(5, GameState.Level);
+
+            if (!gameInProgress)
             {
                 playerCharacter = new PlayerCharacter(this);
                 playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
@@ -189,10 +173,10 @@ namespace Terramental
                 gameInProgress = true;
             }
 
+            playerCharacter.ResetPlayer();
+            playerCharacter.DisplayPlayerLives();
+
             mapManager.LoadMapData(filePath);
-            currentGameState = GameState.LoadingScreen;
-            loadLevelDelay = 10;
-            levelLoaded = true;
             gameLoaded = true;
         }
 

@@ -455,7 +455,7 @@ namespace Terramental
             if(!checkpointFound)
             {
                 Checkpoint checkpoint = new Checkpoint(_gameManager.playerCharacter);
-                checkpoint.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
+                checkpoint.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Checkpoint"), new Vector2(64, 64));
                 checkpoint.LayerOrder = -2;
                 checkpointList.Add(checkpoint);
             }

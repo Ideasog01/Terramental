@@ -48,14 +48,27 @@ namespace Terramental
                         SpawnManager._gameManager.mapManager.UnloadLevel();
                     }
 
-                    if (!GameManager.gameLoaded || GameManager.currentGameState == GameManager.GameState.LevelPause)
+                    if (GameManager.currentGameState == GameManager.GameState.LevelComplete || GameManager.currentGameState == GameManager.GameState.LevelPause)
                     {
-                        _menuManager.DisplayMainMenu(true);
+                        _menuManager.ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
                         GameManager.gameLoaded = false;
                     }
-                    else
+                    
+                    if(GameManager.currentGameState == GameManager.GameState.Options)
                     {
-                        GameManager.currentGameState = GameManager.GameState.LevelPause;
+                        if(GameManager.gameLoaded)
+                        {
+                            GameManager.currentGameState = GameManager.GameState.LevelPause;
+                        }
+                        else
+                        {
+                            GameManager.currentGameState = GameManager.GameState.MainMenu;
+                        }
+                    }
+
+                    if(GameManager.currentGameState == GameManager.GameState.Credits)
+                    {
+                        GameManager.currentGameState = GameManager.GameState.MainMenu;
                     }
                 }
             }
