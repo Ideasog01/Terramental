@@ -15,7 +15,7 @@ namespace Terramental
 
         private bool _isWallTile;
 
-        private List<Tile> neighborTiles = new List<Tile>();
+        private List<Tile> _neighborTiles = new List<Tile>();
 
         #endregion
 
@@ -30,6 +30,11 @@ namespace Terramental
         {
             get { return _isWallTile; }
             set { _isWallTile = value; }
+        }
+
+        public List<Tile> NeighborList
+        {
+            get { return _neighborTiles; }
         }
 
         #endregion
@@ -60,54 +65,56 @@ namespace Terramental
 
         public void SetNeighborTiles()
         {
+            _neighborTiles.Clear();
+
             foreach(Tile tile in MapManager.tileList)
             {
                 //North Tile
                 if(tile.SpritePosition == SpritePosition + new Vector2(0, -64))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //South Tile
                 if(tile.SpritePosition == SpritePosition + new Vector2(0, 64))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //East Tile
                 if (tile.SpritePosition == SpritePosition + new Vector2(64, 0))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //West Tile
                 if (tile.SpritePosition == SpritePosition + new Vector2(-64, 0))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //NorthEast Tile
                 if (tile.SpritePosition == SpritePosition + new Vector2(64, -64))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //SouthEast Tile
                 if (tile.SpritePosition == SpritePosition + new Vector2(64, 64))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //SouthWest Tile
                 if (tile.SpritePosition == SpritePosition + new Vector2(-64, 64))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
 
                 //NorthWest Tile
                 if (tile.SpritePosition == SpritePosition + new Vector2(-64, -64))
                 {
-                    neighborTiles.Add(tile);
+                    _neighborTiles.Add(tile);
                 }
             }
         }

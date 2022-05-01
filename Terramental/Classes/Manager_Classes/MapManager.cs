@@ -182,6 +182,11 @@ namespace Terramental
                 }
             }
 
+            foreach(Tile tile in tileList)
+            {
+                tile.SetNeighborTiles();
+            }
+
             int assetCount = 0;
             int spawnedAssetCount = 0;
             

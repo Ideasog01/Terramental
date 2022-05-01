@@ -28,6 +28,7 @@ namespace Terramental
         private Vector2 _attachSpriteOffset;
         private Vector2 _spawnPosition;
         private int _layerOrder;
+        private Color _spriteColor;
 
         //Animation Variables
 
@@ -49,6 +50,12 @@ namespace Terramental
         {
             get { return _layerOrder; }
             set { _layerOrder = value; }
+        }
+
+        public Color SpriteColor
+        {
+            get { return _spriteColor; }
+            set { _spriteColor = value; }
         }
 
         public bool IsActive
@@ -132,6 +139,7 @@ namespace Terramental
             _isActive = true;
             _spriteRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, (int)scale.X, (int)scale.Y);
             _spawnPosition = startPosition;
+            _spriteColor = Color.White;
 
             if (!SpriteManager.SpriteList.Contains(this))
             {
@@ -181,11 +189,11 @@ namespace Terramental
                     {
                         if (!_spriteAnimations[_animationIndex].MirrorTexture)
                         {
-                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, _spriteColor);
                         }
                         else
                         {
-                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, _spriteColor, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                         }
                     }
                 }
@@ -201,11 +209,11 @@ namespace Terramental
                     {
                         if (!_spriteAnimations[_animationIndex].MirrorTexture)
                         {
-                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White);
+                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, _spriteColor);
                         }
                         else
                         {
-                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, _spriteColor, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                         }
                     }
                 }

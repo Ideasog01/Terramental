@@ -39,7 +39,14 @@ namespace Terramental
         private int _enemyIndex;
         private int _elementIndex;
 
-        private List<Tile> pathList = new List<Tile>();
+        private List<Tile> _pathList = new List<Tile>();
+        private List<float> fCostList = new List<float>();
+        private bool _pathCalculated;
+        private Tile _compareTile;
+        private Tile _destinationTile;
+        private int _pathIndex;
+
+        private int ITERATIONS;
 
         #endregion
 
@@ -166,7 +173,7 @@ namespace Terramental
 
                 if (_groundTile == null)
                 {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
+                 //   SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
                 }
             }
             else
@@ -241,7 +248,7 @@ namespace Terramental
 
             GroundCheck();
 
-            SpritePosition += SpriteVelocity;
+          //  SpritePosition += SpriteVelocity;
         }
 
         #endregion
@@ -264,20 +271,6 @@ namespace Terramental
             {
                 CurrentState = AIState.Idle;
             }
-        }
-
-        private void Chase()
-        {
-            if(!Animations[AnimationIndex].MirrorTexture)
-            {
-                SpriteVelocity = new Vector2(_enemyMovementSpeed, 0);
-            }
-            else
-            {
-                SpriteVelocity = new Vector2(-_enemyMovementSpeed, 0);
-            }
-
-            SetAnimation(1);
         }
 
         private void Attack(GameTime gameTime)
@@ -327,27 +320,125 @@ namespace Terramental
             SpriteVelocity = new Vector2(0, SpriteVelocity.Y);
         }
 
+        private void Chase()
+        {
+            //Vector2 dir = playerCharacter.SpritePosition - SpritePosition;
+            //dir.Normalize();
+            //SpritePosition += dir * 2;
+
+            if (_destinationTile == null)
+            {
+                foreach (Tile tile in MapManager.tileList)
+                {
+                    if (GetDistance(tile.SpritePosition, playerCharacter.SpritePosition) < 32)
+                    {
+                        _destinationTile = tile;
+                        break;
+                    }
+                }
+            }
+
+            if (_compareTile == null)
+            {
+                foreach (Tile tile in MapManager.tileList)
+                {
+                    if (GetDistance(tile.SpritePosition, SpritePosition) < 32)
+                    {
+                        _compareTile = tile;
+                        break;
+                    }
+                }
+            }
+
+            if (_destinationTile != null && _compareTile != null)
+            {
+                while (!_pathCalculated)
+                {
+                    GeneratePath();
+                }
+
+                if (_pathCalculated)
+                {
+                    if (_pathIndex < _pathList.Count)
+                    {
+                        Vector2 dir2 = _pathList[_pathIndex].SpritePosition - SpritePosition;
+                        dir2.Normalize();
+                        SpritePosition += dir2 * 2;
+
+                        _pathList[_pathIndex].SpriteColor = Color.Black;
+
+                        if (GetDistance(SpritePosition, _pathList[_pathIndex].SpritePosition) < 32)
+                        {
+                            _pathList[_pathIndex].SpriteColor = Color.White;
+                            _pathIndex++;
+                        }
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Destination Reached!");
+                        _pathList.Clear();
+                        _compareTile = null;
+                        _destinationTile = null;
+                        _pathCalculated = false;
+                    }
+                }
+            }
+
+            SetAnimation(1);
+        }
+
         #endregion
 
         #region A* Pathfinding
 
-        public void GeneratePath(Tile destinationTile)
+        public void GeneratePath()
         {
-            float gCost;
-            float hCost;
-
-            Tile currentTile = null;
-
-            foreach(Tile tile in MapManager.activeTiles)
+            foreach (Tile tile in _compareTile.NeighborList)
             {
-                float distance = MathF.Sqrt(MathF.Pow(tile.SpritePosition.X - SpritePosition.X, 2) + MathF.Pow(tile.SpritePosition.Y - SpritePosition.Y, 2));
+                float gCost = GetDistance(tile.SpritePosition, _compareTile.SpritePosition);
+                //System.Diagnostics.Debug.WriteLine("G Cost = " + gCost.ToString());
+                float hCost = gCost * gCost;
+                //System.Diagnostics.Debug.WriteLine("H Cost = " + hCost.ToString());
+                fCostList.Add(gCost + hCost);
+                //float fCost = gCost + hCost;
+                //System.Diagnostics.Debug.WriteLine("F Cost = " + fCost.ToString());
+            }
 
-                if(distance < 32)
+            float largestFCost = 0;
+
+            foreach (float fCost in fCostList)
+            {
+                if (largestFCost == 0)
                 {
-                    currentTile = tile;
+                    largestFCost = fCost;
+                }
+                else
+                {
+                    if (fCost > largestFCost)
+                    {
+                        largestFCost = fCost;
+                    }
                 }
             }
 
+            Tile bestTile = _compareTile.NeighborList[fCostList.IndexOf(largestFCost)];
+            _pathList.Add(bestTile);
+            _compareTile = bestTile;
+
+            if(_pathList.Count > 50)
+            {
+                foreach(Tile tile in _pathList)
+                {
+                    tile.SpriteColor = Color.Red;
+                }
+
+                _pathCalculated = true;
+            }
+        }
+
+        private float GetDistance(Vector2 pointA, Vector2 pointB)
+        {
+            return MathF.Sqrt(MathF.Pow(pointA.X - pointB.X, 2) + MathF.Pow(pointA.Y - pointB.Y, 2));
         }
 
         #endregion
