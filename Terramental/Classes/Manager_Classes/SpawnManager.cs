@@ -329,11 +329,11 @@ namespace Terramental
             levelFragment.IsActive = true;
         }
 
-        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration)
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage)
         {
             if(inactiveProjectileList.Count > 0)
             {
-                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration);
+                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
 
                 if(hasAnimation)
                 {
@@ -349,7 +349,7 @@ namespace Terramental
             else
             {
                 Projectile projectile = new Projectile();
-                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration);
+                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
                 projectile.Initialise(position, texture, scale);
                 projectile.LayerOrder = -1;
 

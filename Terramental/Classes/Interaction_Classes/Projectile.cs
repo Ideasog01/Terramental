@@ -8,6 +8,7 @@ namespace Terramental
         private bool _isEnemyProjectile;
         private PlayerCharacter _playerCharacter;
         private int _projectileTrigger;
+        private int _projectileDamage;
         private float _destroyTimer;
 
         public void UpdateProjectile(GameTime gameTime)
@@ -20,7 +21,7 @@ namespace Terramental
                 {
                     if (OnCollision(_playerCharacter.SpriteRectangle))
                     {
-                        _playerCharacter.PlayerTakeDamage(1);
+                        _playerCharacter.PlayerTakeDamage(_projectileDamage);
                         ProjectileTrigger(_playerCharacter);
                         DestroyProjectile();
                     }
@@ -31,7 +32,7 @@ namespace Terramental
                     {
                         if(OnCollision(enemy.SpriteRectangle))
                         {
-                            enemy.TakeDamage(20);
+                            enemy.TakeDamage(_projectileDamage);
                             ProjectileTrigger(enemy);
                             DestroyProjectile();
                         }
@@ -50,7 +51,7 @@ namespace Terramental
             }
         }
 
-        public void ResetProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, int projectileTrigger, float projectileDuration)
+        public void ResetProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, int projectileTrigger, float projectileDuration, int projectileDamage)
         {
             SpriteTexture = texture;
             SpritePosition = position;
@@ -61,6 +62,7 @@ namespace Terramental
             _projectileTrigger = projectileTrigger;
             _destroyTimer = projectileDuration;
             _playerCharacter = SpawnManager._gameManager.playerCharacter;
+            _projectileDamage = projectileDamage;
         }
 
         public void DestroyProjectile()
