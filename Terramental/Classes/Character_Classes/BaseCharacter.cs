@@ -35,6 +35,12 @@ namespace Terramental
             set { _characterHealth = value; }
         }
 
+        public int CharacterMaxHealth
+        {
+            get { return _characterMaxHealth; }
+            set { _characterMaxHealth = value; }
+        }
+
         public bool DisableMovement
         {
             get { return  _disableMovement; }

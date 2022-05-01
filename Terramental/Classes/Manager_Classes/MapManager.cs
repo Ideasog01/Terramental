@@ -11,6 +11,7 @@ namespace Terramental
         public static List<Tile> activeTiles = new List<Tile>();
         public static List<Tile> tileList = new List<Tile>();
         public static List<bool> isWall = new List<bool>();
+        public static List<Sprite> assetSpriteList = new List<Sprite>();
 
         public static float mapWidth;
         public static float mapHeight;
@@ -31,9 +32,15 @@ namespace Terramental
 
         public void ResetLevel()
         {
-            SpawnManager.ResetEntities();
-            _gameManager.IsMouseVisible = true;
+            _gameManager.IsMouseVisible = false;
             _gameManager.playerCharacter.ResetPlayer();
+            SpawnManager.ResetEntities();
+        }
+
+        public void UnloadLevel()
+        {
+            SpawnManager.UnloadEntities();
+            DestroyAssets();
         }
 
         public void CheckActiveTiles()
@@ -128,41 +135,84 @@ namespace Terramental
         {
             int[,] tileData = _mapData._tileMap;
 
+            int tileCount = 0;
+
             for (int x = 0; x < _mapData._mapWidth; x++)
             {
                 for(int y = 0; y < _mapData._mapHeight; y++)
                 {                  
                     int tileIndex = tileData[x, y];
 
-                    Tile tile = new Tile();
-                    tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
-                    tile.LayerOrder = 0;
-                    bool isGround = false;
-
-                    if(tileIndex <= 13 || tileIndex > 20)
+                    if(tileCount < tileList.Count)
                     {
-                        isGround = true;
+                        Tile tile = tileList[tileCount];
+                        tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
+                        tile.LayerOrder = 0;
+
+                        bool isGround = false;
+
+                        if (tileIndex <= 13 || tileIndex > 20)
+                        {
+                            isGround = true;
+                        }
+
+                        tile.GroundTile = isGround;
+                        tile.WallTile = isGround;
+                    }
+                    else
+                    {
+                        Tile tile = new Tile();
+                        tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
+                        tile.LayerOrder = 0;
+                        bool isGround = false;
+
+                        if (tileIndex <= 13 || tileIndex > 20)
+                        {
+                            isGround = true;
+                        }
+
+                        tile.GroundTile = isGround;
+                        tile.WallTile = isGround;
+
+                        tileList.Add(tile);
                     }
 
-                    tile.GroundTile = isGround;
-                    tile.WallTile = isGround;
-
                     SpawnEntity(_mapData._entityMap[x, y], new Vector2(x * 64, y * 64));
-
-                    tileList.Add(tile);
-
+                    tileCount++;
                 }
             }
 
             int assetCount = 0;
+            int spawnedAssetCount = 0;
             
             foreach(int assetIndex in _mapData.assetList)
             {
-                Texture2D assetTexture = _assetTextureList[assetIndex];
+                if(spawnedAssetCount < assetSpriteList.Count)
+                {
+                    Sprite assetSprite = assetSpriteList[0];
+                    Texture2D assetTexture = _assetTextureList[assetIndex];
+                    assetSprite.SpriteTexture = assetTexture;
+                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetTextureList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                    assetSprite.IsActive = true;
+                    assetCount++;
+                    spawnedAssetCount++;
+                }
+                else
+                {
+                    Texture2D assetTexture = _assetTextureList[assetIndex];
+                    Sprite assetSprite = new Sprite();
+                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetTextureList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                    assetSpriteList.Add(assetSprite);
+                    assetCount++;
+                }
+            }
+        }
 
-                Sprite assetSprite = new Sprite();
-                assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetTextureList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
-                assetCount++;
+        private void DestroyAssets()
+        {
+            foreach(Sprite asset in assetSpriteList)
+            {
+                asset.IsActive = false;
             }
         }
 

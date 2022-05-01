@@ -32,6 +32,8 @@ namespace Terramental
         private int _elementIndex;
         private float _attackThreshold;
         private float _chaseThreshold;
+        private float _enemyMovementSpeed;
+        private float _enemyGravity;
 
         public AIState CurrentState
         {
@@ -125,6 +127,7 @@ namespace Terramental
 
         public int EnemyIndex
         {
+            get { return _enemyIndex; }
             set { _enemyIndex = value; }
         }
 
@@ -175,7 +178,7 @@ namespace Terramental
 
                 if (_groundTile == null)
                 {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, 3);
+                    SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
                 }
             }
             else
@@ -230,13 +233,13 @@ namespace Terramental
 
             if (CurrentState == AIState.Chase && yPositionDistance < 4f && DistanceToPlayer() > 50f)
             {
-                if (_faceRight)
+                if(_faceRight)
                 {
-                    SpriteVelocity = new Vector2(3, 0);
+                    SpriteVelocity = new Vector2(_enemyMovementSpeed, 0);
                 }
                 else
                 {
-                    SpriteVelocity = new Vector2(-3, 0);
+                    SpriteVelocity = new Vector2(-_enemyMovementSpeed, 0);
                 }
 
                 SetAnimation(1);
@@ -287,7 +290,6 @@ namespace Terramental
         private void Idle()
         {
             SetAnimation(0);
-
             SpriteVelocity = new Vector2(0, SpriteVelocity.Y);
         }
 
@@ -358,6 +360,22 @@ namespace Terramental
             {
                 _rightPathBlocked = false;
             }
+        }
+
+        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth)
+        {
+            SpriteTexture = texture;
+            SpritePosition = position;
+            SpawnPosition = position;
+            SpriteScale = scale;
+            CharacterMaxHealth = enemyMaxHealth;
+            CharacterHealth = enemyHealth;
+            IsActive = true;
+        }
+
+        public void DestroyEnemy()
+        {
+            IsActive = false;
         }
     }
 }

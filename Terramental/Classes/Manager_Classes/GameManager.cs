@@ -37,7 +37,6 @@ namespace Terramental
         public MapManager mapManager;
         public PlayerInterface playerInterface;
         public MenuManager menuManager;
-        public DialogueManager dialogueManager;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -102,12 +101,6 @@ namespace Terramental
                 {
                     mapManager.CheckActiveTiles();
                 }
-
-                if(DialogueManager.dialogueActive)
-                {
-                    dialogueManager.UpdatePosition();
-                }
-                
             }
 
             if(levelLoaded)
@@ -147,11 +140,6 @@ namespace Terramental
             }
 
             menuManager.DrawMenus(_spriteBatch);
-
-            if(DialogueManager.dialogueActive && currentGameState == GameState.Level)
-            {
-                dialogueManager.DrawDialogueInterface(_spriteBatch);
-            }
 
             _spriteBatch.End();
 
@@ -195,7 +183,6 @@ namespace Terramental
                 playerCharacter.LayerOrder = -1;
                 playerInterface = new PlayerInterface(this);
 
-                dialogueManager = new DialogueManager(this, menuManager);
                 mapManager = new MapManager(this);
 
                 CameraController.playerCharacter = playerCharacter;

@@ -200,7 +200,6 @@ namespace Terramental
             CharacterHealth = 3;
             SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
-            DialogueManager.dialogueActive = false;
             ultimateActiveTimer = 0;
             ultimateActive = false;
             ultimateCooldown = 0;
@@ -342,11 +341,9 @@ namespace Terramental
         public void PlayerMovement(float horizontal, GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            // SpriteVelocity = new Vector2(_playerMovementSpeed * _horizontalAxisRaw * deltaTime, 0);
+
             if (!_isHovering)
             {
-                // IsFacingRight = true;
-
                 if(!disableMovement)
                 {
                     if(horizontal > 0)

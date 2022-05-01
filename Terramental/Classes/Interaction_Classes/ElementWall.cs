@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Terramental
 {
@@ -17,6 +18,11 @@ namespace Terramental
             _playerCharacter = playerCharacter;
             _mapManager = mapManager;
             _elementIndex = elementIndex;
+        }
+
+        public int ElementIndex
+        {
+            set { _elementIndex = value; }
         }
 
         public void ElementWallCollisions()

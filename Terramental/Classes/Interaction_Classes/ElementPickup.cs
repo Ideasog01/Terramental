@@ -32,7 +32,13 @@ namespace Terramental
             SetAnimation(_elementIndex);
         }
 
-        public void ResetPickup()
+        public int ElementIndex
+        {
+            get { return _elementIndex; }
+            set { _elementIndex = value; _originalElementIndex = value; }
+        }
+
+        public void ResetElementPickup()
         {
             ChangeElement(_originalElementIndex);
         }

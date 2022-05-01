@@ -43,7 +43,12 @@ namespace Terramental
 
                 if(_buttonName == GameManager.ButtonName.ReturnMainMenu)
                 {
-                    if(!GameManager.gameLoaded || GameManager.currentGameState == GameManager.GameState.LevelPause)
+                    if (GameManager.currentGameState == GameManager.GameState.LevelPause)
+                    {
+                        SpawnManager._gameManager.mapManager.UnloadLevel();
+                    }
+
+                    if (!GameManager.gameLoaded || GameManager.currentGameState == GameManager.GameState.LevelPause)
                     {
                         _menuManager.DisplayMainMenu(true);
                         GameManager.gameLoaded = false;

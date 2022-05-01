@@ -503,6 +503,7 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.Continue:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                        _gameManager.mapManager.UnloadLevel();
                         break;
                     case GameManager.ButtonName.HelpScreenButton:
                         GameManager.currentGameState = GameManager.GameState.HelpMenu;

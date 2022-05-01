@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Terramental
 {
-    public class ScorePickup : Sprite
+    public class ScorePickup : Pickup
     {
         private PlayerCharacter _playerCharacter;
 

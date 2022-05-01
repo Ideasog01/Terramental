@@ -22,6 +22,12 @@ namespace Terramental
             _cannonCooldownLeft = _cannonCooldown;
         }
 
+        public int CannonDir
+        {
+            get { return _cannonDir; }
+            set { _cannonDir = value; }
+        }
+
         public void UpdateCannon(GameTime gameTime)
         {
             _cannonCooldownLeft -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;

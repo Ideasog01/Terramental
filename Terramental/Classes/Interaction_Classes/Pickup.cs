@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 
 namespace Terramental
 {
@@ -12,6 +10,12 @@ namespace Terramental
         {
             get { return _playerCharacter; }
             set { _playerCharacter = value; }
+        }
+
+        public void ResetPickup(Vector2 position)
+        {
+            SpritePosition = position;
+            IsActive = true;
         }
     }
 }

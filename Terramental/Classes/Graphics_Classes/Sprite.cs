@@ -26,6 +26,7 @@ namespace Terramental
         private bool _isVisible;
         private Sprite _attachSprite;
         private Vector2 _attachSpriteOffset;
+        private Vector2 _spawnPosition;
         private int _layerOrder;
 
         //Animation Variables
@@ -114,6 +115,12 @@ namespace Terramental
             set { _attachSpriteOffset = value; }
         }
 
+        public Vector2 SpawnPosition
+        {
+            get { return _spawnPosition; }
+            set { _spawnPosition = value; }
+        }
+
         #endregion
 
         #region Core
@@ -124,7 +131,13 @@ namespace Terramental
             _spriteScale = scale;
             _isActive = true;
             _spriteRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, (int)scale.X, (int)scale.Y);
-            SpriteManager.SpriteList.Add(this);
+            _spawnPosition = startPosition;
+
+            if (!SpriteManager.SpriteList.Contains(this))
+            {
+                SpriteManager.SpriteList.Add(this);
+            }
+            
         }
 
         public void UpdateSprite(GameTime gameTime)

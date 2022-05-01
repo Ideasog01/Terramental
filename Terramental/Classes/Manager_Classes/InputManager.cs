@@ -95,14 +95,7 @@ namespace Terramental
 
                 if(_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
                 {
-                    if(DialogueManager.dialogueActive)
-                    {
-                        _gameManager.dialogueManager.NextDialogue();
-                    }
-                    else
-                    {
-                        _menuManager.InteractSelectedButton();
-                    }
+                    _menuManager.InteractSelectedButton();
                 }
 
                 Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
@@ -137,15 +130,6 @@ namespace Terramental
                 else
                 {
                     _menuManager.MouseClick(_playerCam.CameraCentre + new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y));
-                }
-                
-
-                if(DialogueManager.dialogueActive)
-                {
-                    if(_gameManager.dialogueManager != null)
-                    {
-                        _gameManager.dialogueManager.CheckButtonInteraction(_playerCam.CameraCentre + new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y));             
-                    }
                 }
             }
 
