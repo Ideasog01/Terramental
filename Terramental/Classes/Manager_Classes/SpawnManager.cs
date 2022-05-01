@@ -466,7 +466,7 @@ namespace Terramental
             if(levelFragment == null)
             {
                 levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
-                levelFragment.Initialise(position, _gameManager.GetTexture("UserInterface/PlayerInterface/Collectible"), new Vector2(64, 64));
+                levelFragment.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/TerramentalIcon"), new Vector2(64, 64));
                 levelFragment.LayerOrder = -2;
             }
             else

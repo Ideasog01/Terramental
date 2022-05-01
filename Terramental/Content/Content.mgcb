@@ -334,6 +334,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Pickups/SnowPickup_SpriteSheet.png
 
+#begin Sprites/Pickups/TerramentalIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Pickups/TerramentalIcon.png
+
 #begin Sprites/Pickups/WaterPickup_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
