@@ -302,7 +302,7 @@ namespace Terramental
 
                 if (_groundTile != null)
                 {
-                    if (!_groundTile.TopCollision(this) || _groundTile.RightCollision(this) || _groundTile.LeftCollision(this))
+                    if (!_groundTile.TopCollision(this) || _groundTile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)) || _groundTile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _isGrounded = false;
                         _groundTile = null;
@@ -666,13 +666,13 @@ namespace Terramental
 
                 if (tile.WallTile)
                 {
-                    if (tile.RightCollision(this))
+                    if (tile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _disableRight = true;
                         _rightTile = tile;
                     }
 
-                    if (tile.LeftCollision(this))
+                    if (tile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _disableLeft = true;
                         _leftTile = tile;
@@ -684,7 +684,7 @@ namespace Terramental
 
             if (_disableRight && _rightTile != null)
             {
-                if (!_rightTile.RightCollision(this))
+                if (!_rightTile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                 {
                     _disableRight = false;
                     _rightTile = null;
@@ -693,7 +693,7 @@ namespace Terramental
 
             if (_disableLeft && _leftTile != null)
             {
-                if (!_leftTile.LeftCollision(this))
+                if (!_leftTile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                 {
                     _disableLeft = false;
                     _leftTile = null;

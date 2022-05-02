@@ -39,14 +39,24 @@ namespace Terramental
         private int _enemyIndex;
         private int _elementIndex;
 
-        private List<Tile> _pathList = new List<Tile>();
-        private List<float> fCostList = new List<float>();
-        private bool _pathCalculated;
-        private Tile _compareTile;
-        private Tile _destinationTile;
-        private int _pathIndex;
+        private bool _rightBlocked;
+        private bool _leftBlocked;
 
-        private int ITERATIONS;
+        private Tile _blockingTile;
+
+        private bool _jumpActive;
+        private float _jumpHeight;
+
+        private float _jumpCooldownTimer;
+
+        //private List<Tile> _pathList = new List<Tile>();
+        //private List<float> fCostList = new List<float>();
+        //private bool _pathCalculated;
+        //private Tile _compareTile;
+        //private Tile _destinationTile;
+        //private int _pathIndex;
+
+        //private int ITERATIONS;
 
         #endregion
 
@@ -168,13 +178,27 @@ namespace Terramental
                             _isGrounded = true;
                             _groundTile = tile;
                         }
+
+                        if (_jumpActive)
+                        {
+                            if (tile.BottomCollision(this))
+                            {
+                                _jumpHeight = SpritePosition.Y;
+                                _jumpActive = false;
+                                _jumpCooldownTimer = 3;
+                            }
+                        }
                     }
                 }
 
-                if (_groundTile == null)
+                if(!_jumpActive)
                 {
-                 //   SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
+                    if (_groundTile == null && _currentState != AIState.Idle)
+                    {
+                        SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
+                    }
                 }
+                
             }
             else
             {
@@ -185,9 +209,10 @@ namespace Terramental
                         _groundTile = null;
                         _isGrounded = false;
                     }
-
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, 0);
-
+                }
+                else
+                {
+                    _isGrounded = false;
                 }
             }
         }
@@ -196,14 +221,6 @@ namespace Terramental
         {
             float distance = MathF.Sqrt(MathF.Pow(playerCharacter.SpritePosition.X - SpritePosition.X, 2) + MathF.Pow(playerCharacter.SpritePosition.Y - SpritePosition.Y, 2));
             return distance;
-        }
-
-        private void FacePlayer()
-        {
-            if (DistanceToPlayer() > 60)
-            {
-                Animations[AnimationIndex].MirrorTexture = SpritePosition.X > playerCharacter.SpritePosition.X;
-            }
         }
 
         #endregion
@@ -221,12 +238,28 @@ namespace Terramental
             _enemyMovementSpeed = enemyMovementSpeed;
             _enemyGravity = enemyGravity;
             IsActive = true;
+            _isGrounded = true;
         }
 
         public void UpdateEnemy(GameTime gameTime)
         {
             EnemyStateMachine();
-            FacePlayer();
+
+            if(_currentState != AIState.Attack)
+            {
+                if(SpriteVelocity.X > 0)
+                {
+                    Animations[AnimationIndex].MirrorTexture = false;
+                }
+                else
+                {
+                    Animations[AnimationIndex].MirrorTexture = true;
+                } 
+            }
+            else if(DistanceToPlayer() > 20)
+            {
+                Animations[AnimationIndex].MirrorTexture = playerCharacter.SpritePosition.X < SpritePosition.X;
+            }
 
             if (CurrentState == AIState.Attack)
             {
@@ -246,9 +279,107 @@ namespace Terramental
                 }
             }
 
+            if(_jumpActive)
+            {
+                if(_currentState == AIState.Chase)
+                {
+                    UpdateJump();
+                    System.Diagnostics.Debug.WriteLine("Enemy is Jumping!");
+
+                    if (!_leftBlocked && !_rightBlocked)
+                    {
+                        _jumpHeight = SpritePosition.Y;
+                        _jumpActive = false;
+                        _jumpCooldownTimer = 3;
+                    }
+                }
+            }
+            else if(_isGrounded && _currentState == AIState.Chase && _jumpCooldownTimer <= 0 && DistanceToPlayer() > 100)
+            {
+                if(_leftBlocked || _rightBlocked)
+                {
+                    _jumpHeight = SpritePosition.Y - 200;
+                    _jumpActive = true;
+                }
+            }
+
+            if(_jumpCooldownTimer > 0)
+            {
+                _jumpCooldownTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
             GroundCheck();
 
-          //  SpritePosition += SpriteVelocity;
+            if (SpriteVelocity.X > 0)
+            {
+                if(_rightBlocked)
+                {
+                    if (_blockingTile != null)
+                    {
+                        if(!_blockingTile.LeftCollision(new Rectangle((int)SpritePosition.X + 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                        {
+                            _rightBlocked = false;
+                            _blockingTile = null;
+                        }
+                    }
+                    else
+                    {
+                        _rightBlocked = false;
+                    }
+                }
+                else
+                {
+                    SpritePosition += new Vector2(SpriteVelocity.X, 0);
+                }
+            }
+            else if(SpriteVelocity.X < 0)
+            {
+                if(_leftBlocked)
+                {
+                    if(_blockingTile != null)
+                    {
+                        if (!_blockingTile.RightCollision(new Rectangle((int)SpritePosition.X - 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                        {
+                            _rightBlocked = false;
+                            _blockingTile = null;
+                        }
+                    }
+                    else
+                    {
+                        _leftBlocked = false;
+                    }
+                }
+                else
+                {
+                    SpritePosition += new Vector2(SpriteVelocity.X, 0);
+                }
+            }
+
+            if (!_leftBlocked || !_rightBlocked)
+            {
+                CheckPath();
+            }
+
+            SpritePosition += new Vector2(0, SpriteVelocity.Y);
+
+        }
+
+        public void CheckPath()
+        {
+            foreach (Tile tile in MapManager.activeTiles)
+            {
+                if (tile.LeftCollision(new Rectangle((int)SpritePosition.X + 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                {
+                    _rightBlocked = true;
+                    _blockingTile = tile;
+                }
+
+                if (tile.RightCollision(new Rectangle((int)SpritePosition.X - 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                {
+                    _leftBlocked = true;
+                    _blockingTile = tile;
+                }
+            }
         }
 
         #endregion
@@ -322,119 +453,80 @@ namespace Terramental
 
         private void Chase()
         {
-            //Vector2 dir = playerCharacter.SpritePosition - SpritePosition;
-            //dir.Normalize();
-            //SpritePosition += dir * 2;
+            Vector2 dir = playerCharacter.SpritePosition - SpritePosition;
+            dir.Normalize();
+            SpriteVelocity = new Vector2(dir.X, 0) * _enemyMovementSpeed;
 
-            if (_destinationTile == null)
+            if(SpriteVelocity.X != 0)
             {
-                foreach (Tile tile in MapManager.tileList)
+                if(SpriteVelocity.X > 0 && !_rightBlocked || SpriteVelocity.X < 0 && !_leftBlocked)
                 {
-                    if (GetDistance(tile.SpritePosition, playerCharacter.SpritePosition) < 32)
-                    {
-                        _destinationTile = tile;
-                        break;
-                    }
+                    SetAnimation(1);
                 }
             }
+        }
 
-            if (_compareTile == null)
+        private void UpdateJump()
+        {
+            if (SpritePosition.Y > _jumpHeight)
             {
-                foreach (Tile tile in MapManager.tileList)
-                {
-                    if (GetDistance(tile.SpritePosition, SpritePosition) < 32)
-                    {
-                        _compareTile = tile;
-                        break;
-                    }
-                }
+                SpriteVelocity = new Vector2(SpriteVelocity.X, -3);
             }
-
-            if (_destinationTile != null && _compareTile != null)
+            else
             {
-                while (!_pathCalculated)
-                {
-                    GeneratePath();
-                }
-
-                if (_pathCalculated)
-                {
-                    if (_pathIndex < _pathList.Count)
-                    {
-                        Vector2 dir2 = _pathList[_pathIndex].SpritePosition - SpritePosition;
-                        dir2.Normalize();
-                        SpritePosition += dir2 * 2;
-
-                        _pathList[_pathIndex].SpriteColor = Color.Black;
-
-                        if (GetDistance(SpritePosition, _pathList[_pathIndex].SpritePosition) < 32)
-                        {
-                            _pathList[_pathIndex].SpriteColor = Color.White;
-                            _pathIndex++;
-                        }
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("Destination Reached!");
-                        _pathList.Clear();
-                        _compareTile = null;
-                        _destinationTile = null;
-                        _pathCalculated = false;
-                    }
-                }
+                _jumpActive = false;
+                _jumpCooldownTimer = 3;
             }
-
-            SetAnimation(1);
         }
 
         #endregion
 
         #region A* Pathfinding
 
-        public void GeneratePath()
-        {
-            foreach (Tile tile in _compareTile.NeighborList)
-            {
-                float gCost = GetDistance(tile.SpritePosition, _compareTile.SpritePosition);
-                //System.Diagnostics.Debug.WriteLine("G Cost = " + gCost.ToString());
-                float hCost = gCost * gCost;
-                //System.Diagnostics.Debug.WriteLine("H Cost = " + hCost.ToString());
-                fCostList.Add(gCost + hCost);
-                //float fCost = gCost + hCost;
-                //System.Diagnostics.Debug.WriteLine("F Cost = " + fCost.ToString());
-            }
+        //public void GeneratePath()
+        //{
+        //    foreach (Tile tile in _compareTile.NeighborList)
+        //    {
+        //        float gCost = GetDistance(tile.SpritePosition, _compareTile.SpritePosition);
+        //        //System.Diagnostics.Debug.WriteLine("G Cost = " + gCost.ToString());
+        //        float hCost = gCost * gCost;
+        //        //System.Diagnostics.Debug.WriteLine("H Cost = " + hCost.ToString());
+        //        fCostList.Add(gCost + hCost);
+        //        //float fCost = gCost + hCost;
+        //        //System.Diagnostics.Debug.WriteLine("F Cost = " + fCost.ToString());
+        //    }
 
-            float largestFCost = 0;
+        //    float largestFCost = 0;
 
-            foreach (float fCost in fCostList)
-            {
-                if (largestFCost == 0)
-                {
-                    largestFCost = fCost;
-                }
-                else
-                {
-                    if (fCost > largestFCost)
-                    {
-                        largestFCost = fCost;
-                    }
-                }
-            }
+        //    foreach (float fCost in fCostList)
+        //    {
+        //        if (largestFCost == 0)
+        //        {
+        //            largestFCost = fCost;
+        //        }
+        //        else
+        //        {
+        //            if (fCost > largestFCost)
+        //            {
+        //                largestFCost = fCost;
+        //            }
+        //        }
+        //    }
 
-            Tile bestTile = _compareTile.NeighborList[fCostList.IndexOf(largestFCost)];
-            _pathList.Add(bestTile);
-            _compareTile = bestTile;
+        //    Tile bestTile = _compareTile.NeighborList[fCostList.IndexOf(largestFCost)];
+        //    _pathList.Add(bestTile);
+        //    _compareTile = bestTile;
 
-            if(_pathList.Count > 50)
-            {
-                foreach(Tile tile in _pathList)
-                {
-                    tile.SpriteColor = Color.Red;
-                }
+        //    if(_pathList.Count > 50)
+        //    {
+        //        foreach(Tile tile in _pathList)
+        //        {
+        //            tile.SpriteColor = Color.Red;
+        //        }
 
-                _pathCalculated = true;
-            }
-        }
+        //        _pathCalculated = true;
+        //    }
+        //}
 
         private float GetDistance(Vector2 pointA, Vector2 pointB)
         {
