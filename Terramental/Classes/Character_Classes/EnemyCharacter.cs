@@ -167,42 +167,31 @@ namespace Terramental
 
         private void GroundCheck()
         {
-            if(_isGrounded)
+            if(!_isGrounded)
             {
-                if (_groundTile != null)
-                {
-                    if (!_groundTile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y + 5, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                    {
-                        _groundTile = null;
-                        _isGrounded = false;
-                    }
-                }
-                else
-                {
-                    _isGrounded = false;
-                }
-            }
-
-            if (!_isGrounded)
-            {
-                if(!_jumpActive && DistanceToPlayer() < 800)
-                {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
-                }
-                
-
-                foreach (Tile tile in MapManager.tileList)
+                foreach (Tile tile in MapManager.activeTiles)
                 {
                     if (tile.GroundTile)
                     {
-                        if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y + 5, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                        if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                         {
                             _isGrounded = true;
                             _groundTile = tile;
                             break;
                         }
                     }
-                }             
+                }
+            }
+            else
+            {
+                if (_groundTile != null)
+                {
+                    if (!_groundTile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                    {
+                        _groundTile = null;
+                        _isGrounded = false;
+                    }
+                }
             }
         }
 
@@ -227,11 +216,12 @@ namespace Terramental
             _enemyMovementSpeed = enemyMovementSpeed;
             _enemyGravity = enemyGravity;
             IsActive = true;
-            _isGrounded = true;
         }
 
         public void UpdateEnemy(GameTime gameTime)
         {
+
+            GroundCheck();
             EnemyStateMachine();
 
             if (CurrentState == AIState.Attack)
@@ -252,34 +242,35 @@ namespace Terramental
                 }
             }
 
-            if(_jumpActive)
-            {
-                if(_currentState == AIState.Chase)
-                {
-                    UpdateJump();
-                    System.Diagnostics.Debug.WriteLine("Enemy is Jumping!");
+            //if (_currentState == AIState.Chase)
+            //{
+            //    if(!_jumpActive)
+            //    {
+            //        if (_leftBlocked || _rightBlocked)
+            //        {
+            //            _jumpHeight = SpritePosition.Y - 256;
+            //            _jumpActive = true;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        UpdateJump();
+            //        System.Diagnostics.Debug.WriteLine("Enemy is Jumping!");
+            //    }
+            //}
 
-                    if (!_leftBlocked && !_rightBlocked && _jumpCooldownTimer > 0)
-                    {
-                        _jumpActive = false;
-                    }
-                }
-            }
-            else if(_isGrounded && _currentState == AIState.Chase && _jumpCooldownTimer <= 0 && DistanceToPlayer() > 100)
-            {
-                if(_leftBlocked || _rightBlocked)
-                {
-                    _jumpHeight = SpritePosition.Y - 256;
-                    _jumpActive = true;
-                }
-            }
+            //if (!_isGrounded)
+            //{
+            //    if (!_jumpActive)
+            //    {
+            //        SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
+            //    }
+            //}
 
             if(_jumpCooldownTimer > 0)
             {
                 _jumpCooldownTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-
-            GroundCheck();
 
             if (SpriteVelocity.X > 0)
             {
@@ -356,9 +347,6 @@ namespace Terramental
                     Animations[AnimationIndex].MirrorTexture = true;
                 }
             }
-
-            
-
         }
 
         public void CheckPath()
