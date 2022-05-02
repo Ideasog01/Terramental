@@ -61,6 +61,7 @@ namespace Terramental
                         if (GameManager.currentGameState == GameManager.GameState.LevelComplete || GameManager.currentGameState == GameManager.GameState.LevelPause)
                         {
                             _menuManager.ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
+                            AudioManager.PlaySound("Level_Music");
                             GameManager.gameLoaded = false;
                             _menuManager.ChangeSelectedButton(0, true);
                         }

@@ -51,9 +51,9 @@ namespace Terramental
             return (this.SpriteRectangle.Left >= otherRectangle.Left && this.SpriteRectangle.Left <= otherRectangle.Right + 5 && this.SpriteRectangle.Top <= otherRectangle.Bottom - (otherRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherRectangle.Top + (otherRectangle.Width / 4));
         }
 
-        public bool TopCollision(Sprite otherSprite)
+        public bool TopCollision(Rectangle rectangle)
         {
-            return (this.SpriteRectangle.Top + this.SpriteVelocity.Y < otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Bottom > otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left + (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right - (otherSprite.SpriteRectangle.Width / 4));
+            return (this.SpriteRectangle.Top + this.SpriteVelocity.Y < rectangle.Bottom && this.SpriteRectangle.Bottom > rectangle.Bottom && this.SpriteRectangle.Right > rectangle.Left + (rectangle.Width / 4) && this.SpriteRectangle.Left < rectangle.Right - (rectangle.Width / 4));
         }
 
         public bool BottomCollision(Sprite otherSprite)

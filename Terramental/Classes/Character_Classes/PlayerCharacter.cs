@@ -302,7 +302,7 @@ namespace Terramental
 
                 if (_groundTile != null)
                 {
-                    if (!_groundTile.TopCollision(this) || _groundTile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)) || _groundTile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                    if (!_groundTile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)) || _groundTile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)) || _groundTile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _isGrounded = false;
                         _groundTile = null;
@@ -671,7 +671,7 @@ namespace Terramental
             {
                 if (tile.GroundTile)
                 {
-                    if (tile.TopCollision(this))
+                    if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _isGrounded = true;
                         _groundTile = tile;

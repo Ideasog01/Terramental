@@ -188,7 +188,6 @@ namespace Terramental
         public void LoadNewGame(string filePath)
         {
             menuManager.ActivateLoadingScreen(5, GameState.Level);
-            AudioManager.StopMusic();
 
             if (!gameInProgress)
             {
@@ -239,8 +238,11 @@ namespace Terramental
             AudioClip beepSound = new AudioClip("BeepTone_SFX", "SFXs/BeepTone", false, this);
             AudioManager.AddSound(beepSound);
 
-            AudioClip introMust = new AudioClip("Intro_Music", "Music/farfromhome", true, this);
-            AudioManager.AddSound(introMust);
+            AudioClip introMusic = new AudioClip("Intro_Music", "Music/far-from-home-acoustic-version-13463", true, this);
+            AudioManager.AddSound(introMusic);
+
+            AudioClip levelMusic = new AudioClip("Level_Music", "Music/ambient-piano-10781", true, this);
+            AudioManager.AddSound(levelMusic);
         }
 
         #endregion

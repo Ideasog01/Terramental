@@ -339,9 +339,19 @@ namespace Terramental
                 }
                 else
                 {
+                    if(GameManager.currentGameState == GameManager.GameState.LoadingScreen)
+                    {
+                        AudioManager.StopMusic();
+                    }
+
                     GameManager.currentGameState = videoPlayerAfterState;
                     videoPlaying = false;
                     videoPlayer.Stop();
+
+                    if(GameManager.currentGameState == GameManager.GameState.Level)
+                    {
+                        AudioManager.PlaySound("Level_Music");
+                    }
                 }
             }
             

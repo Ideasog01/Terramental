@@ -16,7 +16,14 @@ namespace Terramental
 
         public AudioClip(string soundName, string soundFilePath, bool isMusic, GameManager gameManager)
         {
-            _soundEffect = gameManager.Content.Load<SoundEffect>(soundFilePath);
+            if(isMusic)
+            {
+                _songEffect = gameManager.Content.Load<Song>(soundFilePath);
+            }
+            else
+            {
+                _soundEffect = gameManager.Content.Load<SoundEffect>(soundFilePath);
+            }
 
             _isMusic = isMusic;
             _soundName = soundName;

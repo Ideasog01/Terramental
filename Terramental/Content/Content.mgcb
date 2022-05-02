@@ -85,29 +85,29 @@
 /processorParam:TextureFormat=Color
 /build:Assets/WaterLevel/Palm_Tree2.png
 
-#begin Music/ambient-piano-10781.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Music/ambient-piano-10781.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/ambient-piano-10781.wav
+/build:Music/ambient-piano-10781.mp3
 
-#begin Music/farfromhome.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Music/far-from-home-acoustic-version-13463.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/farfromhome.wav
+/build:Music/far-from-home-acoustic-version-13463.mp3
 
-#begin Music/rebirth-110327.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Music/rebirth-110327.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/rebirth-110327.wav
+/build:Music/rebirth-110327.mp3
 
-#begin Music/sana-geldim.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Music/sana-geldim-106818.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/sana-geldim.wav
+/build:Music/sana-geldim-106818.mp3
 
 #begin SFXs/BeepTone.wav
 /importer:WavImporter

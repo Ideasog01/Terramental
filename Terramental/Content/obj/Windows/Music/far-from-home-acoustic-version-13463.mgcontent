@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/far-from-home-acoustic-version-13463.mp3</SourceFile>
+  <SourceTime>2022-05-02T16:55:51.0095705+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Music/far-from-home-acoustic-version-13463.xnb</DestFile>
+  <DestTime>2022-05-02T19:03:41.5331074+01:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2020-08-10T17:17:54+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Music/far-from-home-acoustic-version-13463.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>
