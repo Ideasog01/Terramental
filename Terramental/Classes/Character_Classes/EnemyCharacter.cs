@@ -298,7 +298,7 @@ namespace Terramental
             {
                 if(_leftBlocked || _rightBlocked)
                 {
-                    _jumpHeight = SpritePosition.Y - 200;
+                    _jumpHeight = SpritePosition.Y - 256;
                     _jumpActive = true;
                 }
             }
@@ -427,7 +427,7 @@ namespace Terramental
 
                     if(!Animations[AnimationIndex].MirrorTexture)
                     {
-                        SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(6, 0), true, false, 0, 3, 1);
+                        SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(4, 0), true, false, 0, 3, 1);
                         _knightAttacked = true;
                     }
                     else

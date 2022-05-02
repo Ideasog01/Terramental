@@ -4,7 +4,7 @@ using System;
 
 namespace Terramental
 {
-    class CameraController
+    public class CameraController
     {
         /// <summary>
         /// The class responsible for controlling the player camera

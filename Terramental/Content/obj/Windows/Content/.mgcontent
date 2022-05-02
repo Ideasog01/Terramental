@@ -10,6 +10,10 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Assets/WaterLevel/Grass_3.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Assets/WaterLevel/Palm_Tree.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Assets/WaterLevel/Palm_Tree2.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/ambient-piano-10781.wav</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/farfromhome.wav</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/rebirth-110327.wav</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/sana-geldim.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/BeepTone.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/PlayerJump_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/DefaultFont.spritefont</File>
@@ -109,6 +113,11 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelCompleteMenu/LevelCompleteBackground.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelCompleteMenu/ReplayButton.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/ExitButton.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/Level1_Button.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/Level2_Button.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/Level3_Button.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/Level4_Button.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/Level5_Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/LevelDetailsPanel.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/LevelSelectButton.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LevelSelect/StartButton.png</File>
@@ -118,17 +127,15 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game3Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/Game4Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/LoadGameMenu/LoadGameBackground.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/Achievements_MainMenu_Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/Credits_MainMenu_Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/ExitGame_MainMenu_Button.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/GameTitleText.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/LoadGame_MainMenu_Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/MainMenu_FireBackground.png</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/NewGame_MainMenu_Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/Options_MainMenu_Button.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/MainMenu/StartGame_MainMenu_Button.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/ControlsButton.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/LeftButton.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/MusicVolumeButton.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/OptionsMenuBackground.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/ResolutionButton.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/ReturnButton.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/OptionsMenu/RightButton.png</File>
@@ -154,9 +161,16 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/Sliders/UltimateSliderBorder.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/StartScreen.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/LoadingScreen.wmv</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Video.wmv</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Terramental
 {
-    class InputManager
+    public class InputManager
     {
         /// <summary>
         /// InputManager controls all essential player input
@@ -44,6 +44,11 @@ namespace Terramental
             KeyboardMouseInput(gameTime);
         }
 
+        public bool IsGamePadConnected()
+        {
+            return _currentGamepadState.IsConnected;
+        }
+
         private void KeyboardMouseInput(GameTime gameTime)
         {
             oldKeyboardState = _currentKeyboardState;
@@ -73,6 +78,7 @@ namespace Terramental
                     if (_currentKeyboardState.GetPressedKeys().Length > 0)
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
+                        _gameManager.menuManager.ChangeSelectedButton(0, true);
                     }
                 }
                 
@@ -84,6 +90,7 @@ namespace Terramental
                     if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
+                        _gameManager.menuManager.ChangeSelectedButton(0, true);
                     }
                 }
 
@@ -160,7 +167,7 @@ namespace Terramental
                     _playerCharacter.PrimaryUltimateAttack();
                 }
 
-                if (_currentKeyboardState.IsKeyUp(Keys.Space) && oldKeyboardState.IsKeyDown(Keys.Space))
+                if (_currentKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
                 {
                     _playerCharacter.PlayerJump();
                 }
@@ -177,7 +184,7 @@ namespace Terramental
                     _playerCharacter.PrimaryUltimateAttack();
                 }
 
-                if (_oldGamepadState.Buttons.A == ButtonState.Pressed && _currentGamepadState.Buttons.A == ButtonState.Released)
+                if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
                 {
                     _playerCharacter.PlayerJump();
                 }

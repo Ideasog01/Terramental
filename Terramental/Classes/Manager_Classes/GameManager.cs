@@ -17,13 +17,15 @@ namespace Terramental
         public static bool gameInProgress;
         public static bool gameLoaded;
 
+        public static int levelsComplete;
+
         public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen};
 
         public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown };
 
         public enum GameData { Game1, Game2, Game3, Game4};
 
-        public enum LevelButton { Level1Button, Level2Button };
+        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button };
 
         public static GameState currentGameState = GameState.SplashScreen;
         public static GameState previousGameState = GameState.SplashScreen;
@@ -41,7 +43,7 @@ namespace Terramental
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private InputManager _inputManager;
+        public InputManager _inputManager;
         private SpriteManager _spriteManager;
 
         public PlayerCharacter playerCharacter;
@@ -49,6 +51,10 @@ namespace Terramental
         private CameraController _mainCam;
 
         private bool skipToLevel = false;
+
+        private int[] screenWidths = { 960, 3840, 2560, 2560, 1920, 1366, 1280, 1280 };
+        private int[] screenHeights = { 540, 2160, 1440, 1080, 1080, 768, 1024, 720 };
+        private int currentResolutionIndex;
 
         public GameManager()
         {
@@ -77,6 +83,8 @@ namespace Terramental
 
             InitialiseGame();
             LoadAudioLibrary();
+            AudioManager.SetVolumes();
+            AudioManager.PlaySound("Intro_Music");
 
             if(skipToLevel)
             {
@@ -140,6 +148,29 @@ namespace Terramental
             return Content.Load<Texture2D>(path);
         }
 
+        public void ChangeResolution(int amount)
+        {
+            currentResolutionIndex += amount;
+
+            if(currentResolutionIndex < 0)
+            {
+                currentResolutionIndex = screenWidths.Length - 1;
+            }
+
+            if(currentResolutionIndex >= screenWidths.Length)
+            {
+                currentResolutionIndex = 0;
+            }
+
+            _graphics.PreferredBackBufferWidth = screenWidths[currentResolutionIndex];
+            _graphics.PreferredBackBufferHeight = screenHeights[currentResolutionIndex];
+            screenWidth = _graphics.PreferredBackBufferWidth;
+            screenHeight = _graphics.PreferredBackBufferHeight;
+            // Apply the changes
+            _graphics.ApplyChanges();
+            System.Console.WriteLine("New resolution: {0} x {1}", _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+        }
+
         #endregion
 
         #region Managers
@@ -157,6 +188,7 @@ namespace Terramental
         public void LoadNewGame(string filePath)
         {
             menuManager.ActivateLoadingScreen(5, GameState.Level);
+            AudioManager.StopMusic();
 
             if (!gameInProgress)
             {
@@ -203,8 +235,12 @@ namespace Terramental
         {
             AudioClip audioClip = new AudioClip("PlayerJump_SFX", "SFXs/PlayerJump_SFX", false, this);
             AudioManager.AddSound(audioClip);
+
             AudioClip beepSound = new AudioClip("BeepTone_SFX", "SFXs/BeepTone", false, this);
             AudioManager.AddSound(beepSound);
+
+            AudioClip introMust = new AudioClip("Intro_Music", "Music/farfromhome", true, this);
+            AudioManager.AddSound(introMust);
         }
 
         #endregion

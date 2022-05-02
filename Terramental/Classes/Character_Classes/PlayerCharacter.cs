@@ -646,7 +646,28 @@ namespace Terramental
 
         private void CheckCollisions()
         {
-            foreach(Tile tile in MapManager.activeTiles)
+            if (_elementWall != null)
+            {
+                if (!_elementWall.RightCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)) && !_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
+                {
+                    _disableRight = false;
+                    _elementWall = null;
+                    return;
+                }
+
+                if (!_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
+                {
+                    _disableLeft = false;
+                    _elementWall = null;
+                }
+            }
+            else
+            {
+                _disableLeft = false;
+                _disableRight = false;
+            }
+
+            foreach (Tile tile in MapManager.activeTiles)
             {
                 if (tile.GroundTile)
                 {
@@ -666,13 +687,13 @@ namespace Terramental
 
                 if (tile.WallTile)
                 {
-                    if (tile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                    if (tile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _disableRight = true;
                         _rightTile = tile;
                     }
 
-                    if (tile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                    if (tile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                     {
                         _disableLeft = true;
                         _leftTile = tile;
@@ -684,7 +705,7 @@ namespace Terramental
 
             if (_disableRight && _rightTile != null)
             {
-                if (!_rightTile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                if (!_rightTile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                 {
                     _disableRight = false;
                     _rightTile = null;
@@ -693,20 +714,10 @@ namespace Terramental
 
             if (_disableLeft && _leftTile != null)
             {
-                if (!_leftTile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                if (!_leftTile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                 {
                     _disableLeft = false;
                     _leftTile = null;
-                }
-            }
-
-            if(_elementWall != null)
-            {
-                if(!_elementWall.RightCollision(this) && !_elementWall.LeftCollision(this))
-                {
-                    _disableRight = false;
-                    _disableLeft = false;
-                    _elementWall = null;
                 }
             }
         }

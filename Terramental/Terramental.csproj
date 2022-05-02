@@ -27,6 +27,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Music\" />
     <Folder Include="Content\Sprites\Enemies\DarkMage\" />
     <Folder Include="Content\Sprites\Enemies\Knight\" />
     <Folder Include="Content\Sprites\Player\Walk\" />

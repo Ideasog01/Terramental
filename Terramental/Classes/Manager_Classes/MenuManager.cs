@@ -78,7 +78,7 @@ namespace Terramental
             _gameManager = gameManager;
             _graphics = graphics;
 
-            _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelNameFont");
+            _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
             _levelTitleFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelTitleFont");
 
             LoadStartScreen();
@@ -94,7 +94,6 @@ namespace Terramental
             LoadLoadingScreen();
 
             currentButtonIndex = 0;
-            mainMenuButtonList[0].ComponentColor = Color.Gray;
         }
 
         public void ActivateLoadingScreen(float duration, GameManager.GameState afterState)
@@ -148,6 +147,7 @@ namespace Terramental
                  break;
 
                 case GameManager.GameState.LevelSelect:
+
                     foreach(MenuComponent selectComponent in levelSelectComponentList)
                     {
                         selectComponent.DrawMenuComponent(spriteBatch);
@@ -155,16 +155,28 @@ namespace Terramental
 
                     foreach(Button selectButton in levelSelectButtonList)
                     {
-                        selectButton.DrawMenuComponent(spriteBatch);
+                        int levelButtonIndex = levelSelectButtonList.IndexOf(selectButton);
+
+                        if(levelButtonIndex > 0 && levelButtonIndex < 6)
+                        {
+                            if(GameManager.levelsComplete >= levelButtonIndex)
+                            {
+                                selectButton.DrawMenuComponent(spriteBatch);
+                                selectButton.ButtonActive = true;
+                            }
+                            else
+                            {
+                                selectButton.ButtonActive = false;
+                            }
+                        }
+                        else
+                        {
+                            selectButton.DrawMenuComponent(spriteBatch);
+                        }
                     }
 
                     levelSelectExitButton.DrawMenuComponent(spriteBatch);
 
-                    spriteBatch.DrawString(_defaultFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
-                    spriteBatch.DrawString(_defaultFont, "1", new Vector2(207, 403), Color.White);
-
-                    spriteBatch.DrawString(_defaultFont, "The Fire Lands", new Vector2(565, 400), Color.Black);
-                    spriteBatch.DrawString(_defaultFont, "2", new Vector2(609, 423), Color.White);
                     break;
 
                 case GameManager.GameState.LevelSelectConfirm:
@@ -175,14 +187,25 @@ namespace Terramental
 
                     foreach (Button selectButton in levelSelectButtonList)
                     {
-                        selectButton.DrawMenuComponent(spriteBatch);
+                        int levelButtonIndex = levelSelectButtonList.IndexOf(selectButton);
+
+                        if (levelButtonIndex > 0 && levelButtonIndex < 6)
+                        {
+                            if (GameManager.levelsComplete >= levelButtonIndex)
+                            {
+                                selectButton.DrawMenuComponent(spriteBatch);
+                                selectButton.ButtonActive = true;
+                            }
+                            else
+                            {
+                                selectButton.ButtonActive = false;
+                            }
+                        }
+                        else
+                        {
+                            selectButton.DrawMenuComponent(spriteBatch);
+                        }
                     }
-
-                    spriteBatch.DrawString(_defaultFont, "The Golden Shores", new Vector2(150, 380), Color.Black);
-                    spriteBatch.DrawString(_defaultFont, "1", new Vector2(207, 403), Color.White);
-
-                    spriteBatch.DrawString(_defaultFont, "The Fire Lands", new Vector2(550, 430), Color.Black);
-                    spriteBatch.DrawString(_defaultFont, "2", new Vector2(607, 453), Color.White);
 
 
                     foreach (MenuComponent confirmComponent in confirmLevelComponentList)
@@ -330,56 +353,65 @@ namespace Terramental
 
         public void ChangeSelectedButton(int amount, bool vertical)
         {
-            if (GameManager.currentGameState != GameManager.GameState.SplashScreen && GameManager.currentGameState != GameManager.GameState.Level && _gamePadButtonTimer <= 0)
+            if(_gameManager._inputManager.IsGamePadConnected())
             {
-                switch (GameManager.currentGameState)
+                if (GameManager.currentGameState != GameManager.GameState.SplashScreen && GameManager.currentGameState != GameManager.GameState.Level && _gamePadButtonTimer <= 0)
                 {
-                    case GameManager.GameState.MainMenu:
-                        _buttonList = mainMenuButtonList;
-                        _verticalMenu = true;
-                        break;
-                    case GameManager.GameState.LevelSelect:
-                        _buttonList = levelSelectButtonList;
-                        _verticalMenu = false;
-                        break;
-                    case GameManager.GameState.LevelSelectConfirm:
-                        _buttonList = confirmLevelButtonList;
-                        _verticalMenu = true;
-                        break;
-                    case GameManager.GameState.LevelPause:
-                        _buttonList = pauseMenuButtonList;
-                        _verticalMenu = true;
-                        break;
-                    case GameManager.GameState.Respawn:
-                        _buttonList = respawnMenuButtonList;
-                        _verticalMenu = false;
-                        break;
-                    case GameManager.GameState.LevelComplete:
-                        _buttonList = completeMenuButtonList;
-                        _verticalMenu = true;
-                        break;
-                }
-
-                if (_verticalMenu == vertical)
-                {
-                    _buttonList[currentButtonIndex].ComponentColor = Color.White;
-
-                    currentButtonIndex -= amount;
-
-                    if (currentButtonIndex >= _buttonList.Count)
+                    switch (GameManager.currentGameState)
                     {
-                        currentButtonIndex = 0;
+                        case GameManager.GameState.MainMenu:
+                            _buttonList = mainMenuButtonList;
+                            _verticalMenu = true;
+                            break;
+                        case GameManager.GameState.LevelSelect:
+                            _buttonList = levelSelectButtonList;
+                            _verticalMenu = false;
+                            break;
+                        case GameManager.GameState.LevelSelectConfirm:
+                            _buttonList = confirmLevelButtonList;
+                            _verticalMenu = true;
+                            break;
+                        case GameManager.GameState.LevelPause:
+                            _buttonList = pauseMenuButtonList;
+                            _verticalMenu = true;
+                            break;
+                        case GameManager.GameState.Respawn:
+                            _buttonList = respawnMenuButtonList;
+                            _verticalMenu = false;
+                            break;
+                        case GameManager.GameState.LevelComplete:
+                            _buttonList = completeMenuButtonList;
+                            _verticalMenu = true;
+                            break;
                     }
 
-                    if (currentButtonIndex < 0)
+                    if (_verticalMenu == vertical)
                     {
-                        currentButtonIndex = _buttonList.Count - 1;
+                        _buttonList[currentButtonIndex].ComponentColor = Color.White;
+
+                        currentButtonIndex -= amount;
+
+                        if (currentButtonIndex >= _buttonList.Count)
+                        {
+                            currentButtonIndex = 0;
+                        }
+
+                        if (currentButtonIndex < 0)
+                        {
+                            currentButtonIndex = _buttonList.Count - 1;
+                        }
+
+                        if (!_buttonList[currentButtonIndex].ButtonActive)
+                        {
+                            ChangeSelectedButton(1, vertical);
+                            return;
+                        }
+
+                        _buttonList[currentButtonIndex].ComponentColor = Color.Gray;
                     }
 
-                    _buttonList[currentButtonIndex].ComponentColor = Color.Gray;
+                    _gamePadButtonTimer = 0.25f;
                 }
-
-                _gamePadButtonTimer = 0.25f;
             }
         }
 
@@ -491,22 +523,27 @@ namespace Terramental
                 {
                     case GameManager.ButtonName.StartGameButton:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                        ChangeSelectedButton(0, false);
                         break;
                     case GameManager.ButtonName.ExitGameButton:
                         _gameManager.ExitGame();
                         break;
                     case GameManager.ButtonName.RespawnButton:
                         DisplayRespawnScreen(false);
+                        ChangeSelectedButton(0, true);
                         _gameManager.mapManager.ResetLevel();
                         break;
                     case GameManager.ButtonName.LevelSelectConfirm:
                         _gameManager.LoadNewGame(_levelDataFilePath);
+                        ChangeSelectedButton(0, true);
                         break;
                     case GameManager.ButtonName.LevelSelectExit:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                        ChangeSelectedButton(0, false);
                         break;
                     case GameManager.ButtonName.OptionsButton:
                         GameManager.currentGameState = GameManager.GameState.Options;
+                        ChangeSelectedButton(0, true);
                         break;
                     case GameManager.ButtonName.ResumeGame:
                         GameManager.currentGameState = GameManager.GameState.Level;
@@ -514,6 +551,7 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.CreditsButton:
                         GameManager.currentGameState = GameManager.GameState.Credits;
+                        ChangeSelectedButton(0, true);
                         break;
                     case GameManager.ButtonName.Replay:
                         GameManager.currentGameState = GameManager.GameState.Level;
@@ -521,10 +559,23 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.Continue:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
+                        ChangeSelectedButton(0, false);
+
+                        if (GameManager.levelsComplete < GameManager.levelIndex)
+                        {
+                            GameManager.levelsComplete = GameManager.levelIndex;
+                        }
+
+                        if(GameManager.levelsComplete >= 5)
+                        {
+                            //Play Credits
+                        }
+
                         _gameManager.mapManager.UnloadLevel();
                         break;
                     case GameManager.ButtonName.HelpScreenButton:
                         GameManager.currentGameState = GameManager.GameState.HelpMenu;
+                        ChangeSelectedButton(0, false);
                         break;
                     case GameManager.ButtonName.MusicVolumeUp:
                         AudioManager.AdjustMusicVolume(true);
@@ -537,6 +588,12 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.SFXVolumeDown:
                         AudioManager.AdjustSFXVolume(false);
+                        break;
+                    case GameManager.ButtonName.ResolutionUp:
+                        _gameManager.ChangeResolution(1);
+                        break;
+                    case GameManager.ButtonName.ResolutionDown:
+                        _gameManager.ChangeResolution(-1);
                         break;
                 }
 
@@ -552,31 +609,58 @@ namespace Terramental
                 case GameManager.LevelButton.Level1Button:
                     _levelDataFilePath = @"Content/Level1Map.json";
                     _levelNameText = "The Golden Shores";
-                    _levelDescriptionText = "Explore the golden shores, and defeat \nthe armies of the Fire Lands.";
-                    GameManager.levelIndex = 0;
+                    _levelDescriptionText = "";
+                    GameManager.levelIndex = 1;
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
                     break;
                 case GameManager.LevelButton.Level2Button:
-                    _levelDataFilePath = @"Content/Level2Map.json";
-                    _levelNameText = "The Fire Lands";
-                    _levelDescriptionText = "Venture to the fire lands, and use the \nelements to defeat the armies \nof Magnus.";
-                    GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
-                    GameManager.levelIndex = 1;
-                    break;
-            }
-        }
 
-        public void DisplayMainMenu(bool isActive)
-        {
-            if(isActive)
-            {
-                GameManager.currentGameState = GameManager.GameState.MainMenu;
-                _gameManager.IsMouseVisible = true;
-            }
-            else
-            {
-                GameManager.currentGameState = GameManager.GameState.Level;
-                _gameManager.IsMouseVisible = false;
+                    if(GameManager.levelsComplete > 0)
+                    {
+                        _levelDataFilePath = @"Content/Level2Map.json";
+                        _levelNameText = "The Valley";
+                        _levelDescriptionText = "";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        GameManager.levelIndex = 2;
+                    }
+
+                    break;
+                case GameManager.LevelButton.Level3Button:
+
+                    if(GameManager.levelsComplete > 1)
+                    {
+                        _levelDataFilePath = @"Content/Level2Map.json";
+                        _levelNameText = "The East Shore";
+                        _levelDescriptionText = "";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        GameManager.levelIndex = 3;
+                    }
+                    
+                    break;
+                case GameManager.LevelButton.Level4Button:
+
+                    if(GameManager.levelsComplete > 2)
+                    {
+                        _levelDataFilePath = @"Content/Level2Map.json";
+                        _levelNameText = "Northfar Mountains";
+                        _levelDescriptionText = "";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        GameManager.levelIndex = 4;
+                    }
+                    
+                    break;
+                case GameManager.LevelButton.Level5Button:
+
+                    if(GameManager.levelsComplete > 3)
+                    {
+                        _levelDataFilePath = @"Content/Level2Map.json";
+                        _levelNameText = "Magnus Keep";
+                        _levelDescriptionText = "";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        GameManager.levelIndex = 5;
+                    }
+                    
+                    break;
             }
         }
 
@@ -603,29 +687,24 @@ namespace Terramental
             mainMenuBackground.InitialiseMenuComponent(mainMenuBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
             mainMenuComponentList.Add(mainMenuBackground);
 
-            Texture2D titleTextTexture = _gameManager.GetTexture("UserInterface/MainMenu/GameTitleText");
-            MenuComponent titleText = new MenuComponent();
-            titleText.InitialiseMenuComponent(titleTextTexture, new Vector2(viewportCentreX - (titleTextTexture.Width / 2), 0), new Vector2(titleTextTexture.Width, titleTextTexture.Height));
-            mainMenuComponentList.Add(titleText);
-
-            Texture2D startGameButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/NewGame_MainMenu_Button");
+            Texture2D startGameButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/StartGame_MainMenu_Button");
             Button startGameButton = new Button(GameManager.ButtonName.StartGameButton, this);
-            startGameButton.InitialiseMenuComponent(startGameButtonTexture, new Vector2(viewportCentreX - (startGameButtonTexture.Width / 2), 125), new Vector2(256, 64));
+            startGameButton.InitialiseMenuComponent(startGameButtonTexture, new Vector2(viewportCentreX - (startGameButtonTexture.Width / 2), 125), new Vector2(300, 60));
             mainMenuButtonList.Add(startGameButton);
 
             Texture2D optionsButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/Options_MainMenu_Button");
             Button optionsButton = new Button(GameManager.ButtonName.OptionsButton, this);
-            optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2(viewportCentreX - (optionsButtonTexture.Width / 2), 205), new Vector2(256, 64));
+            optionsButton.InitialiseMenuComponent(optionsButtonTexture, new Vector2(viewportCentreX - (optionsButtonTexture.Width / 2), 205), new Vector2(300, 60));
             mainMenuButtonList.Add(optionsButton);
 
             Texture2D creditsButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/Credits_MainMenu_Button");
             Button creditsButton = new Button(GameManager.ButtonName.CreditsButton, this);
-            creditsButton.InitialiseMenuComponent(creditsButtonTexture, new Vector2(viewportCentreX - (creditsButtonTexture.Width / 2), 285), new Vector2(256, 64));
+            creditsButton.InitialiseMenuComponent(creditsButtonTexture, new Vector2(viewportCentreX - (creditsButtonTexture.Width / 2), 285), new Vector2(300, 60));
             mainMenuButtonList.Add(creditsButton);
 
             Texture2D exitButtonTexture = _gameManager.GetTexture("UserInterface/MainMenu/ExitGame_MainMenu_Button");
             Button exitButton = new Button(GameManager.ButtonName.ExitGameButton, this);
-            exitButton.InitialiseMenuComponent(exitButtonTexture, new Vector2(viewportCentreX - (exitButtonTexture.Width / 2), 365), new Vector2(256, 64));
+            exitButton.InitialiseMenuComponent(exitButtonTexture, new Vector2(viewportCentreX - (exitButtonTexture.Width / 2), 365), new Vector2(300, 60));
             mainMenuButtonList.Add(exitButton);
 
             _gameManager.IsMouseVisible = true;
@@ -654,10 +733,19 @@ namespace Terramental
             terraMap.InitialiseMenuComponent(terraMapTexture, new Vector2(0, 0), new Vector2(terraMapTexture.Width / 2, terraMapTexture.Height / 2));
 
             Button levelOneSelect = new Button(GameManager.LevelButton.Level1Button, this);
-            levelOneSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/LevelSelectButton"), new Vector2(200, 400), new Vector2(24, 24));
+            levelOneSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level1_Button"), new Vector2(200, 400), new Vector2(40, 40));
 
             Button levelTwoSelect = new Button(GameManager.LevelButton.Level2Button, this);
-            levelTwoSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/LevelSelectButton"), new Vector2(600, 420), new Vector2(24, 24));
+            levelTwoSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level2_Button"), new Vector2(100, 220), new Vector2(40, 40));
+
+            Button levelThreeSelect = new Button(GameManager.LevelButton.Level3Button, this);
+            levelThreeSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level3_Button"), new Vector2(400, 280), new Vector2(40, 40));
+
+            Button levelFourSelect = new Button(GameManager.LevelButton.Level4Button, this);
+            levelFourSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level4_Button"), new Vector2(620, 150), new Vector2(40, 40));
+
+            Button levelFiveSelect = new Button(GameManager.LevelButton.Level5Button, this);
+            levelFiveSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level5_Button"), new Vector2(700, 380), new Vector2(40, 40));
 
             Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
             MenuComponent confirmPanel = new MenuComponent();
@@ -678,6 +766,9 @@ namespace Terramental
 
             levelSelectButtonList.Add(levelOneSelect);
             levelSelectButtonList.Add(levelTwoSelect);
+            levelSelectButtonList.Add(levelThreeSelect);
+            levelSelectButtonList.Add(levelFourSelect);
+            levelSelectButtonList.Add(levelFiveSelect);
 
             confirmLevelComponentList.Add(confirmPanel);
 
@@ -729,7 +820,7 @@ namespace Terramental
             creditsBackground = new MenuComponent();
             creditsBackground.InitialiseMenuComponent(creditsBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
 
-            Texture2D creditsReturnTexture = _gameManager.GetTexture("UserInterface/CreditsMenu/ReturnButton");
+            Texture2D creditsReturnTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ReturnButton");
             creditsReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
             creditsReturnButton.InitialiseMenuComponent(creditsReturnTexture, new Vector2(10, 460), new Vector2(creditsReturnTexture.Width, creditsReturnTexture.Height));
         }
@@ -737,11 +828,11 @@ namespace Terramental
         private void LoadSplashScreens()
         {
             videoPlayer = new VideoPlayer();
-            splashScreenVideo = _gameManager.Content.Load<Video>("Videos/SplashScreen_Video");
+            splashScreenVideo = _gameManager.Content.Load<Video>("Videos/SplashScreen_Terramental");
             videoRectangle = new Rectangle(0, 0, GameManager.screenWidth, GameManager.screenHeight);
             videoPlayer.Play(splashScreenVideo);
             videoPlayerAfterState = GameManager.GameState.StartScreen;
-            videoTimer = 13;
+            videoTimer = 10;
             videoPlaying = true;
         }
 
@@ -779,36 +870,36 @@ namespace Terramental
 
         private void LoadOptionsMenu()
         {
-            int viewportCentreX = GameManager.screenWidth / 2;
+            int viewportCentreX = (GameManager.screenWidth / 2);
 
-            Texture2D OptionsMenuBackgroundTexture = _gameManager.GetTexture("UserInterface/MainMenu/MainMenu_FireBackground");
+            Texture2D OptionsMenuBackgroundTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/OptionsMenuBackground");
             MenuComponent OptionsMenuBackground = new MenuComponent();
-            OptionsMenuBackground.InitialiseMenuComponent(OptionsMenuBackgroundTexture, new Vector2(0, 0), new Vector2(OptionsMenuBackgroundTexture.Width, OptionsMenuBackgroundTexture.Height));
+            OptionsMenuBackground.InitialiseMenuComponent(OptionsMenuBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
             optionsComponentList.Add(OptionsMenuBackground);
 
             Texture2D ResolutionButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ResolutionButton");
             Button ResolutionButton = new Button(GameManager.ButtonName.ResolutionButton, this);
-            ResolutionButton.InitialiseMenuComponent(ResolutionButtonTexture, new Vector2(viewportCentreX - (ResolutionButtonTexture.Width / 2), 80), new Vector2(ResolutionButtonTexture.Width, ResolutionButtonTexture.Height));
+            ResolutionButton.InitialiseMenuComponent(ResolutionButtonTexture, new Vector2(viewportCentreX - (ResolutionButtonTexture.Width / 2), 110), new Vector2(ResolutionButtonTexture.Width, ResolutionButtonTexture.Height));
             optionsButtonList.Add(ResolutionButton);
 
             Texture2D MusicButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/MusicVolumeButton");
             Button MusicButton = new Button(GameManager.ButtonName.MusicButton, this);
-            MusicButton.InitialiseMenuComponent(MusicButtonTexture, new Vector2(viewportCentreX - (MusicButtonTexture.Width / 2), 160), new Vector2(MusicButtonTexture.Width, MusicButtonTexture.Height));
+            MusicButton.InitialiseMenuComponent(MusicButtonTexture, new Vector2(viewportCentreX - (MusicButtonTexture.Width / 2), 190), new Vector2(MusicButtonTexture.Width, MusicButtonTexture.Height));
             optionsButtonList.Add(MusicButton);
 
             Texture2D SFXVolButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/SFXVolumeButton");
             Button SFXVolButton = new Button(GameManager.ButtonName.OptionsButton, this);
-            SFXVolButton.InitialiseMenuComponent(SFXVolButtonTexture, new Vector2(viewportCentreX - (SFXVolButtonTexture.Width / 2), 240), new Vector2(SFXVolButtonTexture.Width, SFXVolButtonTexture.Height));
+            SFXVolButton.InitialiseMenuComponent(SFXVolButtonTexture, new Vector2(viewportCentreX - (SFXVolButtonTexture.Width / 2), 270), new Vector2(SFXVolButtonTexture.Width, SFXVolButtonTexture.Height));
             optionsButtonList.Add(SFXVolButton);
 
             Texture2D ControlsButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ControlsButton");
             Button ControlsButton = new Button(GameManager.ButtonName.HelpScreenButton, this);
-            ControlsButton.InitialiseMenuComponent(ControlsButtonTexture, new Vector2(viewportCentreX - (ControlsButtonTexture.Width / 2), 320), new Vector2(ControlsButtonTexture.Width, ControlsButtonTexture.Height));
+            ControlsButton.InitialiseMenuComponent(ControlsButtonTexture, new Vector2(viewportCentreX - (ControlsButtonTexture.Width / 2), 350), new Vector2(ControlsButtonTexture.Width, ControlsButtonTexture.Height));
             optionsButtonList.Add(ControlsButton);
 
             Texture2D ReturnButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ReturnButton");
             Button ReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
-            ReturnButton.InitialiseMenuComponent(ReturnButtonTexture, new Vector2(viewportCentreX - (ReturnButtonTexture.Width / 2), 400), new Vector2(ReturnButtonTexture.Width, ReturnButtonTexture.Height));
+            ReturnButton.InitialiseMenuComponent(ReturnButtonTexture, new Vector2(viewportCentreX - (ReturnButtonTexture.Width / 2), 430), new Vector2(ReturnButtonTexture.Width, ReturnButtonTexture.Height));
             optionsButtonList.Add(ReturnButton);
 
             Texture2D leftButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/LeftButton");
@@ -847,7 +938,7 @@ namespace Terramental
             _helpScreen = new MenuComponent();
             _helpScreen.InitialiseMenuComponent(helpScreenTexture, Vector2.Zero, new Vector2(GameManager.screenWidth, GameManager.screenHeight));
 
-            Texture2D returnButtonTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/ContinueButton");
+            Texture2D returnButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ReturnButton");
             _helpScreenReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
             _helpScreenReturnButton.InitialiseMenuComponent(returnButtonTexture, new Vector2(20, GameManager.screenHeight - 150), new Vector2(returnButtonTexture.Width, returnButtonTexture.Height));
         }

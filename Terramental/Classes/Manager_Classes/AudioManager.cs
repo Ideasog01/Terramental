@@ -9,17 +9,23 @@ namespace Terramental
     {
         public static List<AudioClip> audioLibrary = new List<AudioClip>();
 
-        public static float musicVolume = 1.0f;
-        public static float sfxVolume = 1.0f;
+        public static float musicVolume = 0.5f;
+        public static float sfxVolume = 0.5f;
 
         public static bool muteMusic;
         public static bool muteSfx;
+
+        public static void SetVolumes()
+        {
+            SoundEffect.MasterVolume = sfxVolume;
+            MediaPlayer.Volume = musicVolume;
+        }
 
         public static void AdjustMusicVolume(bool increase)
         {
             if (increase)
             {
-                if (musicVolume < 1.0f)
+                if (musicVolume < 0.9f)
                 {
                     musicVolume += 0.1f;
                 }
@@ -32,6 +38,10 @@ namespace Terramental
                 }
             }
 
+            float previousSoundEfxVol = SoundEffect.MasterVolume;
+            SoundEffect.MasterVolume = musicVolume;
+            PlaySound("BeepTone_SFX");
+            SoundEffect.MasterVolume = previousSoundEfxVol;
             MediaPlayer.Volume = musicVolume;
         }
 
@@ -39,7 +49,7 @@ namespace Terramental
         {
             if(increase)
             {
-                if(sfxVolume < 1.0f)
+                if(sfxVolume < 0.9f)
                 {
                     sfxVolume += 0.1f;
                 }
@@ -78,6 +88,11 @@ namespace Terramental
                 }
                 
             }
+        }
+
+        public static void StopMusic()
+        {
+            MediaPlayer.Stop();
         }
     }
 }
