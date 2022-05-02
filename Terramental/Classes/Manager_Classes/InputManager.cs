@@ -81,7 +81,6 @@ namespace Terramental
                         _gameManager.menuManager.ChangeSelectedButton(0, true);
                     }
                 }
-                
             }
             else
             {
@@ -189,6 +188,38 @@ namespace Terramental
                     _playerCharacter.PlayerJump();
                 }
             }
+
+            if (_playerCharacter.CanDash)
+            {
+                if (_currentKeyboardState.IsKeyDown(Keys.LeftShift) && oldKeyboardState.IsKeyUp(Keys.LeftShift))
+                {
+                    if (IsKeyPressed(Keys.W))
+                    {
+                        
+                    }
+
+                    if (IsKeyPressed(Keys.A))
+                    {
+                        
+                    }
+
+                    if (IsKeyPressed(Keys.D))
+                    {
+                        
+                    }
+
+                    if (_currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        _playerCharacter.VerticalAxisRaw = -1;
+                        _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
+                    }
+
+                    if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        _playerCharacter.VerticalAxisRaw = 0;
+                    }
+                }
+            }
         }
 
         public bool IsKeyPressed(Keys key)
@@ -259,6 +290,7 @@ namespace Terramental
                 {
                     _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
                     _playerCharacter.DashStateMachine();
+                    
                 }
 
                 if (IsKeyPressed(Keys.A))

@@ -440,7 +440,7 @@ namespace Terramental
             switch (dashDir)
             {
                 case DashDirections.Up:
-                    upDashCheck++;
+                    upDashCheck+=1;
                     DoubleTapToDashCooldown();
                     break;
                 case DashDirections.Left:

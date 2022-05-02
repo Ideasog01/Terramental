@@ -568,7 +568,7 @@ namespace Terramental
 
                         if(GameManager.levelsComplete >= 5)
                         {
-                            //Play Credits
+                            GameManager.currentGameState = GameManager.GameState.Credits;
                         }
 
                         _gameManager.mapManager.UnloadLevel();
