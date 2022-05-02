@@ -175,6 +175,8 @@ namespace Terramental
                         }
                     }
 
+                    spriteBatch.DrawString(_defaultFont, "5/" + GameManager.levelsComplete.ToString() + " Levels Complete", new Vector2(GameManager.screenWidth - 220, 15), Color.Black);
+
                     levelSelectExitButton.DrawMenuComponent(spriteBatch);
 
                     break;
