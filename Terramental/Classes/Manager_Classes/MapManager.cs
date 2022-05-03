@@ -295,12 +295,12 @@ namespace Terramental
 
             if(index == 16)
             {
-                SpawnManager.SpawnCannonObstacle(position, 1);
+                SpawnManager.SpawnCannonObstacle(position, true);
             }
 
             if (index == 17)
             {
-                SpawnManager.SpawnCannonObstacle(position, -1);
+                SpawnManager.SpawnCannonObstacle(position, false);
             }
         }
     }

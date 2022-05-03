@@ -54,7 +54,7 @@ namespace Terramental
 
         public PlayerCharacter playerCharacter;
 
-        private CameraController _mainCam;
+        public CameraController _mainCam;
 
         private bool skipToLevel = false;
 

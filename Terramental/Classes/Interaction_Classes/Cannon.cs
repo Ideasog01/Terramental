@@ -7,25 +7,25 @@ namespace Terramental
     {
         private PlayerCharacter _playerCharacter;
 
-        private int _cannonDir;
+        private bool _faceRight;
         private float _cannonCooldownLeft;
         private float _cannonCooldown;
 
         private GameManager _gameManager;
 
-        public Cannon(GameManager gameManager, PlayerCharacter playerCharacter, int cannonDir)
+        public Cannon(GameManager gameManager, PlayerCharacter playerCharacter, bool faceRight)
         {
             _gameManager = gameManager;
             _playerCharacter = playerCharacter;
-            _cannonDir = cannonDir;
+            _faceRight = faceRight;
             _cannonCooldown = 5;
             _cannonCooldownLeft = _cannonCooldown;
         }
 
-        public int CannonDir
+        public bool FaceRight
         {
-            get { return _cannonDir; }
-            set { _cannonDir = value; }
+            get { return _faceRight; }
+            set { _faceRight = value; }
         }
 
         public void UpdateCannon(GameTime gameTime)
@@ -34,13 +34,13 @@ namespace Terramental
 
             if (_cannonCooldownLeft <= 0)
             {
-                if(_cannonDir == 1)
+                if(_faceRight)
                 {
-                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140 * _cannonDir, 20), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1);
+                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140, 20), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1);
                 }
                 else
                 {
-                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140 * _cannonDir, 20), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1);
+                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(-140, 20), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1);
                 }
                 
                 _cannonCooldownLeft = _cannonCooldown;

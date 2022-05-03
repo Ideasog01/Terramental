@@ -56,23 +56,26 @@ namespace Terramental
             foreach(InterfaceComponent component in playerInterfaceElements)
             {
                 component.FollowCamera();
+            }
 
-                if(_gameManager.playerCharacter.ultimateActive)
+            if (_gameManager.playerCharacter.ultimateActive)
+            {
+                _ultimateSlider.FollowCamera();
+                _ultimateSliderFill.FollowCamera();
+
+                _ultimateSliderFill.ComponentScale = new Vector2(40 * _gameManager.playerCharacter.ultimateActiveTimer, 40);
+
+                switch (_gameManager.playerCharacter.ElementIndex)
                 {
-                    _ultimateSlider.FollowCamera();
-                    _ultimateSliderFill.FollowCamera();
-
-                    _ultimateSliderFill.ComponentScale = new Vector2(40 * _gameManager.playerCharacter.ultimateActiveTimer, 40);
-
-                    switch(_gameManager.playerCharacter.ElementIndex)
-                    {
-                        case 0: _ultimateSliderFill.ComponentColor = Color.IndianRed;
-                            break;
-                        case 1: _ultimateSliderFill.ComponentColor = Color.DeepSkyBlue;
-                            break;
-                        case 2: _ultimateSliderFill.ComponentColor = Color.AliceBlue;
-                            break;
-                    }
+                    case 0:
+                        _ultimateSliderFill.ComponentColor = Color.IndianRed;
+                        break;
+                    case 1:
+                        _ultimateSliderFill.ComponentColor = Color.DeepSkyBlue;
+                        break;
+                    case 2:
+                        _ultimateSliderFill.ComponentColor = Color.AliceBlue;
+                        break;
                 }
             }
         }
@@ -115,6 +118,28 @@ namespace Terramental
                     _secondLife.ComponentColor = Color.White;
                     _thirdLife.ComponentColor = Color.White;
                     break;
+            }
+        }
+
+        public void UpdateElementDisplay()
+        {
+            if(_gameManager.playerCharacter.ElementIndex == 0)
+            {
+                playerInterfaceElements[0].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element"), new Vector2(400, -200), new Vector2(64, 64));
+                playerInterfaceElements[1].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element"), new Vector2(412, -240), new Vector2(42, 42));
+                playerInterfaceElements[2].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element"), new Vector2(465, -220), new Vector2(42, 42));
+            }
+            else if(_gameManager.playerCharacter.ElementIndex == 1)
+            {
+                playerInterfaceElements[0].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element"), new Vector2(400, -200), new Vector2(64, 64));
+                playerInterfaceElements[1].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element"), new Vector2(412, -240), new Vector2(42, 42));
+                playerInterfaceElements[2].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element"), new Vector2(465, -220), new Vector2(42, 42));
+            }
+            else if(_gameManager.playerCharacter.ElementIndex == 2)
+            {
+                playerInterfaceElements[0].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element"), new Vector2(400, -200), new Vector2(64, 64));
+                playerInterfaceElements[1].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element"), new Vector2(412, -240), new Vector2(42, 42));
+                playerInterfaceElements[2].SetProperties(_gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element"), new Vector2(465, -220), new Vector2(42, 42));
             }
         }
 

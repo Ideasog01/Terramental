@@ -15,8 +15,7 @@ namespace Terramental
 
         public static int dialogueTriggersCount;
 
-        public static List<Projectile> activeProjectileList = new List<Projectile>();
-        public static List<Projectile> inactiveProjectileList = new List<Projectile>();
+        public static List<Projectile> projectileList = new List<Projectile>();
 
         public static List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
         public static List<HealthPickup> healthPickupList = new List<HealthPickup>();
@@ -58,7 +57,7 @@ namespace Terramental
                     }
                 }
 
-                foreach (Projectile projectile in activeProjectileList)
+                foreach (Projectile projectile in projectileList)
                 {
                     if (projectile != null)
                     {
@@ -69,10 +68,6 @@ namespace Terramental
                                 projectile.UpdateProjectile(gameTime);
                             }
                         }
-                    }
-                    else
-                    {
-                        break;
                     }
                 }
 
@@ -481,22 +476,43 @@ namespace Terramental
 
         public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage)
         {
-            if(inactiveProjectileList.Count > 0)
+            bool projectileFound = false;
+
+            foreach(Projectile projectile in projectileList)
             {
-                inactiveProjectileList[0].ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
-
-                if(hasAnimation)
+                if(!projectile.IsActive)
                 {
-                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
-                    inactiveProjectileList[0].Animations.Clear();
-                    inactiveProjectileList[0].Animations.Add(projectileAnimation);
-                    inactiveProjectileList[0].SetAnimation(0);
-                }
+                    projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
 
-                activeProjectileList.Add(inactiveProjectileList[0]);
-                inactiveProjectileList.RemoveAt(0);
+                    if(hasAnimation)
+                    {
+                        if(projectile.Animations.Count > 0)
+                        {
+                            projectile.Animations[0].SpriteSheet = texture;
+                            projectile.Animations[0].FrameCount = 4;
+                            projectile.Animations[0].FrameDuration = 120f;
+                            projectile.Animations[0].LoopActive = true;
+                            projectile.Animations[0].FrameDimensions = scale;
+                        }
+                        else
+                        {
+                            Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
+                            projectile.Animations.Add(projectileAnimation);
+                            projectile.SetAnimation(0);
+                        }
+                    }
+                    else
+                    {
+                        projectile.Animations.Clear();
+                    }
+
+                    projectile.IsActive = true;
+                    projectileFound = true;
+                    break;
+                }
             }
-            else
+
+            if(!projectileFound)
             {
                 Projectile projectile = new Projectile();
                 projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
@@ -510,7 +526,7 @@ namespace Terramental
                     projectile.SetAnimation(0);
                 }
 
-                activeProjectileList.Add(projectile);
+                projectileList.Add(projectile);
             }
         }
 
@@ -541,7 +557,7 @@ namespace Terramental
             }
         }
 
-        public static void SpawnCannonObstacle(Vector2 position, int cannonDir)
+        public static void SpawnCannonObstacle(Vector2 position, bool faceRight)
         {
             bool cannonObstacleFound = false;
 
@@ -551,7 +567,7 @@ namespace Terramental
                 {
                     cannon.SpritePosition = position;
                     cannon.SpawnPosition = position;
-                    cannon.CannonDir = cannonDir;
+                    cannon.FaceRight = faceRight;
                     cannon.IsActive = true;
                     cannonObstacleFound = true;
                     break;
@@ -560,14 +576,14 @@ namespace Terramental
 
             if(!cannonObstacleFound)
             {
-                Cannon cannon = new Cannon(_gameManager, _gameManager.playerCharacter, cannonDir);
+                Cannon cannon = new Cannon(_gameManager, _gameManager.playerCharacter, faceRight);
                 Texture2D cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right");
 
-                if (cannonDir == 1)
+                if(faceRight)
                 {
                     cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right");
                 }
-                else if (cannonDir == -2)
+                else
                 {
                     cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Left");
                 }
@@ -682,7 +698,7 @@ namespace Terramental
                 cannon.IsActive = false;
             }
 
-            foreach (Projectile projectile in activeProjectileList)
+            foreach (Projectile projectile in projectileList)
             {
                 projectile.IsActive = false;
             }

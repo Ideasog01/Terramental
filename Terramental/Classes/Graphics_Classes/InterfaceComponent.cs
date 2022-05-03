@@ -49,6 +49,13 @@ namespace Terramental
             _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
         }
 
+        public void SetProperties(Texture2D texture, Vector2 position, Vector2 scale)
+        {
+            _componentTexture = texture;
+            _componentPosition = position;
+            _componentScale = scale;
+        }
+
         public void DrawComponent(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_componentTexture, _componentRectangle, _componentColor);

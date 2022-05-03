@@ -128,7 +128,7 @@ namespace Terramental
         public int ElementIndex
         {
             get { return _elementIndex; }
-            set { _elementIndex = value; }
+            set { _elementIndex = value; _gameManager.playerInterface.UpdateElementDisplay(); }
         }
 
         public int PlayerScore
@@ -291,7 +291,7 @@ namespace Terramental
 
                 PlayerJumpBehavior(gameTime);
 
-                Dash();
+                Dash(gameTime);
 
                 CheckCollisions();
 
@@ -416,6 +416,7 @@ namespace Terramental
                     _jumpHeight = SpritePosition.Y - 150;
                     _jumpSpeed = -5;
                     _isDoubleJumpUsed = true;
+                    _isJumping = true;
                 }
             }
         }
@@ -435,6 +436,7 @@ namespace Terramental
                 }
             }
         }
+
         public void DashStateMachine()
         {
             switch (dashDir)
@@ -456,7 +458,7 @@ namespace Terramental
 
         public void DashCheck()
         {
-            if (!_isDashing)
+            if (!_isDashing && dashCooldown <= 0)
             {
                 if (upDashCheck >= 2)
                 {
@@ -488,7 +490,7 @@ namespace Terramental
             }
         }
 
-        public void Dash()
+        public void Dash(GameTime gameTime)
         {
             if (_isDashing)
             {
@@ -502,6 +504,11 @@ namespace Terramental
                 }
 
                 _isDashing = false;
+            }
+
+            if(dashCooldown > 0)
+            {
+                dashCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 

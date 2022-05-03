@@ -68,7 +68,6 @@ namespace Terramental
         public void DestroyProjectile()
         {
             IsActive = false;
-            SpawnManager.inactiveProjectileList.Add(this);
         }
 
         public void ProjectileTrigger(BaseCharacter character)
