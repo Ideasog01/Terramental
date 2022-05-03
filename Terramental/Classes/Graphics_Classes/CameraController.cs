@@ -29,9 +29,13 @@ namespace Terramental
 
         public void UpdateCamera(GameTime gameTime)
         {
-            if(GameManager.currentGameState != GameManager.GameState.Level && GameManager.currentGameState != GameManager.GameState.LevelPause)
+            var scaleX = (float)GameManager.actualWidth / 960;
+            var scaleY = (float)GameManager.actualHeight / 540;
+            var matrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
+
+            if (GameManager.currentGameState != GameManager.GameState.Level && GameManager.currentGameState != GameManager.GameState.LevelPause)
             {
-                var _cameraPosition = Matrix.CreateTranslation(new Vector3(0, 0, 0));
+                var _cameraPosition = matrix * Matrix.CreateTranslation(new Vector3(0, 0, 0));
                 cameraTransform = _cameraPosition;
             }
             else
@@ -46,7 +50,7 @@ namespace Terramental
                     _cameraCentre.X = cameraCentreX;
                     _cameraCentre.Y = cameraCentreY;
 
-                    cameraTransform = Matrix.CreateScale(new Vector3(1, 1, 0)) * Matrix.CreateTranslation(new Vector3(-_cameraCentre.X, -_cameraCentre.Y, 0));
+                    cameraTransform = matrix * Matrix.CreateTranslation(new Vector3(-_cameraCentre.X, -_cameraCentre.Y, 0));
                 }
             }    
         }

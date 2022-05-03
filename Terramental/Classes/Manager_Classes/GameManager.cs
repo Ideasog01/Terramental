@@ -17,7 +17,7 @@ namespace Terramental
         public static bool gameInProgress;
         public static bool gameLoaded;
 
-        public static int levelsComplete;
+        public static int levelsComplete = 5;
 
         public enum GameState { SplashScreen, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen};
 
@@ -33,12 +33,18 @@ namespace Terramental
         public static int screenWidth = 960;
         public static int screenHeight = 540;
 
+        public static float spriteWidth = 1.0f; 
+        public static float spriteHeight = 1.0f;
+
         public static int levelIndex;
         public static Vector2 playerCheckpoint;
 
         public MapManager mapManager;
         public PlayerInterface playerInterface;
         public MenuManager menuManager;
+
+        public static float actualWidth;
+        public static float actualHeight;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -66,6 +72,7 @@ namespace Terramental
             _graphics.PreferredBackBufferHeight = screenHeight;
             _graphics.PreferredBackBufferWidth = screenWidth;
             _graphics.IsFullScreen = false;
+            _graphics.ApplyChanges();
         }
 
         #region Main
@@ -80,6 +87,8 @@ namespace Terramental
             _spriteBatch = new SpriteBatch(GraphicsDevice);
            
             menuManager = new MenuManager(this, _graphics);
+            actualWidth = _graphics.GraphicsDevice.Viewport.Width;
+            actualHeight = _graphics.GraphicsDevice.Viewport.Height;
 
             InitialiseGame();
             LoadAudioLibrary();
@@ -95,6 +104,9 @@ namespace Terramental
 
         protected override void Update(GameTime gameTime)
         {
+            spriteWidth = screenWidth / 960;
+            spriteHeight = screenHeight / 540;
+
             UpdateManagers(gameTime);
 
             if(currentGameState == GameState.Level && playerInterface != null)
@@ -166,6 +178,16 @@ namespace Terramental
             _graphics.PreferredBackBufferHeight = screenHeights[currentResolutionIndex];
             screenWidth = _graphics.PreferredBackBufferWidth;
             screenHeight = _graphics.PreferredBackBufferHeight;
+
+            if(screenWidth == _graphics.GraphicsDevice.Viewport.Width && screenHeight == _graphics.GraphicsDevice.Viewport.Height)
+            {
+                _graphics.IsFullScreen = true;
+            }
+            else
+            {
+                _graphics.IsFullScreen = false;
+            }
+
             // Apply the changes
             _graphics.ApplyChanges();
             System.Console.WriteLine("New resolution: {0} x {1}", _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
