@@ -173,7 +173,7 @@ namespace Terramental
                 {
                     if (tile.GroundTile)
                     {
-                        if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+                        if (tile.OnCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
                         {
                             _isGrounded = true;
                             _groundTile = tile;
@@ -191,6 +191,10 @@ namespace Terramental
                         _groundTile = null;
                         _isGrounded = false;
                     }
+                }
+                else
+                {
+                    _isGrounded = false;
                 }
             }
         }
@@ -242,32 +246,32 @@ namespace Terramental
                 }
             }
 
-            //if (_currentState == AIState.Chase)
-            //{
-            //    if(!_jumpActive)
-            //    {
-            //        if (_leftBlocked || _rightBlocked)
-            //        {
-            //            _jumpHeight = SpritePosition.Y - 256;
-            //            _jumpActive = true;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        UpdateJump();
-            //        System.Diagnostics.Debug.WriteLine("Enemy is Jumping!");
-            //    }
-            //}
+            if (_currentState == AIState.Chase)
+            {
+                if (!_jumpActive)
+                {
+                    if (_leftBlocked || _rightBlocked)
+                    {
+                        _jumpHeight = SpritePosition.Y - 256;
+                        _jumpActive = true;
+                    }
+                }
+                else
+                {
+                    UpdateJump();
+                    System.Diagnostics.Debug.WriteLine("Enemy is Jumping!");
+                }
+            }
 
-            //if (!_isGrounded)
-            //{
-            //    if (!_jumpActive)
-            //    {
-            //        SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
-            //    }
-            //}
+            if (!_isGrounded && _currentState != AIState.Idle)
+            {
+                if (!_jumpActive)
+                {
+                    SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
+                }
+            }
 
-            if(_jumpCooldownTimer > 0)
+            if (_jumpCooldownTimer > 0)
             {
                 _jumpCooldownTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -456,6 +460,12 @@ namespace Terramental
             if (SpritePosition.Y > _jumpHeight)
             {
                 SpriteVelocity = new Vector2(SpriteVelocity.X, -3);
+
+                if(!_rightBlocked && !_leftBlocked)
+                {
+                    _jumpActive = false;
+                    _jumpCooldownTimer = 3;
+                }
             }
             else
             {
