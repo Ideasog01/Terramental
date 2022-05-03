@@ -27,6 +27,7 @@ namespace Terramental
         public Texture2D ComponentTexture
         {
             get { return _componentTexture; }
+            set { _componentTexture = value; }
         }
 
         public Vector2 ComponentScale

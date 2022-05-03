@@ -1258,6 +1258,42 @@
 /processorParam:TextureFormat=Color
 /build:UserInterface/LevelCompleteMenu/ReplayButton.png
 
+#begin UserInterface/LevelDescriptions/Level1Description.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/LevelDescriptions/Level1Description.png
+
+#begin UserInterface/LevelDescriptions/Level2Description.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/LevelDescriptions/Level2Description.png
+
+#begin UserInterface/LevelDescriptions/Level3Description.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/LevelDescriptions/Level3Description.png
+
 #begin UserInterface/LevelSelect/ExitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor

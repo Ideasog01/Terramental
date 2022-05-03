@@ -219,9 +219,7 @@ namespace Terramental
                     {
                         confrimButton.DrawMenuComponent(spriteBatch);
                     }
-
-                    spriteBatch.DrawString(_levelTitleFont, _levelNameText, new Vector2((GameManager.screenWidth / 2) - 130, 120), Color.White);
-                    spriteBatch.DrawString(_defaultFont, _levelDescriptionText, new Vector2((GameManager.screenWidth / 2) - 150, 180), Color.White);
+                    
 
                     break;
 
@@ -624,6 +622,7 @@ namespace Terramental
                     _levelDescriptionText = "";
                     GameManager.levelIndex = 1;
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                    confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level1Description");
                     break;
                 case GameManager.LevelButton.Level2Button:
 
@@ -633,6 +632,7 @@ namespace Terramental
                         _levelNameText = "The Valley";
                         _levelDescriptionText = "";
                         GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level2Description");
                         GameManager.levelIndex = 2;
                     }
 
@@ -645,6 +645,7 @@ namespace Terramental
                         _levelNameText = "The East Shore";
                         _levelDescriptionText = "";
                         GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level3Description");
                         GameManager.levelIndex = 3;
                     }
                     
