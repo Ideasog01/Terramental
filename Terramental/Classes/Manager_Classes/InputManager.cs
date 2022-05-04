@@ -246,12 +246,6 @@ namespace Terramental
                     _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
                     _playerCharacter.PlayerMovement(-1, gameTime);
                 }
-
-                if (_currentKeyboardState.IsKeyUp(Keys.D) && _currentKeyboardState.IsKeyUp(Keys.A))
-                {
-                    _playerCharacter.HorizontalAxisRaw = 0;
-                    _playerCharacter.PlayerMovement(0, gameTime);
-                }
             }
             else
             {
@@ -268,11 +262,6 @@ namespace Terramental
                     _playerCharacter.HorizontalAxisRaw = -1;
                     _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
                     _playerCharacter.PlayerMovement(-1, gameTime);
-                }
-                else if(leftStick.X == 0)
-                {
-                    _playerCharacter.HorizontalAxisRaw = 0;
-                    _playerCharacter.PlayerMovement(0, gameTime);
                 }
             }
         }

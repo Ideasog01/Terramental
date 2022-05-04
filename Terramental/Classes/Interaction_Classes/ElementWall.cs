@@ -11,23 +11,48 @@ namespace Terramental
 
         private bool _checkCollision;
 
-        private MapManager _mapManager;
+        private int wallHealth;
 
-        public ElementWall(PlayerCharacter playerCharacter, MapManager mapManager, int elementIndex)
+        private Tile tile;
+
+        public void InitialiseElementWall(PlayerCharacter playerCharacter, MapManager mapManager, int elementIndex)
         {
             _playerCharacter = playerCharacter;
-            _mapManager = mapManager;
             _elementIndex = elementIndex;
+            tile = mapManager.FindTile(SpriteRectangle);
+            tile.IsBlocking = true;
+            wallHealth = 60;
         }
 
-        public int ElementIndex
+        public void CheckProjectileCollisions()
         {
-            set { _elementIndex = value; }
+            if(_checkCollision)
+            {
+                foreach(Projectile projectile in SpawnManager.projectileList)
+                {
+                    if(!projectile.IsEnemyProjectile)
+                    {
+                        if(projectile.OnCollision(SpriteRectangle))
+                        {
+                            wallHealth -= 20;
+                            projectile.DestroyProjectile();
+
+                            if(wallHealth <= 0)
+                            {
+                                tile.IsBlocking = false;
+                                IsActive = false;
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
-        public void ElementWallCollisions()
+        public void ElementWallCollision()
         {
-            if (_playerCharacter != null)
+            if (_playerCharacter != null && tile != null)
             {
                 // 0 = Fire (Fire goest through snow)
                 // 1 = Water (Water goes through fire)
@@ -80,65 +105,7 @@ namespace Terramental
                         _checkCollision = true;
                     }
                 }
-
-                if (_checkCollision)
-                {
-                    if (LeftCollision(new Rectangle(_playerCharacter.SpriteRectangle.X - 5, _playerCharacter.SpriteRectangle.Y, _playerCharacter.SpriteRectangle.Width, _playerCharacter.SpriteRectangle.Height)))
-                    {
-                        _playerCharacter.DisableLeft = true;
-                        _playerCharacter.ElementWall = this;
-                    }
-
-                    if (RightCollision(new Rectangle(_playerCharacter.SpriteRectangle.X + 5, _playerCharacter.SpriteRectangle.Y, _playerCharacter.SpriteRectangle.Width, _playerCharacter.SpriteRectangle.Height)))
-                    {
-                        _playerCharacter.DisableRight = true;
-                        _playerCharacter.ElementWall = this;
-                    }
-
-                    if (TopCollision(_playerCharacter))
-                    {
-                        Tile tile = _mapManager.GetTile(SpritePosition);
-                        if (tile != null)
-                        {
-                            _playerCharacter.SpriteVelocity = new Vector2(_playerCharacter.SpriteVelocity.X, 0);
-                            _playerCharacter.IsGrounded = true;
-                            _playerCharacter.GroundTile = tile;
-                        }
-                    }
-
-                    if (BottomCollision(_playerCharacter))
-                    {
-                        _playerCharacter.SpriteVelocity = new Vector2(_playerCharacter.SpriteVelocity.X, 0);
-                        if (_playerCharacter.IsJumping)
-                        {
-                            _playerCharacter.JumpHeight = _playerCharacter.SpritePosition.Y;
-                        }
-                    }
-
-
-                }
             }
-
-
-        }
-        public bool LeftCollision(Rectangle otherRectangle)
-        {
-            return (this.SpriteRectangle.Right <= otherRectangle.Right && this.SpriteRectangle.Right >= otherRectangle.Left - 5 && this.SpriteRectangle.Top <= otherRectangle.Bottom - (otherRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherRectangle.Top + (otherRectangle.Width / 4));
-        }
-
-        public bool RightCollision(Rectangle otherRectangle)
-        {
-            return (this.SpriteRectangle.Left >= otherRectangle.Left && this.SpriteRectangle.Left <= otherRectangle.Right + 5 && this.SpriteRectangle.Top <= otherRectangle.Bottom - (otherRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherRectangle.Top + (otherRectangle.Width / 4));
-        }
-
-        public bool TopCollision(Sprite otherSprite)
-        {
-            return (this.SpriteRectangle.Top + this.SpriteVelocity.Y < otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Bottom > otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left + (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right - (otherSprite.SpriteRectangle.Width / 4));
-        }
-
-        public bool BottomCollision(Sprite otherSprite)
-        {
-            return (this.SpriteRectangle.Bottom + this.SpriteVelocity.Y > otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Top < otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left + (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right - (otherSprite.SpriteRectangle.Width / 4));
         }
     }
 }

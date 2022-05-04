@@ -30,7 +30,7 @@ namespace Terramental
         private bool _disableLeft;
 
         // Dash Variables
-        private float dashVelocity = 10.0f;
+        private float dashVelocity = 1.5f;
         private bool _isDashing;
         private bool _canDash = true;
         private bool _isHovering;
@@ -85,12 +85,6 @@ namespace Terramental
             set { _isJumping = value; }
         }
 
-        public bool IsGrounded
-        {
-            get { return _isGrounded; }
-            set { _isGrounded = value; }
-        }
-
         public bool IsDoubleJumpUsed
         {
             get { return _isDoubleJumpUsed; }
@@ -130,7 +124,16 @@ namespace Terramental
         public int ElementIndex
         {
             get { return _elementIndex; }
-            set { _elementIndex = value; _gameManager.playerInterface.UpdateElementDisplay(); }
+            set 
+            { 
+                _elementIndex = value;
+                _gameManager.playerInterface.UpdateElementDisplay(); 
+
+                foreach(ElementWall elementWall in SpawnManager.elementWallList)
+                {
+                    elementWall.ElementWallCollision();
+                }
+            }
         }
 
         public int PlayerScore
@@ -217,98 +220,33 @@ namespace Terramental
         {
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                float currentTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 UpdateUltimateStatus(gameTime);
-
-                if(_dashActive)
-                {
-                    foreach (EnemyCharacter knight in SpawnManager.enemyList)
-                    {
-                        if (knight.IsActive)
-                        {
-                            bool checkCollision = false;
-
-                            if (_elementIndex == 0)
-                            {
-                                if (knight.ElementIndex == 0)
-                                {
-                                    checkCollision = true;
-                                }
-                                else if (knight.ElementIndex == 1)
-                                {
-                                    checkCollision = true;
-                                }
-                                else if (knight.ElementIndex == 2)
-                                {
-                                    checkCollision = false;
-                                }
-                            }
-
-                            if (_elementIndex == 1)
-                            {
-                                if (knight.ElementIndex == 0)
-                                {
-                                    checkCollision = false;
-                                }
-                                else if (knight.ElementIndex == 1)
-                                {
-                                    checkCollision = true;
-                                }
-                                else if (knight.ElementIndex == 2)
-                                {
-                                    checkCollision = true;
-                                }
-                            }
-
-                            if (_elementIndex == 2)
-                            {
-                                if (knight.ElementIndex == 0)
-                                {
-                                    checkCollision = true;
-                                }
-                                else if (knight.ElementIndex == 1)
-                                {
-                                    checkCollision = false;
-                                }
-                                else if (knight.ElementIndex == 2)
-                                {
-                                    checkCollision = true;
-                                }
-                            }
-
-                            if(!checkCollision)
-                            {
-                                if (knight.OnCollision(this.SpriteRectangle))
-                                {
-                                    knight.TakeDamage(25);
-                                }
-                            }
-                        }
-                    }
-                }
-
+                DashDamage();
                 DashCheck();
-
-                ApplyGravity();
-
-                PlayerJumpBehavior(gameTime);
-
                 Dash(gameTime);
 
-                CheckCollisions();
+                MoveIfValid(gameTime);
 
-                if(_ultimateUsedTimer <= 0)
+                if(IsGrounded())
                 {
-                    MovementAnimations();
+                    SimulateFriction();
                 }
 
-                if (_groundTile != null)
+                SimulateFriction();
+                StopMovingIfBlocked();
+
+                if(!IsGrounded())
                 {
-                    if (!_groundTile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)) || _groundTile.RightCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)) || _groundTile.LeftCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                    {
-                        _isGrounded = false;
-                        _groundTile = null;
-                    }
+                    ApplyGravity();
+                }
+                
+
+                //float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
+
+
+                if (_ultimateUsedTimer <= 0)
+                {
+                    MovementAnimations();
                 }
 
                 if(_ultimateUsedTimer > 0)
@@ -331,65 +269,9 @@ namespace Terramental
                     }
                 }
 
-                float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
-
-                SpritePosition = new Vector2(posX, SpritePosition.Y);
-
                 Animations[AnimationIndex].MirrorTexture = !_isFacingRight;
             }
         }
-
-        public void PlayerMovement(float horizontal, GameTime gameTime)
-        {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            if (!_isHovering)
-            {
-                if(!disableMovement)
-                {
-                    if(horizontal > 0)
-                    {
-                        if(!_disableRight)
-                        {
-                            SpriteVelocity = new Vector2(_playerMovementSpeed * deltaTime, 0);
-                        }
-                        else
-                        {
-                            SpriteVelocity = new Vector2(0, 0);
-                        }
-
-                        _isFacingRight = true;
-                    }
-                    else if(horizontal < 0)
-                    {
-                        if (!disableMovement)
-                        {
-                            if (!_disableLeft)
-                            {
-                                SpriteVelocity = new Vector2(-_playerMovementSpeed * deltaTime, 0);
-                            }
-                            else
-                            {
-                                SpriteVelocity = new Vector2(0, 0);
-                            }
-                        }
-
-                        _isFacingRight = false;
-                    }
-                }
-            }
-
-            if (horizontal == 0)
-            {
-                SpriteVelocity = new Vector2(0, 0);
-            }
-        }
-
-        private void UpdatePositionBasedOnMovement(GameTime gameTime)
-        {
-            SpritePosition += SpriteVelocity *  (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
-        }
-
 
         public void TeleportPlayer(Vector2 position, bool setCheckpoint)
         {
@@ -398,48 +280,7 @@ namespace Terramental
             if(setCheckpoint)
             {
                 GameManager.playerCheckpoint = position;
-            }
-        }
-
-        public void PlayerJump()
-        {
-            if(!disableMovement)
-            {
-                if (!_isJumping && _isGrounded)
-                {
-                    AudioManager.PlaySound("PlayerJump_SFX");
-                    _isGrounded = false;
-                    _isJumping = true;
-                    _jumpHeight = SpritePosition.Y - 150;
-                    _jumpSpeed = -5;
-                    _isDoubleJumpUsed = false;
-                    return;
-                }
-
-                if (!_isDoubleJumpUsed)
-                {
-                    AudioManager.PlaySound("PlayerJump_SFX");
-                    _jumpHeight = SpritePosition.Y - 150;
-                    _jumpSpeed = -5;
-                    _isDoubleJumpUsed = true;
-                    _isJumping = true;
-                }
-            }
-        }
-
-        private void PlayerJumpBehavior(GameTime gameTime)
-        {
-            if (_isJumping)
-            {
-                SpriteVelocity += new Vector2(0, _jumpSpeed);
-
-                float distance = (SpritePosition.Y * SpritePosition.Y) - (_jumpHeight * _jumpHeight);
-
-                if (SpritePosition.Y <= _jumpHeight || disableMovement)
-                {
-                    _isJumping = false;
-                    _isGrounded = false;
-                }
+                ElementIndex = 0;
             }
         }
 
@@ -496,6 +337,26 @@ namespace Terramental
             }
         }
 
+        public void PlayerTakeDamage(int amount)
+        {
+            CharacterHealth -= amount;
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+
+            if (CharacterHealth <= 0)
+            {
+                _gameManager.menuManager.DisplayRespawnScreen(true);
+            }
+        }
+
+        public void DisplayPlayerLives()
+        {
+            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+        }
+
+        #endregion
+
+        #region Dash
+
         public void Dash(GameTime gameTime)
         {
             if (_isDashing)
@@ -512,7 +373,7 @@ namespace Terramental
                 _isDashing = false;
             }
 
-            if(dashCooldown > 0)
+            if (dashCooldown > 0)
             {
                 dashCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -528,34 +389,147 @@ namespace Terramental
             _dashActive = false;
         }
 
-        public void ApplyGravity()
+        private void DashDamage()
         {
-            if (!_isGrounded)
+            if (_dashActive)
             {
-                if (!_isJumping)
+                foreach (EnemyCharacter knight in SpawnManager.enemyList)
                 {
-                    if (!_isDashing)
+                    if (knight.IsActive)
                     {
-                        SpriteVelocity = Vector2.UnitY * 0.5f;
+                        bool checkCollision = false;
+
+                        if (_elementIndex == 0)
+                        {
+                            if (knight.ElementIndex == 0)
+                            {
+                                checkCollision = true;
+                            }
+                            else if (knight.ElementIndex == 1)
+                            {
+                                checkCollision = true;
+                            }
+                            else if (knight.ElementIndex == 2)
+                            {
+                                checkCollision = false;
+                            }
+                        }
+
+                        if (_elementIndex == 1)
+                        {
+                            if (knight.ElementIndex == 0)
+                            {
+                                checkCollision = false;
+                            }
+                            else if (knight.ElementIndex == 1)
+                            {
+                                checkCollision = true;
+                            }
+                            else if (knight.ElementIndex == 2)
+                            {
+                                checkCollision = true;
+                            }
+                        }
+
+                        if (_elementIndex == 2)
+                        {
+                            if (knight.ElementIndex == 0)
+                            {
+                                checkCollision = true;
+                            }
+                            else if (knight.ElementIndex == 1)
+                            {
+                                checkCollision = false;
+                            }
+                            else if (knight.ElementIndex == 2)
+                            {
+                                checkCollision = true;
+                            }
+                        }
+
+                        if (!checkCollision)
+                        {
+                            if (knight.OnCollision(this.SpriteRectangle))
+                            {
+                                knight.TakeDamage(25);
+                            }
+                        }
                     }
                 }
             }
         }
 
-        public void PlayerTakeDamage(int amount)
-        {
-            CharacterHealth -= amount;
-            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+        #endregion
 
-            if (CharacterHealth <= 0)
-            {
-                _gameManager.menuManager.DisplayRespawnScreen(true);
-            }
+        #region Movement
+
+        public void PlayerMovement(int amount, GameTime gameTime)
+        {
+            SpriteVelocity += new Vector2(amount, 0);
         }
 
-        public void DisplayPlayerLives()
+        public void PlayerJump()
         {
-            _gameManager.playerInterface.UpdatePlayerLives(CharacterHealth);
+            if(IsGrounded())
+            {
+                SpriteVelocity = -Vector2.UnitY * 22.25f;
+                _isDoubleJumpUsed = false;
+            }
+            else if(!_isDoubleJumpUsed)
+            {
+                SpriteVelocity = -Vector2.UnitY * 22.25f;
+                _isDoubleJumpUsed = true;
+            }
+            
+        }
+
+        private void SimulateFriction()
+        {
+            SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f;
+        }
+
+        private void UpdatePositionBasedOnMovement(GameTime gameTime)
+        {
+            SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+        }
+
+        private void ApplyGravity()
+        {
+            SpriteVelocity += Vector2.UnitY * 0.5f;
+        }
+
+        #endregion
+
+        #region Collisions
+
+        public bool IsGrounded()
+        {
+            Rectangle onePixelLower = SpriteRectangle;
+            onePixelLower.Offset(0, 1);
+            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+        }
+
+        private void MoveIfValid(GameTime gameTime)
+        {
+            _oldPosition = base.SpritePosition;
+            UpdatePositionBasedOnMovement(gameTime);
+
+            base.SpritePosition = _gameManager.mapManager.FindValidLoaction(_oldPosition, SpritePosition, SpriteRectangle);
+        }
+
+        private void StopMovingIfBlocked()
+        {
+            Vector2 lastMovement = SpritePosition - _oldPosition;
+
+            if(lastMovement.X == 0)
+            {
+                SpriteVelocity *= Vector2.UnitY;
+            }
+
+            if(lastMovement.Y == 0)
+            {
+                SpriteVelocity *= Vector2.UnitX;
+            }
         }
 
         #endregion
@@ -650,101 +624,6 @@ namespace Terramental
             {
                 _ultimateUsedTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-        }
-
-        #endregion
-
-        #region Collisions
-
-        private void MoveAsFarAsPossible(GameTime gameTime)
-        {
-            _oldPosition = base.SpritePosition;
-            UpdatePositionBasedOnMovement(gameTime);
-            base.SpritePosition = _gameManager.mapManager.FindValidLocation(_oldPosition, SpritePosition, SpriteRectangle);
-        }
-
-
-        private void CheckCollisions()
-        {
-            if (!_gameManager.mapManager.HasRoomForRectangle(SpriteRectangle))
-            {
-                base.SpritePosition = _gameManager.mapManager.FindValidLocation(_oldPosition, SpritePosition, SpriteRectangle);
-            }
-
-            //if (_elementWall != null)
-            //{
-            //    if (!_elementWall.RightCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)) && !_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
-            //    {
-            //        _disableRight = false;
-            //        _elementWall = null;
-            //        return;
-            //    }
-
-            //    if (!_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
-            //    {
-            //        _disableLeft = false;
-            //        _elementWall = null;
-            //    }
-            //}
-            //else
-            //{
-            //    _disableLeft = false;
-            //    _disableRight = false;
-            //}
-
-            //foreach (Tile tile in MapManager.activeTiles)
-            //{
-            //    if (tile.GroundTile)
-            //    {
-            //        if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-            //        {
-            //            _isGrounded = true;
-            //            _groundTile = tile;
-
-            //        }
-
-            //        if (tile.BottomCollision(this))
-            //        {
-            //            _isJumping = false;
-            //            _jumpHeight = SpritePosition.Y;
-            //        }
-            //    }
-
-            //    if (tile.WallTile)
-            //    {
-            //        if (tile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-            //        {
-            //            _disableRight = true;
-            //            _rightTile = tile;
-            //        }
-
-            //        if (tile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-            //        {
-            //            _disableLeft = true;
-            //            _leftTile = tile;
-            //        }
-            //    }
-            //}
-
-
-
-            //if (_disableRight && _rightTile != null)
-            //{
-            //    if (!_rightTile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-            //    {
-            //        _disableRight = false;
-            //        _rightTile = null;
-            //    }
-            //}
-
-            //if (_disableLeft && _leftTile != null)
-            //{
-            //    if (!_leftTile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-            //    {
-            //        _disableLeft = false;
-            //        _leftTile = null;
-            //    }
-            //}
         }
 
         #endregion

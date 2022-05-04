@@ -11,6 +11,11 @@ namespace Terramental
         private int _projectileDamage;
         private float _destroyTimer;
 
+        public bool IsEnemyProjectile
+        {
+            get { return _isEnemyProjectile; }
+        }
+
         public void UpdateProjectile(GameTime gameTime)
         {
             if(IsActive)

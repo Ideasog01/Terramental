@@ -11,25 +11,18 @@ namespace Terramental
 
         #region Variables
 
-        private bool _isGroundTile;
-
-        private bool _isWallTile;
+        private bool _isBlocking;
 
         private List<Tile> _neighborTiles = new List<Tile>();
 
         #endregion
 
         #region Properties
-        public bool GroundTile
-        {
-            get { return _isGroundTile; }
-            set { _isGroundTile = value; }
-        }
 
-        public bool WallTile
+        public bool IsBlocking
         {
-            get { return _isWallTile; }
-            set { _isWallTile = value; }
+            get { return _isBlocking; }
+            set { _isBlocking = value; }
         }
 
         public List<Tile> NeighborList

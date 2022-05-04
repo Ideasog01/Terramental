@@ -104,17 +104,6 @@ namespace Terramental
                     }
                 }
 
-                foreach (ElementWall elementWall in elementWallList)
-                {
-                    if (elementWall.IsVisible)
-                    {
-                        if (elementWall.IsActive)
-                        {
-                            elementWall.ElementWallCollisions();
-                        }
-                    }
-                }
-
                 foreach (Checkpoint checkpoint in checkpointList)
                 {
                     if (checkpoint.IsVisible)
@@ -144,6 +133,17 @@ namespace Terramental
                         if (cannon.IsActive)
                         {
                             cannon.UpdateCannon(gameTime);
+                        }
+                    }
+                }
+
+                foreach(ElementWall elementWall in elementWallList)
+                {
+                    if(elementWall.IsVisible)
+                    {
+                        if(elementWall.IsActive)
+                        {
+                            elementWall.CheckProjectileCollisions();
                         }
                     }
                 }
@@ -387,7 +387,8 @@ namespace Terramental
             {
                 if(!elementWall.IsActive)
                 {
-                    elementWall.ElementIndex = elementIndex;
+                    elementWall.InitialiseElementWall(_gameManager.playerCharacter, _gameManager.mapManager, elementIndex);
+                    elementWall.ElementWallCollision();
 
                     switch (elementIndex)
                     {
@@ -412,7 +413,9 @@ namespace Terramental
 
             if(!elementWallFound)
             {
-                ElementWall elementWall = new ElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
+                ElementWall elementWall = new ElementWall();
+                elementWall.InitialiseElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
+                elementWall.ElementWallCollision();
 
                 switch (elementIndex)
                 {
