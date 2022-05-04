@@ -189,6 +189,11 @@ namespace Terramental
 
             MoveIfValid(gameTime);
 
+            if (_jumpCooldown > 0)
+            {
+                _jumpCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
             SimulateFriction();
             StopMovingIfBlocked();
 
@@ -357,6 +362,14 @@ namespace Terramental
 
             if (lastMovement.X == 0)
             {
+                if(_currentState == AIState.Chase && IsGrounded() && _jumpCooldown <= 0)
+                {
+                    EnemyJump();
+                    AudioManager.PlaySound("Jump_SFX");
+                    _jumpCooldown = 3;
+                }
+
+
                 SpriteVelocity *= Vector2.UnitY;
             }
 
@@ -368,11 +381,7 @@ namespace Terramental
 
         private void EnemyJump()
         {
-            if (IsGrounded())
-            {
-                SpriteVelocity = -Vector2.UnitY * 22.25f;
-                AudioManager.PlaySound("Jump_SFX");
-            }
+            SpriteVelocity = -Vector2.UnitY * 22.25f;
         }
 
         #endregion
