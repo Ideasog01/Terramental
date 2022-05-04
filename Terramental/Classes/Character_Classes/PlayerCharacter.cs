@@ -514,7 +514,7 @@ namespace Terramental
 
         public async void DoubleTapToDashCooldown()
         {
-            await Task.Delay(200);
+            await Task.Delay(300);
 
             upDashCheck = 0;
             leftDashCheck = 0;
