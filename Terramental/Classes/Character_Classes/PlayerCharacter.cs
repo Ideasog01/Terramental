@@ -269,7 +269,11 @@ namespace Terramental
                     }
                 }
 
-                Animations[AnimationIndex].MirrorTexture = !_isFacingRight;
+                if(SpriteVelocity.X != 0)
+                {
+                    Animations[AnimationIndex].MirrorTexture = SpriteVelocity.X < 0;
+                }
+                
             }
         }
 

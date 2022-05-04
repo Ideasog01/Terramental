@@ -366,7 +366,7 @@ namespace Terramental
         {
             foreach(Tile tile in tileList)
             {
-                if(tile.SpriteRectangle.Intersects(wallRect))
+                if(tile.SpriteRectangle.Contains(wallRect))
                 {
                     return tile;
                 }

@@ -32,30 +32,6 @@ namespace Terramental
 
         #endregion
 
-        #region CollisionDetection
-
-        public bool LeftCollision(Rectangle otherRectangle)
-        {
-            return (this.SpriteRectangle.Right <= otherRectangle.Right && this.SpriteRectangle.Right >= otherRectangle.Left - 5 && this.SpriteRectangle.Top <= otherRectangle.Bottom - (otherRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherRectangle.Top + (otherRectangle.Width / 4));
-        }
-
-        public bool RightCollision(Rectangle otherRectangle)
-        {
-            return (this.SpriteRectangle.Left >= otherRectangle.Left && this.SpriteRectangle.Left <= otherRectangle.Right + 5 && this.SpriteRectangle.Top <= otherRectangle.Bottom - (otherRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherRectangle.Top + (otherRectangle.Width / 4));
-        }
-
-        public bool TopCollision(Rectangle rectangle)
-        {
-            return (this.SpriteRectangle.Top + this.SpriteVelocity.Y < rectangle.Bottom && this.SpriteRectangle.Bottom > rectangle.Bottom && this.SpriteRectangle.Right > rectangle.Left + (rectangle.Width / 4) && this.SpriteRectangle.Left < rectangle.Right - (rectangle.Width / 4));
-        }
-
-        public bool BottomCollision(Sprite otherSprite)
-        {
-            return (this.SpriteRectangle.Bottom + this.SpriteVelocity.Y > otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Top < otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left + (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right - (otherSprite.SpriteRectangle.Width / 4));
-        }
-
-        #endregion
-
         public void SetNeighborTiles()
         {
             _neighborTiles.Clear();

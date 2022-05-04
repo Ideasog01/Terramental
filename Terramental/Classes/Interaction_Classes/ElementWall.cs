@@ -21,32 +21,21 @@ namespace Terramental
             _elementIndex = elementIndex;
             tile = mapManager.FindTile(SpriteRectangle);
             tile.IsBlocking = true;
+            tile.SpriteColor = Color.Red;
             wallHealth = 60;
         }
 
-        public void CheckProjectileCollisions()
+        public void DamageElementWall()
         {
-            if(_checkCollision)
+            if (!_checkCollision)
             {
-                foreach(Projectile projectile in SpawnManager.projectileList)
-                {
-                    if(!projectile.IsEnemyProjectile)
-                    {
-                        if(projectile.OnCollision(SpriteRectangle))
-                        {
-                            wallHealth -= 20;
-                            projectile.DestroyProjectile();
+                wallHealth -= 20;
+            }
 
-                            if(wallHealth <= 0)
-                            {
-                                tile.IsBlocking = false;
-                                IsActive = false;
-                            }
-
-                            break;
-                        }
-                    }
-                }
+            if (wallHealth <= 0)
+            {
+                tile.IsBlocking = false;
+                IsActive = false;
             }
         }
 

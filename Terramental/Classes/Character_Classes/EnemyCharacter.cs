@@ -25,8 +25,6 @@ namespace Terramental
 
         private float _attackTimer;
 
-        private bool _isGrounded;
-
         private float _attackThreshold;
         private float _chaseThreshold;
         private float _attackCooldown;
@@ -36,17 +34,9 @@ namespace Terramental
         private int _enemyIndex;
         private int _elementIndex;
 
-        private bool _rightBlocked;
-        private bool _leftBlocked;
+        private GameManager _gameManager;
 
-        private Tile _blockingTile;
-        private Tile _groundTile;
-
-        private bool _jumpActive;
-        private float _jumpHeight;
-        private float _jumpCooldownTimer;
-
-        private float _groundCheckTimer;
+        private Vector2 _oldPosition;
 
         #endregion
 
@@ -155,7 +145,7 @@ namespace Terramental
 
         #region EnemyCore
 
-        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth, float enemyMovementSpeed, float enemyGravity)
+        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth, float enemyMovementSpeed, float enemyGravity, GameManager gameManager)
         {
             SpriteTexture = texture;
             SpritePosition = position;
@@ -166,14 +156,16 @@ namespace Terramental
             _enemyMovementSpeed = enemyMovementSpeed;
             _enemyGravity = enemyGravity;
             IsActive = true;
+
+            if(_gameManager == null)
+            {
+                _gameManager = gameManager;
+            }
         }
 
         public void UpdateEnemy(GameTime gameTime)
         {
-            GroundCheck(gameTime);
             EnemyStateMachine();
-            UpdateJump(gameTime);
-            UpdateMovement();
 
             if (CurrentState == AIState.Attack)
             {
@@ -193,75 +185,17 @@ namespace Terramental
                 }
             }
 
-            if (!_leftBlocked || !_rightBlocked)
+            MoveIfValid(gameTime);
+
+            SimulateFriction();
+            StopMovingIfBlocked();
+
+            if(!IsGrounded())
             {
-                CheckPath();
+                ApplyGravity();
             }
 
             MirrorEnemy();
-
-            SpritePosition += new Vector2(0, SpriteVelocity.Y);
-        }
-
-        #endregion
-
-        #region Checks
-
-        private void GroundCheck(GameTime gameTime)
-        {
-            if(!_isGrounded)
-            {
-                foreach (Tile tile in MapManager.activeTiles)
-                {
-                    if (tile.TopCollision(SpriteRectangle))
-                    {
-                        _isGrounded = true;
-                        _groundTile = tile;
-                        _groundCheckTimer = 3;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                if(_groundCheckTimer <= 0)
-                {
-                    if (_groundTile == null)
-                    {
-                        _isGrounded = false;
-                    }
-                    else
-                    {
-                        if (!_groundTile.TopCollision(SpriteRectangle) || _groundTile.RightCollision(SpriteRectangle) || _groundTile.LeftCollision(SpriteRectangle))
-                        {
-                            _groundTile = null;
-                        }
-                    }
-                }
-            }
-
-            if(_groundCheckTimer > 0)
-            {
-                _groundCheckTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-        }
-
-        public void CheckPath()
-        {
-            foreach (Tile tile in MapManager.activeTiles)
-            {
-                if (tile.LeftCollision(new Rectangle((int)SpritePosition.X + 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                {
-                    _rightBlocked = true;
-                    _blockingTile = tile;
-                }
-
-                if (tile.RightCollision(new Rectangle((int)SpritePosition.X - 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                {
-                    _leftBlocked = true;
-                    _blockingTile = tile;
-                }
-            }
         }
 
         #endregion
@@ -348,41 +282,6 @@ namespace Terramental
             }
         }
 
-        private void UpdateJump(GameTime gameTime)
-        {
-            if(_jumpActive)
-            {
-                if (SpritePosition.Y > _jumpHeight)
-                {
-                    SpritePosition = new Vector2(SpriteVelocity.X, -3);
-
-                    if (!_rightBlocked && !_leftBlocked)
-                    {
-                        _jumpActive = false;
-                        _jumpCooldownTimer = 3;
-                    }
-                }
-                else
-                {
-                    _jumpActive = false;
-                    _jumpCooldownTimer = 3;
-                }
-            }
-
-            if (!_isGrounded)
-            {
-                if (!_jumpActive)
-                {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
-                }
-            }
-
-            if (_jumpCooldownTimer > 0)
-            {
-                _jumpCooldownTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-        }
-
         private void MirrorEnemy()
         {
             if (_currentState != AIState.Attack)
@@ -409,51 +308,52 @@ namespace Terramental
             }
         }
 
-        private void UpdateMovement()
+        #endregion
+
+        #region EnemyMovement
+
+        private void UpdateEnemyMovement(GameTime gameTime)
         {
-            if (SpriteVelocity.X > 0)
+            SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+        }
+
+        private void ApplyGravity()
+        {
+            SpriteVelocity += Vector2.UnitY * 0.5f;
+        }
+
+        private void SimulateFriction()
+        {
+            SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f;
+        }
+
+        private bool IsGrounded()
+        {
+            Rectangle onePixelLower = SpriteRectangle;
+            onePixelLower.Offset(0, 1);
+            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+        }
+
+        private void MoveIfValid(GameTime gameTime)
+        {
+            _oldPosition = base.SpritePosition;
+            UpdateEnemyMovement(gameTime);
+
+            base.SpritePosition = _gameManager.mapManager.FindValidLoaction(_oldPosition, SpritePosition, SpriteRectangle);
+        }
+
+        private void StopMovingIfBlocked()
+        {
+            Vector2 lastMovement = SpritePosition - _oldPosition;
+
+            if (lastMovement.X == 0)
             {
-                if (_rightBlocked)
-                {
-                    if (_blockingTile != null)
-                    {
-                        if (!_blockingTile.LeftCollision(new Rectangle((int)SpritePosition.X + 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                        {
-                            _rightBlocked = false;
-                            _blockingTile = null;
-                        }
-                    }
-                    else
-                    {
-                        _rightBlocked = false;
-                    }
-                }
-                else
-                {
-                    SpritePosition += new Vector2(SpriteVelocity.X, 0);
-                }
+                SpriteVelocity *= Vector2.UnitY;
             }
-            else if (SpriteVelocity.X < 0)
+
+            if (lastMovement.Y == 0)
             {
-                if (_leftBlocked)
-                {
-                    if (_blockingTile != null)
-                    {
-                        if (!_blockingTile.RightCollision(new Rectangle((int)SpritePosition.X - 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                        {
-                            _rightBlocked = false;
-                            _blockingTile = null;
-                        }
-                    }
-                    else
-                    {
-                        _leftBlocked = false;
-                    }
-                }
-                else
-                {
-                    SpritePosition += new Vector2(SpriteVelocity.X, 0);
-                }
+                SpriteVelocity *= Vector2.UnitX;
             }
         }
 
