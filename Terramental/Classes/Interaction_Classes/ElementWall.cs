@@ -34,6 +34,7 @@ namespace Terramental
 
             if (wallHealth <= 0)
             {
+                AudioManager.PlaySound("WallBreak_SFX");
                 tile.IsBlocking = false;
                 IsActive = false;
             }

@@ -129,13 +129,14 @@ namespace Terramental
             if(_takeDamageCooldown <= 0 && IsActive)
             {
                 _characterHealth -= amount;
-
+                AudioManager.PlaySound("Hit_SFX");
                 _takeDamageCooldown = 2f;
 
                 if(_characterHealth <= 0)
                 {
                     IsActive = false;
                     SpawnManager._gameManager.playerCharacter.EnemiesDefeated++;
+                    AudioManager.PlaySound("Hit_SFX");
 
                     foreach(Sprite effect in _statusEffects)
                     {

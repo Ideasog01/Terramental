@@ -115,11 +115,83 @@
 /processorParam:Quality=Best
 /build:SFXs/BeepTone.wav
 
-#begin SFXs/PlayerJump_SFX.wav
+#begin SFXs/Damage_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:SFXs/PlayerJump_SFX.wav
+/build:SFXs/Damage_SFX.wav
+
+#begin SFXs/Dash_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/Dash_SFX.wav
+
+#begin SFXs/Defeat_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/Defeat_SFX.wav
+
+#begin SFXs/ElementWallBreak_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/ElementWallBreak_SFX.wav
+
+#begin SFXs/FireProjectile_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/FireProjectile_SFX.wav
+
+#begin SFXs/HealthPickup_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/HealthPickup_SFX.wav
+
+#begin SFXs/Jump_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/Jump_SFX.wav
+
+#begin SFXs/MenuButton_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/MenuButton_SFX.wav
+
+#begin SFXs/ScorePickup_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/ScorePickup_SFX.wav
+
+#begin SFXs/SnowProjectile_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/SnowProjectile_SFX.wav
+
+#begin SFXs/Sword_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/Sword_SFX.wav
+
+#begin SFXs/UltimateActivation_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/UltimateActivation_SFX.wav
+
+#begin SFXs/WaterProjectile_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/WaterProjectile_SFX.wav
 
 #begin SpriteFont/DefaultFont.spritefont
 /importer:FontDescriptionImporter

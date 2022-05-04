@@ -319,6 +319,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
+                    AudioManager.PlaySound("Dash_SFX");
                 }
                 if (leftDashCheck >= 2)
                 {
@@ -328,6 +329,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
+                    AudioManager.PlaySound("Dash_SFX");
                 }
                 if (rightDashCheck >= 2)
                 {
@@ -337,6 +339,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
+                    AudioManager.PlaySound("Dash_SFX");
                 }
             }
         }
@@ -349,6 +352,7 @@ namespace Terramental
             if (CharacterHealth <= 0)
             {
                 _gameManager.menuManager.DisplayRespawnScreen(true);
+                AudioManager.PlaySound("Defeat_SFX");
             }
         }
 
@@ -478,11 +482,13 @@ namespace Terramental
             {
                 SpriteVelocity = -Vector2.UnitY * 22.25f;
                 _isDoubleJumpUsed = false;
+                AudioManager.PlaySound("Jump_SFX");
             }
             else if(!_isDoubleJumpUsed)
             {
                 SpriteVelocity = -Vector2.UnitY * 22.25f;
                 _isDoubleJumpUsed = true;
+                AudioManager.PlaySound("Jump_SFX");
             }
             
         }
@@ -546,6 +552,7 @@ namespace Terramental
             {
                 ultimateActiveTimer = 10;
                 ultimateActive = true;
+                AudioManager.PlaySound("UltimateActivation_SFX");
             }
         }
 
@@ -565,6 +572,8 @@ namespace Terramental
                         {
                             SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-4, 0), false, true, 1, 6, 30);
                         }
+
+                        AudioManager.PlaySound("FireProjectile_SFX");
                        
                         break;
                     case 1:
@@ -578,6 +587,8 @@ namespace Terramental
                             SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-4, 0), false, true, 2, 6, 40);
                         }
 
+                        AudioManager.PlaySound("WaterProjectile_SFX");
+
                         break;
                     case 2:
 
@@ -589,6 +600,8 @@ namespace Terramental
                         {
                             SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Snow_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(-4, 0), false, true, 3, 6, 20);
                         }
+
+                        AudioManager.PlaySound("SnowProjectile_SFX");
 
                         break;
                     default:

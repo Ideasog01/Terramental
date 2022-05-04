@@ -51,6 +51,11 @@ namespace Terramental
                 {
                     _menuManager.ButtonInteraction(_buttonName);
 
+                    if(_buttonName != GameManager.ButtonName.SFXVolumeUp && _buttonName != GameManager.ButtonName.SFXVolumeDown)
+                    {
+                        AudioManager.PlaySound("MenuButton_SFX");
+                    }
+
                     if (_buttonName == GameManager.ButtonName.ReturnMainMenu)
                     {
                         if (GameManager.currentGameState == GameManager.GameState.LevelPause)

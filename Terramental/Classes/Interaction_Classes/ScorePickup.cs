@@ -18,6 +18,7 @@ namespace Terramental
             if (OnCollision(_playerCharacter.SpriteRectangle) && IsActive)
             {
                 _playerCharacter.PlayerScore++;
+                AudioManager.PlaySound("ScorePickup_SFX");
                 IsActive = false;
             }
         }

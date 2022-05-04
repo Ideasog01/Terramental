@@ -230,6 +230,15 @@ namespace Terramental
         {
             if (_attackTimer <= 0)
             {
+                if (_enemyIndex == 0)
+                {
+                    AudioManager.PlaySound("Sword_SFX");
+                }
+                else if(_enemyIndex == 1)
+                {
+                    AudioManager.PlaySound("FireProjectile_SFX");
+                }
+
                 _attackTimer = _attackCooldown;
                 _enemyAttacked = false;
             }

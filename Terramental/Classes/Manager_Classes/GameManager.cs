@@ -254,11 +254,50 @@ namespace Terramental
 
         private void LoadAudioLibrary()
         {
-            AudioClip audioClip = new AudioClip("PlayerJump_SFX", "SFXs/PlayerJump_SFX", false, this);
+            AudioClip audioClip = new AudioClip("PlayerJump_SFX", "SFXs/Jump_SFX", false, this);
             AudioManager.AddSound(audioClip);
 
             AudioClip beepSound = new AudioClip("BeepTone_SFX", "SFXs/BeepTone", false, this);
             AudioManager.AddSound(beepSound);
+
+            AudioClip menuButtonSound = new AudioClip("MenuButton_SFX", "SFXs/MenuButton_SFX", false, this);
+            AudioManager.AddSound(menuButtonSound);
+
+            AudioClip healthPickupSound = new AudioClip("HealthPickup_SFX", "SFXs/HealthPickup_SFX", false, this);
+            AudioManager.AddSound(healthPickupSound);
+
+            AudioClip fireProjectileSound = new AudioClip("FireProjectile_SFX", "SFXs/FireProjectile_SFX", false, this);
+            AudioManager.AddSound(fireProjectileSound);
+
+            AudioClip waterProjectileSound = new AudioClip("WaterProjectile_SFX", "SFXs/WaterProjectile_SFX", false, this);
+            AudioManager.AddSound(waterProjectileSound);
+
+            AudioClip snowProjectileSound = new AudioClip("SnowProjectile_SFX", "SFXs/SnowProjectile_SFX", false, this);
+            AudioManager.AddSound(snowProjectileSound);
+
+            AudioClip ultimateActivationSound = new AudioClip("UltimateActivation_SFX", "SFXs/UltimateActivation_SFX", false, this);
+            AudioManager.AddSound(ultimateActivationSound);
+
+            AudioClip hitSound = new AudioClip("Hit_SFX", "SFXs/Damage_SFX", false, this);
+            AudioManager.AddSound(hitSound);
+
+            AudioClip scorePickupSound = new AudioClip("ScorePickup_SFX", "SFXs/ScorePickup_SFX", false, this);
+            AudioManager.AddSound(scorePickupSound);
+
+            AudioClip jumpSound = new AudioClip("Jump_SFX", "SFXs/Jump_SFX", false, this);
+            AudioManager.AddSound(jumpSound);
+
+            AudioClip swordSound = new AudioClip("Sword_SFX", "SFXs/Sword_SFX", false, this);
+            AudioManager.AddSound(swordSound);
+
+            AudioClip defeatSound = new AudioClip("Defeat_SFX", "SFXs/Defeat_SFX", false, this);
+            AudioManager.AddSound(defeatSound);
+
+            AudioClip wallBreakSound = new AudioClip("WallBreak_SFX", "SFXs/ElementWallBreak_SFX", false, this);
+            AudioManager.AddSound(wallBreakSound);
+
+            AudioClip dashSound = new AudioClip("Dash_SFX", "SFXs/Dash_SFX", false, this);
+            AudioManager.AddSound(dashSound);
 
             AudioClip introMusic = new AudioClip("Intro_Music", "Music/far-from-home-acoustic-version-13463", true, this);
             AudioManager.AddSound(introMusic);

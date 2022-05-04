@@ -18,8 +18,9 @@
                 if (OnCollision(Player.SpriteRectangle) && IsActive && Player.CharacterHealth < 3)
                 {
                     Player.Heal(_amount);
-                    IsActive = false;
                     Player.DisplayPlayerLives();
+                    AudioManager.PlaySound("HealthPickup_SFX");
+                    IsActive = false;
                 }
             }
         }
