@@ -10,6 +10,7 @@ namespace Terramental
         private int _projectileTrigger;
         private int _projectileDamage;
         private float _destroyTimer;
+        private float _activeDelay;
 
         public bool IsEnemyProjectile
         {
@@ -22,11 +23,14 @@ namespace Terramental
 
             if (_isEnemyProjectile)
             {
-                if (OnCollision(_playerCharacter.SpriteRectangle))
+                if(_activeDelay <= 0)
                 {
-                    _playerCharacter.PlayerTakeDamage(_projectileDamage);
-                    ProjectileTrigger(_playerCharacter);
-                    DestroyProjectile();
+                    if (OnCollision(_playerCharacter.SpriteRectangle))
+                    {
+                        _playerCharacter.PlayerTakeDamage(_projectileDamage);
+                        ProjectileTrigger(_playerCharacter);
+                        DestroyProjectile();
+                    }
                 }
             }
             else
@@ -35,17 +39,20 @@ namespace Terramental
                 {
                     if(enemy.IsActive)
                     {
-                        if (OnCollision(enemy.SpriteRectangle))
+                        if(_activeDelay <= 0)
                         {
-                            enemy.TakeDamage(_projectileDamage);
-
-                            if(enemy.CharacterHealth > 0)
+                            if (OnCollision(enemy.SpriteRectangle))
                             {
-                                ProjectileTrigger(enemy);
+                                enemy.TakeDamage(_projectileDamage);
+
+                                if (enemy.CharacterHealth > 0)
+                                {
+                                    ProjectileTrigger(enemy);
+                                }
+
+                                DestroyProjectile();
+                                break;
                             }
-                            
-                            DestroyProjectile();
-                            break;
                         }
                     }
                 }
@@ -54,11 +61,14 @@ namespace Terramental
                 {
                     if(elementWall.IsActive)
                     {
-                        if (OnCollision(elementWall.SpriteRectangle))
+                        if(_activeDelay <= 0)
                         {
-                            elementWall.DamageElementWall();
-                            DestroyProjectile();
-                            break;
+                            if (OnCollision(elementWall.SpriteRectangle))
+                            {
+                                elementWall.DamageElementWall();
+                                DestroyProjectile();
+                                break;
+                            }
                         }
                     }
                 }
@@ -71,6 +81,11 @@ namespace Terramental
             else
             {
                 DestroyProjectile();
+            }
+
+            if(_activeDelay > 0)
+            {
+                _activeDelay -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 
@@ -91,7 +106,7 @@ namespace Terramental
                 _playerCharacter = SpawnManager._gameManager.playerCharacter;
             }
 
-            
+            _activeDelay = 0.1f;
             IsActive = true;
         }
 

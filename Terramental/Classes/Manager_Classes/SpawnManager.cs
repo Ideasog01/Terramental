@@ -207,6 +207,7 @@ namespace Terramental
                 {
                     if (vfx.Animations.Count > 0)
                     {
+                        vfx.Animations[0].FrameDimensions = scale;
                         vfx.Animations[0].AnimationActive = false;
                     }
 
@@ -555,7 +556,7 @@ namespace Terramental
             
         }
 
-        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage)
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 frameDimensions, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage)
         {
             bool projectileFound = false;
 
@@ -565,6 +566,12 @@ namespace Terramental
                 {
                     projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
 
+                    if(projectile.Animations.Count > 0)
+                    {
+                        projectile.Animations[0].FrameDimensions = frameDimensions;
+                        projectile.Animations[0].AnimationActive = false;
+                    }
+
                     if(hasAnimation)
                     {
                         if(projectile.Animations.Count > 0)
@@ -573,7 +580,7 @@ namespace Terramental
                             projectile.Animations[0].FrameCount = 4;
                             projectile.Animations[0].FrameDuration = 120f;
                             projectile.Animations[0].LoopActive = true;
-                            projectile.Animations[0].FrameDimensions = scale;
+                            projectile.Animations[0].FrameDimensions = frameDimensions;
                             projectile.Animations[0].AnimationActive = true;
                         }
                         else
@@ -582,10 +589,6 @@ namespace Terramental
                             projectile.Animations.Add(projectileAnimation);
                             projectile.SetAnimation(0);
                         }
-                    }
-                    else if(projectile.Animations.Count > 0)
-                    {
-                        projectile.Animations[0].AnimationActive = false;
                     }
 
                     projectileFound = true;
@@ -602,7 +605,7 @@ namespace Terramental
 
                 if (hasAnimation)
                 {
-                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, scale);
+                    Animation projectileAnimation = new Animation(texture, 4, 120f, true, frameDimensions);
                     projectile.Animations.Add(projectileAnimation);
                     projectile.SetAnimation(0);
                 }
