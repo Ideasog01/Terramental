@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System.IO;
+using System;
 
 namespace Terramental
 {
@@ -49,7 +50,7 @@ namespace Terramental
             {
                 if(tile.IsVisible && !activeTiles.Contains(tile))
                 {
-                    if(tile.WallTile || tile.GroundTile)
+                    if(tile.IsBlocking)
                     {
                         activeTiles.Add(tile);
                     }
@@ -149,30 +150,28 @@ namespace Terramental
                         tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
                         tile.LayerOrder = 0;
 
-                        bool isGround = false;
+                        bool isBlocking = false;
 
                         if (tileIndex <= 13 || tileIndex > 20)
                         {
-                            isGround = true;
+                            isBlocking = true;
                         }
 
-                        tile.GroundTile = isGround;
-                        tile.WallTile = isGround;
+                        tile.IsBlocking = isBlocking;
                     }
                     else
                     {
                         Tile tile = new Tile();
                         tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
                         tile.LayerOrder = 0;
-                        bool isGround = false;
+                        bool isBlocking = false;
 
                         if (tileIndex <= 13 || tileIndex > 20)
                         {
-                            isGround = true;
+                            isBlocking = true;
                         }
 
-                        tile.GroundTile = isGround;
-                        tile.WallTile = isGround;
+                        tile.IsBlocking = isBlocking;
 
                         tileList.Add(tile);
                     }
@@ -303,5 +302,83 @@ namespace Terramental
                 SpawnManager.SpawnCannonObstacle(position, false);
             }
         }
+
+        public Vector2 FindValidLoaction(Vector2 originalPos, Vector2 destination, Rectangle rectangle)
+        {
+            Vector2 movementToTry = destination - originalPos;
+            Vector2 furthestAvailableLocationSoFar = originalPos;
+
+            int numberOfStepsToBreakMovementInto = (int)(movementToTry.Length() * 2) + 1;
+
+            Vector2 oneStep = movementToTry / numberOfStepsToBreakMovementInto;
+
+            for(int i = 1; i <= numberOfStepsToBreakMovementInto; i++)
+            {
+                Vector2 positionToTry = originalPos + oneStep * i;
+                Rectangle newBoundary = CreateRectangleAtPosition(positionToTry, rectangle.Width, rectangle.Height);
+
+                if(HasRoomForRectangle(newBoundary))
+                {
+                    furthestAvailableLocationSoFar = positionToTry;
+                }
+                else
+                {
+                    bool isDiagonalMove = movementToTry.X != 0 && movementToTry.Y != 0;
+
+                    if(isDiagonalMove)
+                    {
+                        int stepsLeft = numberOfStepsToBreakMovementInto - (i - 1);
+
+                        Vector2 remainingHorizontalMovement = oneStep.X * Vector2.UnitX * stepsLeft;
+                        Vector2 finalPositionIfMovingHorizontal = furthestAvailableLocationSoFar + remainingHorizontalMovement;
+
+                        furthestAvailableLocationSoFar = FindValidLoaction(furthestAvailableLocationSoFar, finalPositionIfMovingHorizontal, rectangle);
+
+                        Vector2 remainingVerticalMovement = oneStep.Y * Vector2.UnitY * stepsLeft;
+                        Vector2 finalPositionIfMovingVertical = furthestAvailableLocationSoFar + remainingVerticalMovement;
+                        furthestAvailableLocationSoFar = FindValidLoaction(furthestAvailableLocationSoFar, finalPositionIfMovingVertical, rectangle);
+                    }
+
+                    break;
+                }
+            }
+
+            return furthestAvailableLocationSoFar;
+        }
+
+        public bool HasRoomForRectangle(Rectangle rectangleToCheck)
+        {
+            foreach (Tile tile in activeTiles)
+            {
+                if (tile.IsBlocking)
+                {
+                    if(tile.SpriteRectangle.Intersects(rectangleToCheck))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public Tile FindTile(Rectangle wallRect)
+        {
+            foreach(Tile tile in tileList)
+            {
+                if(tile.SpriteRectangle.Contains(wallRect))
+                {
+                    return tile;
+                }
+            }
+
+            return null;
+        }
+
+        private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height)
+        {
+            return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);
+        }
+
     }
 }

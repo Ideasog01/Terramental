@@ -39,7 +39,7 @@ namespace Terramental
                         {
                             enemy.UpdateCharacter(gameTime);
                             enemy.UpdateEnemy(gameTime);
-                            enemy.UpdateHealthBar();
+                            enemy.UpdateWorldCanvas();
                             enemy.EnableWorldCanvas(true);
                         }
                         else
@@ -59,14 +59,11 @@ namespace Terramental
 
                 foreach (Projectile projectile in projectileList)
                 {
-                    if (projectile != null)
+                    if (projectile.IsVisible)
                     {
-                        if (projectile.IsVisible)
+                        if (projectile.IsActive)
                         {
-                            if (projectile.IsActive)
-                            {
-                                projectile.UpdateProjectile(gameTime);
-                            }
+                            projectile.UpdateProjectile(gameTime);
                         }
                     }
                 }
@@ -100,17 +97,6 @@ namespace Terramental
                         if (scorePickup.IsActive)
                         {
                             scorePickup.UpdateScorePickup();
-                        }
-                    }
-                }
-
-                foreach (ElementWall elementWall in elementWallList)
-                {
-                    if (elementWall.IsVisible)
-                    {
-                        if (elementWall.IsActive)
-                        {
-                            elementWall.ElementWallCollisions();
                         }
                     }
                 }
@@ -164,7 +150,7 @@ namespace Terramental
 
                     if (index == 0)
                     {
-                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2);
+                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, _gameManager);
 
                         if (index != enemy.EnemyIndex)
                         {
@@ -196,7 +182,7 @@ namespace Terramental
                     }
                     else if (index == 1)
                     {
-                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2);
+                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, _gameManager);
 
                         if (index != enemy.EnemyIndex)
                         {
@@ -247,14 +233,14 @@ namespace Terramental
                     EnemyCharacter knightEnemy = new EnemyCharacter();
                     knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
                     knightEnemy.SetProperties(position, 100, 100);
-                    knightEnemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2);
+                    knightEnemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, _gameManager);
 
                     knightEnemy.AddAnimation(knightIdle);
                     knightEnemy.AddAnimation(knightWalk);
                     knightEnemy.AddAnimation(knightAttack);
                     knightEnemy.SetAnimation(0);
                     
-                    knightEnemy.LoadHealthBar(_gameManager);
+                    knightEnemy.LoadWorldCanvas(_gameManager);
                     knightEnemy.LayerOrder = -1;
                     knightEnemy.playerCharacter = _gameManager.playerCharacter;
                     knightEnemy.AttackThreshold = 60;
@@ -274,7 +260,7 @@ namespace Terramental
                     EnemyCharacter darkMageCharacter = new EnemyCharacter();
                     darkMageCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
                     darkMageCharacter.SetProperties(position, 100, 100);
-                    darkMageCharacter.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2);
+                    darkMageCharacter.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, _gameManager);
 
                     darkMageCharacter.AddAnimation(mageIdle);
                     darkMageCharacter.AddAnimation(mageWalk);
@@ -284,7 +270,7 @@ namespace Terramental
                     darkMageCharacter.AttackThreshold = 400;
                     darkMageCharacter.ChaseThreshold = 600;
 
-                    darkMageCharacter.LoadHealthBar(_gameManager);
+                    darkMageCharacter.LoadWorldCanvas(_gameManager);
                     darkMageCharacter.LayerOrder = -1;
                     darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
                     darkMageCharacter.EnemyIndex = 1;
@@ -387,8 +373,6 @@ namespace Terramental
             {
                 if(!elementWall.IsActive)
                 {
-                    elementWall.ElementIndex = elementIndex;
-
                     switch (elementIndex)
                     {
                         case 0:
@@ -406,13 +390,16 @@ namespace Terramental
                     elementWall.SpawnPosition = position;
                     elementWall.IsActive = true;
                     elementWallFound = true;
+
+                    elementWall.InitialiseElementWall(_gameManager.playerCharacter, _gameManager.mapManager, elementIndex);
+                    elementWall.ElementWallCollision();
                     break;
                 }
             }
 
             if(!elementWallFound)
             {
-                ElementWall elementWall = new ElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
+                ElementWall elementWall = new ElementWall();
 
                 switch (elementIndex)
                 {
@@ -426,6 +413,9 @@ namespace Terramental
                         elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
                         break;
                 }
+
+                elementWall.InitialiseElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
+                elementWall.ElementWallCollision();
 
                 elementWall.LayerOrder = -2;
                 elementWallList.Add(elementWall);
@@ -493,6 +483,7 @@ namespace Terramental
                             projectile.Animations[0].FrameDuration = 120f;
                             projectile.Animations[0].LoopActive = true;
                             projectile.Animations[0].FrameDimensions = scale;
+                            projectile.Animations[0].AnimationActive = true;
                         }
                         else
                         {
@@ -501,12 +492,11 @@ namespace Terramental
                             projectile.SetAnimation(0);
                         }
                     }
-                    else
+                    else if(projectile.Animations.Count > 0)
                     {
-                        projectile.Animations.Clear();
+                        projectile.Animations[0].AnimationActive = false;
                     }
 
-                    projectile.IsActive = true;
                     projectileFound = true;
                     break;
                 }

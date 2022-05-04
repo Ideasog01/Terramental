@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 
 namespace Terramental
 {
@@ -22,13 +21,9 @@ namespace Terramental
         private Texture2D enemyHealthBarTexture;
         private Texture2D enemyHealthBarFillTexture;
 
-        private Tile _groundTile;
-
-        private bool _knightAttacked;
+        private bool _enemyAttacked;
 
         private float _attackTimer;
-
-        private bool _isGrounded;
 
         private float _attackThreshold;
         private float _chaseThreshold;
@@ -39,24 +34,9 @@ namespace Terramental
         private int _enemyIndex;
         private int _elementIndex;
 
-        private bool _rightBlocked;
-        private bool _leftBlocked;
+        private GameManager _gameManager;
 
-        private Tile _blockingTile;
-
-        private bool _jumpActive;
-        private float _jumpHeight;
-
-        private float _jumpCooldownTimer;
-
-        //private List<Tile> _pathList = new List<Tile>();
-        //private List<float> fCostList = new List<float>();
-        //private bool _pathCalculated;
-        //private Tile _compareTile;
-        //private Tile _destinationTile;
-        //private int _pathIndex;
-
-        //private int ITERATIONS;
+        private Vector2 _oldPosition;
 
         #endregion
 
@@ -114,9 +94,9 @@ namespace Terramental
 
         #endregion
 
-        #region HealthBar
+        #region WorldCanvas
 
-        public void LoadHealthBar(GameManager gameManager)
+        public void LoadWorldCanvas(GameManager gameManager)
         {
             enemyHealthBarTexture = gameManager.GetTexture("UserInterface/Sliders/HealthBarBorder");
             enemyHealthBarFillTexture = gameManager.GetTexture("UserInterface/Sliders/HealthBarFill");
@@ -135,7 +115,7 @@ namespace Terramental
             enemyElement.LayerOrder = -1;
         }
 
-        public void UpdateHealthBar()
+        public void UpdateWorldCanvas()
         {
             if (!Animations[AnimationIndex].MirrorTexture)
             {
@@ -163,53 +143,9 @@ namespace Terramental
 
         #endregion
 
-        #region Utilities
+        #region EnemyCore
 
-        private void GroundCheck()
-        {
-            if(!_isGrounded)
-            {
-                foreach (Tile tile in MapManager.activeTiles)
-                {
-                    if (tile.GroundTile)
-                    {
-                        if (tile.OnCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                        {
-                            _isGrounded = true;
-                            _groundTile = tile;
-                            break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (_groundTile != null)
-                {
-                    if (!_groundTile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                    {
-                        _groundTile = null;
-                        _isGrounded = false;
-                    }
-                }
-                else
-                {
-                    _isGrounded = false;
-                }
-            }
-        }
-
-        private float DistanceToPlayer()
-        {
-            float distance = MathF.Sqrt(MathF.Pow(playerCharacter.SpritePosition.X - SpritePosition.X, 2) + MathF.Pow(playerCharacter.SpritePosition.Y - SpritePosition.Y, 2));
-            return distance;
-        }
-
-        #endregion
-
-        #region Enemy
-
-        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth, float enemyMovementSpeed, float enemyGravity)
+        public void ResetEnemy(Texture2D texture, Vector2 position, Vector2 scale, int enemyMaxHealth, int enemyHealth, float enemyMovementSpeed, float enemyGravity, GameManager gameManager)
         {
             SpriteTexture = texture;
             SpritePosition = position;
@@ -220,12 +156,15 @@ namespace Terramental
             _enemyMovementSpeed = enemyMovementSpeed;
             _enemyGravity = enemyGravity;
             IsActive = true;
+
+            if(_gameManager == null)
+            {
+                _gameManager = gameManager;
+            }
         }
 
         public void UpdateEnemy(GameTime gameTime)
         {
-
-            GroundCheck();
             EnemyStateMachine();
 
             if (CurrentState == AIState.Attack)
@@ -246,134 +185,28 @@ namespace Terramental
                 }
             }
 
-            if (_currentState == AIState.Chase)
+            MoveIfValid(gameTime);
+
+            SimulateFriction();
+            StopMovingIfBlocked();
+
+            if(!IsGrounded())
             {
-                if (!_jumpActive)
-                {
-                    if (_leftBlocked || _rightBlocked)
-                    {
-                        _jumpHeight = SpritePosition.Y - 256;
-                        _jumpActive = true;
-                    }
-                }
-                else
-                {
-                    UpdateJump();
-                    System.Diagnostics.Debug.WriteLine("Enemy is Jumping!");
-                }
+                ApplyGravity();
             }
 
-            if (!_isGrounded && _currentState != AIState.Idle)
-            {
-                if (!_jumpActive)
-                {
-                    SpriteVelocity = new Vector2(SpriteVelocity.X, _enemyGravity);
-                }
-            }
-
-            if (_jumpCooldownTimer > 0)
-            {
-                _jumpCooldownTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (SpriteVelocity.X > 0)
-            {
-                if(_rightBlocked)
-                {
-                    if (_blockingTile != null)
-                    {
-                        if(!_blockingTile.LeftCollision(new Rectangle((int)SpritePosition.X + 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                        {
-                            _rightBlocked = false;
-                            _blockingTile = null;
-                        }
-                    }
-                    else
-                    {
-                        _rightBlocked = false;
-                    }
-                }
-                else
-                {
-                    SpritePosition += new Vector2(SpriteVelocity.X, 0);
-                }
-            }
-            else if(SpriteVelocity.X < 0)
-            {
-                if(_leftBlocked)
-                {
-                    if(_blockingTile != null)
-                    {
-                        if (!_blockingTile.RightCollision(new Rectangle((int)SpritePosition.X - 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                        {
-                            _rightBlocked = false;
-                            _blockingTile = null;
-                        }
-                    }
-                    else
-                    {
-                        _leftBlocked = false;
-                    }
-                }
-                else
-                {
-                    SpritePosition += new Vector2(SpriteVelocity.X, 0);
-                }
-            }
-
-            if (!_leftBlocked || !_rightBlocked)
-            {
-                CheckPath();
-            }
-
-            SpritePosition += new Vector2(0, SpriteVelocity.Y);
-
-
-            if(_currentState != AIState.Attack)
-            {
-                if (SpriteVelocity.X >= 0)
-                {
-                    Animations[AnimationIndex].MirrorTexture = false;
-                }
-                else
-                {
-                    Animations[AnimationIndex].MirrorTexture = true;
-                }
-            }
-            else
-            {
-                if(playerCharacter.SpritePosition.X >= SpritePosition.X)
-                {
-                    Animations[AnimationIndex].MirrorTexture = false;
-                }
-                else
-                {
-                    Animations[AnimationIndex].MirrorTexture = true;
-                }
-            }
-        }
-
-        public void CheckPath()
-        {
-            foreach (Tile tile in MapManager.activeTiles)
-            {
-                if (tile.LeftCollision(new Rectangle((int)SpritePosition.X + 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                {
-                    _rightBlocked = true;
-                    _blockingTile = tile;
-                }
-
-                if (tile.RightCollision(new Rectangle((int)SpritePosition.X - 48, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                {
-                    _leftBlocked = true;
-                    _blockingTile = tile;
-                }
-            }
+            MirrorEnemy();
         }
 
         #endregion
 
         #region AI
+
+        private float DistanceToPlayer()
+        {
+            float distance = MathF.Sqrt(MathF.Pow(playerCharacter.SpritePosition.X - SpritePosition.X, 2) + MathF.Pow(playerCharacter.SpritePosition.Y - SpritePosition.Y, 2));
+            return distance;
+        }
 
         private void EnemyStateMachine()
         {
@@ -398,31 +231,29 @@ namespace Terramental
             if (_attackTimer <= 0)
             {
                 _attackTimer = _attackCooldown;
-                _knightAttacked = false;
+                _enemyAttacked = false;
             }
             else
             {
                 _attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (OnCollision(playerCharacter.SpriteRectangle) && !_knightAttacked && _enemyIndex == 0)
+                if (OnCollision(playerCharacter.SpriteRectangle) && !_enemyAttacked && _enemyIndex == 0)
                 {
                     playerCharacter.PlayerTakeDamage(1);
-                    _knightAttacked = true;
+                    _enemyAttacked = true;
                 }
 
-                if (_enemyIndex == 1 && !_knightAttacked)
+                if (_enemyIndex == 1 && !_enemyAttacked)
                 {
-                    Vector2 velocity = new Vector2(0, 0);
-
                     if(!Animations[AnimationIndex].MirrorTexture)
                     {
                         SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(4, 0), true, false, 0, 3, 1);
-                        _knightAttacked = true;
+                        _enemyAttacked = true;
                     }
                     else
                     {
                         SpawnManager.SpawnProjectile(SpawnManager._gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(-40, 20), new Vector2(40, 40), new Vector2(-4, 0), true, false, 0, 3, 1);
-                        _knightAttacked = true;
+                        _enemyAttacked = true;
                     }
 
 
@@ -437,7 +268,6 @@ namespace Terramental
         private void Idle()
         {
             SetAnimation(0);
-            SpriteVelocity = new Vector2(0, SpriteVelocity.Y);
         }
 
         private void Chase()
@@ -448,29 +278,82 @@ namespace Terramental
 
             if(SpriteVelocity.X != 0)
             {
-                if(SpriteVelocity.X > 0 && !_rightBlocked || SpriteVelocity.X < 0 && !_leftBlocked)
-                {
-                    SetAnimation(1);
-                }
+                SetAnimation(1);
             }
         }
 
-        private void UpdateJump()
+        private void MirrorEnemy()
         {
-            if (SpritePosition.Y > _jumpHeight)
+            if (_currentState != AIState.Attack)
             {
-                SpriteVelocity = new Vector2(SpriteVelocity.X, -3);
-
-                if(!_rightBlocked && !_leftBlocked)
+                if (SpriteVelocity.X >= 0)
                 {
-                    _jumpActive = false;
-                    _jumpCooldownTimer = 3;
+                    Animations[AnimationIndex].MirrorTexture = false;
+                }
+                else
+                {
+                    Animations[AnimationIndex].MirrorTexture = true;
                 }
             }
             else
             {
-                _jumpActive = false;
-                _jumpCooldownTimer = 3;
+                if (playerCharacter.SpritePosition.X >= SpritePosition.X)
+                {
+                    Animations[AnimationIndex].MirrorTexture = false;
+                }
+                else
+                {
+                    Animations[AnimationIndex].MirrorTexture = true;
+                }
+            }
+        }
+
+        #endregion
+
+        #region EnemyMovement
+
+        private void UpdateEnemyMovement(GameTime gameTime)
+        {
+            SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+        }
+
+        private void ApplyGravity()
+        {
+            SpriteVelocity += Vector2.UnitY * 0.5f;
+        }
+
+        private void SimulateFriction()
+        {
+            SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f;
+        }
+
+        private bool IsGrounded()
+        {
+            Rectangle onePixelLower = SpriteRectangle;
+            onePixelLower.Offset(0, 1);
+            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+        }
+
+        private void MoveIfValid(GameTime gameTime)
+        {
+            _oldPosition = base.SpritePosition;
+            UpdateEnemyMovement(gameTime);
+
+            base.SpritePosition = _gameManager.mapManager.FindValidLoaction(_oldPosition, SpritePosition, SpriteRectangle);
+        }
+
+        private void StopMovingIfBlocked()
+        {
+            Vector2 lastMovement = SpritePosition - _oldPosition;
+
+            if (lastMovement.X == 0)
+            {
+                SpriteVelocity *= Vector2.UnitY;
+            }
+
+            if (lastMovement.Y == 0)
+            {
+                SpriteVelocity *= Vector2.UnitX;
             }
         }
 

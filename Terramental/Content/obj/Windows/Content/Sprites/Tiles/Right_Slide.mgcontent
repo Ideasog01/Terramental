@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Tiles/Right_Slide.png</SourceFile>
-  <SourceTime>2022-04-09T15:57:19.3634116+01:00</SourceTime>
-  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Tiles/Right_Slide.xnb</DestFile>
-  <DestTime>2022-05-03T23:37:46.0455241+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Tiles/Right_Slide.png</SourceFile>
+  <SourceTime>2022-04-29T15:27:44.0014628+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Tiles/Right_Slide.xnb</DestFile>
+  <DestTime>2022-05-04T07:55:42.6049393+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

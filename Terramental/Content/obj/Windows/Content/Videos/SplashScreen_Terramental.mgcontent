@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</SourceFile>
-  <SourceTime>2022-05-03T23:36:43.3068631+01:00</SourceTime>
-  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Videos/SplashScreen_Terramental.xnb</DestFile>
-  <DestTime>2022-05-03T23:37:49.3348868+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</SourceFile>
+  <SourceTime>2022-05-02T15:51:20.937313+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Videos/SplashScreen_Terramental.xnb</DestFile>
+  <DestTime>2022-05-04T07:55:46.6682678+01:00</DestTime>
   <Importer>WmvImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>VideoProcessor</Processor>
@@ -11,6 +11,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Videos/SplashScreen_Terramental.wmv</string>
+    <string>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Videos/SplashScreen_Terramental.wmv</string>
   </BuildOutput>
 </PipelineBuildEvent>

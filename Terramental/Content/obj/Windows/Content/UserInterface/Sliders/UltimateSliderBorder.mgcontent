@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/Sliders/UltimateSliderBorder.png</SourceFile>
-  <SourceTime>2022-04-29T17:26:39.1134918+01:00</SourceTime>
-  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/Sliders/UltimateSliderBorder.xnb</DestFile>
-  <DestTime>2022-05-03T23:37:48.1506181+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/Sliders/UltimateSliderBorder.png</SourceFile>
+  <SourceTime>2022-04-29T16:28:22.7257769+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/Sliders/UltimateSliderBorder.xnb</DestFile>
+  <DestTime>2022-05-04T07:55:46.1383282+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

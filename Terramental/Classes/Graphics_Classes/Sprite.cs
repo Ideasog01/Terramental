@@ -36,6 +36,7 @@ namespace Terramental
         private int _animationIndex = 0;
         private float _animationElapsedTime;
         private int _animationFrameIndex;
+        private int _previousAnimationIndex;
 
         //Destroy Variables
 
@@ -103,6 +104,7 @@ namespace Terramental
         public Rectangle SpriteRectangle
         {
             get { return _spriteRectangle; }
+            set { SpriteRectangle = value; }
         }
 
         public List<Animation> Animations
@@ -136,7 +138,6 @@ namespace Terramental
             _spritePosition = startPosition;
             _spriteTexture = texture;
             _spriteScale = scale;
-            _isActive = true;
             _spriteRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, (int)scale.X, (int)scale.Y);
             _spawnPosition = startPosition;
             _spriteColor = Color.White;
@@ -145,11 +146,19 @@ namespace Terramental
             {
                 SpriteManager.SpriteList.Add(this);
             }
-            
+
+            _isActive = true;
+
         }
 
         public void UpdateSprite(GameTime gameTime)
         {
+            if(_previousAnimationIndex != _animationIndex)
+            {
+                _animationFrameIndex = 0;
+                _previousAnimationIndex = _animationIndex;
+            }
+
             if (_spriteAnimations.Count > 0)
             {
                 UpdateAnimationFrames(gameTime);
@@ -175,13 +184,13 @@ namespace Terramental
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (_isActive)
+            if(_isActive)
             {
-                if(GameManager.gameInProgress)
-                {
-                    _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
+                _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
 
-                    if (_spriteAnimations.Count == 0)
+                if (_spriteAnimations.Count != 0)
+                {
+                    if (!_spriteAnimations[AnimationIndex].AnimationActive)
                     {
                         spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
                     }
@@ -199,23 +208,7 @@ namespace Terramental
                 }
                 else
                 {
-                    _spriteRectangle = new Rectangle((int)_spritePosition.X, (int)_spritePosition.Y, (int)_spriteScale.X, (int)_spriteScale.Y);
-
-                    if (_spriteAnimations.Count == 0)
-                    {
-                        spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
-                    }
-                    else
-                    {
-                        if (!_spriteAnimations[_animationIndex].MirrorTexture)
-                        {
-                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, _spriteColor);
-                        }
-                        else
-                        {
-                            spriteBatch.Draw(_spriteAnimations[_animationIndex].SpriteSheet, _spriteRectangle, _spriteSourceRectangle, _spriteColor, 0f, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
-                        }
-                    }
+                    spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
                 }
             }
         }
@@ -274,7 +267,6 @@ namespace Terramental
                     _animationElapsedTime = 0;
                 }
 
-                // _spriteSourceRectangle = new Rectangle((_animationFrameIndex * animation.SpriteSheet.Width / animation.FrameCount), 0, animation.SpriteSheet.Width / animation.FrameCount, animation.SpriteSheet.Height);
                 _spriteSourceRectangle = new Rectangle(_animationFrameIndex * (int)animation.FrameDimensions.X, 0, (int)animation.FrameDimensions.X, (int)animation.FrameDimensions.Y);
             }
         }
