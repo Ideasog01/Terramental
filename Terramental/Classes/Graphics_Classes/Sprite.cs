@@ -271,6 +271,16 @@ namespace Terramental
             }
         }
 
+        public Vector2 RelativeCentre
+        {
+            get { return new Vector2(SpriteRectangle.Width / 2, SpriteRectangle.Height / 2); }
+        }
+
+        public Vector2 WorldCentre
+        {
+            get { return SpritePosition + RelativeCentre; }
+        }
+
         #endregion
 
 

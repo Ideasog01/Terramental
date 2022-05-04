@@ -60,8 +60,8 @@ namespace Terramental
                 _componentOffset = _componentPosition;
             }
 
-            int centreX = (int)CameraController._cameraCentre.X;
-            int centreY = (int)CameraController._cameraCentre.Y;
+            int centreX = (int)CameraController.cameraCentre.X;
+            int centreY = (int)CameraController.cameraCentre.Y;
             _componentRectangle = new Rectangle(centreX + (int)_componentOffset.X, centreY + (int)_componentOffset.Y, _componentTexture.Width, _componentTexture.Height);
         }
 

@@ -14,7 +14,8 @@ namespace Terramental
 
         public Matrix cameraTransform;
         public Viewport viewPort;
-        public static Vector2 _cameraCentre;
+        public static Vector2 cameraWorldPos;
+        public static Vector2 cameraCentre;
         public static PlayerCharacter playerCharacter;
 
         public CameraController(Viewport newView)
@@ -24,33 +25,36 @@ namespace Terramental
         
         public Vector2 CameraCentre
         {
-            get { return _cameraCentre; }
+            get { return cameraCentre; }
         }
 
         public void UpdateCamera(GameTime gameTime)
         {
-            var scaleX = (float)GameManager.actualWidth / 960;
-            var scaleY = (float)GameManager.actualHeight / 540;
+            var scaleX = (float)GameManager.screenWidth / 960;
+            var scaleY = (float)GameManager.screenHeight / 540;
             var matrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
 
             if (GameManager.currentGameState != GameManager.GameState.Level && GameManager.currentGameState != GameManager.GameState.LevelPause)
             {
-                var _cameraPosition = matrix * Matrix.CreateTranslation(new Vector3(0, 0, 0));
-                cameraTransform = _cameraPosition;
+                var cameraPosition = matrix * Matrix.CreateTranslation(new Vector3(0, 0, 0));
+                cameraTransform = cameraPosition;
+                cameraCentre = new Vector2(GameManager.screenWidth / 2, GameManager.screenHeight / 2);
             }
             else
             {
                 if (playerCharacter != null)
                 {
-                    _cameraCentre = new Vector2(playerCharacter.SpritePosition.X - (viewPort.Width / 2) + (playerCharacter.SpriteRectangle.Width / 2), playerCharacter.SpritePosition.Y - (viewPort.Height / 2) + (playerCharacter.SpriteRectangle.Height / 2));
-                    
-                    float cameraCentreX = MathHelper.Clamp(_cameraCentre.X, 0, (MapManager.mapWidth * 64) - 960);
-                    float cameraCentreY = MathHelper.Clamp(_cameraCentre.Y, 0, (MapManager.mapHeight * 64) - 540);
+                    cameraWorldPos = new Vector2(playerCharacter.SpritePosition.X - (viewPort.Width / 2) + (playerCharacter.SpriteRectangle.Width / 2), playerCharacter.SpritePosition.Y - (viewPort.Height / 2) + (playerCharacter.SpriteRectangle.Height / 2));
 
-                    _cameraCentre.X = cameraCentreX;
-                    _cameraCentre.Y = cameraCentreY;
+                    float cameraCentreX = MathHelper.Clamp(cameraWorldPos.X, 0, (MapManager.mapWidth * 64) - 960);
+                    float cameraCentreY = MathHelper.Clamp(cameraWorldPos.Y, 0, (MapManager.mapHeight * 64) - 540);
 
-                    cameraTransform = matrix * Matrix.CreateTranslation(new Vector3(-_cameraCentre.X, -_cameraCentre.Y, 0));
+                    cameraWorldPos.X = cameraCentreX;
+                    cameraWorldPos.Y = cameraCentreY;
+
+                    cameraCentre = cameraWorldPos;
+
+                    cameraTransform = matrix * Matrix.CreateTranslation(new Vector3(-cameraWorldPos.X, -cameraWorldPos.Y, 0));
                 }
             }    
         }

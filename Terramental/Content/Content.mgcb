@@ -109,6 +109,18 @@
 /processorParam:Quality=Best
 /build:Music/sana-geldim-106818.mp3
 
+#begin PlayerStart_Tile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerStart_Tile.png
+
 #begin SFXs/BeepTone.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

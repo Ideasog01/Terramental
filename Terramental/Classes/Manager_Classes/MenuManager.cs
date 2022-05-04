@@ -890,10 +890,10 @@ namespace Terramental
             OptionsMenuBackground.InitialiseMenuComponent(OptionsMenuBackgroundTexture, new Vector2(0, 0), new Vector2(GameManager.screenWidth, GameManager.screenHeight));
             optionsComponentList.Add(OptionsMenuBackground);
 
-            //Texture2D ResolutionButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ResolutionButton");
-            //Button ResolutionButton = new Button(GameManager.ButtonName.ResolutionButton, this);
-            //ResolutionButton.InitialiseMenuComponent(ResolutionButtonTexture, new Vector2(viewportCentreX - (ResolutionButtonTexture.Width / 2), 110), new Vector2(ResolutionButtonTexture.Width, ResolutionButtonTexture.Height));
-            //optionsButtonList.Add(ResolutionButton);
+            Texture2D ResolutionButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ResolutionButton");
+            Button ResolutionButton = new Button(GameManager.ButtonName.ResolutionButton, this);
+            ResolutionButton.InitialiseMenuComponent(ResolutionButtonTexture, new Vector2(viewportCentreX - (ResolutionButtonTexture.Width / 2), 110), new Vector2(ResolutionButtonTexture.Width, ResolutionButtonTexture.Height));
+            optionsButtonList.Add(ResolutionButton);
 
             Texture2D MusicButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/MusicVolumeButton");
             Button MusicButton = new Button(GameManager.ButtonName.MusicButton, this);
@@ -918,13 +918,13 @@ namespace Terramental
             Texture2D leftButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/LeftButton");
             Texture2D rightButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/RightButton");
 
-            //Button resDecButton = new Button(GameManager.ButtonName.ResolutionDown, this);
-            //resDecButton.InitialiseMenuComponent(leftButtonTexture, new Vector2(ResolutionButton.ComponentPosition.X - 59, ResolutionButton.ComponentPosition.Y + 5), new Vector2(leftButtonTexture.Width, leftButtonTexture.Height));
-            //optionsButtonList.Add(resDecButton);
+            Button resDecButton = new Button(GameManager.ButtonName.ResolutionDown, this);
+            resDecButton.InitialiseMenuComponent(leftButtonTexture, new Vector2(ResolutionButton.ComponentPosition.X - 59, ResolutionButton.ComponentPosition.Y + 5), new Vector2(leftButtonTexture.Width, leftButtonTexture.Height));
+            optionsButtonList.Add(resDecButton);
 
-            //Button resIncButton = new Button(GameManager.ButtonName.ResolutionUp, this);
-            //resIncButton.InitialiseMenuComponent(rightButtonTexture, new Vector2(ResolutionButton.ComponentPosition.X + ResolutionButtonTexture.Width + 10, ResolutionButton.ComponentPosition.Y + 5), new Vector2(rightButtonTexture.Width, rightButtonTexture.Height));
-            //optionsButtonList.Add(resIncButton);
+            Button resIncButton = new Button(GameManager.ButtonName.ResolutionUp, this);
+            resIncButton.InitialiseMenuComponent(rightButtonTexture, new Vector2(ResolutionButton.ComponentPosition.X + ResolutionButtonTexture.Width + 10, ResolutionButton.ComponentPosition.Y + 5), new Vector2(rightButtonTexture.Width, rightButtonTexture.Height));
+            optionsButtonList.Add(resIncButton);
 
             Button musicVolDecButton = new Button(GameManager.ButtonName.MusicVolumeDown, this);
             musicVolDecButton.InitialiseMenuComponent(leftButtonTexture, new Vector2(MusicButton.ComponentPosition.X - 59, MusicButton.ComponentPosition.Y + 5), new Vector2(leftButtonTexture.Width, leftButtonTexture.Height));

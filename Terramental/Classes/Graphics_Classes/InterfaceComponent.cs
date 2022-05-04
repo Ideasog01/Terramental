@@ -45,7 +45,7 @@ namespace Terramental
 
         public void FollowCamera()
         {
-            _componentPosition = CameraController._cameraCentre + _componentOffset + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
+            _componentPosition = CameraController.cameraCentre + _componentOffset + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
             _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
         }
 

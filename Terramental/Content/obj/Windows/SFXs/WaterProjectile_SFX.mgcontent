@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/WaterProjectile_SFX.wav</SourceFile>
-  <SourceTime>2022-05-04T13:57:05.1906499+01:00</SourceTime>
+  <SourceTime>2022-05-04T19:54:17.337702+01:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/SFXs/WaterProjectile_SFX.xnb</DestFile>
-  <DestTime>2022-05-04T14:09:57.6880346+01:00</DestTime>
+  <DestTime>2022-05-04T20:43:21.0052381+01:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

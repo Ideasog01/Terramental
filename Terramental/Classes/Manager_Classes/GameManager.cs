@@ -33,9 +33,6 @@ namespace Terramental
         public static int screenWidth = 960;
         public static int screenHeight = 540;
 
-        public static float spriteWidth = 1.0f; 
-        public static float spriteHeight = 1.0f;
-
         public static int levelIndex;
         public static Vector2 playerCheckpoint;
 
@@ -56,10 +53,10 @@ namespace Terramental
 
         public CameraController _mainCam;
 
-        private bool skipToLevel = false;
+        private bool skipToLevel = true;
 
-        private int[] screenWidths = { 960, 3840, 2560, 2560, 1920, 1366, 1280, 1280 };
-        private int[] screenHeights = { 540, 2160, 1440, 1080, 1080, 768, 1024, 720 };
+        private int[] screenWidths = { 960, 1920 };
+        private int[] screenHeights = { 540, 1080 };
         private int currentResolutionIndex;
 
         public GameManager()
@@ -97,20 +94,20 @@ namespace Terramental
 
             if(skipToLevel)
             {
-                LoadNewGame(@"MapData.json");
+                LoadNewGame(@"Content/Level1Map.json");
                 currentGameState = GameState.Level;
             }
         }
 
         protected override void Update(GameTime gameTime)
         {
-            spriteWidth = screenWidth / 960;
-            spriteHeight = screenHeight / 540;
-
             UpdateManagers(gameTime);
 
-            if(currentGameState == GameState.Level && playerInterface != null)
+            System.Diagnostics.Debug.WriteLine("Camera Position = " + _mainCam.CameraCentre.ToString());
+
+            if (currentGameState == GameState.Level && playerInterface != null)
             {
+
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
@@ -122,8 +119,8 @@ namespace Terramental
             }
 
             menuManager.UpdateMenuButtons(gameTime);
-
             _mainCam.UpdateCamera(gameTime);
+
 
             base.Update(gameTime);
         }
@@ -169,17 +166,17 @@ namespace Terramental
                 currentResolutionIndex = screenWidths.Length - 1;
             }
 
-            if(currentResolutionIndex >= screenWidths.Length)
+            if(currentResolutionIndex > screenWidths.Length - 1)
             {
                 currentResolutionIndex = 0;
             }
 
             _graphics.PreferredBackBufferWidth = screenWidths[currentResolutionIndex];
             _graphics.PreferredBackBufferHeight = screenHeights[currentResolutionIndex];
-            screenWidth = _graphics.PreferredBackBufferWidth;
-            screenHeight = _graphics.PreferredBackBufferHeight;
+            screenWidth = screenWidths[currentResolutionIndex];
+            screenHeight = screenHeights[currentResolutionIndex];
 
-            if(screenWidth == _graphics.GraphicsDevice.Viewport.Width && screenHeight == _graphics.GraphicsDevice.Viewport.Height)
+            if (screenWidth == _graphics.GraphicsDevice.Viewport.Width && screenHeight == _graphics.GraphicsDevice.Viewport.Height)
             {
                 _graphics.IsFullScreen = true;
             }
@@ -188,7 +185,6 @@ namespace Terramental
                 _graphics.IsFullScreen = false;
             }
 
-            // Apply the changes
             _graphics.ApplyChanges();
             System.Console.WriteLine("New resolution: {0} x {1}", _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
         }
@@ -227,7 +223,7 @@ namespace Terramental
 
             playerCharacter.ResetPlayer();
             playerCharacter.DisplayPlayerLives();
-
+            CameraController.cameraWorldPos = playerCharacter.SpritePosition;
             mapManager.LoadMapData(filePath);
             gameLoaded = true;
         }
