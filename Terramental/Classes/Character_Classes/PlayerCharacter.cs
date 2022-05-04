@@ -488,7 +488,6 @@ namespace Terramental
                 _isDoubleJumpUsed = true;
                 AudioManager.PlaySound("Jump_SFX");
             }
-            
         }
 
         private void SimulateFriction()

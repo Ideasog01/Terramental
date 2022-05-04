@@ -34,6 +34,8 @@ namespace Terramental
         private int _enemyIndex;
         private int _elementIndex;
 
+        private float _jumpCooldown;
+
         private GameManager _gameManager;
 
         private Vector2 _oldPosition;
@@ -361,6 +363,15 @@ namespace Terramental
             if (lastMovement.Y == 0)
             {
                 SpriteVelocity *= Vector2.UnitX;
+            }
+        }
+
+        private void EnemyJump()
+        {
+            if (IsGrounded())
+            {
+                SpriteVelocity = -Vector2.UnitY * 22.25f;
+                AudioManager.PlaySound("Jump_SFX");
             }
         }
 
