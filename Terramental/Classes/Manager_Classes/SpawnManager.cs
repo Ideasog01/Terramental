@@ -39,7 +39,7 @@ namespace Terramental
                         {
                             enemy.UpdateCharacter(gameTime);
                             enemy.UpdateEnemy(gameTime);
-                            enemy.UpdateHealthBar();
+                            enemy.UpdateWorldCanvas();
                             enemy.EnableWorldCanvas(true);
                         }
                         else
@@ -254,7 +254,7 @@ namespace Terramental
                     knightEnemy.AddAnimation(knightAttack);
                     knightEnemy.SetAnimation(0);
                     
-                    knightEnemy.LoadHealthBar(_gameManager);
+                    knightEnemy.LoadWorldCanvas(_gameManager);
                     knightEnemy.LayerOrder = -1;
                     knightEnemy.playerCharacter = _gameManager.playerCharacter;
                     knightEnemy.AttackThreshold = 60;
@@ -284,7 +284,7 @@ namespace Terramental
                     darkMageCharacter.AttackThreshold = 400;
                     darkMageCharacter.ChaseThreshold = 600;
 
-                    darkMageCharacter.LoadHealthBar(_gameManager);
+                    darkMageCharacter.LoadWorldCanvas(_gameManager);
                     darkMageCharacter.LayerOrder = -1;
                     darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
                     darkMageCharacter.EnemyIndex = 1;

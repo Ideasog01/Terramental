@@ -48,6 +48,8 @@ namespace Terramental
 
         private bool _isFacingRight;
 
+        private Vector2 _oldPosition;
+
         public enum DashDirections
         {
             Up,
@@ -329,8 +331,6 @@ namespace Terramental
                     }
                 }
 
-                SpritePosition += SpriteVelocity;
-
                 float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
 
                 SpritePosition = new Vector2(posX, SpritePosition.Y);
@@ -384,6 +384,12 @@ namespace Terramental
                 SpriteVelocity = new Vector2(0, 0);
             }
         }
+
+        private void UpdatePositionBasedOnMovement(GameTime gameTime)
+        {
+            SpritePosition += SpriteVelocity *  (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+        }
+
 
         public void TeleportPlayer(Vector2 position, bool setCheckpoint)
         {
@@ -530,9 +536,8 @@ namespace Terramental
                 {
                     if (!_isDashing)
                     {
-                        SpriteVelocity = new Vector2(SpriteVelocity.X, 4);
+                        SpriteVelocity = Vector2.UnitY * 0.5f;
                     }
-
                 }
             }
         }
@@ -651,82 +656,95 @@ namespace Terramental
 
         #region Collisions
 
+        private void MoveAsFarAsPossible(GameTime gameTime)
+        {
+            _oldPosition = base.SpritePosition;
+            UpdatePositionBasedOnMovement(gameTime);
+            base.SpritePosition = _gameManager.mapManager.FindValidLocation(_oldPosition, SpritePosition, SpriteRectangle);
+        }
+
+
         private void CheckCollisions()
         {
-            if (_elementWall != null)
+            if (!_gameManager.mapManager.HasRoomForRectangle(SpriteRectangle))
             {
-                if (!_elementWall.RightCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)) && !_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
-                {
-                    _disableRight = false;
-                    _elementWall = null;
-                    return;
-                }
-
-                if (!_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
-                {
-                    _disableLeft = false;
-                    _elementWall = null;
-                }
-            }
-            else
-            {
-                _disableLeft = false;
-                _disableRight = false;
+                base.SpritePosition = _gameManager.mapManager.FindValidLocation(_oldPosition, SpritePosition, SpriteRectangle);
             }
 
-            foreach (Tile tile in MapManager.activeTiles)
-            {
-                if (tile.GroundTile)
-                {
-                    if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                    {
-                        _isGrounded = true;
-                        _groundTile = tile;
-                      
-                    }
+            //if (_elementWall != null)
+            //{
+            //    if (!_elementWall.RightCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)) && !_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
+            //    {
+            //        _disableRight = false;
+            //        _elementWall = null;
+            //        return;
+            //    }
 
-                    if (tile.BottomCollision(this))
-                    {
-                        _isJumping = false;
-                        _jumpHeight = SpritePosition.Y;
-                    }
-                }
+            //    if (!_elementWall.LeftCollision(new Rectangle(SpriteRectangle.X, SpriteRectangle.Y, SpriteRectangle.Width, SpriteRectangle.Height)))
+            //    {
+            //        _disableLeft = false;
+            //        _elementWall = null;
+            //    }
+            //}
+            //else
+            //{
+            //    _disableLeft = false;
+            //    _disableRight = false;
+            //}
 
-                if (tile.WallTile)
-                {
-                    if (tile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                    {
-                        _disableRight = true;
-                        _rightTile = tile;
-                    }
+            //foreach (Tile tile in MapManager.activeTiles)
+            //{
+            //    if (tile.GroundTile)
+            //    {
+            //        if (tile.TopCollision(new Rectangle((int)SpritePosition.X, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+            //        {
+            //            _isGrounded = true;
+            //            _groundTile = tile;
 
-                    if (tile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                    {
-                        _disableLeft = true;
-                        _leftTile = tile;
-                    }
-                }
-            }
+            //        }
+
+            //        if (tile.BottomCollision(this))
+            //        {
+            //            _isJumping = false;
+            //            _jumpHeight = SpritePosition.Y;
+            //        }
+            //    }
+
+            //    if (tile.WallTile)
+            //    {
+            //        if (tile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+            //        {
+            //            _disableRight = true;
+            //            _rightTile = tile;
+            //        }
+
+            //        if (tile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+            //        {
+            //            _disableLeft = true;
+            //            _leftTile = tile;
+            //        }
+            //    }
+            //}
 
 
 
-            if (_disableRight && _rightTile != null)
-            {
-                if (!_rightTile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                {
-                    _disableRight = false;
-                    _rightTile = null;
-                }
-            }
+            //if (_disableRight && _rightTile != null)
+            //{
+            //    if (!_rightTile.RightCollision(new Rectangle((int)SpritePosition.X + 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+            //    {
+            //        _disableRight = false;
+            //        _rightTile = null;
+            //    }
+            //}
 
-            if (_disableLeft && _leftTile != null)
-            {
-                if (!_leftTile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
-                {
-                    _disableLeft = false;
-                    _leftTile = null;
-                }
-            }
+            //if (_disableLeft && _leftTile != null)
+            //{
+            //    if (!_leftTile.LeftCollision(new Rectangle((int)SpritePosition.X - 5, (int)SpritePosition.Y, (int)SpriteScale.X, (int)SpriteScale.Y)))
+            //    {
+            //        _disableLeft = false;
+            //        _leftTile = null;
+            //    }
+            //}
         }
 
         #endregion

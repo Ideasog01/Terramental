@@ -103,6 +103,7 @@ namespace Terramental
         public Rectangle SpriteRectangle
         {
             get { return _spriteRectangle; }
+            set { SpriteRectangle = value; }
         }
 
         public List<Animation> Animations

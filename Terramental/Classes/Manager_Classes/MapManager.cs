@@ -303,5 +303,64 @@ namespace Terramental
                 SpawnManager.SpawnCannonObstacle(position, false);
             }
         }
+
+        public Vector2 FindValidLocation(Vector2 originalPosition, Vector2 destination, Rectangle box)
+        {
+            Vector2 movementToTry = destination - originalPosition;
+            Vector2 furthestAvailableLocationSoFar = originalPosition;
+            int numberOfStepsToBreakMovementInto = (int)(movementToTry.Length() * 2) + 1;
+            Vector2 oneStep = movementToTry / numberOfStepsToBreakMovementInto;
+
+            for (int i = 1; i <= numberOfStepsToBreakMovementInto; i++)
+            {
+                Vector2 positionToTry = originalPosition + oneStep * i;
+                Rectangle newBoundary = CreateRectangleAtPosition(positionToTry, box.Width, box.Height);
+
+                if (HasRoomForRectangle(newBoundary))
+                {
+                    furthestAvailableLocationSoFar = positionToTry;
+                }
+                else 
+                {
+                    bool isDiagonalMove = movementToTry.X != 0 && movementToTry.Y != 0;
+                    if (isDiagonalMove)
+                    {
+                        int stepsLeft = numberOfStepsToBreakMovementInto - (i - 1);
+                        Vector2 remainingHorizontalMovement = oneStep.X * Vector2.UnitX * stepsLeft;
+                        Vector2 finalPositionIfMovingHorizontally = furthestAvailableLocationSoFar + remainingHorizontalMovement;
+
+                        furthestAvailableLocationSoFar = FindValidLocation(furthestAvailableLocationSoFar, finalPositionIfMovingHorizontally, box);
+                        Vector2 remainingVerticalMovement = oneStep.Y * Vector2.UnitY * stepsLeft;
+                        Vector2 finalPositionIfMovingVertically = furthestAvailableLocationSoFar +
+                        remainingVerticalMovement;
+                        furthestAvailableLocationSoFar = FindValidLocation(furthestAvailableLocationSoFar, finalPositionIfMovingVertically, box);
+                    }
+
+                    break;
+                }
+            }
+
+            return furthestAvailableLocationSoFar;
+
+
+        }
+
+        public bool HasRoomForRectangle(Rectangle rectangleToCheck)
+        {
+            foreach (var tile in tileList)
+            {
+                if (tile.WallTile && tile.SpriteRectangle.Intersects(rectangleToCheck))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height)
+        {
+            return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);
+        }
+
     }
 }
