@@ -238,10 +238,6 @@ namespace Terramental
                 {
                     ApplyGravity();
                 }
-                
-
-                //float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
-
 
                 if (_attackTimer <= 0)
                 {
@@ -266,13 +262,7 @@ namespace Terramental
 
                             break;
                     }
-                }
-
-                if(SpriteVelocity.X != 0)
-                {
-                    Animations[AnimationIndex].MirrorTexture = SpriteVelocity.X < 0;
-                }
-                
+                }           
             }
         }
 
@@ -473,6 +463,15 @@ namespace Terramental
         public void PlayerMovement(int amount, GameTime gameTime)
         {
             SpriteVelocity += new Vector2(amount, 0);
+
+            if(amount > 0)
+            {
+                Animations[AnimationIndex].MirrorTexture = false;
+            }
+            else
+            {
+                Animations[AnimationIndex].MirrorTexture = true;
+            }
         }
 
         public void PlayerJump()

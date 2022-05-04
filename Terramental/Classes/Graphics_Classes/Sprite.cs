@@ -24,7 +24,6 @@ namespace Terramental
         private Rectangle _spriteSourceRectangle;
         private bool _isActive;
         private bool _isVisible;
-        private Sprite _attachSprite;
         private Vector2 _attachSpriteOffset;
         private Vector2 _spawnPosition;
         private int _layerOrder;
@@ -37,11 +36,6 @@ namespace Terramental
         private float _animationElapsedTime;
         private int _animationFrameIndex;
         private int _previousAnimationIndex;
-
-        //Destroy Variables
-
-        private float _destroyTimer;
-        private bool _destructionActivated;
 
         #endregion
 
@@ -75,12 +69,6 @@ namespace Terramental
         {
             get { return _spriteTexture; }
             set { _spriteTexture = value; }
-        }
-
-        public Sprite AttachSprite
-        {
-            get { return _attachSprite; }
-            set { _attachSprite = value; }
         }
 
         public Vector2 SpriteVelocity
@@ -163,23 +151,6 @@ namespace Terramental
             {
                 UpdateAnimationFrames(gameTime);
             }
-
-            if (_attachSprite != null)
-            {
-                _spritePosition = _attachSprite._spritePosition + _attachSpriteOffset;
-            }
-
-            if (_destructionActivated)
-            {
-                if (_destroyTimer > 0)
-                {
-                    _destroyTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else
-                {
-                    Destroy();
-                }
-            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -220,12 +191,6 @@ namespace Terramental
         public virtual void Destroy()
         {
             _isActive = false;
-        }
-
-        public virtual void Destroy(float destroyTime)
-        {
-            _destroyTimer = destroyTime;
-            _destructionActivated = true;
         }
 
         #endregion
@@ -273,7 +238,16 @@ namespace Terramental
 
         public void SetAnimation(int animationIndex)
         {
+            bool mirrorTexture = false;
+
+            if(_spriteAnimations[_animationIndex].MirrorTexture)
+            {
+                mirrorTexture = true;
+            }
+
             _animationIndex = animationIndex;
+
+            _spriteAnimations[_animationIndex].MirrorTexture = mirrorTexture;
         }
 
         public void AddAnimation(Animation animation)

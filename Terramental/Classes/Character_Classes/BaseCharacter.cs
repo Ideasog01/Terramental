@@ -20,12 +20,11 @@ namespace Terramental
 
         private bool _disableMovement;
 
-        private List<Sprite> _statusEffects = new List<Sprite>();
-
         private int _characterMaxHealth = 3;
         private int _characterHealth = 2;
 
         private float _takeDamageCooldown;
+        private VisualEffect _characterVFX;
 
         private Vector2 _startPosition;
 
@@ -47,25 +46,10 @@ namespace Terramental
             set { _disableMovement = value; }
         }
 
-        public void LoadStatusEffects()
+        public VisualEffect CharacterVFX
         {
-            Sprite flameEffect = new Sprite();
-            flameEffect.Initialise(SpritePosition, SpawnManager._gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), new Vector2(64, 64));
-            flameEffect.Animations.Add(new Animation(SpawnManager._gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), 4, 120f, true, new Vector2(64, 64)));
-            flameEffect.SetAnimation(0);
-            flameEffect.AttachSpriteOffset = new Vector2(40, 24);
-            flameEffect.AttachSprite = this;
-            flameEffect.LayerOrder = -2;
-            flameEffect.IsActive = false;
-            _statusEffects.Add(flameEffect);
-
-            Sprite frozenEffect = new Sprite();
-            frozenEffect.Initialise(SpritePosition, SpawnManager._gameManager.GetTexture("Sprites/Effects/FrozenEffect"), new Vector2(96, 96));
-            frozenEffect.AttachSpriteOffset = new Vector2(10, 10);
-            frozenEffect.AttachSprite = this;
-            frozenEffect.LayerOrder = -2;
-            frozenEffect.IsActive = false;
-            _statusEffects.Add(frozenEffect);
+            get { return _characterVFX; }
+            set { _characterVFX = value; }
         }
 
         public void SetProperties(Vector2 position, int maxHealth, int currentHealth)
@@ -112,14 +96,8 @@ namespace Terramental
             _statusDamageTimer = _statusDamageDuration;
             _statusDamageAmount = statusDamageAmount;
 
-            if(_currentStatus == CharacterStatus.Burning)
-            {
-                _statusEffects[0].IsActive = true;
-            }
-
             if(_currentStatus == CharacterStatus.Frozen)
             {
-                _statusEffects[1].IsActive = true;
                 _disableMovement = true;
             }
         }
@@ -134,14 +112,15 @@ namespace Terramental
 
                 if(_characterHealth <= 0)
                 {
+                    if(_characterVFX != null)
+                    {
+                        _characterVFX.IsActive = false;
+                        _characterVFX = null;
+                    }
+
                     IsActive = false;
                     SpawnManager._gameManager.playerCharacter.EnemiesDefeated++;
                     AudioManager.PlaySound("Hit_SFX");
-
-                    foreach(Sprite effect in _statusEffects)
-                    {
-                        effect.IsActive = false;
-                    }
                 }
             }
         }
@@ -166,14 +145,8 @@ namespace Terramental
             }
             else
             {
-                if(_currentStatus == CharacterStatus.Burning)
-                {
-                    _statusEffects[0].IsActive = false;
-                }
-
                 if(_currentStatus == CharacterStatus.Frozen)
                 {
-                    _statusEffects[1].IsActive = false;
                     _disableMovement = false;
                 }
 

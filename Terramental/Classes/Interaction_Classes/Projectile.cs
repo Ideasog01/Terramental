@@ -38,7 +38,12 @@ namespace Terramental
                         if (OnCollision(enemy.SpriteRectangle))
                         {
                             enemy.TakeDamage(_projectileDamage);
-                            ProjectileTrigger(enemy);
+
+                            if(enemy.CharacterHealth > 0)
+                            {
+                                ProjectileTrigger(enemy);
+                            }
+                            
                             DestroyProjectile();
                             break;
                         }
@@ -100,11 +105,22 @@ namespace Terramental
             if(_projectileTrigger == 1)
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Burning, 5, 2, 20);
+
+                if(character.CharacterVFX == null)
+                {
+                    character.CharacterVFX = SpawnManager.SpawnAnimatedVFX(SpawnManager._gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), new Vector2(12, 12), new Vector2(64, 64), 5, 4, 120f, character);
+                }
+
             }
 
             if(_projectileTrigger == 3)
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Frozen, 2, 0, 0);
+
+                if(character.CharacterVFX == null)
+                {
+                    character.CharacterVFX = SpawnManager.SpawnStaticVFX(SpawnManager._gameManager.GetTexture("Sprites/Effects/FrozenEffect"), new Vector2(0, 0), new Vector2(96, 96), 2, character);
+                }
             }
         }
     }

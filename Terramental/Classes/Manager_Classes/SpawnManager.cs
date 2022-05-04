@@ -25,6 +25,8 @@ namespace Terramental
         public static List<Checkpoint> checkpointList = new List<Checkpoint>();
         public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
         public static List<Cannon> cannonObstacleList = new List<Cannon>();
+        public static List<VisualEffect> vfxList = new List<VisualEffect>();
+
         public static Fragment levelFragment;
 
         public static void Update(GameTime gameTime)
@@ -45,6 +47,17 @@ namespace Terramental
                         else
                         {
                             enemy.EnableWorldCanvas(false);
+                        }
+                    }
+                }
+
+                foreach(VisualEffect vfx in vfxList)
+                {
+                    if(vfx.IsVisible)
+                    {
+                        if(vfx.IsActive)
+                        {
+                            vfx.UpdateVisualEffect(gameTime);
                         }
                     }
                 }
@@ -136,6 +149,86 @@ namespace Terramental
             }
 
         }
+
+        #region Visual Effects
+
+        public static VisualEffect SpawnAnimatedVFX(Texture2D texture, Vector2 positionOffset, Vector2 scale, float vfxDuration, int frameCount, float frameDuration, Sprite attachSprite)
+        {
+            bool vfxFound = false;
+
+            foreach(VisualEffect vfx in vfxList)
+            {
+                if(!vfx.IsActive)
+                {
+                    if(vfx.Animations.Count > 0)
+                    {
+                        vfx.Animations[0].SpriteSheet = texture;
+                        vfx.Animations[0].FrameDimensions = scale;
+                        vfx.Animations[0].FrameCount = frameCount;
+                        vfx.Animations[0].FrameDuration = frameDuration;
+                        vfx.Animations[0].AnimationActive = true;
+                    }
+                    else
+                    {
+                        Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
+                        vfx.Animations.Add(newAnimation);
+                    }
+
+                    vfx.InitialiseVFX(attachSprite, positionOffset, vfxDuration);
+
+                    vfxFound = true;
+                    return vfx;
+                }
+            }
+
+            if(!vfxFound)
+            {
+                VisualEffect visualEffect = new VisualEffect();
+                visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
+                visualEffect.InitialiseVFX(vfxDuration);
+                visualEffect.LayerOrder = -2;
+                Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
+                visualEffect.Animations.Add(newAnimation);
+
+                vfxList.Add(visualEffect);
+                return visualEffect;
+            }
+
+            return null;
+        }
+
+        public static VisualEffect SpawnStaticVFX(Texture2D texture, Vector2 positionOffset, Vector2 scale, float vfxDuration, Sprite attachSprite)
+        {
+            bool vfxFound = false;
+
+            foreach (VisualEffect vfx in vfxList)
+            {
+                if (!vfx.IsActive)
+                {
+                    if (vfx.Animations.Count > 0)
+                    {
+                        vfx.Animations[0].AnimationActive = false;
+                    }
+
+                    vfxFound = true;
+                    return vfx;
+                }
+            }
+
+            if (!vfxFound)
+            {
+                VisualEffect visualEffect = new VisualEffect();
+                visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
+                visualEffect.LayerOrder = -2;
+
+                vfxList.Add(visualEffect);
+                return visualEffect;
+            }
+
+            return null;
+        }
+
+        #endregion
 
         public static void SpawnEnemy(int index, Vector2 position)
         {
@@ -246,7 +339,6 @@ namespace Terramental
                     knightEnemy.AttackThreshold = 60;
                     knightEnemy.ChaseThreshold = 400;
                     knightEnemy.ElementIndex = elementIndex;
-                    knightEnemy.LoadStatusEffects();
                     enemyList.Add(knightEnemy);
                     knightEnemy.AttackCooldown = 1;
                     knightEnemy.EnemyIndex = 0;
@@ -277,7 +369,6 @@ namespace Terramental
                     darkMageCharacter.AttackCooldown = 3;
 
                     darkMageCharacter.ElementIndex = elementIndex;
-                    darkMageCharacter.LoadStatusEffects();
                     enemyList.Add(darkMageCharacter);
                     darkMageCharacter.AttackCooldown = 1;
                     darkMageCharacter.EnemyIndex = 1;
