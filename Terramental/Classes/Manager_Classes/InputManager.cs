@@ -25,6 +25,8 @@ namespace Terramental
         private GamePadState _currentGamepadState;
         private GamePadState _oldGamepadState;
 
+        private bool useDoubleTapDash = true;
+
         private bool isTap = false;
         private double time1;
         private double time2;
@@ -270,35 +272,59 @@ namespace Terramental
         {
             if(!_currentGamepadState.IsConnected)
             {
-                if (IsKeyPressed(Keys.W))
+                if (useDoubleTapDash)
                 {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
-                    _playerCharacter.DashStateMachine();
+                    if (IsKeyPressed(Keys.W))
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
+                        _playerCharacter.DashStateMachine();
                     
+                    }
+
+                    if (IsKeyPressed(Keys.A))
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                        _playerCharacter.DashStateMachine();
+                    }
+
+                    if (IsKeyPressed(Keys.D))
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                        _playerCharacter.DashStateMachine();
+                    }
+
+                    if (_currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        _playerCharacter.VerticalAxisRaw = -1;
+                        _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
+                    }
+
+                    if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        _playerCharacter.VerticalAxisRaw = 0;
+                    }
+                }
+                else
+                {
+                    if (IsKeyPressed(Keys.LeftShift))
+                    {
+                        if (IsKeyPressed(Keys.W))
+                        {
+
+                        }
+
+                        if (IsKeyPressed(Keys.A))
+                        {
+
+                        }
+
+                        if (IsKeyPressed(Keys.S))
+                        {
+
+                        }
+                    }
                 }
 
-                if (IsKeyPressed(Keys.A))
-                {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
-                    _playerCharacter.DashStateMachine();
-                }
-
-                if (IsKeyPressed(Keys.D))
-                {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
-                    _playerCharacter.DashStateMachine();
-                }
-
-                if (_currentKeyboardState.IsKeyDown(Keys.S))
-                {
-                    _playerCharacter.VerticalAxisRaw = -1;
-                    _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
-                }
-
-                if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
-                {
-                    _playerCharacter.VerticalAxisRaw = 0;
-                }
             }
             else
             {

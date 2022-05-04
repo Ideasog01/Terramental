@@ -10,7 +10,7 @@ namespace Terramental
         /// All characters inherit from BaseCharacter class
         /// </summary>
         /// 
-        public enum CharacterStatus { Default, Burning, Frozen }
+        public enum CharacterStatus { Default, Burning, Empowered, Frozen }
 
         private CharacterStatus _currentStatus = CharacterStatus.Default;
         private float _statusDuration;

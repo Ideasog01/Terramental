@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/sana-geldim-106818.mp3</SourceFile>
-  <SourceTime>2022-05-02T17:00:16.5067276+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Music/sana-geldim-106818.xnb</DestFile>
-  <DestTime>2022-05-04T12:22:08.7732867+01:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Music/sana-geldim-106818.mp3</SourceFile>
+  <SourceTime>2022-05-03T23:36:43.2248456+01:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Music/sana-geldim-106818.xnb</DestFile>
+  <DestTime>2022-05-04T18:22:43.3124572+01:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Music/sana-geldim-106818.wma</string>
+    <string>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Music/sana-geldim-106818.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

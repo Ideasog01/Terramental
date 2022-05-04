@@ -308,7 +308,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
-                    AudioManager.PlaySound("Dash_SFX");
+                    // AudioManager.PlaySound("Dash_SFX");
                 }
                 if (leftDashCheck >= 2)
                 {
@@ -318,7 +318,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
-                    AudioManager.PlaySound("Dash_SFX");
+                    // AudioManager.PlaySound("Dash_SFX");
                 }
                 if (rightDashCheck >= 2)
                 {
@@ -328,7 +328,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
-                    AudioManager.PlaySound("Dash_SFX");
+                    // AudioManager.PlaySound("Dash_SFX");
                 }
             }
         }
@@ -366,7 +366,6 @@ namespace Terramental
                 {
                     SpriteVelocity = new Vector2(0, 0);
                 }
-
                 _isDashing = false;
             }
 
@@ -462,9 +461,18 @@ namespace Terramental
 
         public void PlayerMovement(int amount, GameTime gameTime)
         {
-            SpriteVelocity += new Vector2(amount, 0);
+            if(ultimateActive && _elementIndex == 1)
+            {
+                SpriteVelocity += new Vector2(amount*2, 0);
 
-            if(amount > 0)
+            }
+            else
+            {
+                SpriteVelocity += new Vector2(amount, 0);
+
+            }
+
+            if (amount > 0)
             {
                 Animations[AnimationIndex].MirrorTexture = false;
             }
