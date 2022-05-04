@@ -30,7 +30,7 @@ namespace Terramental
         private bool _disableLeft;
 
         // Dash Variables
-        private float dashVelocity = 10.0f;
+        private float dashVelocity = 30.0f;
         private bool _isDashing;
         private bool _canDash = true;
         private bool _isHovering;
@@ -514,7 +514,7 @@ namespace Terramental
 
         public async void DoubleTapToDashCooldown()
         {
-            await Task.Delay(500);
+            await Task.Delay(200);
 
             upDashCheck = 0;
             leftDashCheck = 0;
