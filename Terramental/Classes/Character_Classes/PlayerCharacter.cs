@@ -72,7 +72,6 @@ namespace Terramental
         private Tile _leftTile;
         private Tile _rightTile;
         private ElementWall _elementWall;
-        private float _ultimateUsedTimer;
 
         private List<Tile> _tileList;
         private GameManager _gameManager;
@@ -244,12 +243,12 @@ namespace Terramental
                 //float posX = MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth - 1) * 64);
 
 
-                if (_ultimateUsedTimer <= 0)
+                if (_attackTimer <= 0)
                 {
                     MovementAnimations();
                 }
 
-                if(_ultimateUsedTimer > 0)
+                if(_attackTimer > 0)
                 {
                     switch (_elementIndex)
                     {
@@ -544,7 +543,7 @@ namespace Terramental
 
         #endregion
 
-        #region Ultimate Functions
+        #region Ultimate
 
         public void ActivateUltimate()
         {
@@ -558,7 +557,7 @@ namespace Terramental
 
         public void PrimaryUltimateAttack()
         {
-            if (ultimateActive)
+            if (ultimateActive && _attackTimer <= 0)
             {
                 switch (_elementIndex)
                 {
@@ -609,8 +608,7 @@ namespace Terramental
                         break;
                 }
 
-                _ultimateUsedTimer = 0.5f;
-                _attackTimer = 2;
+                _attackTimer = 1f;
             }
         }
 
@@ -623,7 +621,6 @@ namespace Terramental
             else if (ultimateActive)
             {
                 ultimateCooldown = 10;
-                _ultimateUsedTimer = 0;
                 ultimateActive = false;
             }
 
@@ -635,11 +632,6 @@ namespace Terramental
             if (ultimateCooldown > 0 && !ultimateActive)
             {
                 ultimateCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if(_ultimateUsedTimer > 0)
-            {
-                _ultimateUsedTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
 
