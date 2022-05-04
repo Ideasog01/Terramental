@@ -47,7 +47,6 @@ namespace Terramental
                 {
                     DestroyProjectile();
                 }
-                
             }
         }
 
@@ -58,11 +57,11 @@ namespace Terramental
             SpriteScale = scale;
             SpriteVelocity = velocity;
             _isEnemyProjectile = isEnemyProjectile;
-            IsActive = true;
             _projectileTrigger = projectileTrigger;
             _destroyTimer = projectileDuration;
             _playerCharacter = SpawnManager._gameManager.playerCharacter;
             _projectileDamage = projectileDamage;
+            IsActive = true;
         }
 
         public void DestroyProjectile()
