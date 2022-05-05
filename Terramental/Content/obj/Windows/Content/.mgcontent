@@ -120,7 +120,9 @@
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/CreditsMenu/ReturnButton.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/Dialogue/DialogueNextButton.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/Dialogue/DialoguePanel.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/HelpScreen/DoubleTap.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/HelpScreen/HelpMenuScreen.png</File>
+    <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/HelpScreen/ShiftButton.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelCompleteMenu/ContinueButton.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelCompleteMenu/LevelCompleteBackground.png</File>
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/LevelCompleteMenu/ReplayButton.png</File>
@@ -179,6 +181,8 @@
     <File>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

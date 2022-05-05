@@ -895,3 +895,5 @@ C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Sword_SFX.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\UltimateActivation_SFX.xnb
 C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\WaterProjectile_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\HelpScreen\DoubleTap.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\HelpScreen\ShiftButton.xnb

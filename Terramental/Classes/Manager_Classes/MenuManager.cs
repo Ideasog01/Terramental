@@ -30,6 +30,8 @@ namespace Terramental
 
         public static List<Button> loadGameButtonList = new List<Button>();
 
+        public static Button dashControlButton;
+
         public static Button levelSelectExitButton;
 
         public int currentButtonIndex;
@@ -116,8 +118,9 @@ namespace Terramental
                     break;
 
                 case GameManager.GameState.HelpMenu:
-
+                     
                     _helpScreen.DrawMenuComponent(spriteBatch);
+                    dashControlButton.DrawMenuComponent(spriteBatch);
                     _helpScreenReturnButton.DrawMenuComponent(spriteBatch);
 
                     break;
@@ -518,6 +521,7 @@ namespace Terramental
                 if(GameManager.currentGameState == GameManager.GameState.HelpMenu)
                 {
                     _helpScreenReturnButton.CheckInteraction(mousePos);
+                    dashControlButton.CheckInteraction(mousePos);
                 }
             }
 
@@ -604,6 +608,21 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.ResolutionDown:
                         _gameManager.ChangeResolution(-1);
+                        break;
+                    case GameManager.ButtonName.DashButton:
+                        if (_gameManager.playerCharacter.useDoubleTapDash == true)
+                        {
+                            _gameManager.playerCharacter.useDoubleTapDash = false;
+                            dashControlButton.ComponentTexture = _gameManager.GetTexture("UserInterface/HelpScreen/DoubleTap");
+
+                        }
+                        else if (_gameManager.playerCharacter.useDoubleTapDash == false)
+                        {
+                            _gameManager.playerCharacter.useDoubleTapDash = true;
+                            dashControlButton.ComponentTexture = _gameManager.GetTexture("UserInterface/HelpScreen/ShiftButton");
+
+
+                        }
                         break;
                 }
 
@@ -954,6 +973,11 @@ namespace Terramental
             Texture2D returnButtonTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ReturnButton");
             _helpScreenReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
             _helpScreenReturnButton.InitialiseMenuComponent(returnButtonTexture, new Vector2(20, GameManager.screenHeight - 150), new Vector2(returnButtonTexture.Width, returnButtonTexture.Height));
+
+            Texture2D dashButtonTexture = _gameManager.GetTexture("UserInterface/HelpScreen/DoubleTap");
+            dashControlButton = new Button(GameManager.ButtonName.DashButton, this);
+            dashControlButton.InitialiseMenuComponent(dashButtonTexture, new Vector2(750, 80), new Vector2(75, 75));
+
         }
     }
 }

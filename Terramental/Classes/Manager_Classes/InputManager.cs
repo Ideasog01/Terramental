@@ -25,8 +25,6 @@ namespace Terramental
         private GamePadState _currentGamepadState;
         private GamePadState _oldGamepadState;
 
-        private bool useDoubleTapDash = true;
-
         private bool isTap = false;
         private double time1;
         private double time2;
@@ -272,7 +270,7 @@ namespace Terramental
         {
             if(!_currentGamepadState.IsConnected)
             {
-                if (useDoubleTapDash)
+                if (_playerCharacter.useDoubleTapDash)
                 {
                     if (IsKeyPressed(Keys.W))
                     {
@@ -308,19 +306,40 @@ namespace Terramental
                 {
                     if (IsKeyPressed(Keys.LeftShift))
                     {
-                        if (IsKeyPressed(Keys.W))
+                        if (_currentKeyboardState.IsKeyDown(Keys.W))
                         {
+                            _playerCharacter.dashDirY = -1;
+                            _playerCharacter.dashDirX = 0;
 
+                            _playerCharacter._isDashing = true;
+
+                            Debug.WriteLine("Up Dash With Shift");
+
+                            //  _playerCharacter.Dash(gameTime);
                         }
 
-                        if (IsKeyPressed(Keys.A))
+                        if (_currentKeyboardState.IsKeyDown(Keys.A))
                         {
+                            _playerCharacter.dashDirY = 0;
+                            _playerCharacter.dashDirX = -1;
 
+                            _playerCharacter._isDashing = true;
+
+                            Debug.WriteLine("Left Dash With Shift");
+
+                            // _playerCharacter.Dash(gameTime);
                         }
 
-                        if (IsKeyPressed(Keys.S))
+                        if (_currentKeyboardState.IsKeyDown(Keys.D))
                         {
+                            _playerCharacter.dashDirY = 0;
+                            _playerCharacter.dashDirX = 1;
 
+                            _playerCharacter._isDashing = true;
+
+                            Debug.WriteLine("Right Dash With Shift");
+
+                            // _playerCharacter.Dash(gameTime);
                         }
                     }
                 }

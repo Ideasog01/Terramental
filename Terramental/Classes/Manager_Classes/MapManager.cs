@@ -379,6 +379,5 @@ namespace Terramental
         {
             return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);
         }
-
     }
 }
