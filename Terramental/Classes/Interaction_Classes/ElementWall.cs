@@ -15,6 +15,10 @@ namespace Terramental
 
         private Tile tile;
 
+        private Texture2D _texture1;
+        private Texture2D _texture2;
+        private Texture2D _texture3;
+
         public void InitialiseElementWall(PlayerCharacter playerCharacter, MapManager mapManager, int elementIndex)
         {
             _playerCharacter = playerCharacter;
@@ -32,12 +36,31 @@ namespace Terramental
                 wallHealth -= 20;
             }
 
+            if(wallHealth == 40)
+            {
+                SpriteTexture = _texture2;
+            }
+
+            if(wallHealth == 20)
+            {
+                SpriteTexture = _texture3;
+            }
+
             if (wallHealth <= 0)
             {
                 AudioManager.PlaySound("WallBreak_SFX");
                 tile.IsBlocking = false;
                 IsActive = false;
             }
+        }
+
+        public void LoadWallTextures(Texture2D texture1, Texture2D texture2, Texture2D texture3)
+        {
+            _texture1 = texture1;
+            _texture2 = texture2;
+            _texture3 = texture3;
+
+            SpriteTexture = texture1;
         }
 
         public void ElementWallCollision()
@@ -77,7 +100,7 @@ namespace Terramental
                     else if (_elementIndex == 2)
                     {
                         _checkCollision = true;
-                    }
+                    } 
                 }
 
                 if (_playerCharacter.ElementIndex == 2)

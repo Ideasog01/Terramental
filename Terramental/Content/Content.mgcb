@@ -358,7 +358,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Obstacles/Cannon_Right.png
 
-#begin Sprites/Obstacles/FireTile.png
+#begin Sprites/Obstacles/FireWall_Frame1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -368,9 +368,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Obstacles/FireTile.png
+/build:Sprites/Obstacles/FireWall_Frame1.png
 
-#begin Sprites/Obstacles/SnowTile.png
+#begin Sprites/Obstacles/FireWall_Frame2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -380,7 +380,55 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Obstacles/SnowTile.png
+/build:Sprites/Obstacles/FireWall_Frame2.png
+
+#begin Sprites/Obstacles/FireWall_Frame3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/FireWall_Frame3.png
+
+#begin Sprites/Obstacles/SnowWall_Frame1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/SnowWall_Frame1.png
+
+#begin Sprites/Obstacles/SnowWall_Frame2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/SnowWall_Frame2.png
+
+#begin Sprites/Obstacles/SnowWall_Frame3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/SnowWall_Frame3.png
 
 #begin Sprites/Obstacles/Spikes.png
 /importer:TextureImporter
@@ -394,7 +442,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Obstacles/Spikes.png
 
-#begin Sprites/Obstacles/WaterTile.png
+#begin Sprites/Obstacles/WaterWall_Frame1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -404,9 +452,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Obstacles/WaterTile.png
+/build:Sprites/Obstacles/WaterWall_Frame1.png
 
-#begin Sprites/Pickups/Checkpoint.png
+#begin Sprites/Obstacles/WaterWall_Frame2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -416,7 +464,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Pickups/Checkpoint.png
+/build:Sprites/Obstacles/WaterWall_Frame2.png
+
+#begin Sprites/Obstacles/WaterWall_Frame3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Obstacles/WaterWall_Frame3.png
+
+#begin Sprites/Pickups/Camp_Fire.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Pickups/Camp_Fire.png
 
 #begin Sprites/Pickups/FirePickup_SpriteSheet.png
 /importer:TextureImporter
@@ -453,18 +525,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Pickups/SnowPickup_SpriteSheet.png
-
-#begin Sprites/Pickups/TerramentalIcon.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Pickups/TerramentalIcon.png
 
 #begin Sprites/Pickups/WaterPickup_SpriteSheet.png
 /importer:TextureImporter
@@ -633,6 +693,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/Snow_Projectile.png
+
+#begin Sprites/Projectiles/Water_Projectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/Water_Projectile.png
 
 #begin Sprites/SpriteSheets/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter

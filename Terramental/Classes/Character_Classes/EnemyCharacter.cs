@@ -196,11 +196,7 @@ namespace Terramental
 
             SimulateFriction();
             StopMovingIfBlocked();
-
-            if(!IsGrounded())
-            {
-                ApplyGravity();
-            }
+            ApplyGravity();
 
             MirrorEnemy();
         }
@@ -362,14 +358,6 @@ namespace Terramental
 
             if (lastMovement.X == 0)
             {
-                if(_currentState == AIState.Chase && IsGrounded() && _jumpCooldown <= 0)
-                {
-                    EnemyJump();
-                    AudioManager.PlaySound("Jump_SFX");
-                    _jumpCooldown = 3;
-                }
-
-
                 SpriteVelocity *= Vector2.UnitY;
             }
 
@@ -377,11 +365,6 @@ namespace Terramental
             {
                 SpriteVelocity *= Vector2.UnitX;
             }
-        }
-
-        private void EnemyJump()
-        {
-            SpriteVelocity = -Vector2.UnitY * 22.25f;
         }
 
         #endregion

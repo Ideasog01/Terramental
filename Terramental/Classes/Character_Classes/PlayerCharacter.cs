@@ -577,11 +577,11 @@ namespace Terramental
 
                         if(!Animations[AnimationIndex].MirrorTexture)
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(32, 32), new Vector2(4, 0), false, true, 2, 6, 40);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Water_Projectile"), SpritePosition + new Vector2(40, 0), new Vector2(32, 32), new Vector2(32, 32), new Vector2(4, 0), false, true, 2, 6, 40);
                         }
                         else
                         {
-                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Fire_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(32, 32), new Vector2(-4, 0), false, true, 2, 6, 40);
+                            SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Water_Projectile"), SpritePosition - new Vector2(40, 0), new Vector2(32, 32), new Vector2(32, 32), new Vector2(-4, 0), false, true, 2, 6, 40);
                         }
 
                         AudioManager.PlaySound("WaterProjectile_SFX");

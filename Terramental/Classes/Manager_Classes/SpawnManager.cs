@@ -462,13 +462,13 @@ namespace Terramental
                     switch (elementIndex)
                     {
                         case 0:
-                            elementWall.SpriteTexture = _gameManager.GetTexture("Sprites/Obstacles/FireTile");
+                            elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame3"));
                             break;
                         case 1:
-                            elementWall.SpriteTexture = _gameManager.GetTexture("Sprites/Obstacles/WaterTile");
+                            elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame3"));
                             break;
                         case 2:
-                            elementWall.SpriteTexture = _gameManager.GetTexture("Sprites/Obstacles/SnowTile");
+                            elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame3"));
                             break;
                     }
 
@@ -490,13 +490,16 @@ namespace Terramental
                 switch (elementIndex)
                 {
                     case 0:
-                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/FireTile"), new Vector2(64, 64));
+                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), new Vector2(64, 64));
+                        elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame3"));
                         break;
                     case 1:
                         elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/WaterTile"), new Vector2(64, 64));
+                        elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame3"));
                         break;
                     case 2:
-                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
+                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), new Vector2(64, 64));
+                        elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame3"));
                         break;
                 }
 
@@ -508,37 +511,15 @@ namespace Terramental
             }
         }
 
-        public static void SpawnCheckpoint(Vector2 position)
-        {
-            bool checkpointFound = false;
-
-            foreach(Checkpoint checkpoint in checkpointList)
-            {
-                if(!checkpoint.IsActive)
-                {
-                    checkpoint.SpritePosition = position;
-                    checkpoint.SpawnPosition = position;
-                    checkpoint.IsActive = true;
-                    checkpointFound = true;
-                    break;
-                }
-            }
-
-            if(!checkpointFound)
-            {
-                Checkpoint checkpoint = new Checkpoint(_gameManager.playerCharacter);
-                checkpoint.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Checkpoint"), new Vector2(64, 64));
-                checkpoint.LayerOrder = -2;
-                checkpointList.Add(checkpoint);
-            }
-        }
-
         public static void SpawnLevelEnd(Vector2 position)
         {
             if(levelFragment == null)
             {
                 levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter);
-                levelFragment.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/TerramentalIcon"), new Vector2(64, 64));
+                levelFragment.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), new Vector2(64, 64));
+                Animation levelEndAnim = new Animation(_gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), 4, 120f, true, new Vector2(64, 64));
+                levelFragment.AddAnimation(levelEndAnim);
+
                 levelFragment.LayerOrder = -2;
             }
             else
