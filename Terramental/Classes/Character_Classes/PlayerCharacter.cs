@@ -50,6 +50,8 @@ namespace Terramental
 
         private Vector2 _oldPosition;
 
+        private int _oldElementIndex;
+
         public enum DashDirections
         {
             Up,
@@ -656,9 +658,9 @@ namespace Terramental
             Animations.Add(new Animation(idleWater, 5, 120f, true, new Vector2(64, 64))); //1 //Idle Animations
             Animations.Add(new Animation(idleSnow, 5, 120f, true, new Vector2(64, 64))); //2
 
-            Animations.Add(new Animation(walkFire, 4, 120f, true, new Vector2(64, 64))); //3
-            Animations.Add(new Animation(walkWater, 4, 120f, true, new Vector2(64, 64))); //4 //Walking Animations
-            Animations.Add(new Animation(walkSnow, 4, 120f, true, new Vector2(64, 64))); //5
+            Animations.Add(new Animation(walkFire, 4, 200f, true, new Vector2(64, 64))); //3
+            Animations.Add(new Animation(walkWater, 4, 200f, true, new Vector2(64, 64))); //4 //Walking Animations
+            Animations.Add(new Animation(walkSnow, 4, 200f, true, new Vector2(64, 64))); //5
 
             Animations.Add(new Animation(fireUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //6
             Animations.Add(new Animation(waterUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //7 //Ultimate Activation Animations
@@ -682,38 +684,50 @@ namespace Terramental
         {
             if (SpriteVelocity.X != 0)
             {
-                switch (_elementIndex)
+                if(_elementIndex == 0)
                 {
-                    case 0:
+                    if(Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.FireWalk])
+                    {
                         SetAnimation((int)AnimationIndexEnum.FireWalk);
-                        break;
-                    case 1:
+                    }
+                }
+                else if(_elementIndex == 1)
+                {
+                    if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.WaterWalk])
+                    {
                         SetAnimation((int)AnimationIndexEnum.WaterWalk);
-                        break;
-                    case 2:
+                    }
+                }
+                else if(_elementIndex == 2)
+                {
+                    if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.SnowWalk])
+                    {
                         SetAnimation((int)AnimationIndexEnum.SnowWalk);
-                        break;
-                    default:
-                        _elementIndex = (int)AnimationIndexEnum.IdleFire;
-                        break;
+                    }
                 }
             }
             else
             {
-                switch (_elementIndex)
+                if (_elementIndex == 0)
                 {
-                    case 0:
+                    if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.IdleFire])
+                    {
                         SetAnimation((int)AnimationIndexEnum.IdleFire);
-                        break;
-                    case 1:
+                    }
+                }
+                else if (_elementIndex == 1)
+                {
+                    if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.IdleWater])
+                    {
                         SetAnimation((int)AnimationIndexEnum.IdleWater);
-                        break;
-                    case 2:
+                    }
+                }
+                else if (_elementIndex == 2)
+                {
+                    if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.IdleSnow])
+                    {
                         SetAnimation((int)AnimationIndexEnum.IdleSnow);
-                        break;
-                    default:
-                        _elementIndex = (int)AnimationIndexEnum.IdleFire;
-                        break;
+                    }
                 }
             }
         }
