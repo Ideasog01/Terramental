@@ -222,85 +222,102 @@ namespace Terramental
 
         private void SpawnEntity(int index, Vector2 position)
         {
-            if(index == 1)
+            if (index == 1)
             {
-                SpawnManager.SpawnEnemy(0, position);
+                //Set Player Position To Start
+                _gameManager.playerCharacter.TeleportPlayer(position, true);
             }
 
-            if(index == 2)
+            if (index == 2)
             {
-                SpawnManager.SpawnHealthPickup(position);
+                SpawnManager.SpawnLevelEnd(position);
             }
 
             if(index == 3)
             {
-                SpawnManager.SpawnElementPickup(0, position);
+                SpawnManager.SpawnEnemy(0, position, 0);
             }
 
-            if(index == 4)
+            if (index == 4)
             {
-                SpawnManager.SpawnElementPickup(1, position);
+                SpawnManager.SpawnEnemy(0, position, 1);
             }
 
-            if(index == 5)
+            if (index == 5)
             {
-                SpawnManager.SpawnElementPickup(2, position);
+                SpawnManager.SpawnEnemy(0, position, 2);
             }
 
-            if(index == 6)
+            if (index == 6)
             {
-                SpawnManager.SpawnScorePickup(position);
+                SpawnManager.SpawnEnemy(1, position, 0);
             }
 
-            if(index == 7)
+            if (index == 7)
             {
-                _gameManager.playerCharacter.TeleportPlayer(position, true);
+                SpawnManager.SpawnEnemy(1, position, 1);
             }
 
-            if(index == 8)
+            if (index == 8)
             {
-                SpawnManager.SpawnElementWall(0, position, this);
+                SpawnManager.SpawnEnemy(1, position, 2);
             }
 
             if (index == 9)
             {
-                SpawnManager.SpawnElementWall(1, position, this);
+                SpawnManager.SpawnHealthPickup(position);
             }
 
             if (index == 10)
             {
-                SpawnManager.SpawnElementWall(2, position, this);
+                SpawnManager.SpawnScorePickup(position);
+            }
+
+            if(index == 11)
+            {
+                SpawnManager.SpawnElementPickup(0, position);
             }
 
             if(index == 12)
             {
-                SpawnManager.SpawnCheckpoint(position);
+                SpawnManager.SpawnElementPickup(1, position);
             }
 
             if(index == 13)
             {
-                SpawnManager.SpawnFragment(position);
+                SpawnManager.SpawnElementPickup(2, position);
             }
 
             if(index == 14)
             {
-                SpawnManager.SpawnEnemy(1, position);
+                SpawnManager.SpawnElementWall(0, position, this);
             }
 
             if(index == 15)
             {
-                SpawnManager.SpawnSpikeObstacle(position);
+                SpawnManager.SpawnElementWall(1, position, this);
             }
 
             if(index == 16)
             {
+                SpawnManager.SpawnElementWall(2, position, this);
+            }
+
+            if(index == 17)
+            {
+                SpawnManager.SpawnSpikeObstacle(position);
+            }
+
+            if(index == 18)
+            {
                 SpawnManager.SpawnCannonObstacle(position, true);
             }
 
-            if (index == 17)
+            if(index == 19)
             {
                 SpawnManager.SpawnCannonObstacle(position, false);
             }
+
         }
 
         public Vector2 FindValidLoaction(Vector2 originalPos, Vector2 destination, Rectangle rectangle)

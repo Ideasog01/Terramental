@@ -231,7 +231,7 @@ namespace Terramental
 
         #endregion
 
-        public static void SpawnEnemy(int index, Vector2 position)
+        public static void SpawnEnemy(int index, Vector2 position, int elementIndex)
         {
             bool enemyFound = false;
 
@@ -239,9 +239,6 @@ namespace Terramental
             {
                 if (!enemy.IsActive)
                 {
-                    Random rand = new Random();
-                    int elementIndex = rand.Next(0, 2);
-
                     if (index == 0)
                     {
                         enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, _gameManager);
@@ -315,9 +312,6 @@ namespace Terramental
 
             if (!enemyFound)
             {
-                Random rand = new Random();
-                int elementIndex = rand.Next(0, 2);
-
                 if (index == 0) //Knight Enemy Character
                 {
                     Animation knightIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
@@ -539,7 +533,7 @@ namespace Terramental
             }
         }
 
-        public static void SpawnFragment(Vector2 position)
+        public static void SpawnLevelEnd(Vector2 position)
         {
             if(levelFragment == null)
             {
