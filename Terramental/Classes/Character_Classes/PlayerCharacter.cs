@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Terramental
 {
@@ -30,8 +31,8 @@ namespace Terramental
         private bool _disableLeft;
 
         // Dash Variables
-        private float dashVelocity = 1.5f;
-        private bool _isDashing;
+        private float dashVelocity = 3.0f;
+        public bool _isDashing = false;
         private bool _canDash = true;
         private bool _isHovering;
         private bool _dashActive;
@@ -40,8 +41,10 @@ namespace Terramental
         private int leftDashCheck = 0;
         private int rightDashCheck = 0;
 
-        private int dashDirX;
-        private int dashDirY;
+        public int dashDirX;
+        public int dashDirY;
+
+        public bool useDoubleTapDash = false;
 
         private float _dashDistX;
         private float _dashDistY;
@@ -310,7 +313,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
-                    AudioManager.PlaySound("Dash_SFX");
+                    // AudioManager.PlaySound("Dash_SFX");
                 }
                 if (leftDashCheck >= 2)
                 {
@@ -320,7 +323,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
-                    AudioManager.PlaySound("Dash_SFX");
+                    // AudioManager.PlaySound("Dash_SFX");
                 }
                 if (rightDashCheck >= 2)
                 {
@@ -330,7 +333,7 @@ namespace Terramental
                     //Dash();
                     _dashActive = true;
                     _isDashing = true;
-                    AudioManager.PlaySound("Dash_SFX");
+                    // AudioManager.PlaySound("Dash_SFX");
                 }
             }
         }
@@ -358,18 +361,44 @@ namespace Terramental
 
         public void Dash(GameTime gameTime)
         {
-            if (_isDashing)
+            if (_isDashing && useDoubleTapDash)
             {
-                if (!_disableRight && !_disableLeft)
+                Rectangle rectangle = SpriteRectangle;
+                rectangle.Offset(dashDirX, dashDirY);
+
+                if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
                 {
+                    Debug.WriteLine("Performing Shift Dash");
+                    Debug.WriteLine(dashDirX);
+                    Debug.Write(dashDirY);
                     SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                 }
                 else
                 {
                     SpriteVelocity = new Vector2(0, 0);
                 }
-
                 _isDashing = false;
+            }
+            else if (_isDashing && !useDoubleTapDash)
+            {
+                for(int i=0; i < 4; i++)
+                {
+                    Rectangle rectangle = SpriteRectangle;
+                    rectangle.Offset(dashDirX, dashDirY);
+
+                    if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
+                    {
+                        Debug.WriteLine("Performing Shift Dash");
+                        Debug.WriteLine(dashDirX);
+                        Debug.Write(dashDirY);
+                        SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
+                    }
+                    else
+                    {
+                        SpriteVelocity = new Vector2(0, 0);
+                    }
+                    _isDashing = false;
+                }
             }
 
             if (dashCooldown > 0)
@@ -464,9 +493,18 @@ namespace Terramental
 
         public void PlayerMovement(int amount, GameTime gameTime)
         {
-            SpriteVelocity += new Vector2(amount, 0);
+            if(ultimateActive && _elementIndex == 1)
+            {
+                SpriteVelocity += new Vector2(amount*2, 0);
 
-            if(amount > 0)
+            }
+            else
+            {
+                SpriteVelocity += new Vector2(amount, 0);
+
+            }
+
+            if (amount > 0)
             {
                 Animations[AnimationIndex].MirrorTexture = false;
             }

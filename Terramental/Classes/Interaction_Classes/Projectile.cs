@@ -128,6 +128,11 @@ namespace Terramental
 
             }
 
+            if (_projectileTrigger == 2)
+            {
+                character.SetStatus(BaseCharacter.CharacterStatus.Empowered, 10, 0, 0);
+            }
+
             if(_projectileTrigger == 3)
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Frozen, 2, 0, 0);

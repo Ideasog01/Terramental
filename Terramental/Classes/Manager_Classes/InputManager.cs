@@ -270,35 +270,80 @@ namespace Terramental
         {
             if(!_currentGamepadState.IsConnected)
             {
-                if (IsKeyPressed(Keys.W))
+                if (_playerCharacter.useDoubleTapDash)
                 {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
-                    _playerCharacter.DashStateMachine();
+                    if (IsKeyPressed(Keys.W))
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
+                        _playerCharacter.DashStateMachine();
                     
+                    }
+
+                    if (IsKeyPressed(Keys.A))
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                        _playerCharacter.DashStateMachine();
+                    }
+
+                    if (IsKeyPressed(Keys.D))
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                        _playerCharacter.DashStateMachine();
+                    }
+
+                    if (_currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        _playerCharacter.VerticalAxisRaw = -1;
+                        _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
+                    }
+
+                    if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        _playerCharacter.VerticalAxisRaw = 0;
+                    }
+                }
+                else
+                {
+                    if (IsKeyPressed(Keys.LeftShift))
+                    {
+                        if (_currentKeyboardState.IsKeyDown(Keys.W))
+                        {
+                            _playerCharacter.dashDirY = -1;
+                            _playerCharacter.dashDirX = 0;
+
+                            _playerCharacter._isDashing = true;
+
+                            Debug.WriteLine("Up Dash With Shift");
+
+                            //  _playerCharacter.Dash(gameTime);
+                        }
+
+                        if (_currentKeyboardState.IsKeyDown(Keys.A))
+                        {
+                            _playerCharacter.dashDirY = 0;
+                            _playerCharacter.dashDirX = -1;
+
+                            _playerCharacter._isDashing = true;
+
+                            Debug.WriteLine("Left Dash With Shift");
+
+                            // _playerCharacter.Dash(gameTime);
+                        }
+
+                        if (_currentKeyboardState.IsKeyDown(Keys.D))
+                        {
+                            _playerCharacter.dashDirY = 0;
+                            _playerCharacter.dashDirX = 1;
+
+                            _playerCharacter._isDashing = true;
+
+                            Debug.WriteLine("Right Dash With Shift");
+
+                            // _playerCharacter.Dash(gameTime);
+                        }
+                    }
                 }
 
-                if (IsKeyPressed(Keys.A))
-                {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
-                    _playerCharacter.DashStateMachine();
-                }
-
-                if (IsKeyPressed(Keys.D))
-                {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
-                    _playerCharacter.DashStateMachine();
-                }
-
-                if (_currentKeyboardState.IsKeyDown(Keys.S))
-                {
-                    _playerCharacter.VerticalAxisRaw = -1;
-                    _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
-                }
-
-                if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
-                {
-                    _playerCharacter.VerticalAxisRaw = 0;
-                }
             }
             else
             {
