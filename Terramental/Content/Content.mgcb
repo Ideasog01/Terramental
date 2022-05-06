@@ -226,6 +226,13 @@
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/LevelTitleFont.spritefont
 
+#begin SpriteFont/TutorialFont.spritefont
+/importer:FontDescriptionImporter
+/processor:LocalizedFontProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SpriteFont/TutorialFont.spritefont
+
 #begin Sprites/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

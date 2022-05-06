@@ -46,6 +46,7 @@ namespace Terramental
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        public TutorialManager tutorialManager;
         public InputManager _inputManager;
         private SpriteManager _spriteManager;
 
@@ -107,7 +108,6 @@ namespace Terramental
 
             if (currentGameState == GameState.Level && playerInterface != null)
             {
-
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
@@ -115,6 +115,11 @@ namespace Terramental
                 if(mapManager != null)
                 {
                     mapManager.CheckActiveTiles();
+                }
+
+                if(tutorialManager != null)
+                {
+                    tutorialManager.UpdateDisplayMessageTimer(gameTime);
                 }
             }
 
@@ -139,6 +144,14 @@ namespace Terramental
             }
 
             menuManager.DrawMenus(_spriteBatch);
+
+            if(tutorialManager != null)
+            {
+                if(tutorialManager.DisplayMessageTimer > 0)
+                {
+                    tutorialManager.DrawMessage(_spriteBatch);
+                }
+            }
 
             _spriteBatch.End();
 
@@ -216,6 +229,7 @@ namespace Terramental
                 playerInterface = new PlayerInterface(this);
 
                 mapManager = new MapManager(this);
+                tutorialManager = new TutorialManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"), playerCharacter);
 
                 CameraController.playerCharacter = playerCharacter;
                 gameInProgress = true;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/HealthPickup_SFX.wav</SourceFile>
-  <SourceTime>2022-05-04T19:54:16.4326744+01:00</SourceTime>
+  <SourceTime>2022-05-05T20:04:27.0236605+01:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/SFXs/HealthPickup_SFX.xnb</DestFile>
-  <DestTime>2022-05-05T17:34:26.7994561+01:00</DestTime>
+  <DestTime>2022-05-06T14:06:49.0221534+01:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
