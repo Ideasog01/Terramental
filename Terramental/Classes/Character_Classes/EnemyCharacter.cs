@@ -37,6 +37,8 @@ namespace Terramental
 
         private Vector2 _oldPosition;
 
+        private bool _pathBlocked;
+
         #endregion
 
         #region Properties
@@ -188,10 +190,26 @@ namespace Terramental
             SimulateFriction();
             StopMovingIfBlocked();
 
-            if(!IsGrounded())
+            if(_currentState == AIState.Idle)
             {
-                ApplyGravity();
+                if(!IsGrounded())
+                {
+                    ApplyGravity();
+                }
             }
+            else if(_currentState == AIState.Chase)
+            {
+                if (!IsGrounded() && !_pathBlocked)
+                {
+                    ApplyGravity();
+                }
+
+                if (_pathBlocked)
+                {
+                    EnemyJump();
+                }
+            }
+
             
 
             MirrorEnemy();
@@ -355,12 +373,27 @@ namespace Terramental
             if (lastMovement.X == 0)
             {
                 SpriteVelocity *= Vector2.UnitY;
+
+                if(!_pathBlocked && IsGrounded())
+                {
+                    AudioManager.PlaySound("Jump_SFX");
+                    _pathBlocked = true;
+                }
+            }
+            else
+            {
+                _pathBlocked = false;
             }
 
             if (lastMovement.Y == 0)
             {
                 SpriteVelocity *= Vector2.UnitX;
             }
+        }
+
+        public void EnemyJump()
+        {
+             SpriteVelocity = -Vector2.UnitY * 2.225f;
         }
 
         #endregion

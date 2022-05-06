@@ -493,21 +493,6 @@ namespace Terramental
 
         public void PlayerMovement(int amount, GameTime gameTime)
         {
-            if(amount < 0)
-            {
-                if(SpritePosition.X - 32 <= 0)
-                {
-                    return;
-                }
-            }
-
-            if(amount > 0)
-            {
-                if (SpritePosition.X + 128 > MapManager.mapWidth * 64)
-                {
-                    return;
-                }
-            }
 
             if(ultimateActive && _elementIndex == 1)
             {
@@ -554,6 +539,7 @@ namespace Terramental
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
             SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+            SpritePosition = new Vector2(MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth * 64) - 64), SpritePosition.Y);
         }
 
         private void ApplyGravity()
