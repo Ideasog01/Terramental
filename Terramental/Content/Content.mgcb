@@ -97,18 +97,6 @@
 /processorParam:Quality=Best
 /build:Music/far-from-home-acoustic-version-13463.mp3
 
-#begin Music/rebirth-110327.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/rebirth-110327.mp3
-
-#begin Music/sana-geldim-106818.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/sana-geldim-106818.mp3
-
 #begin PlayerStart_Tile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2068,6 +2056,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UserInterface/StartScreen.png
+
+#begin Videos/CreditsVideo.wmv
+/importer:WmvImporter
+/processor:VideoProcessor
+/build:Videos/CreditsVideo.wmv
 
 #begin Videos/LoadingScreen.wmv
 /importer:WmvImporter

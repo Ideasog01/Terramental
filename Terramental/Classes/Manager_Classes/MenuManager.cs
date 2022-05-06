@@ -38,6 +38,7 @@ namespace Terramental
 
         public Video splashScreenVideo;
         public Video loadingScreenVideo;
+        public Video creditsVideo;
 
         public VideoPlayer videoPlayer;
         public Texture2D videoTexture;
@@ -95,6 +96,8 @@ namespace Terramental
             LoadHelpScreen();
             LoadLoadingScreen();
 
+            creditsVideo = _gameManager.Content.Load<Video>("Videos/CreditsVideo");
+
             currentButtonIndex = 0;
         }
 
@@ -105,6 +108,17 @@ namespace Terramental
             videoPlayer.Play(loadingScreenVideo);
             videoPlayerAfterState = afterState;
             GameManager.currentGameState = GameManager.GameState.LoadingScreen;
+        }
+
+        public void ActivateCreditsScreen(float duration, GameManager.GameState afterState)
+        {
+            AudioManager.StopMusic();
+            AudioManager.PlaySound("Intro_Music");
+            videoTimer = duration;
+            videoPlaying = true;
+            videoPlayer.Play(creditsVideo);
+            videoPlayerAfterState = afterState;
+            GameManager.currentGameState = GameManager.GameState.CreditsVideo;
         }
 
         public void DrawMenus(SpriteBatch spriteBatch)
@@ -276,6 +290,21 @@ namespace Terramental
                     if (videoPlayer.State == MediaState.Stopped)
                     {
                         videoPlayer.Play(loadingScreenVideo);
+                    }
+
+                    if (videoPlayer.State == MediaState.Playing)
+                    {
+                        videoTexture = videoPlayer.GetTexture();
+                        spriteBatch.Draw(videoTexture, videoRectangle, Color.White);
+                    }
+
+                    break;
+
+                case GameManager.GameState.CreditsVideo:
+
+                    if (videoPlayer.State == MediaState.Stopped)
+                    {
+                        videoPlayer.Play(creditsVideo);
                     }
 
                     if (videoPlayer.State == MediaState.Playing)
@@ -582,7 +611,7 @@ namespace Terramental
 
                         if(GameManager.levelsComplete >= 5)
                         {
-                            GameManager.currentGameState = GameManager.GameState.Credits;
+                            ActivateCreditsScreen(60, GameManager.GameState.MainMenu);
                         }
 
                         _gameManager.mapManager.UnloadLevel();
