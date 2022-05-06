@@ -230,7 +230,7 @@ namespace Terramental
 
                 mapManager = new MapManager(this);
                 tutorialManager = new TutorialManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"), playerCharacter);
-
+                SpawnManager.SpawnMovingPlatform(new Vector2(300, 300), mapManager);
                 CameraController.playerCharacter = playerCharacter;
                 gameInProgress = true;
             }

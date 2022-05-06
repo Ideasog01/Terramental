@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Tiles/WaterLevel/Right_Corner.png</SourceFile>
-  <SourceTime>2022-05-05T20:04:27.9212357+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Tiles/WaterLevel/Right_Corner.xnb</DestFile>
-  <DestTime>2022-05-06T15:17:09.8264842+01:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Tiles/WaterLevel/Right_Corner.png</SourceFile>
+  <SourceTime>2022-05-06T20:08:16.5944837+01:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Tiles/WaterLevel/Right_Corner.xnb</DestFile>
+  <DestTime>2022-05-06T20:10:19.8648895+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

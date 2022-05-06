@@ -318,6 +318,11 @@ namespace Terramental
                 SpawnManager.SpawnCannonObstacle(position, false);
             }
 
+            if(index == 20)
+            {
+                SpawnManager.SpawnMovingPlatform(position, this);
+            }
+
         }
 
         public Vector2 FindValidLoaction(Vector2 originalPos, Vector2 destination, Rectangle rectangle)

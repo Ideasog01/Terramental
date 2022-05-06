@@ -903,3 +903,37 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\HelpScreen\ShiftButton.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\CreditsVideo.wmv
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\CreditsVideo.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\CreditsVideo.wmv
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\PlayerStart_Tile.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Damage_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Dash_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Defeat_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\ElementWallBreak_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\FireProjectile_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\HealthPickup_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Jump_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\MenuButton_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\ScorePickup_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\SnowProjectile_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Sword_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\UltimateActivation_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\WaterProjectile_SFX.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\SpriteFont\TutorialFont.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\FireWall_Frame1.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\FireWall_Frame2.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\FireWall_Frame3.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\SnowWall_Frame1.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\SnowWall_Frame2.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\SnowWall_Frame3.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\WaterWall_Frame1.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\WaterWall_Frame2.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Obstacles\WaterWall_Frame3.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pickups\Camp_Fire.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\walkspritesheet.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_Walk.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_Walk.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Water_Projectile.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\HelpScreen\DoubleTap.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\HelpScreen\ShiftButton.xnb
+C:\Users\lewis\Documents\GitHub\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Videos\CreditsVideo.xnb
