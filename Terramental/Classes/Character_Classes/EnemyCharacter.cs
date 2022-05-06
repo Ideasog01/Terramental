@@ -30,11 +30,8 @@ namespace Terramental
         private float _attackCooldown;
 
         private float _enemyMovementSpeed;
-        private float _enemyGravity;
         private int _enemyIndex;
         private int _elementIndex;
-
-        private float _jumpCooldown;
 
         private GameManager _gameManager;
 
@@ -156,7 +153,6 @@ namespace Terramental
             CharacterMaxHealth = enemyMaxHealth;
             CharacterHealth = enemyHealth;
             _enemyMovementSpeed = enemyMovementSpeed;
-            _enemyGravity = enemyGravity;
             IsActive = true;
 
             if(_gameManager == null)
@@ -189,14 +185,14 @@ namespace Terramental
 
             MoveIfValid(gameTime);
 
-            if (_jumpCooldown > 0)
-            {
-                _jumpCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
             SimulateFriction();
             StopMovingIfBlocked();
-            ApplyGravity();
+
+            if(!IsGrounded())
+            {
+                ApplyGravity();
+            }
+            
 
             MirrorEnemy();
         }
@@ -284,7 +280,7 @@ namespace Terramental
         {
             Vector2 dir = playerCharacter.SpritePosition - SpritePosition;
             dir.Normalize();
-            SpriteVelocity = new Vector2(dir.X, 0) * _enemyMovementSpeed;
+            SpriteVelocity = new Vector2(dir.X, SpriteVelocity.Y) * _enemyMovementSpeed;
 
             if(SpriteVelocity.X != 0)
             {
@@ -329,7 +325,7 @@ namespace Terramental
 
         private void ApplyGravity()
         {
-            SpriteVelocity += Vector2.UnitY * 0.5f;
+            SpriteVelocity = Vector2.UnitY * 0.5f;
         }
 
         private void SimulateFriction()

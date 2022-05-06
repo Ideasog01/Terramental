@@ -40,7 +40,8 @@ namespace Terramental
 
         public void ResetElementPickup()
         {
-            ChangeElement(_originalElementIndex);
+            _elementIndex = _originalElementIndex;
+            ChangeTexture();
         }
 
         public void CheckElementPickupCollision(GameTime gameTime)

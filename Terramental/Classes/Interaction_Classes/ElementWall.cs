@@ -29,6 +29,16 @@ namespace Terramental
             wallHealth = 60;
         }
 
+        public void ResetWall(MapManager mapManager)
+        {
+            tile = mapManager.FindTile(SpriteRectangle);
+            tile.IsBlocking = true;
+            tile.SpriteColor = Color.Red;
+            wallHealth = 60;
+            SpriteTexture = _texture1;
+            IsActive = true;
+        }
+
         public void DamageElementWall()
         {
             if (!_checkCollision)

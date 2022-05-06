@@ -217,7 +217,7 @@ namespace Terramental
             _playerScore = 0;
             _isGrounded = false;
             _enemiesDefeated = 0;
-            _elementIndex = 0;
+            ElementIndex = 0;
         }
 
         public void UpdatePlayerCharacter(GameTime gameTime)

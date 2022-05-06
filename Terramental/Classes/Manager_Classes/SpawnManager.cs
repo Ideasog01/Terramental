@@ -22,7 +22,6 @@ namespace Terramental
         public static List<ScorePickup> scorePickupList = new List<ScorePickup>();
         public static List<ElementWall> elementWallList = new List<ElementWall>();
         public static List<ElementPickup> elementPickupList = new List<ElementPickup>();
-        public static List<Checkpoint> checkpointList = new List<Checkpoint>();
         public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
         public static List<Cannon> cannonObstacleList = new List<Cannon>();
         public static List<VisualEffect> vfxList = new List<VisualEffect>();
@@ -110,17 +109,6 @@ namespace Terramental
                         if (scorePickup.IsActive)
                         {
                             scorePickup.UpdateScorePickup();
-                        }
-                    }
-                }
-
-                foreach (Checkpoint checkpoint in checkpointList)
-                {
-                    if (checkpoint.IsVisible)
-                    {
-                        if (checkpoint.IsActive)
-                        {
-                            checkpoint.CheckCollision();
                         }
                     }
                 }
@@ -655,11 +643,16 @@ namespace Terramental
 
         public static void ResetEntities()
         {
+            foreach(Projectile projectile in projectileList)
+            {
+                projectile.IsActive = false;
+            }
+
             foreach (EnemyCharacter enemy in enemyList)
             {
+                enemy.CharacterHealth = enemy.CharacterMaxHealth;
                 enemy.IsActive = true;
                 enemy.SpritePosition = enemy.SpawnPosition;
-                break;
             }
 
             foreach (ElementPickup elementPickup in elementPickupList)
@@ -667,49 +660,35 @@ namespace Terramental
                 elementPickup.IsActive = true;
                 elementPickup.SpritePosition = elementPickup.SpawnPosition;
                 elementPickup.ResetElementPickup();
-                break;
             }
 
             foreach (ElementWall elementWall in elementWallList)
             {
-                elementWall.IsActive = true;
-                elementWall.SpritePosition = elementWall.SpawnPosition;
-                break;
+                elementWall.ResetWall(_gameManager.mapManager);
             }
 
             foreach (HealthPickup healthPickup in healthPickupList)
             {
                 healthPickup.IsActive = true;
                 healthPickup.SpritePosition = healthPickup.SpawnPosition;
-                break;
             }
 
             foreach (ScorePickup scorePickup in scorePickupList)
             {
                 scorePickup.IsActive = true;
                 scorePickup.SpritePosition = scorePickup.SpawnPosition;
-                break;
-            }
-
-            foreach (Checkpoint checkpoint in checkpointList)
-            {
-                checkpoint.IsActive = true;
-                checkpoint.SpritePosition = checkpoint.SpawnPosition;
-                break;
             }
 
             foreach (SpikeObstacle spikeObstacle in spikeObstacleList)
             {
                 spikeObstacle.IsActive = true;
                 spikeObstacle.SpritePosition = spikeObstacle.SpawnPosition;
-                break;
             }
 
             foreach (Cannon cannon in cannonObstacleList)
             {
                 cannon.IsActive = true;
                 cannon.SpritePosition = cannon.SpawnPosition;
-                break;
             }
 
             levelFragment.IsActive = true;
@@ -740,11 +719,6 @@ namespace Terramental
             foreach (ScorePickup scorePickup in scorePickupList)
             {
                 scorePickup.IsActive = false;
-            }
-
-            foreach (Checkpoint checkpoint in checkpointList)
-            {
-                checkpoint.IsActive = false;
             }
 
             foreach (SpikeObstacle spikeObstacle in spikeObstacleList)
