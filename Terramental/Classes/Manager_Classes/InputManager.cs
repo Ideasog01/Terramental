@@ -270,7 +270,7 @@ namespace Terramental
         {
             if(!_currentGamepadState.IsConnected)
             {
-                if (_playerCharacter.useDoubleTapDash)
+                if (_gameManager.useDoubleTapDash)
                 {
                     if (IsKeyPressed(Keys.W))
                     {

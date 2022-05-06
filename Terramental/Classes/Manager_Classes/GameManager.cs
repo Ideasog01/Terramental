@@ -54,6 +54,8 @@ namespace Terramental
 
         public CameraController _mainCam;
 
+        public bool useDoubleTapDash = false;
+
         private bool skipToLevel = false;
 
         private int[] screenWidths = { 960, 1920 };

@@ -118,6 +118,8 @@ namespace Terramental
             videoPlaying = true;
             videoPlayer.Play(creditsVideo);
             videoPlayerAfterState = afterState;
+            GameManager.gameLoaded = false;
+            GameManager.previousGameState = GameManager.GameState.MainMenu;
             GameManager.currentGameState = GameManager.GameState.CreditsVideo;
         }
 
@@ -639,19 +641,19 @@ namespace Terramental
                         _gameManager.ChangeResolution(-1);
                         break;
                     case GameManager.ButtonName.DashButton:
-                        if (_gameManager.playerCharacter.useDoubleTapDash == true)
+
+                        if (_gameManager.useDoubleTapDash == true)
                         {
-                            _gameManager.playerCharacter.useDoubleTapDash = false;
+                            _gameManager.useDoubleTapDash = false;
                             dashControlButton.ComponentTexture = _gameManager.GetTexture("UserInterface/HelpScreen/DoubleTap");
 
                         }
-                        else if (_gameManager.playerCharacter.useDoubleTapDash == false)
+                        else if (_gameManager.useDoubleTapDash == false)
                         {
-                            _gameManager.playerCharacter.useDoubleTapDash = true;
+                            _gameManager.useDoubleTapDash = true;
                             dashControlButton.ComponentTexture = _gameManager.GetTexture("UserInterface/HelpScreen/ShiftButton");
-
-
                         }
+
                         break;
                 }
 
@@ -995,7 +997,7 @@ namespace Terramental
 
         private void LoadHelpScreen()
         {
-            Texture2D helpScreenTexture = _gameManager.GetTexture("UserInterface/HelpScreen/HelpMenuScreen");
+            Texture2D helpScreenTexture = _gameManager.GetTexture("UserInterface/HelpScreen/HelpScreen");
             _helpScreen = new MenuComponent();
             _helpScreen.InitialiseMenuComponent(helpScreenTexture, Vector2.Zero, new Vector2(GameManager.screenWidth, GameManager.screenHeight));
 
@@ -1005,7 +1007,7 @@ namespace Terramental
 
             Texture2D dashButtonTexture = _gameManager.GetTexture("UserInterface/HelpScreen/DoubleTap");
             dashControlButton = new Button(GameManager.ButtonName.DashButton, this);
-            dashControlButton.InitialiseMenuComponent(dashButtonTexture, new Vector2(750, 80), new Vector2(75, 75));
+            dashControlButton.InitialiseMenuComponent(dashButtonTexture, new Vector2(820, 80), new Vector2(75, 75));
 
         }
     }

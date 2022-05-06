@@ -19,9 +19,6 @@ namespace Terramental
 
         public float deltaTime;
         //Movement Variables
-
-        private bool _isGrounded;
-        private float _playerMovementSpeed = 0.5f;
         private int _horizontalAxisRaw;
         private int _verticalAxisRaw;
         private int _lastNonZeroVAR;
@@ -44,16 +41,12 @@ namespace Terramental
         public int dashDirX;
         public int dashDirY;
 
-        public bool useDoubleTapDash = false;
-
         private float _dashDistX;
         private float _dashDistY;
 
         private bool _isFacingRight;
 
         private Vector2 _oldPosition;
-
-        private int _oldElementIndex;
 
         public enum DashDirections
         {
@@ -72,13 +65,10 @@ namespace Terramental
         private bool _isJumping;
         private bool _isDoubleJumpUsed;
         private float _jumpHeight;
-        private float _jumpSpeed;
         private Tile _groundTile;
         private Tile _leftTile;
         private Tile _rightTile;
         private ElementWall _elementWall;
-
-        private List<Tile> _tileList;
         private GameManager _gameManager;
 
         #region Properties
@@ -215,7 +205,6 @@ namespace Terramental
             disableMovement = false;
             _isJumping = false;
             _playerScore = 0;
-            _isGrounded = false;
             _enemiesDefeated = 0;
             ElementIndex = 0;
         }
@@ -361,7 +350,7 @@ namespace Terramental
 
         public void Dash(GameTime gameTime)
         {
-            if (_isDashing && useDoubleTapDash)
+            if (_isDashing && _gameManager.useDoubleTapDash)
             {
                 Rectangle rectangle = SpriteRectangle;
                 rectangle.Offset(dashDirX, dashDirY);
@@ -379,7 +368,7 @@ namespace Terramental
                 }
                 _isDashing = false;
             }
-            else if (_isDashing && !useDoubleTapDash)
+            else if (_isDashing && !_gameManager.useDoubleTapDash)
             {
                 for(int i=0; i < 4; i++)
                 {
