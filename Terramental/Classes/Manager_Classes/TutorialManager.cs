@@ -69,7 +69,10 @@ namespace Terramental
 
         public void DrawMessage(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - _displayMessageWidth, CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 200), Color.White);
+            if(GameManager.currentGameState == GameManager.GameState.Level)
+            {
+                spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - _displayMessageWidth, CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 200), Color.White);
+            }
         }
 
         private void CheckDistance()
