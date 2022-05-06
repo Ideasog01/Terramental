@@ -503,7 +503,7 @@ namespace Terramental
 
             if(amount > 0)
             {
-                if (SpritePosition.X + 32 > MapManager.mapWidth * 64)
+                if (SpritePosition.X + 128 > MapManager.mapWidth * 64)
                 {
                     return;
                 }
