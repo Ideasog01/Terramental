@@ -493,6 +493,22 @@ namespace Terramental
 
         public void PlayerMovement(int amount, GameTime gameTime)
         {
+            if(amount < 0)
+            {
+                if(SpritePosition.X - 32 <= 0)
+                {
+                    return;
+                }
+            }
+
+            if(amount > 0)
+            {
+                if (SpritePosition.X + 32 > MapManager.mapWidth * 64)
+                {
+                    return;
+                }
+            }
+
             if(ultimateActive && _elementIndex == 1)
             {
                 SpriteVelocity += new Vector2(amount*2, 0);

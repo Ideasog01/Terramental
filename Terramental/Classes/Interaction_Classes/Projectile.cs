@@ -31,43 +31,107 @@ namespace Terramental
                         ProjectileTrigger(_playerCharacter);
                         DestroyProjectile();
                     }
-                }
-            }
-            else
-            {
-                foreach (EnemyCharacter enemy in SpawnManager.enemyList)
-                {
-                    if(enemy.IsActive)
+
+                    foreach (Tile tile in MapManager.activeTiles)
                     {
-                        if(_activeDelay <= 0)
+                        if (tile.IsVisible)
                         {
-                            if (OnCollision(enemy.SpriteRectangle))
+                            if (tile.IsActive)
                             {
-                                enemy.TakeDamage(_projectileDamage);
-
-                                if (enemy.CharacterHealth > 0)
+                                if (OnCollision(tile.SpriteRectangle))
                                 {
-                                    ProjectileTrigger(enemy);
+                                    DestroyProjectile();
+                                    break;
                                 }
-
-                                DestroyProjectile();
-                                break;
                             }
                         }
                     }
                 }
+            }
+            else
+            {
 
-                foreach(ElementWall elementWall in SpawnManager.elementWallList)
+                if(_activeDelay <= 0)
                 {
-                    if(elementWall.IsActive)
+                    foreach (EnemyCharacter enemy in SpawnManager.enemyList)
                     {
-                        if(_activeDelay <= 0)
+                        if (enemy.IsActive)
                         {
-                            if (OnCollision(elementWall.SpriteRectangle))
+                            if (_activeDelay <= 0)
                             {
-                                elementWall.DamageElementWall();
-                                DestroyProjectile();
-                                break;
+                                if (OnCollision(enemy.SpriteRectangle))
+                                {
+                                    bool damageEnemy = true;
+
+                                    if (_playerCharacter.ElementIndex == 0)
+                                    {
+                                        if (enemy.ElementIndex != 2)
+                                        {
+                                            damageEnemy = false;
+                                        }
+                                    }
+
+                                    if (_playerCharacter.ElementIndex == 1)
+                                    {
+                                        if (enemy.ElementIndex != 0)
+                                        {
+                                            damageEnemy = false;
+                                        }
+                                    }
+
+                                    if (_playerCharacter.ElementIndex == 2)
+                                    {
+                                        if (enemy.ElementIndex != 1)
+                                        {
+                                            damageEnemy = false;
+                                        }
+                                    }
+
+
+                                    if(damageEnemy)
+                                    {
+                                        enemy.TakeDamage(_projectileDamage);
+
+                                        if (enemy.CharacterHealth > 0)
+                                        {
+                                            ProjectileTrigger(enemy);
+                                        }
+                                    }
+
+                                    DestroyProjectile();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (ElementWall elementWall in SpawnManager.elementWallList)
+                    {
+                        if (elementWall.IsActive)
+                        {
+                            if (_activeDelay <= 0)
+                            {
+                                if (OnCollision(elementWall.SpriteRectangle))
+                                {
+                                    elementWall.DamageElementWall();
+                                    DestroyProjectile();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (Tile tile in MapManager.activeTiles)
+                    {
+                        if (tile.IsVisible)
+                        {
+                            if (tile.IsActive)
+                            {
+                                if (OnCollision(tile.SpriteRectangle))
+                                {
+                                    DestroyProjectile();
+                                    break;
+                                }
                             }
                         }
                     }
