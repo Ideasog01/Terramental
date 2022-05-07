@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/SFXs/NegativeElement_SFX.wav</SourceFile>
+  <SourceTime>2022-05-07T21:07:32.8476738+00:00</SourceTime>
+  <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Content/SFXs/NegativeElement_SFX.xnb</DestFile>
+  <DestTime>2022-05-07T22:08:12.0618933+00:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2020-08-10T16:17:54+00:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
