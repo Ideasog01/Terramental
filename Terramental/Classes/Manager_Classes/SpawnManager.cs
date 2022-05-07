@@ -170,6 +170,7 @@ namespace Terramental
                         vfx.Animations[0].FrameCount = frameCount;
                         vfx.Animations[0].FrameDuration = frameDuration;
                         vfx.Animations[0].AnimationActive = true;
+                        vfx.IsActive = true;
                     }
                     else
                     {
@@ -179,6 +180,8 @@ namespace Terramental
 
                     vfx.InitialiseVFX(attachSprite, positionOffset, vfxDuration);
 
+                    vfx.SpritePosition = attachSprite.AttachSpriteOffset;
+                    vfx.SpriteScale = scale;
                     vfxFound = true;
                     return vfx;
                 }
@@ -189,7 +192,7 @@ namespace Terramental
                 VisualEffect visualEffect = new VisualEffect();
                 visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
                 visualEffect.InitialiseVFX(vfxDuration);
-                visualEffect.LayerOrder = -2;
+                visualEffect.LayerOrder = -3;
                 Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
                 visualEffect.Animations.Add(newAnimation);
 
@@ -210,8 +213,9 @@ namespace Terramental
                 {
                     if (vfx.Animations.Count > 0)
                     {
+                        vfx.Animations[0].SpriteSheet = texture;
                         vfx.Animations[0].FrameDimensions = scale;
-                        vfx.Animations[0].AnimationActive = false;
+                        vfx.Animations[0].AnimationActive = true;
                     }
 
                     vfxFound = true;
@@ -223,13 +227,56 @@ namespace Terramental
             {
                 VisualEffect visualEffect = new VisualEffect();
                 visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
-                visualEffect.LayerOrder = -2;
+                visualEffect.LayerOrder = -3;
 
                 vfxList.Add(visualEffect);
                 return visualEffect;
             }
 
             return null;
+        }
+
+        public static void SpawnVisualEffectAtPosition(Texture2D texture, Vector2 position, Vector2 scale, float vfxDuration, int frameCount, float frameDuration)
+        {
+            bool vfxFound = false;
+
+            foreach (VisualEffect vfx in vfxList)
+            {
+                if (!vfx.IsActive)
+                {
+                    if (vfx.Animations.Count > 0)
+                    {
+                        vfx.Animations[0].SpriteSheet = texture;
+                        vfx.Animations[0].FrameDimensions = scale;
+                        vfx.Animations[0].FrameCount = frameCount;
+                        vfx.Animations[0].FrameDuration = frameDuration;
+                        vfx.Animations[0].AnimationActive = true;
+                        vfx.IsActive = true;
+                    }
+                    else
+                    {
+                        Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
+                        vfx.Animations.Add(newAnimation);
+                    }
+
+                    vfx.SpritePosition = position;
+                    vfx.SpriteScale = scale;
+                    vfx.InitialiseVFX(vfxDuration);
+
+                    vfxFound = true;
+                }
+            }
+
+            if (!vfxFound)
+            {
+                VisualEffect visualEffect = new VisualEffect();
+                visualEffect.Initialise(position, texture, scale);
+                visualEffect.InitialiseVFX(vfxDuration);
+                visualEffect.LayerOrder = -3;
+                Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
+                visualEffect.Animations.Add(newAnimation);
+                vfxList.Add(visualEffect);
+            }
         }
 
         #endregion

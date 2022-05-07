@@ -139,6 +139,12 @@
 /processorParam:Quality=Best
 /build:SFXs/ElementWallBreak_SFX.wav
 
+#begin SFXs/FireExplosion_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/FireExplosion_SFX.wav
+
 #begin SFXs/FireProjectile_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -175,6 +181,12 @@
 /processorParam:Quality=Best
 /build:SFXs/ScorePickup_SFX.wav
 
+#begin SFXs/SnowExplosion_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/SnowExplosion_SFX.wav
+
 #begin SFXs/SnowProjectile_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -193,6 +205,12 @@
 /processorParam:Quality=Best
 /build:SFXs/UltimateActivation_SFX.wav
 
+#begin SFXs/WaterExplosion_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/WaterExplosion_SFX.wav
+
 #begin SFXs/WaterProjectile_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -205,6 +223,18 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/DefaultFont.spritefont
+
+#begin Sprites/Effects/FireExplosion_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Effects/FireExplosion_SpriteSheet.png
 
 #begin Sprites/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter

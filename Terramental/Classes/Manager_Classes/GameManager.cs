@@ -268,6 +268,15 @@ namespace Terramental
             AudioClip dashSound = new AudioClip("Dash_SFX", "SFXs/Dash_SFX", false, this);
             AudioManager.AddSound(dashSound);
 
+            AudioClip fireExplosion = new AudioClip("FireExplosion_SFX", "SFXs/FireExplosion_SFX", false, this);
+            AudioManager.AddSound(fireExplosion);
+
+            AudioClip waterExplosion = new AudioClip("WaterExplosion_SFX", "SFXs/WaterExplosion_SFX", false, this);
+            AudioManager.AddSound(waterExplosion);
+
+            AudioClip snowExplosion = new AudioClip("SnowExplosion_SFX", "SFXs/SnowExplosion_SFX", false, this);
+            AudioManager.AddSound(snowExplosion);
+
             AudioClip negativeElementSound = new AudioClip("NegativeElement_SFX", "SFXs/NegativeElement_SFX", false, this);
             AudioManager.AddSound(negativeElementSound);
 
