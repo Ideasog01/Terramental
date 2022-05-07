@@ -56,7 +56,7 @@ namespace Terramental
 
         public bool useDoubleTapDash = false;
 
-        private bool skipToLevel = false;
+        private bool skipToLevel = true;
 
         private int[] screenWidths = { 960, 1920 };
         private int[] screenHeights = { 540, 1080 };
@@ -149,10 +149,7 @@ namespace Terramental
 
             if(tutorialManager != null)
             {
-                if(tutorialManager.DisplayMessageTimer > 0)
-                {
-                    tutorialManager.DrawMessage(_spriteBatch);
-                }
+                tutorialManager.DrawMessage(_spriteBatch);
             }
 
             _spriteBatch.End();
@@ -309,6 +306,9 @@ namespace Terramental
 
             AudioClip dashSound = new AudioClip("Dash_SFX", "SFXs/Dash_SFX", false, this);
             AudioManager.AddSound(dashSound);
+
+            AudioClip negativeElementSound = new AudioClip("NegativeElement_SFX", "SFXs/NegativeElement_SFX", false, this);
+            AudioManager.AddSound(negativeElementSound);
 
             AudioClip introMusic = new AudioClip("Intro_Music", "Music/far-from-home-acoustic-version-13463", true, this);
             AudioManager.AddSound(introMusic);

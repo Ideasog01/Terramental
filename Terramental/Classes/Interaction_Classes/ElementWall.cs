@@ -45,6 +45,10 @@ namespace Terramental
             {
                 wallHealth -= 20;
             }
+            else
+            {
+                SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
+            }
 
             if(wallHealth == 40)
             {
@@ -58,6 +62,11 @@ namespace Terramental
 
             if (wallHealth <= 0)
             {
+                if (SpawnManager._gameManager.tutorialManager.displayingElementWallMessage)
+                {
+                    SpawnManager._gameManager.tutorialManager.RemoveMessage();
+                }
+
                 AudioManager.PlaySound("WallBreak_SFX");
                 tile.IsBlocking = false;
                 IsActive = false;

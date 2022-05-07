@@ -276,7 +276,6 @@ namespace Terramental
                     {
                         _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
                         _playerCharacter.DashStateMachine();
-                    
                     }
 
                     if (IsKeyPressed(Keys.A))

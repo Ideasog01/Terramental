@@ -482,10 +482,9 @@ namespace Terramental
 
         public void PlayerMovement(int amount, GameTime gameTime)
         {
-
             if(ultimateActive && _elementIndex == 1)
             {
-                SpriteVelocity += new Vector2(amount*2, 0);
+                SpriteVelocity += new Vector2(amount*1.34f, 0);
 
             }
             else

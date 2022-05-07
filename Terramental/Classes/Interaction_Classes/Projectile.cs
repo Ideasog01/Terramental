@@ -67,6 +67,7 @@ namespace Terramental
                                     {
                                         if (enemy.ElementIndex != 2)
                                         {
+                                            SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
                                             damageEnemy = false;
                                         }
                                     }
@@ -75,6 +76,7 @@ namespace Terramental
                                     {
                                         if (enemy.ElementIndex != 0)
                                         {
+                                            SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
                                             damageEnemy = false;
                                         }
                                     }
@@ -83,6 +85,7 @@ namespace Terramental
                                     {
                                         if (enemy.ElementIndex != 1)
                                         {
+                                            SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
                                             damageEnemy = false;
                                         }
                                     }

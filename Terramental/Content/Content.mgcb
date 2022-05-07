@@ -163,6 +163,12 @@
 /processorParam:Quality=Best
 /build:SFXs/MenuButton_SFX.wav
 
+#begin SFXs/NegativeElement_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/NegativeElement_SFX.wav
+
 #begin SFXs/ScorePickup_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -199,27 +205,6 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/DefaultFont.spritefont
-
-#begin SpriteFont/LevelNumberFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:SpriteFont/LevelNumberFont.spritefont
-
-#begin SpriteFont/LevelTitleFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:SpriteFont/LevelTitleFont.spritefont
-
-#begin SpriteFont/TutorialFont.spritefont
-/importer:FontDescriptionImporter
-/processor:LocalizedFontProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:SpriteFont/TutorialFont.spritefont
 
 #begin Sprites/Effects/Flame_SpriteSheet.png
 /importer:TextureImporter
@@ -1408,6 +1393,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UserInterface/HelpScreen/ShiftButton.png
+
+#begin UserInterface/InvalidElementText.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UserInterface/InvalidElementText.png
 
 #begin UserInterface/LevelCompleteMenu/ContinueButton.png
 /importer:TextureImporter

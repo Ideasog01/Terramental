@@ -53,7 +53,6 @@ namespace Terramental
         private GraphicsDeviceManager _graphics;
 
         private SpriteFont _defaultFont;
-        private SpriteFont _levelTitleFont;
 
         private MenuComponent _startScreen;
 
@@ -82,7 +81,6 @@ namespace Terramental
             _graphics = graphics;
 
             _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
-            _levelTitleFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelTitleFont");
 
             LoadStartScreen();
             LoadMainMenu();
@@ -329,8 +327,8 @@ namespace Terramental
                         completeButton.DrawMenuComponent(spriteBatch);
                     }
 
-                    spriteBatch.DrawString(_levelTitleFont, "Score: " + _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 50, 200), Color.White);
-                    spriteBatch.DrawString(_levelTitleFont, "Enemies Defeated: " + _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) - 150, 300), Color.White);
+                    spriteBatch.DrawString(_defaultFont, "Score: " + _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 50, 200), Color.White);
+                    spriteBatch.DrawString(_defaultFont, "Enemies Defeated: " + _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) - 150, 300), Color.White);
 
                     break;
 
