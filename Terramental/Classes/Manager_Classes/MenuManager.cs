@@ -573,9 +573,10 @@ namespace Terramental
                         _gameManager.ExitGame();
                         break;
                     case GameManager.ButtonName.RespawnButton:
-                        DisplayRespawnScreen(false);
+                        _gameManager.playerCharacter.TeleportPlayer(SpawnManager.startOfLevel);
                         ChangeSelectedButton(0, true);
                         _gameManager.mapManager.ResetLevel();
+                        DisplayRespawnScreen(false);
                         break;
                     case GameManager.ButtonName.LevelSelectConfirm:
                         _gameManager.LoadNewGame(_levelDataFilePath);

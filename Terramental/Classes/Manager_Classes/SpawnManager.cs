@@ -27,6 +27,7 @@ namespace Terramental
         public static List<Cannon> cannonObstacleList = new List<Cannon>();
         public static List<MovingPlatform> movingPlatformList = new List<MovingPlatform>();
         public static List<VisualEffect> vfxList = new List<VisualEffect>();
+        public static Vector2 startOfLevel;
 
         public static Fragment levelFragment;
 
@@ -34,6 +35,7 @@ namespace Terramental
         {
             if (GameManager.currentGameState == GameManager.GameState.Level)
             {
+
                 foreach (EnemyCharacter enemy in enemyList)
                 {
                     if (enemy.IsVisible)

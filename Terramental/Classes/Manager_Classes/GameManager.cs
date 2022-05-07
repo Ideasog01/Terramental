@@ -53,10 +53,6 @@ namespace Terramental
 
         public bool useDoubleTapDash; //Customisation for the dash ability. If this boolean is false, the B button or left shift key can be used instead to activate the dash ability.
 
-        private bool skipToLevel = false;
-
-        public bool useDoubleTapDash;
-
         private int[] screenWidths = { 960, 1920 }; //The possible screen widths for changing resolution
         private int[] screenHeights = { 540, 1080 }; //The possible screen heights for changing resolution
         private int currentResolutionIndex; //The current index for the screenWidth and screenHeight array

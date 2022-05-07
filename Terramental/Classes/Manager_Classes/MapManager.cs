@@ -229,6 +229,7 @@ namespace Terramental
             {
                 //Set Player Position To Start
                 _gameManager.playerCharacter.TeleportPlayer(position);
+                SpawnManager.startOfLevel = position;
             }
 
             if (index == 2)

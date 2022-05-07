@@ -28,7 +28,16 @@ namespace Terramental
 
             if (_cannonCooldownLeft <= 0) // Checks to see if there is no time left on cooldown
             {
-                SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile
+                if (_faceRight)
+                {
+                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile
+
+                }
+                else
+                {
+                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(-40, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile
+
+                }
                 _cannonCooldownLeft = _cannonCooldown; // Resets the amount of time left to the value stored in cannonCooldown
             }
         }
