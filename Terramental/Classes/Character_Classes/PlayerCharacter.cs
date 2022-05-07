@@ -370,7 +370,7 @@ namespace Terramental
                 }
                 _isDashing = false;
             }
-            else if (_isDashing && !useDoubleTapDash && _canDash)
+            else if (_isDashing && !_gameManager.useDoubleTapDash && _canDash)
             {
                 for(int i=0; i < 4; i++)
                 {

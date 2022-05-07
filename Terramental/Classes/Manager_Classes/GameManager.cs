@@ -58,6 +58,8 @@ namespace Terramental
 
         private bool skipToLevel = true;
 
+        public bool useDoubleTapDash;
+
         private int[] screenWidths = { 960, 1920 };
         private int[] screenHeights = { 540, 1080 };
         private int currentResolutionIndex;
