@@ -11,9 +11,8 @@ namespace Terramental
 {
     public class MapManager
     {
-        public static List<Tile> activeTiles = new List<Tile>();
+        public static List<Tile> activeTiles = new List<Tile>(); //The purpose of the activeTiles list is to allow faster checks with collisions etc.
         public static List<Tile> tileList = new List<Tile>();
-        public static List<bool> isWall = new List<bool>();
         public static List<Sprite> assetSpriteList = new List<Sprite>();
 
         public static float mapWidth;
@@ -22,7 +21,7 @@ namespace Terramental
         private GameManager _gameManager;
         private MapData _mapData;
 
-        private List<Texture2D> _tileMap1 = new List<Texture2D>();
+        private List<Texture2D> _tileMap1 = new List<Texture2D>(); //The water region tile map
         private List<Texture2D> _assetTextureList = new List<Texture2D>();
 
         public MapManager(GameManager gameManager)
@@ -46,7 +45,7 @@ namespace Terramental
             DestroyAssets();
         }
 
-        public void CheckActiveTiles()
+        public void CheckActiveTiles() //If the tile is active, and not in the activeTiles list, then add it to the list.
         {
             foreach(Tile tile in tileList)
             {

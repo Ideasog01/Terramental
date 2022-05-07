@@ -99,7 +99,7 @@ namespace Terramental
 
             if(skipToLevel)
             {
-                LoadNewGame(@"Content/Level1Map.json");
+                LoadNewGame(@"Content/Level1Map.json"); //Used for testing
                 currentGameState = GameState.Level;
             }
         }
@@ -110,7 +110,7 @@ namespace Terramental
 
             System.Diagnostics.Debug.WriteLine("Camera Position = " + _mainCam.CameraCentre.ToString());
 
-            if (currentGameState == GameState.Level && playerInterface != null)
+            if (currentGameState == GameState.Level && playerInterface != null) //If level is active, update the appropriate objects
             {
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
