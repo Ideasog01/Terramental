@@ -7,7 +7,7 @@ using TerraEngine.Graphics;
 
 namespace Terramental
 {
-    class SpriteManager
+    public class SpriteManager
     {
         /// <summary>
         /// Controls all loaded sprites

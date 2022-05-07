@@ -195,10 +195,9 @@ namespace Terramental
             _gameManager = gameManager;
         }
 
-        public void ResetPlayer()
+        public void ResetPlayer() //Resets the player's health, element, and other properties. This function is called on respawn or on replay.
         {
             CharacterHealth = 3;
-            SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
             ultimateActiveTimer = 0;
             ultimateActive = false;
@@ -265,15 +264,9 @@ namespace Terramental
             }
         }
 
-        public void TeleportPlayer(Vector2 position, bool setCheckpoint)
+        public void TeleportPlayer(Vector2 position)
         {
             SpritePosition = position;
-
-            if(setCheckpoint)
-            {
-                GameManager.playerCheckpoint = position;
-                ElementIndex = 0;
-            }
         }
 
         public void DashStateMachine()

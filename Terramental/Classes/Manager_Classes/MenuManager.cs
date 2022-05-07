@@ -117,7 +117,7 @@ namespace Terramental
             videoPlaying = true;
             videoPlayer.Play(creditsVideo);
             videoPlayerAfterState = afterState;
-            GameManager.gameLoaded = false;
+            GameManager.levelLoaded = false;
             GameManager.previousGameState = GameManager.GameState.MainMenu;
             GameManager.currentGameState = GameManager.GameState.CreditsVideo;
         }
@@ -396,7 +396,7 @@ namespace Terramental
 
         public void ChangeSelectedButton(int amount, bool vertical)
         {
-            if(_gameManager._inputManager.IsGamePadConnected())
+            if(_gameManager.inputManager.IsGamePadConnected())
             {
                 if (GameManager.currentGameState != GameManager.GameState.SplashScreen && GameManager.currentGameState != GameManager.GameState.Level && _gamePadButtonTimer <= 0)
                 {

@@ -85,7 +85,7 @@ namespace Terramental
         {
             string strResultJson = File.ReadAllText(filePath);
             MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
-            _mapData = newMapData;
+            _mapData = newMapData; //Convert the .json file to MapData class
 
             mapWidth = _mapData._mapWidth;
             mapHeight = _mapData._mapHeight;
@@ -98,6 +98,7 @@ namespace Terramental
 
         private void LoadTextures()
         {
+            //Load Level 1 Texture
             _tileMap1.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsLeft")); //0
             _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsRight")); //1
@@ -124,13 +125,14 @@ namespace Terramental
             _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Sand")); //22
             _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_SandReverse")); //23
 
+            //Load Level 1 Asset Textures
             _assetTextureList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_1"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_2"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_3"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm")); //1
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_1")); //2
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_2")); //3
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_3")); //4
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree")); //5
+            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2")); //6
         }
 
         private void GenerateMap()
@@ -226,7 +228,7 @@ namespace Terramental
             if (index == 1)
             {
                 //Set Player Position To Start
-                _gameManager.playerCharacter.TeleportPlayer(position, true);
+                _gameManager.playerCharacter.TeleportPlayer(position);
             }
 
             if (index == 2)
