@@ -54,7 +54,7 @@ namespace Terramental
                 {
                     _playerCharacter.SpriteVelocity = new Vector2(0, _playerCharacter.SpriteVelocity.Y);
                     _playerCharacter.DisableLeft = true;
-                    _playerCharacter.MovingPlatform = this;
+                    //_playerCharacter.MovingPlatform = this;
 
                 }
 
@@ -62,16 +62,16 @@ namespace Terramental
                 {
                     _playerCharacter.SpriteVelocity = new Vector2(0, _playerCharacter.SpriteVelocity.Y);
                     _playerCharacter.DisableRight = true;
-                    _playerCharacter.MovingPlatform = this;
+                    //_playerCharacter.MovingPlatform = this;
 
                 }
 
                 if (TopCollision(_playerCharacter))
                 {
 
-
+                    _playerCharacter.SpriteVelocity -= Vector2.UnitY * 0.5f;
+                    _playerCharacter.SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f;
                     _playerCharacter.SpriteVelocity += new Vector2(SpriteVelocity.X, SpriteVelocity.Y);
-                    _playerCharacter.IsGrounded = true;
                 }
 
                 if (BottomCollision(_playerCharacter))
@@ -108,10 +108,26 @@ namespace Terramental
                     moveTowardsPos = true;
                 }
             }
-
             SpritePosition += SpriteVelocity;
+        }
+        public bool LeftCollision(Sprite otherSprite)
+        {
+            return (this.SpriteRectangle.Right <= otherSprite.SpriteRectangle.Right && this.SpriteRectangle.Right >= otherSprite.SpriteRectangle.Left - 5 && this.SpriteRectangle.Top <= otherSprite.SpriteRectangle.Bottom - (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherSprite.SpriteRectangle.Top + (otherSprite.SpriteRectangle.Width / 4));
+        }
 
+        public bool RightCollision(Sprite otherSprite)
+        {
+            return (this.SpriteRectangle.Left >= otherSprite.SpriteRectangle.Left && this.SpriteRectangle.Left <= otherSprite.SpriteRectangle.Right + 5 && this.SpriteRectangle.Top <= otherSprite.SpriteRectangle.Bottom - (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Bottom >= otherSprite.SpriteRectangle.Top + (otherSprite.SpriteRectangle.Width / 4));
+        }
 
+        public bool TopCollision(Sprite otherSprite)
+        {
+            return (this.SpriteRectangle.Top + this.SpriteVelocity.Y < otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Bottom > otherSprite.SpriteRectangle.Bottom && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left + (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right - (otherSprite.SpriteRectangle.Width / 4));
+        }
+
+        public bool BottomCollision(Sprite otherSprite)
+        {
+            return (this.SpriteRectangle.Bottom + this.SpriteVelocity.Y > otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Top < otherSprite.SpriteRectangle.Top && this.SpriteRectangle.Right > otherSprite.SpriteRectangle.Left + (otherSprite.SpriteRectangle.Width / 4) && this.SpriteRectangle.Left < otherSprite.SpriteRectangle.Right - (otherSprite.SpriteRectangle.Width / 4));
         }
     }
 }

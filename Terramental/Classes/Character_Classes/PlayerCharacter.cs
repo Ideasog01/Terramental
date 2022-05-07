@@ -20,7 +20,7 @@ namespace Terramental
         public float deltaTime;
         //Movement Variables
 
-        private bool _isGrounded;
+        public bool _isGrounded;
         private float _playerMovementSpeed = 0.5f;
         private int _horizontalAxisRaw;
         private int _verticalAxisRaw;
@@ -225,9 +225,13 @@ namespace Terramental
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
                 UpdateUltimateStatus(gameTime);
+                UpdateShiftDashCooldown(gameTime);
+
+
                 DashDamage();
                 DashCheck();
                 Dash(gameTime);
+
 
                 MoveIfValid(gameTime);
 
@@ -368,9 +372,6 @@ namespace Terramental
 
                 if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
                 {
-                    Debug.WriteLine("Performing Shift Dash");
-                    Debug.WriteLine(dashDirX);
-                    Debug.Write(dashDirY);
                     SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                 }
                 else
@@ -379,7 +380,7 @@ namespace Terramental
                 }
                 _isDashing = false;
             }
-            else if (_isDashing && !useDoubleTapDash)
+            else if (_isDashing && !useDoubleTapDash && _canDash)
             {
                 for(int i=0; i < 4; i++)
                 {
@@ -388,22 +389,35 @@ namespace Terramental
 
                     if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
                     {
-                        Debug.WriteLine("Performing Shift Dash");
-                        Debug.WriteLine(dashDirX);
-                        Debug.Write(dashDirY);
                         SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                     }
                     else
                     {
                         SpriteVelocity = new Vector2(0, 0);
                     }
-                    _isDashing = false;
                 }
+                _isDashing = false;
+                _canDash = false;
+                dashCooldown = 2;
+                Debug.WriteLine("HERE");
             }
+            _isDashing = false;
+        }
 
-            if (dashCooldown > 0)
+        public void UpdateShiftDashCooldown(GameTime gameTime)
+        {
+            Debug.WriteLine("is dash: " + _isDashing);
+            Debug.WriteLine("can dash: " + _canDash);
+            // Debug.WriteLine(dashCooldown);
+            if (dashCooldown >= 0)
             {
                 dashCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _canDash = false;
+            }
+
+            if (dashCooldown <= 0)
+            {
+                _canDash = true;
             }
         }
 
