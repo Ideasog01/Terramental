@@ -56,9 +56,7 @@ namespace Terramental
 
         public CameraController _mainCam;
 
-        public bool useDoubleTapDash = false;
-
-        private bool skipToLevel = false;
+        private bool skipToLevel = true;
 
         private int[] screenWidths = { 960, 1920 };
         private int[] screenHeights = { 540, 1080 };
@@ -108,7 +106,7 @@ namespace Terramental
         {
             UpdateManagers(gameTime);
 
-            System.Diagnostics.Debug.WriteLine("Camera Position = " + _mainCam.CameraCentre.ToString());
+            // System.Diagnostics.Debug.WriteLine("Camera Position = " + _mainCam.CameraCentre.ToString());
 
             if (currentGameState == GameState.Level && playerInterface != null) //If level is active, update the appropriate objects
             {
@@ -231,7 +229,7 @@ namespace Terramental
 
                 mapManager = new MapManager(this);
                 tutorialManager = new TutorialManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"), playerCharacter);
-
+                SpawnManager.SpawnMovingPlatform(new Vector2(300, 300), mapManager);
                 CameraController.playerCharacter = playerCharacter;
                 gameInProgress = true;
             }

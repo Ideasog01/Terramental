@@ -215,9 +215,13 @@ namespace Terramental
             if(GameManager.currentGameState == GameManager.GameState.Level)
             {
                 UpdateUltimateStatus(gameTime);
+                UpdateShiftDashCooldown(gameTime);
+
+
                 DashDamage();
                 DashCheck();
                 Dash(gameTime);
+
 
                 MoveIfValid(gameTime);
 
@@ -356,11 +360,8 @@ namespace Terramental
                 Rectangle rectangle = SpriteRectangle;
                 rectangle.Offset(dashDirX, dashDirY);
 
-                if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
+                if (_gameManager.mapManager.HasRoomForRectangle(rectangle) && _gameManager.mapManager.HasRoomForRectangleMP(rectangle))
                 {
-                    Debug.WriteLine("Performing Shift Dash");
-                    Debug.WriteLine(dashDirX);
-                    Debug.Write(dashDirY);
                     SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                 }
                 else
@@ -369,31 +370,44 @@ namespace Terramental
                 }
                 _isDashing = false;
             }
-            else if (_isDashing && !_gameManager.useDoubleTapDash)
+            else if (_isDashing && !useDoubleTapDash && _canDash)
             {
                 for(int i=0; i < 4; i++)
                 {
                     Rectangle rectangle = SpriteRectangle;
                     rectangle.Offset(dashDirX, dashDirY);
 
-                    if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
+                    if (_gameManager.mapManager.HasRoomForRectangle(rectangle) && _gameManager.mapManager.HasRoomForRectangleMP(rectangle))
                     {
-                        Debug.WriteLine("Performing Shift Dash");
-                        Debug.WriteLine(dashDirX);
-                        Debug.Write(dashDirY);
                         SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                     }
                     else
                     {
                         SpriteVelocity = new Vector2(0, 0);
                     }
-                    _isDashing = false;
                 }
+                _isDashing = false;
+                _canDash = false;
+                dashCooldown = 2;
+                Debug.WriteLine("HERE");
             }
+            _isDashing = false;
+        }
 
-            if (dashCooldown > 0)
+        public void UpdateShiftDashCooldown(GameTime gameTime)
+        {
+            //Debug.WriteLine("is dash: " + _isDashing);
+            //Debug.WriteLine("can dash: " + _canDash);
+            // Debug.WriteLine(dashCooldown);
+            if (dashCooldown >= 0)
             {
                 dashCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _canDash = false;
+            }
+
+            if (dashCooldown <= 0)
+            {
+                _canDash = true;
             }
         }
 
@@ -544,7 +558,7 @@ namespace Terramental
         {
             Rectangle onePixelLower = SpriteRectangle;
             onePixelLower.Offset(0, 1);
-            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower) || !_gameManager.mapManager.HasRoomForRectangleMP(onePixelLower);
         }
 
         private void MoveIfValid(GameTime gameTime)

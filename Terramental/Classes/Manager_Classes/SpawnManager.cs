@@ -25,6 +25,7 @@ namespace Terramental
         public static List<ElementPickup> elementPickupList = new List<ElementPickup>();
         public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
         public static List<Cannon> cannonObstacleList = new List<Cannon>();
+        public static List<MovingPlatform> movingPlatformList = new List<MovingPlatform>();
         public static List<VisualEffect> vfxList = new List<VisualEffect>();
 
         public static Fragment levelFragment;
@@ -132,6 +133,17 @@ namespace Terramental
                         if (cannon.IsActive)
                         {
                             cannon.UpdateCannon(gameTime);
+                        }
+                    }
+                }
+
+                foreach (MovingPlatform movingPlatform in movingPlatformList)
+                {
+                    if (movingPlatform.IsVisible)
+                    {
+                        if (movingPlatform.IsActive)
+                        {
+                            movingPlatform.UpdateMovingPlatform(gameTime);
                         }
                     }
                 }
@@ -640,6 +652,15 @@ namespace Terramental
                 cannon.LayerOrder = -1;
                 cannonObstacleList.Add(cannon);
             }
+        }
+
+        public static void SpawnMovingPlatform(Vector2 position, MapManager mapManager)
+        {
+            MovingPlatform movingPlatform = new MovingPlatform(_gameManager.playerCharacter, mapManager, position, 0);
+            movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
+            movingPlatform.LayerOrder = -2;
+
+            movingPlatformList.Add(movingPlatform);
         }
 
         public static void ResetEntities()
