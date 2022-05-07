@@ -109,7 +109,7 @@ namespace Terramental
             {
                 _characterHealth -= amount;
                 AudioManager.PlaySound("Hit_SFX");
-                _takeDamageCooldown = 2f;
+                _takeDamageCooldown = 0.2f;
 
                 if(_characterHealth <= 0)
                 {

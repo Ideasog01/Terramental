@@ -56,7 +56,7 @@ namespace Terramental
 
         public CameraController _mainCam;
 
-        private bool skipToLevel = true;
+        private bool skipToLevel = false;
 
         public bool useDoubleTapDash;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Pickups/FirePickup_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-04-29T15:27:43.468677+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Pickups/FirePickup_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-05-07T17:52:37.9693896+01:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Pickups/FirePickup_SpriteSheet.png</SourceFile>
+  <SourceTime>2022-03-28T16:06:01.4592795+01:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Pickups/FirePickup_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-05-07T18:08:05.5235747+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

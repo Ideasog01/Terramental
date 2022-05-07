@@ -627,7 +627,6 @@ namespace Terramental
                 {
                     cannon.SpritePosition = position;
                     cannon.SpawnPosition = position;
-                    cannon.FaceRight = faceRight;
                     cannon.IsActive = true;
                     cannonObstacleFound = true;
                     break;

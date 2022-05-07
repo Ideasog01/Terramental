@@ -174,7 +174,7 @@ namespace Terramental
                 _playerCharacter = SpawnManager._gameManager.playerCharacter;
             }
 
-            _activeDelay = 0.1f;
+            _activeDelay = 0.2f;
             IsActive = true;
         }
 
