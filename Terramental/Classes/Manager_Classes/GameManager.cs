@@ -54,7 +54,7 @@ namespace Terramental
 
         public CameraController _mainCam;
 
-        private bool skipToLevel = false;
+        private bool skipToLevel = true;
 
         private int[] screenWidths = { 960, 1920 };
         private int[] screenHeights = { 540, 1080 };

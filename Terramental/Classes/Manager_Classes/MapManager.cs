@@ -339,7 +339,7 @@ namespace Terramental
                 Vector2 positionToTry = originalPos + oneStep * i;
                 Rectangle newBoundary = CreateRectangleAtPosition(positionToTry, rectangle.Width, rectangle.Height);
 
-                if(HasRoomForRectangle(newBoundary))
+                if(HasRoomForRectangle(newBoundary) && HasRoomForRectangleMP(newBoundary))
                 {
                     furthestAvailableLocationSoFar = positionToTry;
                 }
@@ -400,6 +400,19 @@ namespace Terramental
         private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height)
         {
             return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);
+        }
+
+        public bool HasRoomForRectangleMP(Rectangle rectangleToCheck)
+        {
+            foreach (MovingPlatform movingPlatform in SpawnManager.movingPlatformList)
+            {
+                if (movingPlatform.SpriteRectangle.Intersects(rectangleToCheck))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

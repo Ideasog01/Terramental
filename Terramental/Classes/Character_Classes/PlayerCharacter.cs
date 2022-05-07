@@ -370,7 +370,7 @@ namespace Terramental
                 Rectangle rectangle = SpriteRectangle;
                 rectangle.Offset(dashDirX, dashDirY);
 
-                if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
+                if (_gameManager.mapManager.HasRoomForRectangle(rectangle) && _gameManager.mapManager.HasRoomForRectangleMP(rectangle))
                 {
                     SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                 }
@@ -387,7 +387,7 @@ namespace Terramental
                     Rectangle rectangle = SpriteRectangle;
                     rectangle.Offset(dashDirX, dashDirY);
 
-                    if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
+                    if (_gameManager.mapManager.HasRoomForRectangle(rectangle) && _gameManager.mapManager.HasRoomForRectangleMP(rectangle))
                     {
                         SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                     }
@@ -406,8 +406,8 @@ namespace Terramental
 
         public void UpdateShiftDashCooldown(GameTime gameTime)
         {
-            Debug.WriteLine("is dash: " + _isDashing);
-            Debug.WriteLine("can dash: " + _canDash);
+            //Debug.WriteLine("is dash: " + _isDashing);
+            //Debug.WriteLine("can dash: " + _canDash);
             // Debug.WriteLine(dashCooldown);
             if (dashCooldown >= 0)
             {
@@ -567,7 +567,7 @@ namespace Terramental
         {
             Rectangle onePixelLower = SpriteRectangle;
             onePixelLower.Offset(0, 1);
-            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower) || !_gameManager.mapManager.HasRoomForRectangleMP(onePixelLower);
         }
 
         private void MoveIfValid(GameTime gameTime)
