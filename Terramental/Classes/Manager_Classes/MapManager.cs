@@ -13,6 +13,10 @@ namespace Terramental
         public static List<Tile> tileList = new List<Tile>();
         public static List<bool> isWall = new List<bool>();
         public static List<Sprite> assetSpriteList = new List<Sprite>();
+        
+
+
+
 
         public static float mapWidth;
         public static float mapHeight;
@@ -20,8 +24,13 @@ namespace Terramental
         private GameManager _gameManager;
         private MapData _mapData;
 
-        private List<Texture2D> _tileMap1 = new List<Texture2D>();
-        private List<Texture2D> _assetTextureList = new List<Texture2D>();
+        private List<Texture2D> _waterTileMap = new List<Texture2D>();
+        private List<Texture2D> _snowTileMap = new List<Texture2D>();
+        private List<Texture2D> _assetWaterList = new List<Texture2D>();
+        private List<Texture2D> _assetSnowList = new List<Texture2D>();
+        private List<Texture2D> _currentTileMap = new List<Texture2D>();
+        private List<Texture2D> _currentAssetTexture = new List<Texture2D>();
+
 
         public MapManager(GameManager gameManager)
         {
@@ -97,43 +106,93 @@ namespace Terramental
 
         private void LoadTextures()
         {
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsLeft")); //0
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsRight")); //1
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_BottomLeft_CornerTile")); //2
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_BottomRight_CornerTile")); //3
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Left_CornerTile")); //4
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_LeftSide_Tile")); //5
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Right_CornerTile")); //6
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_RightSlide_Tile")); //7
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Tile")); //8
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Left_Corner")); //9
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Left_Slide")); //10
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Right_Corner")); //11
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Right_Slide")); //12
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //13
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FirstTile")); //14
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FourthTile")); //15
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SecondTile")); //16
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SeventhTile")); //17
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SixthTile")); //18
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_ThirdTile")); //19
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Thin_Tile_64x32")); //20
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Filler")); //21
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Sand")); //22
-            _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_SandReverse")); //23
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsLeft")); //0
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsRight")); //1
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_BottomLeft_CornerTile")); //2
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_BottomRight_CornerTile")); //3
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Left_CornerTile")); //4
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_LeftSide_Tile")); //5
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Right_CornerTile")); //6
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_RightSlide_Tile")); //7
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Grass_Tile")); //8
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Left_Corner")); //9
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Left_Slide")); //10
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Right_Corner")); //11
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Right_Slide")); //12
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //13
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FirstTile")); //14
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FourthTile")); //15
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SecondTile")); //16
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SeventhTile")); //17
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_SixthTile")); //18
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_ThirdTile")); //19
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Thin_Tile_64x32")); //20
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Filler")); //21
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Sand")); //22
+            _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_SandReverse")); //23
 
-            _assetTextureList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_1"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_2"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_3"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
-            _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_GroundTile")); //0
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_RightCorner")); //1
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_RighSlide")); //2
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_LeftCorner")); //3
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_LeftSlide")); //4
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_DownRightCorner")); //5
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_DownLeftCorner")); //6
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_Backwards")); //7
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_Filler")); //8
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_GroundTile")); //9
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_RightCorner")); //10
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_RightSlide")); //11
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_LeftCorner")); //12
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_FirstTile")); //13
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_SecondTile")); //14
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_ThirdTile")); //15
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FourthTile")); //16
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //17
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_SixthTile")); //18
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_SeventhTile")); //19
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_LeftSlide")); //20
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_DownRightCorner")); //21
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_DownLeftCorner")); //22
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_Filler")); //23
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_Backwards")); //24
+
+
+
+            _assetWaterList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));
+            _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_1"));
+            _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_2"));
+            _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_3"));
+            _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
+            _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
+
+            _assetSnowList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Igloo1")); //2
+            _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile")); //3
+            _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile2")); //4
+            _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pine")); //5
         }
 
         private void GenerateMap()
         {
+
+            if (GameManager.levelIndex < 4)
+            {
+                _currentTileMap = _waterTileMap;
+                _currentAssetTexture = _assetWaterList;
+
+            }
+
+            else if (GameManager.levelIndex == 5 || GameManager.levelIndex ==6)
+            {
+                _currentTileMap = _snowTileMap;
+                _currentAssetTexture = _assetSnowList;
+            }
+
+
             int[,] tileData = _mapData._tileMap;
 
             int tileCount = 0;
@@ -147,7 +206,7 @@ namespace Terramental
                     if(tileCount < tileList.Count)
                     {
                         Tile tile = tileList[tileCount];
-                        tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
+                        tile.Initialise(new Vector2(x * 64, y * 64), _snowTileMap[tileIndex], new Vector2(64, 64));
                         tile.LayerOrder = 0;
 
                         bool isBlocking = false;
@@ -162,7 +221,7 @@ namespace Terramental
                     else
                     {
                         Tile tile = new Tile();
-                        tile.Initialise(new Vector2(x * 64, y * 64), _tileMap1[tileIndex], new Vector2(64, 64));
+                        tile.Initialise(new Vector2(x * 64, y * 64), _snowTileMap[tileIndex], new Vector2(64, 64));
                         tile.LayerOrder = 0;
                         bool isBlocking = false;
 
@@ -194,18 +253,18 @@ namespace Terramental
                 if(spawnedAssetCount < assetSpriteList.Count)
                 {
                     Sprite assetSprite = assetSpriteList[0];
-                    Texture2D assetTexture = _assetTextureList[assetIndex];
+                    Texture2D assetTexture = _assetSnowList[assetIndex];
                     assetSprite.SpriteTexture = assetTexture;
-                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetTextureList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetSnowList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
                     assetSprite.IsActive = true;
                     assetCount++;
                     spawnedAssetCount++;
                 }
                 else
                 {
-                    Texture2D assetTexture = _assetTextureList[assetIndex];
+                    Texture2D assetTexture = _assetSnowList[assetIndex];
                     Sprite assetSprite = new Sprite();
-                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetTextureList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetSnowList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
                     assetSpriteList.Add(assetSprite);
                     assetCount++;
                 }
