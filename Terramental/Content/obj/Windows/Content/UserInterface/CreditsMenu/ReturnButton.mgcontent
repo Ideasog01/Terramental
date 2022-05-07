@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/CreditsMenu/ReturnButton.png</SourceFile>
-  <SourceTime>2022-04-29T15:27:43.081109+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/CreditsMenu/ReturnButton.xnb</DestFile>
-  <DestTime>2022-05-07T17:36:20.1656389+01:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/CreditsMenu/ReturnButton.png</SourceFile>
+  <SourceTime>2022-04-18T18:42:11.8760628+01:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/CreditsMenu/ReturnButton.xnb</DestFile>
+  <DestTime>2022-05-06T22:42:13.434955+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
