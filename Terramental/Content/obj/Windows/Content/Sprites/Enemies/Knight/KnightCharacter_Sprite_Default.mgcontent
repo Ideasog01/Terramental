@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png</SourceFile>
-  <SourceTime>2022-03-14T14:43:04.5694182+00:00</SourceTime>
-  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.xnb</DestFile>
-  <DestTime>2022-05-06T22:42:12.3271944+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.png</SourceFile>
+  <SourceTime>2022-04-29T15:27:43.5773869+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Enemies/Knight/KnightCharacter_Sprite_Default.xnb</DestFile>
+  <DestTime>2022-05-07T17:36:14.2724632+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
