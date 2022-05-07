@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System.IO;
 using System;
+using TerraEngine.Graphics;
+using TerraEngine.Data;
 
 namespace Terramental
 {

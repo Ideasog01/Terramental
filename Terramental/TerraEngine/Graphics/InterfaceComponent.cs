@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terramental;
 
-
-namespace Terramental
+namespace TerraEngine.Graphics
 {
     public class InterfaceComponent
     {

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Terramental;
 
-namespace Terramental
+namespace TerraEngine.Graphics
 {
     public class Tile : Sprite
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Terramental
+namespace TerraEngine.Graphics
 {
     public class VisualEffect : Sprite
     {

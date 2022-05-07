@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using Terramental;
 
-namespace Terramental
+namespace TerraEngine.Data
 {
     public class AudioClip
     {

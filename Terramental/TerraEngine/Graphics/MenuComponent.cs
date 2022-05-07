@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terramental;
 
-namespace Terramental
+namespace TerraEngine.Graphics
 {
     public class MenuComponent
     {
@@ -11,14 +12,12 @@ namespace Terramental
         private Rectangle _componentRectangle;
         private Vector2 _componentOffset;
         private Color _componentColor;
-        private float _componentAlpha;
 
         public void InitialiseMenuComponent(Texture2D texture, Vector2 position, Vector2 scale)
         {
             _componentTexture = texture;
             _componentPosition = position;
             _componentScale = scale;
-            _componentAlpha = 1.0f;
 
             _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
             _componentColor = Color.White;

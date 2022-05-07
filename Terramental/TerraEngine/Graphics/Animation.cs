@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Terramental
+namespace TerraEngine.Graphics
 {
     public class Animation
     {

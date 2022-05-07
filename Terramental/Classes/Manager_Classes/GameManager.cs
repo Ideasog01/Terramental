@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
+using TerraEngine.Data;
+using TerraEngine.Graphics;
 
 namespace Terramental
 {
@@ -56,7 +58,7 @@ namespace Terramental
 
         public bool useDoubleTapDash = false;
 
-        private bool skipToLevel = true;
+        private bool skipToLevel = false;
 
         private int[] screenWidths = { 960, 1920 };
         private int[] screenHeights = { 540, 1080 };

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace Terramental
+namespace TerraEngine.Data
 {
     public class MapData
     {
