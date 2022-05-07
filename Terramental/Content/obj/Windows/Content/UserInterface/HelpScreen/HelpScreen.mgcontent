@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/UserInterface/HelpScreen/HelpScreen.png</SourceFile>
-  <SourceTime>2022-05-07T18:03:15.1801715+01:00</SourceTime>
-  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/HelpScreen/HelpScreen.xnb</DestFile>
-  <DestTime>2022-05-07T18:08:07.5270289+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/HelpScreen/HelpScreen.png</SourceFile>
+  <SourceTime>2022-05-07T17:44:12.6958384+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/UserInterface/HelpScreen/HelpScreen.xnb</DestFile>
+  <DestTime>2022-05-07T22:02:38.2030834+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
