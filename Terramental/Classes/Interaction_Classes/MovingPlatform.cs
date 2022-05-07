@@ -57,7 +57,7 @@ namespace Terramental
             topRect.Offset(0, 5);
             if (LeftCollision(leftRect) || RightCollision(rightRect) || TopCollision(topRect))
             {
-                _playerCharacter.SpriteVelocity += new Vector2(SpriteVelocity.X, _playerCharacter.SpriteVelocity.Y);
+                _playerCharacter.SpriteVelocity = new Vector2(SpriteVelocity.X, _playerCharacter.SpriteVelocity.Y);
                 _playerCharacter.SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f;
             }
 
