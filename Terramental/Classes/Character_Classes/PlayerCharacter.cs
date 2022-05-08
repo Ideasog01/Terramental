@@ -207,7 +207,6 @@ namespace Terramental
         public void ResetPlayer()
         {
             CharacterHealth = 3;
-            SpritePosition = GameManager.playerCheckpoint;
             _gameManager.playerInterface.UpdatePlayerLives(3);
             ultimateActiveTimer = 0;
             ultimateActive = false;
@@ -270,12 +269,7 @@ namespace Terramental
         public void TeleportPlayer(Vector2 position) // Moves the player to a given position
         {
             SpritePosition = position;
-
-            if(setCheckpoint)
-            {
-                GameManager.playerCheckpoint = position;
-                ElementIndex = 0;
-            }
+            ElementIndex = 0;
         }
 
         public void DashStateMachine() // Used to keep track of direction of dashes using double tap input method
@@ -377,7 +371,7 @@ namespace Terramental
             }
             else if (_isDashing && !useDoubleTapDash)
             {
-                for(int i=0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     Rectangle rectangle = SpriteRectangle;
                     rectangle.Offset(dashDirX, dashDirY);
@@ -396,6 +390,7 @@ namespace Terramental
                     _isDashing = false;
                 }
             }
+        }
 
         public void UpdateShiftDashCooldown(GameTime gameTime) // Cooldown method for shift input method of dash
         {
@@ -731,6 +726,7 @@ namespace Terramental
             Animations.Add(new Animation(waterUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //7 //Ultimate Activation Animations
             Animations.Add(new Animation(snowUltimateActivation, 4, 120f, true, new Vector2(64, 64))); //8
         }
+
 
         enum AnimationIndexEnum
         {

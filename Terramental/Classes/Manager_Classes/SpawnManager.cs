@@ -25,6 +25,7 @@ namespace Terramental
         public static List<SpikeObstacle> spikeObstacleList = new List<SpikeObstacle>();
         public static List<Cannon> cannonObstacleList = new List<Cannon>();
         public static List<VisualEffect> vfxList = new List<VisualEffect>();
+        public static List<MovingPlatform> movingPlatformList = new List<MovingPlatform>();
 
         public static Fragment levelFragment;
 
@@ -683,7 +684,7 @@ namespace Terramental
             if(!cannonObstacleFound)
             {
                 Cannon cannon = new Cannon(_gameManager, _gameManager.playerCharacter, faceRight);
-                Texture2D cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right"); // Gets the cannon texture
+                Texture2D cannonTexture; // Gets the cannon texture
 
                 if(faceRight) // Checks to see if it is a right or left facing cannon
                 {

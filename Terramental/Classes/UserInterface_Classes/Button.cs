@@ -67,13 +67,13 @@ namespace Terramental
                         {
                             _menuManager.ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
                             AudioManager.PlaySound("Level_Music");
-                            GameManager.gameLoaded = false;
+                            GameManager.levelLoaded = false;
                             _menuManager.ChangeSelectedButton(0, true);
                         }
 
                         if(GameManager.currentGameState == GameManager.GameState.HelpMenu)
                         {
-                            if(GameManager.gameLoaded)
+                            if(GameManager.levelLoaded)
                             {
                                 GameManager.currentGameState = GameManager.GameState.LevelPause;
                                 _menuManager.ChangeSelectedButton(0, true);
@@ -87,7 +87,7 @@ namespace Terramental
 
                         if (GameManager.currentGameState == GameManager.GameState.Options)
                         {
-                            if (GameManager.gameLoaded)
+                            if (GameManager.levelLoaded)
                             {
                                 GameManager.currentGameState = GameManager.GameState.LevelPause;
                                 _menuManager.ChangeSelectedButton(0, true);

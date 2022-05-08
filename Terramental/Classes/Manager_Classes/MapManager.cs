@@ -312,7 +312,7 @@ namespace Terramental
             if (index == 1)
             {
                 //Set Player Position To Start
-                _gameManager.playerCharacter.TeleportPlayer(position, true);
+                _gameManager.playerCharacter.TeleportPlayer(position);
             }
 
             if (index == 2)
@@ -460,6 +460,19 @@ namespace Terramental
                     {
                         return false;
                     }
+                }
+            }
+
+            return true;
+        }
+
+        public bool HasRoomForRectangleMP(Rectangle rectangleToCheck)
+        {
+            foreach (MovingPlatform movingPlatform in SpawnManager.movingPlatformList)
+            {
+                if (movingPlatform.SpriteRectangle.Intersects(rectangleToCheck))
+                {
+                    return false;
                 }
             }
 

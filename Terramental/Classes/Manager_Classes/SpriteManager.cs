@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Terramental
 {
-    class SpriteManager
+    public class SpriteManager
     {
         /// <summary>
         /// Controls all loaded sprites

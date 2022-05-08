@@ -12,63 +12,58 @@ namespace Terramental
 
     public class GameManager : Game
     {
-        public const int gravity = 3;
+        public static bool gameInitialised; //Set to true when game is intialised. E.g player is instantiated. Avoids multiple players/managers.
+        public static bool levelLoaded; //States whether a level is loaded.
 
-        public static bool gameInProgress;
-        public static bool gameLoaded;
+        public static int levelsComplete = 5; //When each level is completed, this value is incremented. Handles available levels and when to show end credits.
 
-        public static int levelsComplete = 5;
+        public enum GameState { SplashScreen, CreditsVideo, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen }; //Controls the current textures and logic being activated
 
-        public enum GameState { SplashScreen, CreditsVideo, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen};
+        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown, DashButton }; //Each button has this value attributed
 
-        public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, DialogueNextButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown, DashButton };
+        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button }; //Each button that represents a level on the level select screen has this value attributed
 
-        public enum GameData { Game1, Game2, Game3, Game4};
+        public static GameState currentGameState = GameState.SplashScreen; //The current state of the game.
+        public static GameState previousGameState = GameState.SplashScreen; //The previous state of the game. Useful for return buttons in menus.
 
-        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button };
+        public static int screenWidth = 960; //The game window width in pixels.
+        public static int screenHeight = 540; //The game window height in pixels.
 
-        public static GameState currentGameState = GameState.SplashScreen;
-        public static GameState previousGameState = GameState.SplashScreen;
+        public static int levelIndex; //The current level index. Level 1 = 1, Level 2 = 2 etc.
 
-        public static int screenWidth = 960;
-        public static int screenHeight = 540;
+        public MapManager mapManager; //The MapManager handles all processes concerning levels. Involves spawning tiles, entities and environment assets.
+        public PlayerInterface playerInterface; //The player interface that handles the heads-up-display
+        public MenuManager menuManager; //The MenuManager handles everything regarding menus, including drawing, checking button interaction and loading.
+        public TutorialManager tutorialManager; //The TutorialManager displays information to the player in the form of text. This class also notifies the player if they use the wrong element.
+        public InputManager inputManager; //The input manager controls the player's input and activates functions in other classes accordingly.
+        public SpriteManager spriteManager; //The sprite manager renders all objects of type Sprite.
 
-        public static int levelIndex;
-        public static Vector2 playerCheckpoint;
-
-        public MapManager mapManager;
-        public PlayerInterface playerInterface;
-        public MenuManager menuManager;
-
-        public static float actualWidth;
-        public static float actualHeight;
+        public static float actualWidth; //The width of the device screen
+        public static float actualHeight; //The height of the device screen
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public TutorialManager tutorialManager;
-        public InputManager _inputManager;
-        private SpriteManager _spriteManager;
+        public PlayerCharacter playerCharacter; //The player character is instantiated when a level is loaded for the first time
+        public CameraController mainCam; //The main camera that follows the player's location
 
-        public PlayerCharacter playerCharacter;
+        private bool skipToLevel = false; //TESTING PURPOSES ONLY. SET TO FALSE ON BUILD
 
-        public CameraController _mainCam;
+        public bool useDoubleTapDash; //Customisation for the dash ability. If this boolean is false, the B button or left shift key can be used instead to activate the dash ability.
 
-        private bool skipToLevel = false;
-
-        private int[] screenWidths = { 960, 1920 };
-        private int[] screenHeights = { 540, 1080 };
-        private int currentResolutionIndex;
+        private int[] screenWidths = { 960, 1920 }; //The possible screen widths for changing resolution
+        private int[] screenHeights = { 540, 1080 }; //The possible screen heights for changing resolution
+        private int currentResolutionIndex; //The current index for the screenWidth and screenHeight array
 
         public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+
             IsMouseVisible = false;
 
-            _graphics.PreferredBackBufferHeight = screenHeight;
-            _graphics.PreferredBackBufferWidth = screenWidth;
+            _graphics.PreferredBackBufferHeight = screenHeight; //Gets the window's height
+            _graphics.PreferredBackBufferWidth = screenWidth; //Gets the window's width
             _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
         }
@@ -83,17 +78,17 @@ namespace Terramental
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-           
-            menuManager = new MenuManager(this, _graphics);
-            actualWidth = _graphics.GraphicsDevice.Viewport.Width;
-            actualHeight = _graphics.GraphicsDevice.Viewport.Height;
 
-            InitialiseGame();
+            menuManager = new MenuManager(this, _graphics);
+            actualWidth = _graphics.GraphicsDevice.Viewport.Width; //Set the actualWidth to the device screen width
+            actualHeight = _graphics.GraphicsDevice.Viewport.Height;//Set the actualWidth to the device screen height
+
+            InitialiseGame(); //
             LoadAudioLibrary();
             AudioManager.SetVolumes();
             AudioManager.PlaySound("Intro_Music");
 
-            if(skipToLevel)
+            if (skipToLevel) //Skips the splash screen and main menu and instantly. USED FOR TESTING
             {
                 LoadNewGame(@"Content/Level1Map.json");
                 currentGameState = GameState.Level;
@@ -104,27 +99,27 @@ namespace Terramental
         {
             UpdateManagers(gameTime);
 
-            System.Diagnostics.Debug.WriteLine("Camera Position = " + _mainCam.CameraCentre.ToString());
+            // System.Diagnostics.Debug.WriteLine("Camera Position = " + mainCam.CameraCentre.ToString());
 
-            if (currentGameState == GameState.Level && playerInterface != null)
+            if (currentGameState == GameState.Level && playerInterface != null) //If level is active, update the appropriate objects
             {
                 playerInterface.UpdatePlayerInterface();
                 playerCharacter.UpdateCharacter(gameTime);
                 playerCharacter.UpdatePlayerCharacter(gameTime);
 
-                if(mapManager != null)
+                if (mapManager != null)
                 {
                     mapManager.CheckActiveTiles();
                 }
 
-                if(tutorialManager != null)
+                if (tutorialManager != null)
                 {
                     tutorialManager.UpdateDisplayMessageTimer(gameTime);
                 }
             }
 
             menuManager.UpdateMenuButtons(gameTime);
-            _mainCam.UpdateCamera(gameTime);
+            mainCam.UpdateCamera(gameTime);
 
 
             base.Update(gameTime);
@@ -134,23 +129,20 @@ namespace Terramental
         {
             GraphicsDevice.Clear(Color.SkyBlue);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, _mainCam.cameraTransform);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, mainCam.cameraTransform);
 
-            if(currentGameState == GameState.Level || currentGameState == GameState.LevelPause && playerInterface != null)
+            if (currentGameState == GameState.Level || currentGameState == GameState.LevelPause && playerInterface != null)
             {
-                _spriteManager.Draw(gameTime, _spriteBatch);
+                spriteManager.Draw(gameTime, _spriteBatch);
                 playerInterface.DrawInterface(_spriteBatch);
                 playerInterface.DrawCooldownTexts(_spriteBatch);
             }
 
             menuManager.DrawMenus(_spriteBatch);
 
-            if(tutorialManager != null)
+            if (tutorialManager != null)
             {
-                if(tutorialManager.DisplayMessageTimer > 0)
-                {
-                    tutorialManager.DrawMessage(_spriteBatch);
-                }
+                tutorialManager.DrawMessage(_spriteBatch);
             }
 
             _spriteBatch.End();
@@ -165,103 +157,70 @@ namespace Terramental
 
         #region Property Tools
 
-        public Texture2D GetTexture(string path)
+        public Texture2D GetTexture(string path) //Easily load textures
         {
             return Content.Load<Texture2D>(path);
-        }
-
-        public void ChangeResolution(int amount)
-        {
-            currentResolutionIndex += amount;
-
-            if(currentResolutionIndex < 0)
-            {
-                currentResolutionIndex = screenWidths.Length - 1;
-            }
-
-            if(currentResolutionIndex > screenWidths.Length - 1)
-            {
-                currentResolutionIndex = 0;
-            }
-
-            _graphics.PreferredBackBufferWidth = screenWidths[currentResolutionIndex];
-            _graphics.PreferredBackBufferHeight = screenHeights[currentResolutionIndex];
-            screenWidth = screenWidths[currentResolutionIndex];
-            screenHeight = screenHeights[currentResolutionIndex];
-
-            if (screenWidth == _graphics.GraphicsDevice.Viewport.Width && screenHeight == _graphics.GraphicsDevice.Viewport.Height)
-            {
-                _graphics.IsFullScreen = true;
-            }
-            else
-            {
-                _graphics.IsFullScreen = false;
-            }
-
-            _graphics.ApplyChanges();
-            System.Console.WriteLine("New resolution: {0} x {1}", _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
         }
 
         #endregion
 
         #region Managers
 
-        public void ExitGame()
+        public void ExitGame() //Closes the application. Called when the main menu exit button is interacted with.
         {
             Exit();
         }
 
-        public static void PauseGame()
+        public static void PauseGame() //Pauses the game during the level. Called when the escape key or start controller button is pressed.
         {
             currentGameState = GameState.LevelPause;
         }
 
-        public void LoadNewGame(string filePath)
+        public void LoadNewGame(string filePath) //Loads the approriate level using the data located at the file path.
         {
             menuManager.ActivateLoadingScreen(5, GameState.Level);
 
-            if (!gameInProgress)
+            if (!gameInitialised) //Loads neccessary managers and the player if a level has not yet been loaded
             {
                 playerCharacter = new PlayerCharacter(this);
                 playerCharacter.Initialise(new Vector2(200, 128), GetTexture("Sprites/Player/Idle/Idle_Fire_SpriteSheet"), new Vector2(64, 64));
-                playerCharacter.InitialisePlayerAnimations(this);
+                playerCharacter.InitialisePlayerAnimations(this); //Initialise Player Animations
                 playerCharacter.LayerOrder = -1;
-                playerInterface = new PlayerInterface(this);
-
+                playerInterface = new PlayerInterface(this); //Loads the player's heads-up-display
                 mapManager = new MapManager(this);
-                tutorialManager = new TutorialManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"), playerCharacter);
-
+                tutorialManager = new TutorialManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"), playerCharacter); //Initialises the tutorial manager
                 CameraController.playerCharacter = playerCharacter;
-                gameInProgress = true;
+                gameInitialised = true;
             }
 
-            playerCharacter.ResetPlayer();
+            playerCharacter.ResetPlayer(); //Resets the player's variables and properties
             playerCharacter.DisplayPlayerLives();
             CameraController.cameraWorldPos = playerCharacter.SpritePosition;
-            mapManager.LoadMapData(filePath);
-            gameLoaded = true;
+            mapManager.LoadMapData(filePath); //Loads all tiles, entities and environment assets
+            levelLoaded = true;
         }
 
-        private void InitialiseGame()
+        private void InitialiseGame() //Loads the appropriate managers at the start of runtime
         {
-            _spriteManager = new SpriteManager();
-            _mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
+            spriteManager = new SpriteManager();
+            mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
             SpawnManager._gameManager = this;
-            _inputManager = new InputManager(_mainCam, menuManager, this);
+            inputManager = new InputManager(mainCam, menuManager, this);
         }
 
         private void UpdateManagers(GameTime gameTime)
         {
-            _inputManager.Update(gameTime);
+            inputManager.Update(gameTime);
 
-            if(currentGameState == GameState.Level)
+            if (currentGameState == GameState.Level)
             {
-                _spriteManager.Update(gameTime);
+                spriteManager.Update(gameTime);
                 SpawnManager.Update(gameTime);
             }
         }
 
-        private void LoadAudioLibrary()
+
+        private void LoadAudioLibrary()//Loads all sounds effects and music
         {
             AudioClip audioClip = new AudioClip("PlayerJump_SFX", "SFXs/Jump_SFX", false, this);
             AudioManager.AddSound(audioClip);
@@ -326,6 +285,39 @@ namespace Terramental
             AudioClip levelMusic = new AudioClip("Level_Music", "Music/ambient-piano-10781", true, this);
             AudioManager.AddSound(levelMusic);
         }
+
+        public void ChangeResolution(int amount) //Changes the resolution of the game
+        {
+            currentResolutionIndex += amount;
+
+            if (currentResolutionIndex < 0)
+            {
+                currentResolutionIndex = screenWidths.Length - 1;
+            }
+
+            if (currentResolutionIndex > screenWidths.Length - 1)
+            {
+                currentResolutionIndex = 0;
+            }
+
+            _graphics.PreferredBackBufferWidth = screenWidths[currentResolutionIndex];
+            _graphics.PreferredBackBufferHeight = screenHeights[currentResolutionIndex];
+            screenWidth = screenWidths[currentResolutionIndex];
+            screenHeight = screenHeights[currentResolutionIndex];
+
+            if (screenWidth == _graphics.GraphicsDevice.Viewport.Width && screenHeight == _graphics.GraphicsDevice.Viewport.Height)
+            {
+                _graphics.IsFullScreen = true;
+            }
+            else
+            {
+                _graphics.IsFullScreen = false;
+            }
+
+            _graphics.ApplyChanges();
+            System.Console.WriteLine("New resolution: {0} x {1}", _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+        }
+
 
         #endregion
     }

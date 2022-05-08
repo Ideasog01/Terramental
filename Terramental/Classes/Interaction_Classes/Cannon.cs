@@ -30,11 +30,11 @@ namespace Terramental
 
         public void UpdateCannon(GameTime gameTime)
         {
-            _cannonCooldownLeft -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _cannonCooldownLeft -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds; // Decreases time left on cannon cooldown
 
-            if (_cannonCooldownLeft <= 0)
+            if (_cannonCooldownLeft <= 0) // Checks to see if there is no time left on cooldown
             {
-                if(_faceRight)
+                if (_faceRight)
                 {
                     SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile for the right facing cannon
                 }
@@ -42,8 +42,7 @@ namespace Terramental
                 {
                     SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(-40, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile for the left facing cannon
                 }
-                
-                _cannonCooldownLeft = _cannonCooldown;
+                _cannonCooldownLeft = _cannonCooldown; // Resets the amount of time left to the value stored in cannonCooldown
             }
         }
     }
