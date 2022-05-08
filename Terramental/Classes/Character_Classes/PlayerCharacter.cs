@@ -532,17 +532,20 @@ namespace Terramental
 
         public void PlayerJump()
         {
-            if(IsGrounded())
+            if(SpritePosition.Y > 64)
             {
-                SpriteVelocity = -Vector2.UnitY * 22.25f;
-                _isDoubleJumpUsed = false;
-                AudioManager.PlaySound("Jump_SFX");
-            }
-            else if(!_isDoubleJumpUsed)
-            {
-                SpriteVelocity = -Vector2.UnitY * 22.25f;
-                _isDoubleJumpUsed = true;
-                AudioManager.PlaySound("Jump_SFX");
+                if (IsGrounded())
+                {
+                    SpriteVelocity = -Vector2.UnitY * 22.25f;
+                    _isDoubleJumpUsed = false;
+                    AudioManager.PlaySound("Jump_SFX");
+                }
+                else if (!_isDoubleJumpUsed)
+                {
+                    SpriteVelocity = -Vector2.UnitY * 22.25f;
+                    _isDoubleJumpUsed = true;
+                    AudioManager.PlaySound("Jump_SFX");
+                }
             }
         }
 
