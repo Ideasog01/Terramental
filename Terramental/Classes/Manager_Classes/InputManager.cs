@@ -57,13 +57,13 @@ namespace Terramental
             {
                 if (_currentKeyboardState.IsKeyUp(Keys.Escape) && oldKeyboardState.IsKeyDown(Keys.Escape) && GameManager.currentGameState == GameManager.GameState.Level) // If player presses escape whilst playing a level
                 {
-                    GameManager.PauseGame(); // Pause the game
+                    GameManager.PauseGame();
                     _gameManager.IsMouseVisible = true; // Sets the mouse visibility to true
                 }
 
                 if(GameManager.currentGameState == GameManager.GameState.StartScreen)
                 {
-                    if (_currentKeyboardState.GetPressedKeys().Length > 0)
+                    if (_currentKeyboardState.GetPressedKeys().Length > 0) // Checks to see if keys are being pressed
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
                         _gameManager.menuManager.ChangeSelectedButton(0, true);
@@ -92,22 +92,22 @@ namespace Terramental
                     _menuManager.InteractSelectedButton();
                 }
 
-                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
+                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left; // Left thumbstick using controller
 
-                if (leftStick.X > 0)
+                if (leftStick.X > 0) // Checks to see if left stick is moving to the right
                 {
                     _menuManager.ChangeSelectedButton(1, false);
                 }
-                else if (leftStick.X < 0)
+                else if (leftStick.X < 0) // Checks to see if left stick is moving to the left
                 {
                     _menuManager.ChangeSelectedButton(-1, false);
                 }
 
-                if(leftStick.Y > 0)
+                if(leftStick.Y > 0) // Checks to see if left stick is moving up
                 {
                     _menuManager.ChangeSelectedButton(1, true);
                 }
-                else if(leftStick.Y < 0)
+                else if(leftStick.Y < 0) // Checks to see if left stick is moving down
                 {
                     _menuManager.ChangeSelectedButton(-1, true);
                 }
@@ -127,11 +127,11 @@ namespace Terramental
                 }
             }
 
-            if (_playerCharacter == null)
+            if (_playerCharacter == null) // Checks to see if there is no player reference
             {
-                if (_gameManager.playerCharacter != null)
+                if (_gameManager.playerCharacter != null) // Checks to see if GameManager has a player reference
                 {
-                    _playerCharacter = _gameManager.playerCharacter;
+                    _playerCharacter = _gameManager.playerCharacter; // Sets the local playerCharacter to the one in GameManager
                 }
                 else
                 {
@@ -142,9 +142,9 @@ namespace Terramental
             PlayerMovementInput(gameTime);
             PlayerDashInput(gameTime);
 
-            if(!_currentGamepadState.IsConnected)
+            if(!_currentGamepadState.IsConnected) // Checks to see that no controller is connected
             {
-                if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q))
+                if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q)) // If Q is pressed
                 {
                     _playerCharacter.ActivateUltimate();
                 }
@@ -154,12 +154,12 @@ namespace Terramental
                     _playerCharacter.PrimaryUltimateAttack();
                 }
 
-                if (_currentKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
+                if (_currentKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space)) // If Space is pressed
                 {
                     _playerCharacter.PlayerJump();
                 }
             }
-            else
+            else // Controller is connected
             {
                 if(_currentGamepadState.IsButtonDown(Buttons.Y) && _oldGamepadState.IsButtonUp(Buttons.Y))
                 {
@@ -176,41 +176,9 @@ namespace Terramental
                     _playerCharacter.PlayerJump();
                 }
             }
-
-            if (_playerCharacter.CanDash)
-            {
-                if (_currentKeyboardState.IsKeyDown(Keys.LeftShift) && oldKeyboardState.IsKeyUp(Keys.LeftShift))
-                {
-                    if (IsKeyPressed(Keys.W))
-                    {
-                        
-                    }
-
-                    if (IsKeyPressed(Keys.A))
-                    {
-                        
-                    }
-
-                    if (IsKeyPressed(Keys.D))
-                    {
-                        
-                    }
-
-                    if (_currentKeyboardState.IsKeyDown(Keys.S))
-                    {
-                        _playerCharacter.VerticalAxisRaw = -1;
-                        _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
-                    }
-
-                    if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
-                    {
-                        _playerCharacter.VerticalAxisRaw = 0;
-                    }
-                }
-            }
         }
 
-        public bool IsKeyPressed(Keys key)
+        public bool IsKeyPressed(Keys key) // Used to check for when a key is pressed and then released
         {
             if (_currentKeyboardState.IsKeyUp(key) && oldKeyboardState.IsKeyDown(key))
             {
@@ -224,36 +192,28 @@ namespace Terramental
 
         private void PlayerMovementInput(GameTime gameTime)
         {
-            if(!_currentGamepadState.IsConnected)
+            if(!_currentGamepadState.IsConnected) // Checks to see that no controller is connected
             {
                 if (_currentKeyboardState.IsKeyDown(Keys.D))
                 {
-                    _playerCharacter.HorizontalAxisRaw = 1;
-                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
                     _playerCharacter.PlayerMovement(1, gameTime);
                 }
 
                 if (_currentKeyboardState.IsKeyDown(Keys.A))
                 {
-                    _playerCharacter.HorizontalAxisRaw = -1;
-                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
                     _playerCharacter.PlayerMovement(-1, gameTime);
                 }
             }
             else
             {
-                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
+                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left; // Left stick controller input
 
-                if(leftStick.X > 0)
+                if(leftStick.X > 0) // Right movement
                 {
-                    _playerCharacter.HorizontalAxisRaw = 1;
-                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
                     _playerCharacter.PlayerMovement(1, gameTime);
                 }
-                else if(leftStick.X < 0)
+                else if(leftStick.X < 0) // Left movement
                 {
-                    _playerCharacter.HorizontalAxisRaw = -1;
-                    _playerCharacter.LastNonZeroHAR = _playerCharacter.HorizontalAxisRaw;
                     _playerCharacter.PlayerMovement(-1, gameTime);
                 }
             }
@@ -261,44 +221,34 @@ namespace Terramental
 
         private void PlayerDashInput(GameTime gameTime)
         {
-            if(!_currentGamepadState.IsConnected)
+            if(!_currentGamepadState.IsConnected) // Checks to see that no controller is connected
             {
-                if (_gameManager.useDoubleTapDash)
+                if (_gameManager.useDoubleTapDash) // Checks to see which chosen method of dashing the player has selected (shift vs double tap)
                 {
+                    // Double tap dash method
                     if (IsKeyPressed(Keys.W))
                     {
-                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up; // Vertical Dash
                         _playerCharacter.DashStateMachine();
                     }
 
                     if (IsKeyPressed(Keys.A))
                     {
-                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left; // Left Dash
                         _playerCharacter.DashStateMachine();
                     }
 
                     if (IsKeyPressed(Keys.D))
                     {
-                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right; // Right Dash
                         _playerCharacter.DashStateMachine();
                     }
-
-                    if (_currentKeyboardState.IsKeyDown(Keys.S))
-                    {
-                        _playerCharacter.VerticalAxisRaw = -1;
-                        _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
-                    }
-
-                    if (!_currentKeyboardState.IsKeyDown(Keys.W) && !_currentKeyboardState.IsKeyDown(Keys.S))
-                    {
-                        _playerCharacter.VerticalAxisRaw = 0;
-                    }
                 }
-                else
+                else // Left Shift dash method
                 {
-                    if (IsKeyPressed(Keys.LeftShift))
+                    if (IsKeyPressed(Keys.LeftShift)) // Checks to see if left shift is pressed
                     {
-                        if (_currentKeyboardState.IsKeyDown(Keys.W))
+                        if (_currentKeyboardState.IsKeyDown(Keys.W)) // Vertical Dash
                         {
                             _playerCharacter.dashDirY = -1;
                             _playerCharacter.dashDirX = 0;
@@ -306,7 +256,7 @@ namespace Terramental
                             _playerCharacter._isDashing = true;
                         }
 
-                        if (_currentKeyboardState.IsKeyDown(Keys.A))
+                        if (_currentKeyboardState.IsKeyDown(Keys.A)) // Left Dash
                         {
                             _playerCharacter.dashDirY = 0;
                             _playerCharacter.dashDirX = -1;
@@ -314,7 +264,7 @@ namespace Terramental
                             _playerCharacter._isDashing = true;
                         }
 
-                        if (_currentKeyboardState.IsKeyDown(Keys.D))
+                        if (_currentKeyboardState.IsKeyDown(Keys.D)) // Right Dash
                         {
                             _playerCharacter.dashDirY = 0;
                             _playerCharacter.dashDirX = 1;
@@ -330,33 +280,22 @@ namespace Terramental
                 Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
                 Vector2 oldLeftStick = _oldGamepadState.ThumbSticks.Left;
 
-                if(leftStick.X > 0 && oldLeftStick.X == 0)
+                if(leftStick.X > 0 && oldLeftStick.X == 0) // Right Dash
                 {
                     _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
                     _playerCharacter.DashStateMachine();
                 }
 
-                if(leftStick.X < 0 && oldLeftStick.X == 0)
+                if(leftStick.X < 0 && oldLeftStick.X == 0) // Left Dash
                 {
                     _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
                     _playerCharacter.DashStateMachine();
                 }
 
-                if(leftStick.Y > 0 && oldLeftStick.Y == 0)
+                if(leftStick.Y > 0 && oldLeftStick.Y == 0) // Vertical Dash
                 {
                     _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
                     _playerCharacter.DashStateMachine();
-                }
-
-                if (leftStick.Y < 0 && oldLeftStick.Y == 0)
-                {
-                    _playerCharacter.VerticalAxisRaw = -1;
-                    _playerCharacter.LastNonZeroVAR = _playerCharacter.VerticalAxisRaw;
-                }
-
-                if(leftStick.Y == 0)
-                {
-                    _playerCharacter.VerticalAxisRaw = 0;
                 }
             }
             

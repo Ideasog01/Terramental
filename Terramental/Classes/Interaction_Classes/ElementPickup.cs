@@ -15,7 +15,7 @@ namespace Terramental
         private float _pickupTimer;
         private int _originalElementIndex;
 
-        public ElementPickup(int elementIndex, Texture2D fireTexture, Texture2D waterTexture, Texture2D snowTexture, PlayerCharacter playerCharacter)
+        public ElementPickup(int elementIndex, Texture2D fireTexture, Texture2D waterTexture, Texture2D snowTexture, PlayerCharacter playerCharacter) // ElementPickup constructor
         {
             _fireTexture = fireTexture;
             _waterTexture = waterTexture;
@@ -39,7 +39,7 @@ namespace Terramental
             set { _elementIndex = value; _originalElementIndex = value; }
         }
 
-        public void ResetElementPickup()
+        public void ResetElementPickup() // Resets the element pickup to the starting element
         {
             _elementIndex = _originalElementIndex;
             ChangeTexture();
@@ -47,9 +47,9 @@ namespace Terramental
 
         public void CheckElementPickupCollision(GameTime gameTime)
         {
-            if(Player != null & IsActive && Player.ElementIndex != _elementIndex && _pickupTimer <= 0)
+            if(Player != null & IsActive && Player.ElementIndex != _elementIndex && _pickupTimer <= 0) // Checks to see if the required conditions are met before checking for a collision
             {
-                if (OnCollision(Player.SpriteRectangle) && !Player.ultimateActive)
+                if (OnCollision(Player.SpriteRectangle) && !Player.ultimateActive) // Checks for a collision between the element pickup and the player
                 {
                     ChangeElement(Player.ElementIndex);
                 }
@@ -57,20 +57,20 @@ namespace Terramental
 
             if(_pickupTimer > 0)
             {
-                _pickupTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _pickupTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds; // Decreased pickup timer
             }
         }
 
-        private void ChangeElement(int index)
+        private void ChangeElement(int index) // Changes the element to the one at the specified index
         {
             Player.ElementIndex = _elementIndex;
             _elementIndex = index;
-            _pickupTimer = 1.2f;
+            _pickupTimer = 1.2f; // Resets the pickup timer
 
             ChangeTexture();
         }
 
-        private void ChangeTexture()
+        private void ChangeTexture() // Updates the texture
         {
             SetAnimation(_elementIndex);
         }
