@@ -12,10 +12,10 @@ namespace Terramental
             set { _playerCharacter = value; }
         }
 
-        public void ResetPickup(Vector2 position)
+        public void ResetPickup(Vector2 position) // Resets the position of the pickup to the specified position
         {
             SpritePosition = position;
-            IsActive = true;
+            IsActive = true; // Sets the pickup to active
         }
     }
 }

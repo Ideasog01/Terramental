@@ -10,9 +10,9 @@ namespace Terramental
         /// All characters inherit from BaseCharacter class
         /// </summary>
         /// 
-        public enum CharacterStatus { Default, Burning, Empowered, Frozen }
+        public enum CharacterStatus { Default, Burning, Empowered, Frozen } // Enum holding the different possible states of base character
 
-        private CharacterStatus _currentStatus = CharacterStatus.Default;
+        private CharacterStatus _currentStatus = CharacterStatus.Default; // Sets the initial state to the default state
         private float _statusDuration;
         private float _statusDamageDuration;
         private float _statusDamageTimer;
@@ -69,19 +69,19 @@ namespace Terramental
         {
             if (SpriteVelocity.X > 0) // Facing right
             {
-                SetAnimation(0);
+                SetAnimation(0); // Right animation
             }
             else if (SpriteVelocity.X < 0)  // Facing left 
             {
-                SetAnimation(1);
+                SetAnimation(1); // Left animation
             }
 
             if (_takeDamageCooldown > 0)
             {
-                _takeDamageCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _takeDamageCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds; // Decreases the timer for taking damage
             }
 
-            if(_currentStatus != CharacterStatus.Default)
+            if(_currentStatus != CharacterStatus.Default) // Checks to see if base character is not in the default state
             {
                 UpdateStatus(gameTime);
             }
@@ -89,37 +89,37 @@ namespace Terramental
 
         public void SetStatus(CharacterStatus status, float statusDuration, float statusDamageDuration, int statusDamageAmount)
         {
-            _currentStatus = status;
-            _statusDuration = statusDuration;
+            _currentStatus = status; // Updates the state of basecharacter to the given CharacterStatus parameter
+            _statusDuration = statusDuration; // Amount of time to apply the status
 
             _statusDamageDuration = statusDamageDuration;
             _statusDamageTimer = _statusDamageDuration;
-            _statusDamageAmount = statusDamageAmount;
+            _statusDamageAmount = statusDamageAmount; // Amount of damage the status will apply
 
             if(_currentStatus == CharacterStatus.Frozen)
             {
-                _disableMovement = true;
+                _disableMovement = true; // Disables movement if the character is frozen
             }
         }
 
         public void TakeDamage(int amount)
         {
-            if(_takeDamageCooldown <= 0 && IsActive)
+            if(_takeDamageCooldown <= 0 && IsActive) // Checks if there is no time remaining in damage cooldown
             {
-                _characterHealth -= amount;
-                AudioManager.PlaySound("Hit_SFX");
-                _takeDamageCooldown = 2f;
+                _characterHealth -= amount; // Decreases health
+                AudioManager.PlaySound("Hit_SFX"); // Plays hit sound effect
+                _takeDamageCooldown = 0.2f; // Resets the damage cooldown
 
-                if(_characterHealth <= 0)
+                if(_characterHealth <= 0) // Checks if the character has no health left
                 {
                     if(_characterVFX != null)
                     {
-                        _characterVFX.IsActive = false;
+                        _characterVFX.IsActive = false; // Removes any VFX related to the character
                         _characterVFX = null;
                     }
 
-                    IsActive = false;
-                    SpawnManager._gameManager.playerCharacter.EnemiesDefeated++;
+                    IsActive = false; // Removes the character
+                    SpawnManager._gameManager.playerCharacter.EnemiesDefeated++; // Increments the count storing the number of enemies defeated
                     AudioManager.PlaySound("Hit_SFX");
                 }
             }
@@ -127,44 +127,44 @@ namespace Terramental
 
         public void Heal(int amount) { 
         
-            if(_characterHealth + amount > _characterMaxHealth)
+            if(_characterHealth + amount > _characterMaxHealth) // Checks to see if the amount of health that would be applied would exceed the max possible health
             {
-                _characterHealth = _characterMaxHealth;
+                _characterHealth = _characterMaxHealth; // Sets the character health to maximum health
             }
             else
             {
-                _characterHealth += amount;
+                _characterHealth += amount; // Adds a given amount of health to the character
             }
         }
 
         private void UpdateStatus(GameTime gameTime)
         {
-            if(_statusDuration > 0)
+            if(_statusDuration > 0) // Checks to see if the status has not finished
             {
-                _statusDuration -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _statusDuration -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds; // Decreases time left using statuss
             }
             else
             {
-                if(_currentStatus == CharacterStatus.Frozen)
+                if(_currentStatus == CharacterStatus.Frozen) // Checks to see if the character has the frozen status
                 {
-                    _disableMovement = false;
+                    _disableMovement = false; // Disables movement
                 }
 
-                _currentStatus = CharacterStatus.Default;
+                _currentStatus = CharacterStatus.Default; // Sets the status to the default state
             }
 
-            if(_statusDamageAmount > 0)
+            if(_statusDamageAmount > 0) // Checks to see if the damage amount is greater than 0
             {
-                if (_statusDamageTimer > 0)
+                if (_statusDamageTimer > 0) // Checks to see if there is time on the damage timer
                 {
-                    _statusDamageTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    _statusDamageTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds; // Decreases damage timer
                 }
                 else
                 {
-                    if (_currentStatus != CharacterStatus.Default)
+                    if (_currentStatus != CharacterStatus.Default) 
                     {
-                        TakeDamage(_statusDamageAmount);
-                        _statusDamageTimer = _statusDamageDuration;
+                        TakeDamage(_statusDamageAmount); // Applies damage
+                        _statusDamageTimer = _statusDamageDuration; // Resets damage timer
                     }
                 }
             }

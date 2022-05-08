@@ -6,7 +6,7 @@ namespace Terramental
 {
     public class ScorePickup : Pickup
     {
-        private PlayerCharacter _playerCharacter;
+        private PlayerCharacter _playerCharacter; // Reference to player character
 
         public ScorePickup(PlayerCharacter character)
         {
@@ -15,11 +15,11 @@ namespace Terramental
 
         public void UpdateScorePickup()
         {
-            if (OnCollision(_playerCharacter.SpriteRectangle) && IsActive)
+            if (OnCollision(_playerCharacter.SpriteRectangle) && IsActive) // Checks to see if the score pickup has collided with the player character
             {
-                _playerCharacter.PlayerScore++;
-                AudioManager.PlaySound("ScorePickup_SFX");
-                IsActive = false;
+                _playerCharacter.PlayerScore++; // Increments player score value by 1
+                AudioManager.PlaySound("ScorePickup_SFX"); // Plays the score pickup sound effect
+                IsActive = false; // Used to hide the score pickup by setting IsActive to false 
             }
         }
     }

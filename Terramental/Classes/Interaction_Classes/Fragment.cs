@@ -8,7 +8,7 @@ namespace Terramental
 
         private float _collisionTimer;
 
-        public Fragment(MenuManager menuManager, PlayerCharacter player)
+        public Fragment(MenuManager menuManager, PlayerCharacter player) // Fragment constructor
         {
             _menuManager = menuManager;
             Player = player;
@@ -16,16 +16,16 @@ namespace Terramental
 
         public void CheckFragmentCollision(GameTime gameTime)
         {
-            if(_collisionTimer > 0)
+            if(_collisionTimer > 0) // Checks to see that the collision timer is greater than 0
             {
                 _collisionTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if(OnCollision(Player.SpriteRectangle) && IsActive && _collisionTimer <= 0)
+            if(OnCollision(Player.SpriteRectangle) && IsActive && _collisionTimer <= 0) // Checks for a collision between this and the player
             {
                 _menuManager.EndLevel();
-                IsActive = false;
-                _collisionTimer = 2;
+                IsActive = false; // Removes fragment object
+                _collisionTimer = 2; // Resets collision timer
             }
         }
     }

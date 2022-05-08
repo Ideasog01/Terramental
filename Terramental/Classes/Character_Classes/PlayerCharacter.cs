@@ -222,7 +222,7 @@ namespace Terramental
 
         public void UpdatePlayerCharacter(GameTime gameTime)
         {
-            if(GameManager.currentGameState == GameManager.GameState.Level)
+            if(GameManager.currentGameState == GameManager.GameState.Level) // Checks to see if the game is in the level state
             {
                 UpdateUltimateStatus(gameTime);
                 DashDamage();
@@ -231,7 +231,7 @@ namespace Terramental
 
                 MoveIfValid(gameTime);
 
-                if(IsGrounded())
+                if(IsGrounded()) // Checks to see if the player is touching the ground
                 {
                     SimulateFriction();
                 }
@@ -239,39 +239,35 @@ namespace Terramental
                 SimulateFriction();
                 StopMovingIfBlocked();
 
-                if(!IsGrounded())
+                if(!IsGrounded()) // Checks to see if the player is not touching the ground
                 {
                     ApplyGravity();
                 }
 
-                if (_attackTimer <= 0)
+                if (_attackTimer <= 0) // Checks to see if there is no time left on attack timer, meaning animations should go back to movement animations
                 {
                     MovementAnimations();
                 }
 
-                if(_attackTimer > 0)
+                if(_attackTimer > 0) // Checks to see if there is time left on attack timer, meaning animations should be attack animations
                 {
-                    switch (_elementIndex)
+                    switch (_elementIndex) // Switch statement to handle the 3 different element types
                     {
                         case 0:
-                            SetAnimation((int)AnimationIndexEnum.FireUltimate);
-
+                            SetAnimation((int)AnimationIndexEnum.FireUltimate); // Fire ultimate animations
                             break;
                         case 1:
-
-                            SetAnimation((int)AnimationIndexEnum.WaterUltimate);
-
+                            SetAnimation((int)AnimationIndexEnum.WaterUltimate); // Water ultimate animations
                             break;
                         case 2:
-                            SetAnimation((int)AnimationIndexEnum.SnowUltimate);
-
+                            SetAnimation((int)AnimationIndexEnum.SnowUltimate); // Snow ultimate animations
                             break;
                     }
                 }           
             }
         }
-
-        public void TeleportPlayer(Vector2 position, bool setCheckpoint)
+        
+        public void TeleportPlayer(Vector2 position) // Moves the player to a given position
         {
             SpritePosition = position;
 
@@ -282,20 +278,20 @@ namespace Terramental
             }
         }
 
-        public void DashStateMachine()
+        public void DashStateMachine() // Used to keep track of direction of dashes using double tap input method
         {
             switch (dashDir)
             {
                 case DashDirections.Up:
-                    upDashCheck+=1;
+                    upDashCheck++; // Increments the up dash to show that the player has performed an input for dashing vertically
                     DoubleTapToDashCooldown();
                     break;
                 case DashDirections.Left:
-                    leftDashCheck++;
+                    leftDashCheck++; // Increments the up dash to show that the player has performed an input for dashing left
                     DoubleTapToDashCooldown();
                     break;
                 case DashDirections.Right:
-                    rightDashCheck++;
+                    rightDashCheck++; // Increments the up dash to show that the player has performed an input for dashing right
                     DoubleTapToDashCooldown();
                     break;
             }
@@ -401,19 +397,29 @@ namespace Terramental
                 }
             }
 
-            if (dashCooldown > 0)
+        public void UpdateShiftDashCooldown(GameTime gameTime) // Cooldown method for shift input method of dash
+        {
+            if (dashCooldown >= 0) // Checks to see if the dash cooldown timer is greater or equal to 0
             {
-                dashCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                dashCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds; // Decreases dash cooldown timer
+                _canDash = false; // Boolean used to prevent the player from dashing
+            }
+
+            if (dashCooldown <= 0) // Checks to see if the dash cooldown timer is less than or equal to 0
+            {
+                _canDash = true; // Boolean used to allow the player to dash
             }
         }
 
-        public async void DoubleTapToDashCooldown()
+        public async void DoubleTapToDashCooldown() // Cooldown method for double tap input method of dash
         {
-            await Task.Delay(300);
+            await Task.Delay(300); // Performs a 300ms delay before executing any following code 
 
+            // Resets direction of dash counters to 0
             upDashCheck = 0;
             leftDashCheck = 0;
             rightDashCheck = 0;
+
             _dashActive = false;
         }
 
@@ -509,14 +515,14 @@ namespace Terramental
                 }
             }
 
-            if(ultimateActive && _elementIndex == 1)
+            if(ultimateActive && _elementIndex == 1) // Checks to see if the players ultimate is active and that they are using the water element
             {
-                SpriteVelocity += new Vector2(amount*2, 0);
+                SpriteVelocity += new Vector2(amount*1.34f, 0); // Applies a speed boost to the player
 
             }
             else
             {
-                SpriteVelocity += new Vector2(amount, 0);
+                SpriteVelocity += new Vector2(amount, 0); // Applies the standard speed to the player
 
             }
 
@@ -534,48 +540,50 @@ namespace Terramental
         {
             if(SpritePosition.Y > 64)
             {
-                if (IsGrounded())
+                if(IsGrounded()) // Checks to see if the player is touching the ground
                 {
-                    SpriteVelocity = -Vector2.UnitY * 22.25f;
+                    SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
                     _isDoubleJumpUsed = false;
-                    AudioManager.PlaySound("Jump_SFX");
+                    AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
                 }
-                else if (!_isDoubleJumpUsed)
+                else if(!_isDoubleJumpUsed) // Checks to see if the player has not used double jump
                 {
-                    SpriteVelocity = -Vector2.UnitY * 22.25f;
+                    SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
                     _isDoubleJumpUsed = true;
-                    AudioManager.PlaySound("Jump_SFX");
+                    AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
                 }
+            
             }
         }
 
-        private void SimulateFriction()
+        private void SimulateFriction() // Applies a counter force to the players velocity to act as friciton
         {
             SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f;
         }
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
-            SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+            SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15; // Moves the player based on sprite velocity
+            SpritePosition = new Vector2(MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth * 64) - 64), SpritePosition.Y);
         }
 
-        private void ApplyGravity()
+        private void ApplyGravity() // Applies a downward force on the player to act as gravity
         {
-            SpriteVelocity += Vector2.UnitY * 0.5f;
+            SpriteVelocity += Vector2.UnitY * 0.5f; 
         }
 
         #endregion
 
         #region Collisions
 
-        public bool IsGrounded()
+        public bool IsGrounded() // Checks to see if the player is grounded
         {
             Rectangle onePixelLower = SpriteRectangle;
-            onePixelLower.Offset(0, 1);
-            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+            onePixelLower.Offset(0, 1); // Adds a pixel offset
+            return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower) || !_gameManager.mapManager.HasRoomForRectangleMP(onePixelLower);
         }
 
-        private void MoveIfValid(GameTime gameTime)
+        private void MoveIfValid(GameTime gameTime) // Checks to see if a movement is valid
         {
             _oldPosition = base.SpritePosition;
             UpdatePositionBasedOnMovement(gameTime);
@@ -583,9 +591,9 @@ namespace Terramental
             base.SpritePosition = _gameManager.mapManager.FindValidLoaction(_oldPosition, SpritePosition, SpriteRectangle);
         }
 
-        private void StopMovingIfBlocked()
+        private void StopMovingIfBlocked() // Checks if the movement is blocked and stops the movement accordingly
         {
-            Vector2 lastMovement = SpritePosition - _oldPosition;
+            Vector2 lastMovement = SpritePosition - _oldPosition; // Stores the previous position
 
             if(lastMovement.X == 0)
             {
@@ -604,19 +612,19 @@ namespace Terramental
 
         public void ActivateUltimate()
         {
-            if (ultimateCooldown <= 0 && ultimateActiveTimer <= 0)
+            if (ultimateCooldown <= 0 && ultimateActiveTimer <= 0) // Checks to see if the player can use their ultimate ability
             {
-                ultimateActiveTimer = 10;
-                ultimateActive = true;
-                AudioManager.PlaySound("UltimateActivation_SFX");
+                ultimateActiveTimer = 10; // Resets the ultimate cooldown
+                ultimateActive = true; // Sets the ultimate to active
+                AudioManager.PlaySound("UltimateActivation_SFX"); // Plays the sound effect for ultimate activation
             }
         }
 
         public void PrimaryUltimateAttack()
         {
-            if (ultimateActive && _attackTimer <= 0)
+            if (ultimateActive && _attackTimer <= 0) // Checks if ultimate is active and if the player can attack (not on cooldown)
             {
-                switch (_elementIndex)
+                switch (_elementIndex) // Switch statement to handle the 3 possibly elements
                 {
                     case 0:
 
@@ -671,17 +679,17 @@ namespace Terramental
 
         private void UpdateUltimateStatus(GameTime gameTime)
         {
-            if (ultimateActiveTimer > 0)
+            if (ultimateActiveTimer > 0) // Decreases ultimate timer
             {
                 ultimateActiveTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (ultimateActive)
             {
-                ultimateCooldown = 10;
+                ultimateCooldown = 10; // Resets ultimate cooldown
                 ultimateActive = false;
             }
 
-            if (_attackTimer > 0)
+            if (_attackTimer > 0) // Decreases attack timer
             {
                 _attackTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -739,23 +747,23 @@ namespace Terramental
 
         private void MovementAnimations()
         {
-            if (SpriteVelocity.X != 0)
+            if (SpriteVelocity.X != 0) // Checks to see if the player has a horizontal velocity (for walk animations)
             {
-                if(_elementIndex == 0)
+                if(_elementIndex == 0) // Checks to see if the player is currently using the fire element
                 {
                     if(Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.FireWalk])
                     {
                         SetAnimation((int)AnimationIndexEnum.FireWalk);
                     }
                 }
-                else if(_elementIndex == 1)
+                else if(_elementIndex == 1) // Checks to see if the player is currently using the water element
                 {
                     if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.WaterWalk])
                     {
                         SetAnimation((int)AnimationIndexEnum.WaterWalk);
                     }
                 }
-                else if(_elementIndex == 2)
+                else if(_elementIndex == 2) // Checks to see if the player is currently using the snow element
                 {
                     if (Animations[AnimationIndex] != Animations[(int)AnimationIndexEnum.SnowWalk])
                     {
@@ -763,7 +771,7 @@ namespace Terramental
                     }
                 }
             }
-            else
+            else // For idle animations
             {
                 if (_elementIndex == 0)
                 {
