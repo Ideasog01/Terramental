@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/DefaultFont.spritefont</SourceFile>
-  <SourceTime>2022-05-06T14:50:37.1937725+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/SpriteFont/DefaultFont.xnb</DestFile>
-  <DestTime>2022-05-08T04:50:47.0817141+01:00</DestTime>
+  <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/SpriteFont/DefaultFont.spritefont</SourceFile>
+  <SourceTime>2022-05-06T21:24:38.0405919+00:00</SourceTime>
+  <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Content/SpriteFont/DefaultFont.xnb</DestFile>
+  <DestTime>2022-05-08T20:47:58.193321+00:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
-  <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
+  <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
-  <ProcessorTime>2020-08-10T17:17:54+01:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T16:17:54+00:00</ProcessorTime>
   <Parameters>
     <Key>PremultiplyAlpha</Key>
     <Value>True</Value>
