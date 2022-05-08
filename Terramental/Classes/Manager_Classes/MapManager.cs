@@ -28,6 +28,7 @@ namespace Terramental
         private List<Texture2D> _fireTileMap = new List<Texture2D>();
         private List<Texture2D> _assetWaterList = new List<Texture2D>();
         private List<Texture2D> _assetSnowList = new List<Texture2D>();
+        private List<Texture2D> _assetFireList = new List<Texture2D>();
         private List<Texture2D> _currentTileMap = new List<Texture2D>();
         private List<Texture2D> _currentAssetTexture = new List<Texture2D>();
 
@@ -167,23 +168,23 @@ namespace Terramental
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_UpwardsRightCorner")); //5
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_UpwradsLeftCorner")); //6
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_UpwardsTile")); //7
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_Filler")); //8
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_GroundTile")); //9
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_RightCorner")); //10
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_RightSlide")); //11
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_LeftCorner")); //12
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_GroundTile")); //9
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_RightCorner")); //10
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_RightSlide")); //11
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_LeftCorner")); //12
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FirstFrame")); //13
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //13
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_SecondFrame")); //14
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_ThirdFrame")); //15
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_Thirdframe")); //15
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FourthFrame")); //16
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FifthFrame")); //17
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_SeventhFrame")); //18
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_EightFrame")); //19
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_LeftSlide")); //20
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_DownRightCorner")); //21
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_DownLeftCorner")); //22
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_Filler")); //23
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_Backwards")); //24
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_LeftSlide")); //20
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_DownRightCorner")); //21
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_DownLeftCorner")); //22
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Filler")); //23
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Backwards")); //24
 
 
             _assetWaterList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
@@ -199,6 +200,9 @@ namespace Terramental
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile")); //3
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile2")); //4
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pine")); //5
+
+
+            
         }
 
         private void GenerateMap()
@@ -217,6 +221,7 @@ namespace Terramental
             else if (GameManager.levelIndex == 5)
             {
                 _currentTileMap = _fireTileMap;
+                _currentAssetTexture = _assetFireList;
 
             }
 
