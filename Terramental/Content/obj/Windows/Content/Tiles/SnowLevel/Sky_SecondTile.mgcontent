@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/SnowLevel/Sky_SecondTile.png</SourceFile>
-  <SourceTime>2022-05-08T18:48:13.2281474+00:00</SourceTime>
-  <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Content/Tiles/SnowLevel/Sky_SecondTile.xnb</DestFile>
-  <DestTime>2022-05-08T20:48:03.5271308+00:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Tiles/SnowLevel/Sky_SecondTile.png</SourceFile>
+  <SourceTime>2022-05-08T18:57:45.5470701+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Tiles/SnowLevel/Sky_SecondTile.xnb</DestFile>
+  <DestTime>2022-05-08T22:26:06.560047+01:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
+  <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T16:17:54+00:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T17:17:54+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
