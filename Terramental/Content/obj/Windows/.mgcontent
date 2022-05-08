@@ -113,6 +113,15 @@
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire_UpwardsRightCorner.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire_UpwardsTile.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire_UpwradsLeftCorner.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_Backwards.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_DownLeftCorner.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_DownRightCorner.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_Filler.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_GroundTile.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_LeftCorner.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_LeftSlide.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_RightCorner.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/Fire2_RightSlide.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/FireSky_EightFrame.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/FireSky_FifthFrame.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Tiles/FireLevel/FireSky_FirstFrame.png</File>
@@ -236,6 +245,15 @@
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
