@@ -26,6 +26,7 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/HealthPickup_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/Jump_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/MenuButton_SFX.wav</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/NegativeElement_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/ScorePickup_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/SnowProjectile_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/Sword_SFX.wav</File>
@@ -218,6 +219,7 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

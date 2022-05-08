@@ -211,6 +211,12 @@
 /processorParam:Quality=Best
 /build:SFXs/MenuButton_SFX.wav
 
+#begin SFXs/NegativeElement_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/NegativeElement_SFX.wav
+
 #begin SFXs/ScorePickup_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
