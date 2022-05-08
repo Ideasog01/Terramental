@@ -179,14 +179,14 @@ namespace Terramental
         private void GenerateMap()
         {
 
-            if (GameManager.levelIndex < 4)
+            if (GameManager.levelIndex == 1 || GameManager.levelIndex == 2 || GameManager.levelIndex == 3)
             {
                 _currentTileMap = _waterTileMap;
                 _currentAssetTexture = _assetWaterList;
 
             }
 
-            else if (GameManager.levelIndex == 5 || GameManager.levelIndex ==6)
+            else if (GameManager.levelIndex == 4)
             {
                 _currentTileMap = _snowTileMap;
                 _currentAssetTexture = _assetSnowList;
@@ -206,7 +206,7 @@ namespace Terramental
                     if(tileCount < tileList.Count)
                     {
                         Tile tile = tileList[tileCount];
-                        tile.Initialise(new Vector2(x * 64, y * 64), _snowTileMap[tileIndex], new Vector2(64, 64));
+                        tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
                         tile.LayerOrder = 0;
 
                         bool isBlocking = false;
@@ -221,7 +221,7 @@ namespace Terramental
                     else
                     {
                         Tile tile = new Tile();
-                        tile.Initialise(new Vector2(x * 64, y * 64), _snowTileMap[tileIndex], new Vector2(64, 64));
+                        tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
                         tile.LayerOrder = 0;
                         bool isBlocking = false;
 
@@ -253,18 +253,18 @@ namespace Terramental
                 if(spawnedAssetCount < assetSpriteList.Count)
                 {
                     Sprite assetSprite = assetSpriteList[0];
-                    Texture2D assetTexture = _assetSnowList[assetIndex];
+                    Texture2D assetTexture = _currentAssetTexture[assetIndex];
                     assetSprite.SpriteTexture = assetTexture;
-                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetSnowList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _currentAssetTexture[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
                     assetSprite.IsActive = true;
                     assetCount++;
                     spawnedAssetCount++;
                 }
                 else
                 {
-                    Texture2D assetTexture = _assetSnowList[assetIndex];
+                    Texture2D assetTexture = _currentAssetTexture[assetIndex];
                     Sprite assetSprite = new Sprite();
-                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _assetSnowList[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
+                    assetSprite.Initialise(_mapData.assetPositionList[assetCount], _currentAssetTexture[assetIndex], new Vector2(assetTexture.Width, assetTexture.Height));
                     assetSpriteList.Add(assetSprite);
                     assetCount++;
                 }
