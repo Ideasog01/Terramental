@@ -66,6 +66,17 @@ namespace Terramental
                     }
                 }
             }
+
+            foreach (Sprite sprite in _spriteList)
+            {
+                if (sprite.IsVisible && sprite.IsActive)
+                {
+                    if (sprite.LayerOrder == -3)
+                    {
+                        sprite.Draw(gameTime, _spriteBatch);
+                    }
+                }
+            }
         }
 
         public void DestroySprite(Sprite sprite)
