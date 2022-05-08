@@ -131,31 +131,31 @@ namespace Terramental
             _tileMap1.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_SandReverse")); //23
 
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_GroundTile")); //0
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_RightCorner")); //1
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_RighSlide")); //2
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_LeftCorner")); //3
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_LeftSlide")); //4
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_DownRightCorner")); //5
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_DownLeftCorner")); //6
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_Backwards")); //7
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Snow_Filler")); //8
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_GroundTile")); //9
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_RightCorner")); //10
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_RightSlide")); //11
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_LeftCorner")); //12
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_FirstTile")); //13
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_SecondTile")); //14
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_ThirdTile")); //15
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_GroundTile")); //0
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_RightCorner")); //1
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_RighSlide")); //2
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_LeftCorner")); //3
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_LeftSlide")); //4
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_DownRightCorner")); //5
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_DownLeftCorner")); //6
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_Backwards")); //7
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_Filler")); //8
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_GroundTile")); //9
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_RightCorner")); //10
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_RightSlide")); //11
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_LeftCorner")); //12
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Sky_FirstTile")); //13
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Sky_SecondTile")); //14
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Sky_ThirdTile")); //15
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FourthTile")); //16
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //17
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_SixthTile")); //18
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Sky_SeventhTile")); //19
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_LeftSlide")); //20
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_DownRightCorner")); //21
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_DownLeftCorner")); //22
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_Filler")); //23
-            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevelTiles/Ice_Backwards")); //24
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Sky_SixthTile")); //18
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Sky_SeventhTile")); //19
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_LeftSlide")); //20
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_DownRightCorner")); //21
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_DownLeftCorner")); //22
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_Filler")); //23
+            _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_Backwards")); //24
 
             _assetTextureList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _assetTextureList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));

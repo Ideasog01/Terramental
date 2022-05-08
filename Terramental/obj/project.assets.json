@@ -7419,11 +7419,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\olive\\Desktop\\Terramental\\Terramental\\Terramental.csproj",
+      "projectUniqueName": "F:\\University\\Semester2\\Game Development Group Project\\Terramental_Project\\Terramental\\Terramental\\Terramental.csproj",
       "projectName": "Terramental",
-      "projectPath": "C:\\Users\\olive\\Desktop\\Terramental\\Terramental\\Terramental.csproj",
+      "projectPath": "F:\\University\\Semester2\\Game Development Group Project\\Terramental_Project\\Terramental\\Terramental\\Terramental.csproj",
       "packagesPath": "C:\\Users\\olive\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\olive\\Desktop\\Terramental\\Terramental\\obj\\",
+      "outputPath": "F:\\University\\Semester2\\Game Development Group Project\\Terramental_Project\\Terramental\\Terramental\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
