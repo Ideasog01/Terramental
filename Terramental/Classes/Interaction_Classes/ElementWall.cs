@@ -9,7 +9,7 @@ namespace Terramental
 
         private int _elementIndex;
 
-        private bool _checkCollision;
+        private bool _invalidElement;
 
         private int wallHealth;
 
@@ -41,9 +41,13 @@ namespace Terramental
 
         public void DamageElementWall()
         {
-            if (!_checkCollision)
+            if (!_invalidElement)
             {
                 wallHealth -= 20;
+            }
+            else
+            {
+                SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
             }
 
             if(wallHealth == 40)
@@ -85,15 +89,15 @@ namespace Terramental
                 {
                     if (_elementIndex == 0)
                     {
-                        _checkCollision = true;
+                        _invalidElement = true;
                     }
                     else if (_elementIndex == 1)
                     {
-                        _checkCollision = true;
+                        _invalidElement = true;
                     }
                     else if (_elementIndex == 2)
                     {
-                        _checkCollision = false;
+                        _invalidElement = false;
                     }
                 }
 
@@ -101,15 +105,15 @@ namespace Terramental
                 {
                     if (_elementIndex == 0)
                     {
-                        _checkCollision = false;
+                        _invalidElement = false;
                     }
                     else if (_elementIndex == 1)
                     {
-                        _checkCollision = true;
+                        _invalidElement = true;
                     }
                     else if (_elementIndex == 2)
                     {
-                        _checkCollision = true;
+                        _invalidElement = true;
                     } 
                 }
 
@@ -117,15 +121,15 @@ namespace Terramental
                 {
                     if (_elementIndex == 0)
                     {
-                        _checkCollision = true;
+                        _invalidElement = true;
                     }
                     else if (_elementIndex == 1)
                     {
-                        _checkCollision = false;
+                        _invalidElement = false;
                     }
                     else if (_elementIndex == 2)
                     {
-                        _checkCollision = true;
+                        _invalidElement = true;
                     }
                 }
             }
