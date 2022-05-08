@@ -19,18 +19,11 @@ namespace Terramental
         private GameManager _gameManager;
         private PlayerCharacter _playerCharacter;
 
-        public KeyboardState _currentKeyboardState;
-        public KeyboardState oldKeyboardState;
-        private MouseState _currentMouseState;
-        private GamePadState _currentGamepadState;
-        private GamePadState _oldGamepadState;
-
-        private bool isTap = false;
-        private double time1;
-        private double time2;
-        private int doubleTapKeyCooldown = 500;
-        private int sameKeyDownCount = 0;
-        private double lastKeyPressTime;
+        public KeyboardState _currentKeyboardState; // Stores current keyboard state
+        public KeyboardState oldKeyboardState; // Stores previous keyboard state
+        private MouseState _currentMouseState; // Stores current mouse state
+        private GamePadState _currentGamepadState; // Stores current controller state
+        private GamePadState _oldGamepadState; // Stores previous controller state
 
         public InputManager(CameraController playerCam, MenuManager menuManager, GameManager gameManager)
         {
@@ -60,12 +53,12 @@ namespace Terramental
             _oldGamepadState = _currentGamepadState;
             _currentGamepadState = GamePad.GetState(PlayerIndex.One);
             
-            if(!_currentGamepadState.IsConnected)
+            if(!_currentGamepadState.IsConnected) // Checks to see if there is no controller connected 
             {
-                if (_currentKeyboardState.IsKeyUp(Keys.Escape) && oldKeyboardState.IsKeyDown(Keys.Escape) && GameManager.currentGameState == GameManager.GameState.Level)
+                if (_currentKeyboardState.IsKeyUp(Keys.Escape) && oldKeyboardState.IsKeyDown(Keys.Escape) && GameManager.currentGameState == GameManager.GameState.Level) // If player presses escape whilst playing a level
                 {
-                    GameManager.PauseGame();
-                    _gameManager.IsMouseVisible = true;
+                    GameManager.PauseGame(); // Pause the game
+                    _gameManager.IsMouseVisible = true; // Sets the mouse visibility to true
                 }
 
                 if(GameManager.currentGameState == GameManager.GameState.StartScreen)
@@ -311,10 +304,6 @@ namespace Terramental
                             _playerCharacter.dashDirX = 0;
 
                             _playerCharacter._isDashing = true;
-
-                            Debug.WriteLine("Up Dash With Shift");
-
-                            //  _playerCharacter.Dash(gameTime);
                         }
 
                         if (_currentKeyboardState.IsKeyDown(Keys.A))
@@ -323,10 +312,6 @@ namespace Terramental
                             _playerCharacter.dashDirX = -1;
 
                             _playerCharacter._isDashing = true;
-
-                            Debug.WriteLine("Left Dash With Shift");
-
-                            // _playerCharacter.Dash(gameTime);
                         }
 
                         if (_currentKeyboardState.IsKeyDown(Keys.D))
@@ -335,10 +320,6 @@ namespace Terramental
                             _playerCharacter.dashDirX = 1;
 
                             _playerCharacter._isDashing = true;
-
-                            Debug.WriteLine("Right Dash With Shift");
-
-                            // _playerCharacter.Dash(gameTime);
                         }
                     }
                 }
@@ -380,32 +361,5 @@ namespace Terramental
             }
             
         }
-
-        /*
-
-        
-        double clickTimer;
-        public bool IsKeyDoublePressed(Keys key, GameTime gameTime)
-        {
-            double doublePressTime = 500;
-            // clickTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            Debug.WriteLine("current" + key);
-            Debug.WriteLine("last " + lastSuccessfulKeyPress);
-            if (IsKeyPressed(key, gameTime) && key == lastSuccessfulKeyPress) // && lastKeyPressed == key)
-            {
-                if (clickTimer < doublePressTime) // double click
-                {
-                    return true;
-                }
-                else // normal click
-                {
-
-                }
-                clickTimer = 0;
-            }
-            return false;    
-        }
-        */
     }
-
 }
