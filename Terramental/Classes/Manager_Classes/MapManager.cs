@@ -168,23 +168,57 @@ namespace Terramental
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_UpwardsRightCorner")); //5
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_UpwradsLeftCorner")); //6
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_UpwardsTile")); //7
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_Filler")); //8
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_GroundTile")); //9
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_RightCorner")); //10
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_RightSlide")); //11
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_LeftCorner")); //12
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FirstFrame")); //13
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Sky_FifthTile")); //13
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_SecondFrame")); //14
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_Thirdframe")); //15
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FourthFrame")); //16
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FifthFrame")); //17
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_SeventhFrame")); //18
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_EightFrame")); //19
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_LeftSlide")); //20
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_DownRightCorner")); //21
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_DownLeftCorner")); //22
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Filler")); //23
-            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Backwards")); //24
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FirstFrame")); //14
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_SecondFrame")); //15
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_Thirdframe")); //16
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FourthFrame")); //17
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_FifthFrame")); //18
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_SeventhFrame")); //19
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/FireSky_EightFrame")); //20
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_LeftSlide")); //21
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_DownRightCorner")); //22
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_DownLeftCorner")); //23
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Filler")); //24
+            _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Backwards")); //25
+
+            /*
+             * tileTextureList.Add(GetTexture("Tiles/DefaultTile")); //0
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_Tile")); //0
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_RightCorner")); //1
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_RightSlide")); //2
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_LeftCorner")); //3
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_LeftSlide")); //4
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_UpwardsRightCorner")); //5
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_UpwradsLeftCorner")); //6
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_UpwardsTile")); //7
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_Filler")); //8
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_GroundTile")); //9
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_RightCorner")); //10
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_RightSlide")); //11
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_LeftCorner")); //12
+            tileTextureList.Add(GetTexture("Tiles/WaterLevelTiles/Sky_FifthTile")); //13
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_FirstFrame")); //14
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_SecondFrame")); //15
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_Thirdframe")); //16
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_FourthFrame")); //17
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_FifthFrame")); //18
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_SeventhFrame")); //19
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_EightFrame")); //20
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_LeftSlide")); //21
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_DownRightCorner")); //22
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_DownLeftCorner")); //23
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_Filler")); //24
+            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_Backwards")); //25
+             * 
+             * 
+             * 
+             */
 
 
             _assetWaterList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
@@ -222,7 +256,6 @@ namespace Terramental
             {
                 _currentTileMap = _fireTileMap;
                 _currentAssetTexture = _assetFireList;
-
             }
 
 
@@ -238,34 +271,40 @@ namespace Terramental
 
                     if(tileCount < tileList.Count)
                     {
-                        Tile tile = tileList[tileCount];
-                        tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
-                        tile.LayerOrder = 0;
-
-                        bool isBlocking = false;
-
-                        if (tileIndex <= 13 || tileIndex > 20)
+                        if(tileIndex < _currentTileMap.Count)
                         {
-                            isBlocking = true;
-                        }
+                            Tile tile = tileList[tileCount];
+                            tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
+                            tile.LayerOrder = 0;
 
-                        tile.IsBlocking = isBlocking;
+                            bool isBlocking = false;
+
+                            if (tileIndex <= 13 || tileIndex > 20)
+                            {
+                                isBlocking = true;
+                            }
+
+                            tile.IsBlocking = isBlocking;
+                        }
                     }
                     else
                     {
-                        Tile tile = new Tile();
-                        tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
-                        tile.LayerOrder = 0;
-                        bool isBlocking = false;
-
-                        if (tileIndex <= 13 || tileIndex > 20)
+                        if(tileIndex < _currentTileMap.Count)
                         {
-                            isBlocking = true;
+                            Tile tile = new Tile();
+                            tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
+                            tile.LayerOrder = 0;
+                            bool isBlocking = false;
+
+                            if (tileIndex <= 13 || tileIndex > 20)
+                            {
+                                isBlocking = true;
+                            }
+
+                            tile.IsBlocking = isBlocking;
+
+                            tileList.Add(tile);
                         }
-
-                        tile.IsBlocking = isBlocking;
-
-                        tileList.Add(tile);
                     }
 
                     SpawnEntity(_mapData._entityMap[x, y], new Vector2(x * 64, y * 64));
@@ -317,6 +356,7 @@ namespace Terramental
             if (index == 1)
             {
                 //Set Player Position To Start
+                SpawnManager.levelStartPosition = position;
                 _gameManager.playerCharacter.TeleportPlayer(position);
             }
 

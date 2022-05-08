@@ -217,6 +217,7 @@ namespace Terramental
             _isGrounded = false;
             _enemiesDefeated = 0;
             ElementIndex = 0;
+            SpritePosition = SpawnManager.levelStartPosition; 
         }
 
         public void UpdatePlayerCharacter(GameTime gameTime)
@@ -494,22 +495,6 @@ namespace Terramental
 
         public void PlayerMovement(int amount, GameTime gameTime)
         {
-            if(amount < 0)
-            {
-                if(SpritePosition.X - 32 <= 0)
-                {
-                    return;
-                }
-            }
-
-            if(amount > 0)
-            {
-                if (SpritePosition.X + 128 > MapManager.mapWidth * 64)
-                {
-                    return;
-                }
-            }
-
             if(ultimateActive && _elementIndex == 1) // Checks to see if the players ultimate is active and that they are using the water element
             {
                 SpriteVelocity += new Vector2(amount*1.34f, 0); // Applies a speed boost to the player
@@ -533,21 +518,17 @@ namespace Terramental
 
         public void PlayerJump()
         {
-            if(SpritePosition.Y > 64)
+            if (IsGrounded()) // Checks to see if the player is touching the ground
             {
-                if(IsGrounded()) // Checks to see if the player is touching the ground
-                {
-                    SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
-                    _isDoubleJumpUsed = false;
-                    AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
-                }
-                else if(!_isDoubleJumpUsed) // Checks to see if the player has not used double jump
-                {
-                    SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
-                    _isDoubleJumpUsed = true;
-                    AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
-                }
-            
+                SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
+                _isDoubleJumpUsed = false;
+                AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
+            }
+            else if (!_isDoubleJumpUsed) // Checks to see if the player has not used double jump
+            {
+                SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
+                _isDoubleJumpUsed = true;
+                AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
             }
         }
 
@@ -559,7 +540,7 @@ namespace Terramental
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
             SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15; // Moves the player based on sprite velocity
-            SpritePosition = new Vector2(MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth * 64) - 64), SpritePosition.Y);
+            SpritePosition = new Vector2(MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth * 64) - 64), MathHelper.Clamp(SpritePosition.Y, 0, (MapManager.mapHeight * 64) + 300)); //Restricts the player's position within the level boundaries
         }
 
         private void ApplyGravity() // Applies a downward force on the player to act as gravity

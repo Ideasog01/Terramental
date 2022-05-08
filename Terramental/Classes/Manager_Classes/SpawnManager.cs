@@ -13,7 +13,7 @@ namespace Terramental
 
         public static GameManager _gameManager;
 
-        public static int dialogueTriggersCount;
+        public static Vector2 levelStartPosition;
 
         public static List<Projectile> projectileList = new List<Projectile>();
 
