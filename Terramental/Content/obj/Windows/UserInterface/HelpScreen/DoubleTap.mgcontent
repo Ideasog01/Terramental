@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/UserInterface/HelpScreen/DoubleTap.png</SourceFile>
+  <SourceFile>C:/Users/olive/Desktop/Terramental/Terramental/Content/UserInterface/HelpScreen/DoubleTap.png</SourceFile>
   <SourceTime>2022-05-05T20:16:48.7737809+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/UserInterface/HelpScreen/DoubleTap.xnb</DestFile>
-  <DestTime>2022-05-06T14:06:52.040229+01:00</DestTime>
+  <DestFile>C:/Users/olive/Desktop/Terramental/Terramental/Content/bin/Windows/UserInterface/HelpScreen/DoubleTap.xnb</DestFile>
+  <DestTime>2022-05-08T04:46:29.5179648+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
