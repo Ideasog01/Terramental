@@ -260,6 +260,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Effects/FrozenEffect.png
 
+#begin Sprites/Effects/SnowExplosion_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Effects/SnowExplosion_SpriteSheet.png
+
+#begin Sprites/Effects/WaterExplosion_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Effects/WaterExplosion_SpriteSheet.png
+
 #begin Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

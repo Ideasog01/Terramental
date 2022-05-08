@@ -201,14 +201,14 @@ namespace Terramental
             if (_projectileTrigger == 2)
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Empowered, 10, 0, 0);
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/WaterExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("WaterExplosion_SFX");
             }
 
             if(_projectileTrigger == 3)
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Frozen, 2, 0, 0);
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("SnowExplosion_SFX");
 
                 if (character.CharacterVFX == null)
@@ -228,13 +228,13 @@ namespace Terramental
 
             if(_projectileTrigger == 2)
             {
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/WaterExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("WaterExplosion_SFX");
             }
 
             if(_projectileTrigger == 3)
             {
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("SnowExplosion_SFX");
             }
         }

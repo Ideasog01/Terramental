@@ -35,6 +35,8 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/FireExplosion_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/Flame_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/FrozenEffect.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/SnowExplosion_SpriteSheet.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/WaterExplosion_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet.png</File>
@@ -192,6 +194,8 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
