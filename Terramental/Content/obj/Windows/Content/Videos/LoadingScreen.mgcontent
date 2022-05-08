@@ -3,7 +3,7 @@
   <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/Videos/LoadingScreen.wmv</SourceFile>
   <SourceTime>2022-05-04T18:03:22.3216437+00:00</SourceTime>
   <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Content/Videos/LoadingScreen.xnb</DestFile>
-  <DestTime>2022-05-07T22:12:31.2896661+00:00</DestTime>
+  <DestTime>2022-05-06T21:25:13.4753664+00:00</DestTime>
   <Importer>WmvImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
   <Processor>VideoProcessor</Processor>
