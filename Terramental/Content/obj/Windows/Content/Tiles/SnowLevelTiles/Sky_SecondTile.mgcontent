@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Tiles/SnowLevelTiles/Sky_SecondTile.png</SourceFile>
-  <SourceTime>2022-05-08T03:51:26.8537466+01:00</SourceTime>
+  <SourceTime>2022-05-08T04:35:43.5511144+01:00</SourceTime>
   <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Tiles/SnowLevelTiles/Sky_SecondTile.xnb</DestFile>
-  <DestTime>2022-05-08T04:03:41.1199542+01:00</DestTime>
+  <DestTime>2022-05-08T04:36:39.4847203+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
