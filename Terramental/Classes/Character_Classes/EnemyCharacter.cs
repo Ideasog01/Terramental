@@ -407,7 +407,7 @@ namespace Terramental
             {
                 SpriteVelocity *= Vector2.UnitY;
 
-                if (!_pathBlocked && IsGrounded() && _currentState == AIState.Chase && DistanceToPlayer() < 300)
+                if (!_pathBlocked && IsGrounded() && _currentState == AIState.Chase && DistanceToPlayer() < 160)
                 {
                     AudioManager.PlaySound("Jump_SFX");
                     _pathBlocked = true;
