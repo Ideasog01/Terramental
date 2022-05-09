@@ -274,13 +274,26 @@ namespace Terramental
         private void Idle()
         {
             SetAnimation(0);
+
+            foreach(Tile tile in MapManager.tileList)
+            {
+                float distance = MathF.Sqrt((MathF.Pow(tile.SpritePosition.X - SpritePosition.X, 2)) + (MathF.Pow(tile.SpritePosition.Y - SpritePosition.Y, 2)));
+
+                if(distance < 64)
+                {
+                    if (SpritePosition.Y > tile.SpritePosition.Y)
+                    {
+                        SpritePosition = SpawnPosition;
+                    }
+                }
+            }
         }
 
         private void Chase()
         {
             Vector2 dir = playerCharacter.SpritePosition - SpritePosition;
             dir.Normalize();
-            SpriteVelocity = new Vector2(dir.X, SpriteVelocity.Y) * _enemyMovementSpeed;
+            SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, SpriteVelocity.Y);
 
             if(SpriteVelocity.X != 0)
             {
@@ -325,7 +338,7 @@ namespace Terramental
 
         private void ApplyGravity()
         {
-            SpriteVelocity = Vector2.UnitY * 0.5f;
+            SpriteVelocity += Vector2.UnitY * 0.5f;
         }
 
         private void SimulateFriction()

@@ -540,7 +540,7 @@ namespace Terramental
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
             SpritePosition += SpriteVelocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15; // Moves the player based on sprite velocity
-            SpritePosition = new Vector2(MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth * 64) - 64), MathHelper.Clamp(SpritePosition.Y, 0, (MapManager.mapHeight * 64) + 300)); //Restricts the player's position within the level boundaries
+            SpritePosition = new Vector2(MathHelper.Clamp(SpritePosition.X, 0, (MapManager.mapWidth * 64) - 64), MathHelper.Clamp(SpritePosition.Y, -32, (MapManager.mapHeight * 64) + 300)); //Restricts the player's position within the level boundaries
         }
 
         private void ApplyGravity() // Applies a downward force on the player to act as gravity

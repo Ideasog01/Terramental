@@ -109,7 +109,7 @@ namespace Terramental
             {
                 if (_displayMessageTimer > 0)
                 {
-                    spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 200), Color.White);
+                    spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 150), Color.White);
                 }
             }
         }

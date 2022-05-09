@@ -325,8 +325,10 @@ namespace Terramental
                         completeButton.DrawMenuComponent(spriteBatch);
                     }
 
-                    spriteBatch.DrawString(_levelTitleFont, "Score: " + _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 50, 200), Color.White);
-                    spriteBatch.DrawString(_levelTitleFont, "Enemies Defeated: " + _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) - 150, 300), Color.White);
+
+                    spriteBatch.DrawString(_levelTitleFont, _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) + 5, 178), Color.White);
+                    spriteBatch.DrawString(_levelTitleFont, _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 60, 210), Color.White);
+                    spriteBatch.DrawString(_levelTitleFont, "0", new Vector2((GameManager.screenWidth / 2) + 35, 242), Color.White);
 
                     break;
 
@@ -914,11 +916,11 @@ namespace Terramental
 
             Texture2D replayButtonTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/ReplayButton");
             Button replayButton = new Button(GameManager.ButtonName.Replay, this);
-            replayButton.InitialiseMenuComponent(replayButtonTexture, new Vector2((GameManager.screenWidth / 2) - (replayButtonTexture.Width / 2) - 160, 380), new Vector2(replayButtonTexture.Width, replayButtonTexture.Height));
+            replayButton.InitialiseMenuComponent(replayButtonTexture, new Vector2((GameManager.screenWidth / 2) - (replayButtonTexture.Width / 2) - 160, 420), new Vector2(replayButtonTexture.Width, replayButtonTexture.Height));
 
             Texture2D continueButtonTexture = _gameManager.GetTexture("UserInterface/LevelCompleteMenu/ContinueButton");
             Button continueButton = new Button(GameManager.ButtonName.Continue, this);
-            continueButton.InitialiseMenuComponent(continueButtonTexture, new Vector2((GameManager.screenWidth / 2) - (replayButtonTexture.Width / 2) + 160, 380), new Vector2(continueButtonTexture.Width, continueButtonTexture.Height));
+            continueButton.InitialiseMenuComponent(continueButtonTexture, new Vector2((GameManager.screenWidth / 2) - (replayButtonTexture.Width / 2) + 160, 420), new Vector2(continueButtonTexture.Width, continueButtonTexture.Height));
 
             completeMenuButtonList.Add(replayButton);
             completeMenuButtonList.Add(continueButton);

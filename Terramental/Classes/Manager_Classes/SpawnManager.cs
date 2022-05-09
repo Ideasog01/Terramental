@@ -312,7 +312,7 @@ namespace Terramental
 
                             enemy.EnemyIndex = 0;
                             enemy.AttackThreshold = 60;
-                            enemy.ChaseThreshold = 400;
+                            enemy.ChaseThreshold = 900;
                             enemy.AttackCooldown = 1;
                             enemy.ElementIndex = elementIndex;
                             enemy.AttackCooldown = 1;
@@ -343,8 +343,8 @@ namespace Terramental
                             enemy.Animations[2].FrameDimensions = new Vector2(96, 96);
 
                             enemy.EnemyIndex = 1;
-                            enemy.AttackThreshold = 400;
-                            enemy.ChaseThreshold = 600;
+                            enemy.AttackThreshold = 300;
+                            enemy.ChaseThreshold = 900;
                             enemy.AttackCooldown = 3;
                             enemy.ElementIndex = elementIndex;
                             enemy.AttackCooldown = 1;
@@ -379,7 +379,7 @@ namespace Terramental
                     knightEnemy.LayerOrder = -1;
                     knightEnemy.playerCharacter = _gameManager.playerCharacter;
                     knightEnemy.AttackThreshold = 60; // Distance to attack the player
-                    knightEnemy.ChaseThreshold = 400; // Distance to chase the player
+                    knightEnemy.ChaseThreshold = 900; // Distance to chase the player
                     knightEnemy.ElementIndex = elementIndex;
                     enemyList.Add(knightEnemy);
                     knightEnemy.AttackCooldown = 1; // Cooldown between attacks
@@ -401,8 +401,8 @@ namespace Terramental
                     darkMageCharacter.AddAnimation(mageAttack);
                     darkMageCharacter.SetAnimation(0);
 
-                    darkMageCharacter.AttackThreshold = 400; // Distance to attack the player
-                    darkMageCharacter.ChaseThreshold = 600; // Distance to chase the player
+                    darkMageCharacter.AttackThreshold = 300; // Distance to attack the player
+                    darkMageCharacter.ChaseThreshold = 900; // Distance to chase the player
 
                     darkMageCharacter.LoadWorldCanvas(_gameManager);
                     darkMageCharacter.LayerOrder = -1;
