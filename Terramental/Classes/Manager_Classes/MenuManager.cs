@@ -192,8 +192,6 @@ namespace Terramental
                         }
                     }
 
-                    spriteBatch.DrawString(_defaultFont, "5/" + GameManager.levelsComplete.ToString() + " Levels Complete", new Vector2(GameManager.screenWidth - 220, 15), Color.Black);
-
                     levelSelectExitButton.DrawMenuComponent(spriteBatch);
 
                     break;
@@ -707,6 +705,7 @@ namespace Terramental
                         _levelNameText = "Northfar Mountains";
                         _levelDescriptionText = "";
                         GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level4Description");
                         GameManager.levelIndex = 4;
                     }
                     
@@ -719,6 +718,7 @@ namespace Terramental
                         _levelNameText = "Magnus Keep";
                         _levelDescriptionText = "";
                         GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level5Description");
                         GameManager.levelIndex = 5;
                     }
                     
