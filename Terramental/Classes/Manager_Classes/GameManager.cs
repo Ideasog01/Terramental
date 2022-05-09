@@ -15,7 +15,7 @@ namespace Terramental
         public static bool gameInitialised; //Set to true when game is intialised. E.g player is instantiated. Avoids multiple players/managers.
         public static bool levelLoaded; //States whether a level is loaded.
 
-        public static int levelsComplete = 5; //When each level is completed, this value is incremented. Handles available levels and when to show end credits.
+        public static int levelsComplete = 0; //When each level is completed, this value is incremented. Handles available levels and when to show end credits.
 
         public enum GameState { SplashScreen, CreditsVideo, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen }; //Controls the current textures and logic being activated
 
