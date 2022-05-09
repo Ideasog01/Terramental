@@ -79,11 +79,14 @@ namespace Terramental
                     if(audioClip.IsMusic && audioClip.SongAudio != null)
                     {
                         MediaPlayer.Play(audioClip.SongAudio);
+                        MediaPlayer.IsRepeating = true;
                     }
                     else
                     {
                         audioClip.EffectAudio.Play();
                     }
+
+                    break;
                 }
                 
             }

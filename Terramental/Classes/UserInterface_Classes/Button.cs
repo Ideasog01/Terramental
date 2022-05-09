@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
+using System.Collections.Generic;
 
 namespace Terramental
 {
@@ -11,6 +11,9 @@ namespace Terramental
         private bool _buttonActive = true;
 
         private MenuManager _menuManager;
+
+        private Button positiveNeighbour;
+        private Button negativeNeighbour;
 
         public Button(GameManager.ButtonName buttonName, MenuManager menuManager)
         {
@@ -24,6 +27,18 @@ namespace Terramental
             _levelButtonName = buttonName;
             _menuManager = menuManager;
             ComponentColor = Color.White;
+        }
+
+        public Button PositiveNeighbour
+        {
+            get { return positiveNeighbour; }
+            set { positiveNeighbour = value; }
+        }
+
+        public Button NegativeNeighbour
+        {
+            get { return negativeNeighbour; }
+            set { negativeNeighbour = value; }
         }
 
         public bool ButtonActive
@@ -64,12 +79,10 @@ namespace Terramental
                             if (GameManager.levelLoaded)
                             {
                                 GameManager.PauseGame();
-                                _menuManager.ChangeSelectedButton(0, true);
                             }
                             else
                             {
                                 GameManager.currentGameState = GameManager.GameState.MainMenu;
-                                _menuManager.ChangeSelectedButton(0, true);
                             }
 
                             return;
@@ -80,12 +93,10 @@ namespace Terramental
                             if (GameManager.levelLoaded)
                             {
                                 GameManager.PauseGame();
-                                _menuManager.ChangeSelectedButton(0, true);
                             }
                             else
                             {
                                 GameManager.currentGameState = GameManager.GameState.MainMenu;
-                                _menuManager.ChangeSelectedButton(0, true);
                             }
 
                             return;
@@ -94,7 +105,6 @@ namespace Terramental
                         if (GameManager.currentGameState == GameManager.GameState.Credits || GameManager.currentGameState == GameManager.GameState.LevelSelect)
                         {
                             GameManager.currentGameState = GameManager.GameState.MainMenu;
-                            _menuManager.ChangeSelectedButton(0, true);
                             return;
                         }
 
@@ -103,7 +113,6 @@ namespace Terramental
                             _menuManager.ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
                             AudioManager.PlaySound("Level_Music");
                             GameManager.levelLoaded = false;
-                            _menuManager.ChangeSelectedButton(0, true);
                         }
                     }
                 }

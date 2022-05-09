@@ -300,7 +300,7 @@ namespace Terramental
 
                             enemy.Animations[1].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"); // Second animation (Walk)
                             enemy.Animations[1].FrameCount = 7;
-                            enemy.Animations[1].FrameDuration = 120f;
+                            enemy.Animations[1].FrameDuration = 100f;
                             enemy.Animations[1].LoopActive = true;
                             enemy.Animations[1].FrameDimensions = new Vector2(96, 96);
 
@@ -337,7 +337,7 @@ namespace Terramental
 
                             enemy.Animations[2].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet");
                             enemy.Animations[2].FrameCount = 12;
-                            enemy.Animations[2].FrameDuration = 80f;
+                            enemy.Animations[2].FrameDuration = 150f;
                             enemy.Animations[2].LoopActive = true;
                             enemy.Animations[2].FrameDimensions = new Vector2(96, 96);
 
@@ -387,7 +387,7 @@ namespace Terramental
                 {
                     Animation mageIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
                     Animation mageWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
-                    Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 12, 80f, true, new Vector2(96, 96));
+                    Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 12, 100f, true, new Vector2(96, 96));
 
                     EnemyCharacter darkMageCharacter = new EnemyCharacter();
                     darkMageCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
