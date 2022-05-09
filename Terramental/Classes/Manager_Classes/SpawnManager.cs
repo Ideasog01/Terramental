@@ -233,7 +233,7 @@ namespace Terramental
             return null;
         }
 
-        public static void SpawnVisualEffectAtPosition(Texture2D texture, Vector2 position, Vector2 scale, float vfxDuration, int frameCount, float frameDuration)
+        public static void SpawnVisualEffectAtPosition(Texture2D texture, Vector2 position, Vector2 scale, float vfxDuration, int frameCount, float frameDuration) //Spawns the visual effect at a given position instead of attaching it to an existing sprite
         {
             bool vfxFound = false;
 
@@ -315,7 +315,6 @@ namespace Terramental
                             enemy.ChaseThreshold = 900;
                             enemy.AttackCooldown = 1;
                             enemy.ElementIndex = elementIndex;
-                            enemy.AttackCooldown = 1;
                         }
                     }
                     else if (index == 1)
@@ -347,7 +346,6 @@ namespace Terramental
                             enemy.ChaseThreshold = 900;
                             enemy.AttackCooldown = 3;
                             enemy.ElementIndex = elementIndex;
-                            enemy.AttackCooldown = 1;
 
                         }
                     }
@@ -412,7 +410,6 @@ namespace Terramental
 
                     darkMageCharacter.ElementIndex = elementIndex;
                     enemyList.Add(darkMageCharacter);
-                    darkMageCharacter.AttackCooldown = 1;
                     darkMageCharacter.EnemyIndex = 1;
                 }
             }
@@ -575,7 +572,6 @@ namespace Terramental
                 levelFragment.SpawnPosition = position;
                 levelFragment.IsActive = true;
             }
-            
         }
 
         public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 frameDimensions, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage)
@@ -658,6 +654,7 @@ namespace Terramental
             {
                 SpikeObstacle spikeObstacle = new SpikeObstacle();
                 spikeObstacle.Player = _gameManager.playerCharacter;
+                spikeObstacle.SpawnPosition = position;
                 spikeObstacle.LayerOrder = -2;
                 spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
                 spikeObstacleList.Add(spikeObstacle); // Adds the spike obstacle to the list of spikes
@@ -672,8 +669,21 @@ namespace Terramental
             {
                 if(!cannon.IsActive)
                 {
-                    cannon.SpritePosition = position;
-                    cannon.SpawnPosition = position;
+                    Texture2D cannonTexture; // Gets the cannon texture
+
+                    if (faceRight) // Checks to see if it is a right or left facing cannon
+                    {
+                        cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right"); // Right facing cannon
+                    }
+                    else
+                    {
+                        cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Left"); // Left facing cannon
+                    }
+
+                    cannon.SpriteTexture = cannonTexture;
+
+                    cannon.SpritePosition = position - new Vector2(0, 50);
+                    cannon.SpawnPosition = position - new Vector2(0, 50);
                     cannon.FaceRight = faceRight;
                     cannon.IsActive = true;
                     cannonObstacleFound = true;
@@ -703,11 +713,29 @@ namespace Terramental
 
         public static void SpawnMovingPlatform(Vector2 position, MapManager mapManager)
         {
-            MovingPlatform movingPlatform = new MovingPlatform(_gameManager.playerCharacter, mapManager, position, 0);
-            movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
-            movingPlatform.LayerOrder = -2;
+            bool movingPlatformFound = false;
 
-            movingPlatformList.Add(movingPlatform);
+            foreach(MovingPlatform movingPlatform in movingPlatformList)
+            {
+                if(!movingPlatform.IsActive)
+                {
+                    movingPlatform.InitialiseMovingPlatform(position, 0);
+                    movingPlatform.SpritePosition = position;
+                    movingPlatform.IsActive = true;
+                    movingPlatformFound = true;
+                    break;
+                }
+            }
+
+            if(!movingPlatformFound)
+            {
+                MovingPlatform movingPlatform = new MovingPlatform();
+                movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
+                movingPlatform.InitialiseMovingPlatform(_gameManager.playerCharacter, mapManager, position, 0);
+                movingPlatform.LayerOrder = -2;
+
+                movingPlatformList.Add(movingPlatform);
+            }
         }
 
         public static void ResetEntities() // Used to set entities back to their starting positions
@@ -760,6 +788,12 @@ namespace Terramental
                 cannon.SpritePosition = cannon.SpawnPosition;
             }
 
+            foreach(MovingPlatform movingPlatform in movingPlatformList)
+            {
+                movingPlatform.IsActive = true;
+                movingPlatform.InitialiseMovingPlatform(movingPlatform.SpawnPosition, 0);
+            }
+
             levelFragment.IsActive = true;
         }
 
@@ -805,7 +839,13 @@ namespace Terramental
                 projectile.IsActive = false;
             }
 
+            foreach(MovingPlatform movingPlatform in movingPlatformList)
+            {
+                movingPlatform.IsActive = false;
+            }
+
             levelFragment.IsActive = false;
+            GameManager.levelLoaded = false;
         }
     }
 }

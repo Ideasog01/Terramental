@@ -328,7 +328,6 @@ namespace Terramental
 
                     spriteBatch.DrawString(_levelTitleFont, _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) + 5, 178), Color.White);
                     spriteBatch.DrawString(_levelTitleFont, _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 60, 210), Color.White);
-                    spriteBatch.DrawString(_levelTitleFont, "0", new Vector2((GameManager.screenWidth / 2) + 35, 242), Color.White);
 
                     break;
 
@@ -578,6 +577,12 @@ namespace Terramental
                         _gameManager.playerCharacter.TeleportPlayer(SpawnManager.levelStartPosition);
                         break;
                     case GameManager.ButtonName.LevelSelectConfirm:
+
+                        if(_gameManager.mapManager != null)
+                        {
+                            _gameManager.mapManager.UnloadLevel();
+                        }
+                        
                         _gameManager.LoadNewGame(_levelDataFilePath);
                         ChangeSelectedButton(0, true);
                         break;

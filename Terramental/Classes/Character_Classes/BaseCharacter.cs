@@ -98,6 +98,7 @@ namespace Terramental
 
             if(_currentStatus == CharacterStatus.Frozen)
             {
+                SpawnManager.SpawnStaticVFX(SpawnManager._gameManager.GetTexture("Sprites/Effects/FrozenEffect"), SpritePosition, new Vector2(96, 96), statusDuration, this);
                 _disableMovement = true; // Disables movement if the character is frozen
             }
         }

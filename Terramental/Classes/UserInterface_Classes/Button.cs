@@ -58,9 +58,44 @@ namespace Terramental
 
                     if (_buttonName == GameManager.ButtonName.ReturnMainMenu)
                     {
-                        if (GameManager.currentGameState == GameManager.GameState.LevelPause)
+
+                        if (GameManager.currentGameState == GameManager.GameState.HelpMenu)
                         {
-                            SpawnManager._gameManager.mapManager.UnloadLevel();
+                            if (GameManager.levelLoaded)
+                            {
+                                GameManager.PauseGame();
+                                _menuManager.ChangeSelectedButton(0, true);
+                            }
+                            else
+                            {
+                                GameManager.currentGameState = GameManager.GameState.MainMenu;
+                                _menuManager.ChangeSelectedButton(0, true);
+                            }
+
+                            return;
+                        }
+
+                        if (GameManager.currentGameState == GameManager.GameState.Options)
+                        {
+                            if (GameManager.levelLoaded)
+                            {
+                                GameManager.PauseGame();
+                                _menuManager.ChangeSelectedButton(0, true);
+                            }
+                            else
+                            {
+                                GameManager.currentGameState = GameManager.GameState.MainMenu;
+                                _menuManager.ChangeSelectedButton(0, true);
+                            }
+
+                            return;
+                        }
+
+                        if (GameManager.currentGameState == GameManager.GameState.Credits || GameManager.currentGameState == GameManager.GameState.LevelSelect)
+                        {
+                            GameManager.currentGameState = GameManager.GameState.MainMenu;
+                            _menuManager.ChangeSelectedButton(0, true);
+                            return;
                         }
 
                         if (GameManager.currentGameState == GameManager.GameState.LevelComplete || GameManager.currentGameState == GameManager.GameState.LevelPause)
@@ -68,40 +103,6 @@ namespace Terramental
                             _menuManager.ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
                             AudioManager.PlaySound("Level_Music");
                             GameManager.levelLoaded = false;
-                            _menuManager.ChangeSelectedButton(0, true);
-                        }
-
-                        if(GameManager.currentGameState == GameManager.GameState.HelpMenu)
-                        {
-                            if(GameManager.levelLoaded)
-                            {
-                                GameManager.currentGameState = GameManager.GameState.LevelPause;
-                                _menuManager.ChangeSelectedButton(0, true);
-                            }
-                            else
-                            {
-                                GameManager.currentGameState = GameManager.GameState.MainMenu;
-                                _menuManager.ChangeSelectedButton(0, true);
-                            }
-                        }
-
-                        if (GameManager.currentGameState == GameManager.GameState.Options)
-                        {
-                            if (GameManager.levelLoaded)
-                            {
-                                GameManager.currentGameState = GameManager.GameState.LevelPause;
-                                _menuManager.ChangeSelectedButton(0, true);
-                            }
-                            else
-                            {
-                                GameManager.currentGameState = GameManager.GameState.MainMenu;
-                                _menuManager.ChangeSelectedButton(0, true);
-                            }
-                        }
-
-                        if (GameManager.currentGameState == GameManager.GameState.Credits || GameManager.currentGameState == GameManager.GameState.LevelSelect)
-                        {
-                            GameManager.currentGameState = GameManager.GameState.MainMenu;
                             _menuManager.ChangeSelectedButton(0, true);
                         }
                     }

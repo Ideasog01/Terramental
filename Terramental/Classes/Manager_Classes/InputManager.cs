@@ -253,7 +253,7 @@ namespace Terramental
                         {
                             _playerCharacter.dashDirY = -1;
                             _playerCharacter.dashDirX = 0;
-
+                            _playerCharacter.dashCooldown = 2;
                             _playerCharacter._isDashing = true;
                         }
 
@@ -261,7 +261,7 @@ namespace Terramental
                         {
                             _playerCharacter.dashDirY = 0;
                             _playerCharacter.dashDirX = -1;
-
+                            _playerCharacter.dashCooldown = 2;
                             _playerCharacter._isDashing = true;
                         }
 
@@ -269,7 +269,7 @@ namespace Terramental
                         {
                             _playerCharacter.dashDirY = 0;
                             _playerCharacter.dashDirX = 1;
-
+                            _playerCharacter.dashCooldown = 2;
                             _playerCharacter._isDashing = true;
                         }
                     }

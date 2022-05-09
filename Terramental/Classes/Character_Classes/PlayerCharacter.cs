@@ -217,7 +217,8 @@ namespace Terramental
             _isGrounded = false;
             _enemiesDefeated = 0;
             ElementIndex = 0;
-            SpritePosition = SpawnManager.levelStartPosition; 
+            SpritePosition = SpawnManager.levelStartPosition;
+            SpriteVelocity = Vector2.Zero;
         }
 
         public void UpdatePlayerCharacter(GameTime gameTime)
@@ -225,6 +226,8 @@ namespace Terramental
             if(GameManager.currentGameState == GameManager.GameState.Level) // Checks to see if the game is in the level state
             {
                 UpdateUltimateStatus(gameTime);
+                UpdateShiftDashCooldown(gameTime);
+
                 DashDamage();
                 DashCheck();
                 Dash(gameTime);
@@ -233,7 +236,7 @@ namespace Terramental
 
                 if(IsGrounded()) // Checks to see if the player is touching the ground
                 {
-                    SimulateFriction();
+                    SimulateFriction(); //Simulates extra friction for when the player is grounded
                 }
 
                 SimulateFriction();

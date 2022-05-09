@@ -33,6 +33,8 @@ namespace Terramental
         private int _enemyIndex;
         private int _elementIndex;
 
+        private bool _pathBlocked;
+
         private GameManager _gameManager;
 
         private Vector2 _oldPosition;
@@ -155,6 +157,21 @@ namespace Terramental
             _enemyMovementSpeed = enemyMovementSpeed;
             IsActive = true;
 
+            if(enemyHealthBar != null)
+            {
+                enemyHealthBar.SpritePosition = SpritePosition + new Vector2(0, -50);
+
+                if (enemyHealthBarFill != null)
+                {
+                    enemyHealthBarFill.SpritePosition = enemyHealthBar.SpritePosition;
+                }
+            }
+
+            if(enemyElement != null)
+            {
+                enemyElement.SpritePosition = SpritePosition + new Vector2(0, -70);
+            }
+
             if(_gameManager == null)
             {
                 _gameManager = gameManager;
@@ -188,11 +205,26 @@ namespace Terramental
             SimulateFriction();
             StopMovingIfBlocked();
 
-            if(!IsGrounded())
+            if (_currentState == AIState.Idle)
+            {
+                if (!IsGrounded())
+                {
+                    ApplyGravity();
+                }
+            }
+            else if (_currentState == AIState.Chase)
             {
                 ApplyGravity();
+                if (!IsGrounded() && !_pathBlocked && !DisableMovement)
+                {
+                    ApplyGravity();
+                }
+
+                if (_pathBlocked && !DisableMovement)
+                {
+                    EnemyJump();
+                }
             }
-            
 
             MirrorEnemy();
         }
@@ -295,7 +327,13 @@ namespace Terramental
             dir.Normalize();
             SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, SpriteVelocity.Y);
 
-            if(SpriteVelocity.X != 0)
+            Vector2 lastMovement = SpritePosition - _oldPosition; // Stores the previous position
+
+            if(lastMovement.X == 0)
+            {
+                SetAnimation(0);
+            }
+            else
             {
                 SetAnimation(1);
             }
@@ -368,12 +406,27 @@ namespace Terramental
             if (lastMovement.X == 0)
             {
                 SpriteVelocity *= Vector2.UnitY;
+
+                if (!_pathBlocked && IsGrounded() && _currentState == AIState.Chase && DistanceToPlayer() < 300)
+                {
+                    AudioManager.PlaySound("Jump_SFX");
+                    _pathBlocked = true;
+                }
+            }
+            else
+            {
+                _pathBlocked = false;
             }
 
             if (lastMovement.Y == 0)
             {
                 SpriteVelocity *= Vector2.UnitX;
             }
+        }
+
+        private void EnemyJump()
+        {
+            SpriteVelocity = -Vector2.UnitY * 25.25f;
         }
 
         #endregion

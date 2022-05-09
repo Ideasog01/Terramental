@@ -28,9 +28,7 @@ namespace Terramental
         private InterfaceComponent _ultimateSlider;
         private InterfaceComponent _ultimateSliderFill;
 
-        private SpriteFont _dashCooldown;
-        private SpriteFont _ultimateCooldown;
-        private SpriteFont _playerScore;
+        private SpriteFont _defaultFont;
 
         public PlayerInterface(GameManager gameManager)
         {
@@ -149,15 +147,15 @@ namespace Terramental
             {
                 if(_gameManager.playerCharacter.dashCooldown > 0)
                 {
-                    spriteBatch.DrawString(_dashCooldown, _gameManager.playerCharacter.dashCooldown.ToString("F0"), _dashAbility.ComponentPosition + new Vector2(15, 14), Color.Black);
+                    spriteBatch.DrawString(_defaultFont, _gameManager.playerCharacter.dashCooldown.ToString("F0"), _dashAbility.ComponentPosition + new Vector2(15, 14), Color.Black);
                 }
 
                 if(_gameManager.playerCharacter.ultimateCooldown > 0)
                 {
-                    spriteBatch.DrawString(_ultimateCooldown, _gameManager.playerCharacter.ultimateCooldown.ToString("F0"), _ultimateAbility.ComponentPosition + new Vector2(15, 14), Color.Black);
+                    spriteBatch.DrawString(_defaultFont, _gameManager.playerCharacter.ultimateCooldown.ToString("F0"), _ultimateAbility.ComponentPosition + new Vector2(15, 14), Color.Black);
                 }
 
-                spriteBatch.DrawString(_playerScore, _gameManager.playerCharacter.PlayerScore.ToString(), _playerScoreComponent.ComponentPosition + new Vector2(40, 5), Color.Black);
+                spriteBatch.DrawString(_defaultFont, _gameManager.playerCharacter.PlayerScore.ToString(), _playerScoreComponent.ComponentPosition + new Vector2(40, 5), Color.Black);
                 
                 
             }
@@ -196,9 +194,7 @@ namespace Terramental
 
             _ultimateSliderFill = new InterfaceComponent(_gameManager.playerCharacter, _ultimateSlider.ComponentPosition, new Vector2(400, 40), _gameManager.GetTexture("UserInterface/Sliders/BlankSliderFill"));
 
-            _dashCooldown = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
-            _ultimateCooldown = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
-            _playerScore = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
+            _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
 
             interfaceActive = true;
         }

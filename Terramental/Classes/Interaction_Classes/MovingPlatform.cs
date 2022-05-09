@@ -23,12 +23,31 @@ namespace Terramental
 
         private int _moveDir; // Stores the type of moving platform, 1 = vertical moving platfrom 0 = horizontal moving platform
 
-        public MovingPlatform(PlayerCharacter playerCharacter, MapManager mapManager, Vector2 position, int moveDir) // Moving platfrom constructor
+        public void InitialiseMovingPlatform(PlayerCharacter playerCharacter, MapManager mapManager, Vector2 position, int moveDir) // Moving platfrom constructor
         {
             _playerCharacter = playerCharacter;
             _mapManager = mapManager;
             _position = position;
             _moveDir = moveDir;
+            SpawnPosition = position;
+
+            if (_moveDir == 1) // 1 = Vertical moving platform
+            {
+                _moveDistPos = _position.Y + 300; // Adds 300 to the current Y position of the platform in order to calculate the final distance in the positive direction
+                _moveDistNeg = _position.Y - 300; // Subtracts 300 to the current Y position of the platform in order to calculate the final distance in the negative direction
+            }
+            else if (_moveDir == 0) // 0 = Horizontal moving platform
+            {
+                _moveDistPos = _position.X + 300; // Adds 300 to the current X position of the platform in order to calculate the final distance in the positive direction
+                _moveDistNeg = _position.X - 300; // Subtracts 300 to the current Y position of the platform in order to calculate the final distance in the negative direction
+            }
+        }
+
+        public virtual void InitialiseMovingPlatform(Vector2 position, int moveDir)
+        {
+            _position = position;
+            _moveDir = moveDir;
+            SpawnPosition = position;
 
             if (_moveDir == 1) // 1 = Vertical moving platform
             {
@@ -56,10 +75,17 @@ namespace Terramental
             rightRect.Offset(5, 0);
             topRect.Offset(0, 5);
 
-            if (LeftCollision(leftRect) || RightCollision(rightRect) || TopCollision(topRect)) // Checks to see if there is a collision between any of the offset player rectangles and the moving platform
+            if (LeftCollision(leftRect) || RightCollision(rightRect)) // Checks to see if there is a collision between any of the offset player rectangles and the moving platform
             {
                 _playerCharacter.SpriteVelocity = new Vector2(SpriteVelocity.X, _playerCharacter.SpriteVelocity.Y); // Sets the player velocity to a new vector2 made up of the x velocity of the moving platform, but keeps the y velocity of the player the same
                 _playerCharacter.SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f; // Subtracts the frictional velocity added to the player so that the player stays on the platform
+            }
+
+            if(TopCollision(topRect))
+            {
+                _playerCharacter.SpriteVelocity = new Vector2(SpriteVelocity.X, _playerCharacter.SpriteVelocity.Y); // Sets the player velocity to a new vector2 made up of the x velocity of the moving platform, but keeps the y velocity of the player the same
+                _playerCharacter.SpriteVelocity -= SpriteVelocity * Vector2.One * 0.075f; // Subtracts the frictional velocity added to the player so that the player stays on the platform
+                _playerCharacter.SpritePosition = new Vector2(_playerCharacter.SpritePosition.X, WorldCentre.Y - 96);
             }
 
             // Debug.WriteLine("sprite pos x: " + SpritePosition.X);
