@@ -23,6 +23,7 @@ namespace Terramental
 
             if(OnCollision(Player.SpriteRectangle) && IsActive && _collisionTimer <= 0) // Checks for a collision between this and the player
             {
+                AudioManager.PlaySound("Positive_SFX");
                 _menuManager.EndLevel();
                 IsActive = false; // Removes fragment object
                 _collisionTimer = 2; // Resets collision timer
