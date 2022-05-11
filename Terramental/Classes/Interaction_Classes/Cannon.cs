@@ -42,6 +42,8 @@ namespace Terramental
                 {
                     SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(-40, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile for the left facing cannon
                 }
+
+                AudioManager.PlaySound("CannonFire_SFX");
                 _cannonCooldownLeft = _cannonCooldown; // Resets the amount of time left to the value stored in cannonCooldown
             }
         }

@@ -163,6 +163,12 @@
 /processorParam:Quality=Best
 /build:SFXs/BeepTone.wav
 
+#begin SFXs/CannonFire_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/CannonFire_SFX.wav
+
 #begin SFXs/Damage_SFX.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -216,6 +222,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SFXs/NegativeElement_SFX.wav
+
+#begin SFXs/Positive_SFX.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFXs/Positive_SFX.wav
 
 #begin SFXs/ScorePickup_SFX.wav
 /importer:WavImporter
