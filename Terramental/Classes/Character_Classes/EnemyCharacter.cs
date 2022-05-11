@@ -227,6 +227,11 @@ namespace Terramental
             }
 
             MirrorEnemy();
+
+            if(SpritePosition.Y < -(MapManager.mapHeight * 64))
+            {
+                TakeDamage(CharacterMaxHealth);
+            }
         }
 
         #endregion
