@@ -38,81 +38,103 @@ namespace Terramental
             {
                 foreach (EnemyCharacter enemy in enemyList) // Loops through list of enemies
                 {
-                    if (enemy.IsVisible) // Checks to see if the enemy is on screen
+                    if(enemy.IsLoaded)
                     {
-                        if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health
+                        if (enemy.IsVisible) // Checks to see if the enemy is on screen
                         {
-                            enemy.UpdateCharacter(gameTime);
-                            enemy.UpdateEnemy(gameTime);
-                            enemy.UpdateWorldCanvas();
-                            enemy.EnableWorldCanvas(true);
-                        }
-                        else
-                        {
-                            enemy.EnableWorldCanvas(false);
+                            if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health
+                            {
+                                enemy.UpdateCharacter(gameTime);
+                                enemy.UpdateEnemy(gameTime);
+                                enemy.UpdateWorldCanvas();
+                                enemy.EnableWorldCanvas(true);
+                            }
+                            else
+                            {
+                                enemy.EnableWorldCanvas(false);
+                            }
                         }
                     }
                 }
 
                 foreach(VisualEffect vfx in vfxList) // Loops through every VFX is the VFX list
                 {
-                    if(vfx.IsVisible) // Checks to see if the effect is visible
+                    if(vfx.IsLoaded)
                     {
-                        if(vfx.IsActive) // Checks to see if the effect is active
+                        if (vfx.IsVisible) // Checks to see if the effect is visible
                         {
-                            vfx.UpdateVisualEffect(gameTime);
+                            if (vfx.IsActive) // Checks to see if the effect is active
+                            {
+                                vfx.UpdateVisualEffect(gameTime);
+                            }
                         }
                     }
                 }
 
                 foreach (SpikeObstacle spikeObstacle in spikeObstacleList) // Loops through every spike obstacle in the spike lsit
                 {
-                    if(spikeObstacle.IsVisible && spikeObstacle.IsActive) // Checks to see if the spike is visible and active
+                    if(spikeObstacle.IsLoaded)
                     {
-                        spikeObstacle.CheckCollision(gameTime);
+                        if (spikeObstacle.IsVisible && spikeObstacle.IsActive) // Checks to see if the spike is visible and active
+                        {
+                            spikeObstacle.CheckCollision(gameTime);
+                        }
                     }
                 }
 
                 foreach (Projectile projectile in projectileList) // Loops through every projectile in the projectile list
                 {
-                    if (projectile.IsVisible) // Checks if the projectile is visible
+                    if(projectile.IsLoaded)
                     {
-                        if (projectile.IsActive) // Checks if the projectile is active
+                        if (projectile.IsVisible) // Checks if the projectile is visible
                         {
-                            projectile.UpdateProjectile(gameTime);
+                            if (projectile.IsActive) // Checks if the projectile is active
+                            {
+                                projectile.UpdateProjectile(gameTime);
+                            }
                         }
                     }
+
                 }
 
                 foreach (HealthPickup healthPickup in healthPickupList) // Loops through every health pickup in the health pickup list
                 {
-                    if (healthPickup.IsVisible) // Checks if the health pickup is visible
+                    if(healthPickup.IsLoaded)
                     {
-                        if (healthPickup.IsActive) // Checks if the health pickup is active
+                        if (healthPickup.IsVisible) // Checks if the health pickup is visible
                         {
-                            healthPickup.CheckHealthPickupCollision();
+                            if (healthPickup.IsActive) // Checks if the health pickup is active
+                            {
+                                healthPickup.CheckHealthPickupCollision();
+                            }
                         }
                     }
                 }
 
                 foreach (ElementPickup elementPickup in elementPickupList) // Loops through every element pickup in the list
                 {
-                    if (elementPickup.IsVisible) // Checks if the element pickup is visible
+                    if(elementPickup.IsLoaded)
                     {
-                        if (elementPickup.IsActive) // Checks if the element pickup is active
+                        if (elementPickup.IsVisible) // Checks if the element pickup is visible
                         {
-                            elementPickup.CheckElementPickupCollision(gameTime);
+                            if (elementPickup.IsActive) // Checks if the element pickup is active
+                            {
+                                elementPickup.CheckElementPickupCollision(gameTime);
+                            }
                         }
                     }
                 }
 
                 foreach (ScorePickup scorePickup in scorePickupList) // Loops through each score pickup in the list
                 {
-                    if (scorePickup.IsVisible) // Checks if the score pickup is visible
+                    if(scorePickup.IsLoaded)
                     {
-                        if (scorePickup.IsActive) // Checks to see if the score pickup is active
+                        if (scorePickup.IsVisible) // Checks if the score pickup is visible
                         {
-                            scorePickup.UpdateScorePickup();
+                            if (scorePickup.IsActive) // Checks to see if the score pickup is active
+                            {
+                                scorePickup.UpdateScorePickup();
+                            }
                         }
                     }
                 }
@@ -130,22 +152,28 @@ namespace Terramental
 
                 foreach (Cannon cannon in cannonObstacleList) // Loops through every cannon in the cannon list
                 {
-                    if (cannon.IsVisible) // Checks if the cannon is visible
+                    if(cannon.IsLoaded)
                     {
-                        if (cannon.IsActive) // Checks if the cannon is active
+                        if (cannon.IsVisible) // Checks if the cannon is visible
                         {
-                            cannon.UpdateCannon(gameTime);
+                            if (cannon.IsActive) // Checks if the cannon is active
+                            {
+                                cannon.UpdateCannon(gameTime);
+                            }
                         }
                     }
                 }
 
                 foreach (MovingPlatform movingPlatform in movingPlatformList) // Loops through every moving platform in the moving platform list
                 {
-                    if (movingPlatform.IsVisible) //Checks if the moving platform is visible
+                    if(movingPlatform.IsLoaded)
                     {
-                        if (movingPlatform.IsActive) // Checks if the moving platform is active
+                        if (movingPlatform.IsVisible) //Checks if the moving platform is visible
                         {
-                            movingPlatform.UpdateMovingPlatform(gameTime);
+                            if (movingPlatform.IsActive) // Checks if the moving platform is active
+                            {
+                                movingPlatform.UpdateMovingPlatform(gameTime);
+                            }
                         }
                     }
                 }
@@ -183,6 +211,7 @@ namespace Terramental
                     vfx.SpritePosition = attachSprite.AttachSpriteOffset;
                     vfx.SpriteScale = scale;
                     vfxFound = true;
+                    vfx.IsLoaded = true;
                     return vfx;
                 }
             }
@@ -197,6 +226,7 @@ namespace Terramental
                 visualEffect.Animations.Add(newAnimation); // Adds the animation to the animation list
 
                 vfxList.Add(visualEffect); // Adds the effect to the list of visual effects
+                visualEffect.IsLoaded = true;
                 return visualEffect;
             }
 
@@ -218,6 +248,7 @@ namespace Terramental
                         vfx.Animations[0].AnimationActive = true;
                     }
 
+                    vfx.IsLoaded = true;
                     vfxFound = true;
                     return vfx;
                 }
@@ -228,7 +259,7 @@ namespace Terramental
                 VisualEffect visualEffect = new VisualEffect();
                 visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
                 visualEffect.LayerOrder = -3;
-
+                visualEffect.IsLoaded = true;
                 vfxList.Add(visualEffect);
                 return visualEffect;
             }
@@ -261,6 +292,7 @@ namespace Terramental
 
                     vfx.SpritePosition = position;
                     vfx.SpriteScale = scale;
+                    vfx.IsLoaded = true;
                     vfx.InitialiseVFX(vfxDuration);
 
                     vfxFound = true;
@@ -275,6 +307,7 @@ namespace Terramental
                 visualEffect.LayerOrder = -3;
                 Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
                 visualEffect.Animations.Add(newAnimation);
+                visualEffect.IsLoaded = true;
                 vfxList.Add(visualEffect);
             }
         }
@@ -319,6 +352,8 @@ namespace Terramental
                             enemy.AttackCooldown = 1;
                             enemy.ElementIndex = elementIndex;
                         }
+
+                        enemy.IsLoaded = true;
                     }
                     else if (index == 1)
                     {
@@ -351,6 +386,8 @@ namespace Terramental
                             enemy.ElementIndex = elementIndex;
 
                         }
+
+                        enemy.IsLoaded = true;
                     }
 
                     enemyFound = true;
@@ -382,9 +419,10 @@ namespace Terramental
                     knightEnemy.AttackThreshold = 60; // Distance to attack the player
                     knightEnemy.ChaseThreshold = 900; // Distance to chase the player
                     knightEnemy.ElementIndex = elementIndex;
-                    enemyList.Add(knightEnemy);
                     knightEnemy.AttackCooldown = 1; // Cooldown between attacks
                     knightEnemy.EnemyIndex = 0;
+                    knightEnemy.IsLoaded = true;
+                    enemyList.Add(knightEnemy);
                 }
                 else if (index == 1) //Dark Mage Character
                 {
@@ -412,8 +450,9 @@ namespace Terramental
                     darkMageCharacter.AttackCooldown = 3; // Cooldown between attacks
 
                     darkMageCharacter.ElementIndex = elementIndex;
-                    enemyList.Add(darkMageCharacter);
+                    darkMageCharacter.IsLoaded = true;
                     darkMageCharacter.EnemyIndex = 1;
+                    enemyList.Add(darkMageCharacter);
                 }
             }
 
@@ -433,6 +472,7 @@ namespace Terramental
                     healthPickup.ResetPickup(position);
                     healthPickup.IsActive = true; // Enables the health pickup
                     healthPickupFound = true;
+                    healthPickup.IsLoaded = true;
                     break;
                 }
             }
@@ -442,6 +482,7 @@ namespace Terramental
                 HealthPickup healthPickup = new HealthPickup(_gameManager.playerCharacter, 1); // Creates a new health pickup
                 healthPickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64, 64)); // Initialises
                 healthPickup.LayerOrder = -2; // Sets the layer
+                healthPickup.IsLoaded = true;
                 healthPickupList.Add(healthPickup); // Adds the health pickup to the list of health pickups
             }
         }
@@ -459,6 +500,7 @@ namespace Terramental
                     scorePickup.SpawnPosition = position;
                     scorePickup.IsActive = true;
                     scorePickupFound = true;
+                    scorePickup.IsLoaded = true;
                     break;
                 }
             }
@@ -468,6 +510,7 @@ namespace Terramental
                 ScorePickup scorePickup = new ScorePickup(_gameManager.playerCharacter);
                 scorePickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
                 scorePickup.LayerOrder = -2;
+                scorePickup.IsLoaded = true;
                 scorePickupList.Add(scorePickup);
             }
 
@@ -489,6 +532,7 @@ namespace Terramental
                     elementPickup.SpawnPosition = position;
                     elementPickup.IsActive = true;
                     elementPickupFound = true;
+                    elementPickup.IsLoaded = true;
                     break;
                 }
             }
@@ -498,6 +542,7 @@ namespace Terramental
                 ElementPickup elementPickup = new ElementPickup(elementIndex, _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), _gameManager.playerCharacter);
                 elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));
                 elementPickup.LayerOrder = -1;
+                elementPickup.IsLoaded = true;
                 elementPickupList.Add(elementPickup);
             }
         }
@@ -526,6 +571,7 @@ namespace Terramental
                     elementWall.SpritePosition = position;
                     elementWall.SpawnPosition = position;
                     elementWall.IsActive = true;
+                    elementWall.IsLoaded = true;
                     elementWallFound = true;
 
                     elementWall.InitialiseElementWall(_gameManager.playerCharacter, _gameManager.mapManager, elementIndex);
@@ -556,7 +602,7 @@ namespace Terramental
 
                 elementWall.InitialiseElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
                 elementWall.ElementWallCollision();
-
+                elementWall.IsLoaded = true;
                 elementWall.LayerOrder = -2;
                 elementWallList.Add(elementWall); // Adds the elemental wall to the list of elemental walls
             }
@@ -571,6 +617,7 @@ namespace Terramental
                 Animation levelEndAnim = new Animation(_gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), 4, 120f, true, new Vector2(64, 64)); // Adds animation to the level end object
                 levelFragment.AddAnimation(levelEndAnim);
                 levelFragment.LayerOrder = -2;
+                levelFragment.IsLoaded = true;
                 levelFragment.IsActive = false;
             }
             else
@@ -578,6 +625,7 @@ namespace Terramental
                 levelFragment.SpritePosition = position;
                 levelFragment.SpawnPosition = position;
                 levelFragment.IsActive = false;
+                levelFragment.IsLoaded = true;
             }
         }
 
@@ -617,6 +665,7 @@ namespace Terramental
                         }
                     }
 
+                    projectile.IsLoaded = true;
                     projectileFound = true;
                     break;
                 }
@@ -636,6 +685,7 @@ namespace Terramental
                     projectile.SetAnimation(0);
                 }
 
+                projectile.IsLoaded = true;
                 projectileList.Add(projectile);
             }
         }
@@ -651,6 +701,7 @@ namespace Terramental
                     spikeObstacle.SpawnPosition = position;
                     spikeObstacle.SpritePosition = position;
                     spikeObstacle.IsActive = true;
+                    spikeObstacle.IsLoaded = true;
                     spikeObstacle.ResetPickup(position);
                     spikeObstacleFound = true;
                     break;
@@ -664,6 +715,7 @@ namespace Terramental
                 spikeObstacle.SpawnPosition = position;
                 spikeObstacle.LayerOrder = -2;
                 spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
+                spikeObstacle.IsLoaded = true;
                 spikeObstacleList.Add(spikeObstacle); // Adds the spike obstacle to the list of spikes
             }
         }
@@ -674,7 +726,7 @@ namespace Terramental
 
             foreach(Cannon cannon in cannonObstacleList)
             {
-                if(!cannon.IsActive)
+                if(!cannon.IsLoaded)
                 {
                     Texture2D cannonTexture; // Gets the cannon texture
 
@@ -693,6 +745,7 @@ namespace Terramental
                     cannon.SpawnPosition = position - new Vector2(0, 50);
                     cannon.FaceRight = faceRight;
                     cannon.IsActive = true;
+                    cannon.IsLoaded = true;
                     cannonObstacleFound = true;
                     break;
                 }
@@ -714,6 +767,7 @@ namespace Terramental
 
                 cannon.Initialise(position - new Vector2(0, 50), cannonTexture, new Vector2(cannonTexture.Width, cannonTexture.Height));
                 cannon.LayerOrder = -1;
+                cannon.IsLoaded = true;
                 cannonObstacleList.Add(cannon);
             }
         }
@@ -724,13 +778,14 @@ namespace Terramental
 
             foreach(MovingPlatform movingPlatform in movingPlatformList)
             {
-                if(!movingPlatform.IsActive)
+                if(!movingPlatform.IsLoaded)
                 {
                     movingPlatform.InitialiseMovingPlatform(position, 0);
                     movingPlatform.SpritePosition = position;
                     movingPlatform.SpawnPosition = position;
                     movingPlatform.IsActive = true;
                     movingPlatformFound = true;
+                    movingPlatform.IsLoaded = true;
                     break;
                 }
             }
@@ -741,7 +796,7 @@ namespace Terramental
                 movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
                 movingPlatform.InitialiseMovingPlatform(_gameManager.playerCharacter, mapManager, position, 0);
                 movingPlatform.LayerOrder = -2;
-
+                movingPlatform.IsLoaded = true;
                 movingPlatformList.Add(movingPlatform);
             }
         }
@@ -750,56 +805,82 @@ namespace Terramental
         {
             foreach(Projectile projectile in projectileList)
             {
-                projectile.IsActive = false;
+                if(projectile.IsLoaded)
+                {
+                    projectile.IsActive = false;
+                }
             }
 
             foreach (EnemyCharacter enemy in enemyList)
             {
-                enemy.CharacterHealth = enemy.CharacterMaxHealth;
-                enemy.IsActive = true;
-                enemy.SpritePosition = enemy.SpawnPosition;
+                if(enemy.IsLoaded)
+                {
+                    enemy.CharacterHealth = enemy.CharacterMaxHealth;
+                    enemy.IsActive = true;
+                    enemy.SpritePosition = enemy.SpawnPosition;
+                }
             }
 
             foreach (ElementPickup elementPickup in elementPickupList)
             {
-                elementPickup.IsActive = true;
-                elementPickup.SpritePosition = elementPickup.SpawnPosition;
-                elementPickup.ResetElementPickup();
+                if(elementPickup.IsLoaded)
+                {
+                    elementPickup.IsActive = true;
+                    elementPickup.SpritePosition = elementPickup.SpawnPosition;
+                    elementPickup.ResetElementPickup();
+                }
             }
 
             foreach (ElementWall elementWall in elementWallList)
             {
-                elementWall.ResetWall(_gameManager.mapManager);
+                if(elementWall.IsLoaded)
+                {
+                    elementWall.ResetWall(_gameManager.mapManager);
+                }
             }
 
             foreach (HealthPickup healthPickup in healthPickupList)
             {
-                healthPickup.IsActive = true;
-                healthPickup.SpritePosition = healthPickup.SpawnPosition;
+                if(healthPickup.IsLoaded)
+                {
+                    healthPickup.IsActive = true;
+                    healthPickup.SpritePosition = healthPickup.SpawnPosition;
+                }
             }
 
             foreach (ScorePickup scorePickup in scorePickupList)
             {
-                scorePickup.IsActive = true;
-                scorePickup.SpritePosition = scorePickup.SpawnPosition;
+                if(scorePickup.IsLoaded)
+                {
+                    scorePickup.IsActive = true;
+                    scorePickup.SpritePosition = scorePickup.SpawnPosition;
+                }
             }
 
             foreach (SpikeObstacle spikeObstacle in spikeObstacleList)
             {
-                spikeObstacle.IsActive = true;
-                spikeObstacle.SpritePosition = spikeObstacle.SpawnPosition;
+                if(spikeObstacle.IsLoaded)
+                {
+                    spikeObstacle.IsActive = true;
+                    spikeObstacle.SpritePosition = spikeObstacle.SpawnPosition;
+                }
             }
 
             foreach (Cannon cannon in cannonObstacleList)
             {
-                cannon.IsActive = true;
-                cannon.SpritePosition = cannon.SpawnPosition;
-            }
+                if (cannon.IsLoaded)
+                {
+                    cannon.IsActive = true;
+                    cannon.SpritePosition = cannon.SpawnPosition;
+                }            }
 
             foreach(MovingPlatform movingPlatform in movingPlatformList)
             {
-                movingPlatform.IsActive = true;
-                movingPlatform.InitialiseMovingPlatform(movingPlatform.SpawnPosition, 0);
+                if(movingPlatform.IsLoaded)
+                {
+                    movingPlatform.IsActive = true;
+                    movingPlatform.InitialiseMovingPlatform(movingPlatform.SpawnPosition, 0);
+                }
             }
 
             levelFragment.IsActive = false;
@@ -810,46 +891,55 @@ namespace Terramental
             foreach (EnemyCharacter enemy in enemyList)
             {
                 enemy.IsActive = false;
+                enemy.IsLoaded = false;
             }
 
             foreach (ElementPickup elementPickup in elementPickupList)
             {
                 elementPickup.IsActive = false;
+                elementPickup.IsLoaded = false;
             }
 
             foreach(ElementWall elementWall in elementWallList)
             {
                 elementWall.IsActive = false;
+                elementWall.IsLoaded = false;
             }
 
             foreach (HealthPickup healthPickup in healthPickupList)
             {
                 healthPickup.IsActive = false;
+                healthPickup.IsLoaded = false;
             }
 
             foreach (ScorePickup scorePickup in scorePickupList)
             {
                 scorePickup.IsActive = false;
+                scorePickup.IsLoaded = false;
             }
 
             foreach (SpikeObstacle spikeObstacle in spikeObstacleList)
             {
                 spikeObstacle.IsActive = false;
+                spikeObstacle.IsLoaded = false;
             }
 
             foreach (Cannon cannon in cannonObstacleList)
             {
                 cannon.IsActive = false;
+                cannon.IsLoaded = false;
             }
 
             foreach (Projectile projectile in projectileList)
             {
                 projectile.IsActive = false;
+                projectile.IsLoaded = false;
             }
 
             foreach(MovingPlatform movingPlatform in movingPlatformList)
             {
                 movingPlatform.IsActive = false;
+                movingPlatform.IsLoaded = false;
             }
 
             levelFragment.IsActive = false;

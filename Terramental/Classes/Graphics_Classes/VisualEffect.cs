@@ -38,6 +38,7 @@ namespace Terramental
             }
             else
             {
+                IsLoaded = false;
                 IsActive = false;
             }
         }

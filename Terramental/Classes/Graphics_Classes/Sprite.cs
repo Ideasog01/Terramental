@@ -28,6 +28,7 @@ namespace Terramental
         private Vector2 _spawnPosition;
         private int _layerOrder;
         private Color _spriteColor;
+        private bool _isLoaded;
 
         //Animation Variables
 
@@ -45,6 +46,12 @@ namespace Terramental
         {
             get { return _layerOrder; }
             set { _layerOrder = value; }
+        }
+
+        public bool IsLoaded
+        {
+            get { return _isLoaded; }
+            set { _isLoaded = value; }
         }
 
         public Color SpriteColor

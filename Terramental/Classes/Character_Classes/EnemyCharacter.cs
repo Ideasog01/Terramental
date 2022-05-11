@@ -227,9 +227,14 @@ namespace Terramental
                     Rectangle rectangleOffset = SpriteRectangle;
                     rectangleOffset.Offset(0, -256);
 
-                    if(!_gameManager.mapManager.FindNearestTile(rectangleOffset).IsBlocking)
+                    Tile tile = _gameManager.mapManager.FindNearestTile(rectangleOffset);
+
+                    if (tile != null)
                     {
-                        EnemyJump();
+                        if(!tile.IsBlocking)
+                        {
+                            EnemyJump();
+                        }
                     }
                 }
             }

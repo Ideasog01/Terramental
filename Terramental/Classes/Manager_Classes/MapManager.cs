@@ -9,30 +9,26 @@ namespace Terramental
 {
     public class MapManager
     {
-        public static List<Tile> activeTiles = new List<Tile>();
-        public static List<Tile> tileList = new List<Tile>();
-        public static List<bool> isWall = new List<bool>();
-        public static List<Sprite> assetSpriteList = new List<Sprite>();
+        public static List<Tile> activeTiles = new List<Tile>(); //The visible tiles currently within the viewport bounds
+        public static List<Tile> tileList = new List<Tile>(); //The tiles currently instantiated
+        public static List<Sprite> assetSpriteList = new List<Sprite>(); //A list that includes all environment assets that have been instantiated
 
-        public static float mapWidth;
-        public static float mapHeight;
+        public static float mapWidth; //The level width in tiles. Multiply by 64 (tile size) to get the map width in pixels.
+        public static float mapHeight; //The level height tiles. Multiply by 64 (tile size) to get the map height in pixels.
 
-        private GameManager _gameManager;
-        private MapData _mapData;
+        private GameManager _gameManager; //Reference to GameManager
+        private MapData _mapData; //The map data currently being used to load the tiles, entities and environment assets
 
-        private List<Texture2D> _tileMap1 = new List<Texture2D>();
-        private List<Texture2D> _assetTextureList = new List<Texture2D>();
+        private List<Texture2D> _waterTileMap = new List<Texture2D>(); //The tile map that includes all tiles that are used in levels set in a water region.
+        private List<Texture2D> _snowTileMap = new List<Texture2D>(); //The tile map that includes all tiles that are used in levels set in a snow region
+        private List<Texture2D> _fireTileMap = new List<Texture2D>(); //The tile map that includes all tiles that are used in levels set in a fire region
+        private List<Texture2D> _assetWaterList = new List<Texture2D>(); //The environment assets that are used in levels set in the water region.
+        private List<Texture2D> _assetSnowList = new List<Texture2D>(); //The environment assets that are used in levels set in the snow region.
+        private List<Texture2D> _assetFireList = new List<Texture2D>(); //The environment assets that are used in levels set in the fire region.
+        private List<Texture2D> _currentTileMap = new List<Texture2D>(); //The current tile map being used
+        private List<Texture2D> _currentAssetTexture = new List<Texture2D>(); //The current list of environment assets being used
 
-        private List<Texture2D> _waterTileMap = new List<Texture2D>();
-        private List<Texture2D> _snowTileMap = new List<Texture2D>();
-        private List<Texture2D> _fireTileMap = new List<Texture2D>();
-        private List<Texture2D> _assetWaterList = new List<Texture2D>();
-        private List<Texture2D> _assetSnowList = new List<Texture2D>();
-        private List<Texture2D> _assetFireList = new List<Texture2D>();
-        private List<Texture2D> _currentTileMap = new List<Texture2D>();
-        private List<Texture2D> _currentAssetTexture = new List<Texture2D>();
-
-        public MapManager(GameManager gameManager)
+        public MapManager(GameManager gameManager) //MapManager constructed used to assign the reference to the GameManager class
         {
             _gameManager = gameManager;
 
@@ -40,20 +36,20 @@ namespace Terramental
 
         }
 
-        public void ResetLevel()
+        public void ResetLevel() //Resets the player and all entities currently instantiated
         {
             _gameManager.IsMouseVisible = false;
-            _gameManager.playerCharacter.ResetPlayer();
-            SpawnManager.ResetEntities();
+            _gameManager.playerCharacter.ResetPlayer(); //Resets the player object to it's starting state
+            SpawnManager.ResetEntities(); //Resets all Entities, including reseting position, activation and properties including enemy health.
         }
 
         public void UnloadLevel()
         {
-            SpawnManager.UnloadEntities();
-            DestroyAssets();
+            SpawnManager.UnloadEntities(); //Unloads all entities by setting the IsActive and IsLoaded booleans to false
+            DestroyAssets(); //Destroys all assets and sets them to inactive
         }
 
-        public void CheckActiveTiles()
+        public void CheckActiveTiles() //Checks the currently visible tiles within the viewport. If the tile is not active, it is removed from the activeTileList.
         {
             foreach(Tile tile in tileList)
             {
@@ -61,42 +57,30 @@ namespace Terramental
                 {
                     if(tile.IsBlocking)
                     {
-                        activeTiles.Add(tile);
+                        activeTiles.Add(tile); //Adds the tile if it is a blocking tile and visible
                     }
                 }
                 
-                if(activeTiles.Contains(tile) && !tile.IsVisible)
+                if(activeTiles.Contains(tile) && !tile.IsVisible) //If the tile is within the activeTile list, and it is no longer visible, remove the tile from this list
                 {
                     activeTiles.Remove(tile);
                 }
             }
 
-            if(_gameManager.playerCharacter.SpritePosition.Y > (_mapData._mapHeight * 64))
+            if(_gameManager.playerCharacter.SpritePosition.Y > (_mapData._mapHeight * 64)) //If the player is outside the world boundaries on the Y axis, the player will be damaged resulting in displaying the respawn screen
             {
                 _gameManager.playerCharacter.PlayerTakeDamage(3);
             }
         }
 
-        public Tile GetTile(Vector2 position)
+        public void LoadMapData(string filePath) //Loads the map data associtated with the filePath string argument
         {
-            foreach (Tile tile in tileList)
-            {
-                if (tile.SpritePosition == position)
-                {
-                    return tile;
-                }
-            }
-            return null;
-        }
+            string strResultJson = File.ReadAllText(filePath); //Reads the data in the .json file, returning a string
+            MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson); //Converts the .json file string to the MapData class
+            _mapData = newMapData; //Sets the global MapData variable to the recently converted MapData
 
-        public void LoadMapData(string filePath)
-        {
-            string strResultJson = File.ReadAllText(filePath);
-            MapData newMapData = JsonConvert.DeserializeObject<MapData>(strResultJson);
-            _mapData = newMapData;
-
-            mapWidth = _mapData._mapWidth;
-            mapHeight = _mapData._mapHeight;
+            mapWidth = _mapData._mapWidth; //Sets the static float mapWidth variable to the width associated with the .json data
+            mapHeight = _mapData._mapHeight; //Sets the static float mapHeight variable to the width associated with the .json data
 
             if (_mapData != null)
             {
@@ -104,8 +88,9 @@ namespace Terramental
             }
         }
 
-        private void LoadTextures()
+        private void LoadTextures() //Loads and stores all textures in the appropriate list
         {
+            //Water Level Tile Map
             _waterTileMap.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsLeft")); //0
             _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Corner_Tile_UpwardsRight")); //1
@@ -132,6 +117,8 @@ namespace Terramental
             _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_Sand")); //22
             _waterTileMap.Add(_gameManager.GetTexture("Tiles/WaterLevel/Tile_SandReverse")); //23
 
+
+            //Snow Level Tile Map
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_GroundTile")); //0
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Snow_RightCorner")); //1
@@ -159,6 +146,7 @@ namespace Terramental
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_Filler")); //23
             _snowTileMap.Add(_gameManager.GetTexture("Tiles/SnowLevel/Ice_Backwards")); //24
 
+            //Fire Level Tile Map
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_Tile")); //0
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire_RightCorner")); //1
@@ -187,7 +175,7 @@ namespace Terramental
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Filler")); //24
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Backwards")); //25
 
-
+            //Load the Water Level Environment Assets
             _assetWaterList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Grass_1"));
@@ -196,6 +184,7 @@ namespace Terramental
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
 
+            //Load the Fire Level Environment Assets
             _assetSnowList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Igloo1")); //2
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile")); //3
@@ -323,12 +312,12 @@ namespace Terramental
             }
         }
 
-        private void SpawnEntity(int index, Vector2 position)
+        private void SpawnEntity(int index, Vector2 position) //Handles creating entities in the level
         {
             if (index == 1)
             {
                 //Set Player Position To Start
-                SpawnManager.levelStartPosition = position;
+                SpawnManager.levelStartPosition = position; //Sets the level start position for player spawning and respawning
                 _gameManager.playerCharacter.TeleportPlayer(position);
             }
 
@@ -429,7 +418,7 @@ namespace Terramental
 
         }
 
-        public Vector2 FindValidLoaction(Vector2 originalPos, Vector2 destination, Rectangle rectangle)
+        public Vector2 FindValidLoaction(Vector2 originalPos, Vector2 destination, Rectangle rectangle) //Finds if the space between the original position and destination is valid, otherwise, returns the furthest available location
         {
             Vector2 movementToTry = destination - originalPos;
             Vector2 furthestAvailableLocationSoFar = originalPos;
@@ -472,7 +461,7 @@ namespace Terramental
             return furthestAvailableLocationSoFar;
         }
 
-        public bool HasRoomForRectangle(Rectangle rectangleToCheck)
+        public bool HasRoomForRectangle(Rectangle rectangleToCheck) //Checks if there is room for the given rectangle within the generated level tile map
         {
             foreach (Tile tile in activeTiles)
             {
@@ -488,7 +477,7 @@ namespace Terramental
             return true;
         }
 
-        public bool HasRoomForRectangleMP(Rectangle rectangleToCheck)
+        public bool HasRoomForRectangleMP(Rectangle rectangleToCheck) //Checks if there is room for the given rectangle with reference to the generated moving platforms
         {
             foreach (MovingPlatform movingPlatform in SpawnManager.movingPlatformList)
             {
@@ -501,7 +490,7 @@ namespace Terramental
             return true;
         }
 
-        public Tile FindTile(Rectangle wallRect)
+        public Tile FindTile(Rectangle wallRect) //Finds the tile associated with the position of the rectangle
         {
             foreach(Tile tile in tileList)
             {
@@ -514,7 +503,7 @@ namespace Terramental
             return null;
         }
 
-        public Tile FindNearestTile(Rectangle rectangle)
+        public Tile FindNearestTile(Rectangle rectangle) //Finds the nearest tile based on distance
         {
             foreach (Tile tile in tileList)
             {
@@ -529,7 +518,7 @@ namespace Terramental
             return null;
         }
 
-        private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height)
+        private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height) //Creates a rectangle based on the given values
         {
             return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);
         }
