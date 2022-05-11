@@ -52,7 +52,7 @@ namespace Terramental
 
         public void DrawComponent(SpriteBatch spriteBatch)
         {
-            _componentPosition = CameraController.cameraCentre + _componentOffset;
+            _componentPosition = CameraController.cameraTopLeftAnchor + _componentOffset;
             _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
             spriteBatch.Draw(_componentTexture, _componentRectangle, _componentColor);
         }

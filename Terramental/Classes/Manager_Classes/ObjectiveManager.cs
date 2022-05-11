@@ -70,7 +70,7 @@ namespace Terramental
 
         public void DrawObjectiveString(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_defaultFont, _objectiveDescription, new Vector2(CameraController.cameraCentre.X + 5, CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 165), Color.White);
+            spriteBatch.DrawString(_defaultFont, _objectiveDescription, new Vector2(CameraController.cameraTopLeftAnchor.X + 5, CameraController.cameraTopLeftAnchor.Y + (GameManager.screenHeight / 2) - 165), Color.White);
         }
     }
 }

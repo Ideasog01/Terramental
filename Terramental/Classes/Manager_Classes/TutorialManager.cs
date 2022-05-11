@@ -58,7 +58,7 @@ namespace Terramental
             if (_elementNotificationTimer > 0)
             {
                 _elementNotificationTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                elementNotificationSprite.SpritePosition = CameraController.cameraCentre + new Vector2(-110, -140) + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
+                elementNotificationSprite.SpritePosition = CameraController.cameraTopLeftAnchor + new Vector2(-110, -140) + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
             }
             else if (elementNotificationSprite.IsActive)
             {
@@ -86,7 +86,7 @@ namespace Terramental
             {
                 if (_displayMessageTimer > 0)
                 {
-                    spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 80), Color.White);
+                    spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraTopLeftAnchor.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraTopLeftAnchor.Y + (GameManager.screenHeight / 2) - 80), Color.White);
                 }
             }
             else

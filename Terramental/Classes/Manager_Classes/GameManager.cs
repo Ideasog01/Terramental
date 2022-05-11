@@ -100,7 +100,7 @@ namespace Terramental
         {
             UpdateManagers(gameTime);
 
-            // System.Diagnostics.Debug.WriteLine("Camera Position = " + mainCam.CameraCentre.ToString());
+            // System.Diagnostics.Debug.WriteLine("Camera Position = " + mainCam.CameraTopLeftAnchor.ToString());
 
             if (currentGameState == GameState.Level && playerInterface != null) //If level is active, update the appropriate objects
             {

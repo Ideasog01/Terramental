@@ -132,7 +132,7 @@ namespace Terramental
                 }
                 else
                 {
-                    _menuManager.MouseClick(_playerCam.CameraCentre + new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y));
+                    _menuManager.MouseClick(CameraController.cameraTopLeftAnchor + new Vector2(oldMouseState.Position.X, oldMouseState.Position.Y));
                 }
             }
 
