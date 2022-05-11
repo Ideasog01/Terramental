@@ -15,13 +15,13 @@ namespace Terramental
         public static bool gameInitialised; //Set to true when game is intialised. E.g player is instantiated. Avoids multiple players/managers.
         public static bool levelLoaded; //States whether a level is loaded.
 
-        public static int levelsComplete = 5; //When each level is completed, this value is incremented. Handles available levels and when to show end credits. Set this value to 5 to make all levels available
+        public static int levelsComplete = 6; //When each level is completed, this value is incremented. Handles available levels and when to show end credits. Set this value to 6 to make all levels available
 
         public enum GameState { SplashScreen, CreditsVideo, MainMenu, Options, Credits, Level, Respawn, LevelSelect, LevelSelectConfirm, LevelPause, LevelComplete, StartScreen, HelpMenu, LoadingScreen }; //Controls the current textures and logic being activated
 
         public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown, DashButton }; //Each button has this value attributed
 
-        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button }; //Each button that represents a level on the level select screen has this value attributed
+        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button, Level6Button }; //Each button that represents a level on the level select screen has this value attributed
 
         public static GameState currentGameState = GameState.SplashScreen; //The current state of the game.
         public static GameState previousGameState = GameState.SplashScreen; //The previous state of the game. Useful for return buttons in menus.

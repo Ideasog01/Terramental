@@ -187,39 +187,6 @@ namespace Terramental
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Filler")); //24
             _fireTileMap.Add(_gameManager.GetTexture("Tiles/FireLevel/Fire2_Backwards")); //25
 
-            /*
-             * tileTextureList.Add(GetTexture("Tiles/DefaultTile")); //0
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_Tile")); //0
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_RightCorner")); //1
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_RightSlide")); //2
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_LeftCorner")); //3
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_LeftSlide")); //4
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_UpwardsRightCorner")); //5
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_UpwradsLeftCorner")); //6
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_UpwardsTile")); //7
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire_Filler")); //8
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_GroundTile")); //9
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_RightCorner")); //10
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_RightSlide")); //11
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_LeftCorner")); //12
-            tileTextureList.Add(GetTexture("Tiles/WaterLevelTiles/Sky_FifthTile")); //13
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_FirstFrame")); //14
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_SecondFrame")); //15
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_Thirdframe")); //16
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_FourthFrame")); //17
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_FifthFrame")); //18
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_SeventhFrame")); //19
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/FireSky_EightFrame")); //20
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_LeftSlide")); //21
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_DownRightCorner")); //22
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_DownLeftCorner")); //23
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_Filler")); //24
-            tileTextureList.Add(GetTexture("Tiles/FireLevelTiles/Fire2_Backwards")); //25
-             * 
-             * 
-             * 
-             */
-
 
             _assetWaterList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Big_Palm"));
@@ -256,6 +223,11 @@ namespace Terramental
             {
                 _currentTileMap = _fireTileMap;
                 _currentAssetTexture = _assetFireList;
+            }
+            else if(GameManager.levelIndex == 6)
+            {
+                _currentTileMap = _snowTileMap;
+                _currentTileMap = _assetSnowList;
             }
 
 

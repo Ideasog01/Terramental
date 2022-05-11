@@ -23,6 +23,7 @@ namespace Terramental
         {
             _playerCharacter = playerCharacter;
             _elementIndex = elementIndex;
+
             tile = mapManager.FindTile(SpriteRectangle);
             tile.IsBlocking = true;
             tile.SpriteColor = Color.Red;

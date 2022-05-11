@@ -305,7 +305,7 @@ namespace Terramental
                     {
                         int levelButtonIndex = levelSelectButtonList.IndexOf(selectButton);
 
-                        if (levelButtonIndex > 0 && levelButtonIndex < 6)
+                        if (levelButtonIndex > 0 && levelButtonIndex < 7)
                         {
                             if (GameManager.levelsComplete >= levelButtonIndex)
                             {
@@ -828,6 +828,18 @@ namespace Terramental
                     }
                     
                     break;
+
+                case GameManager.LevelButton.Level6Button:
+
+                    if (GameManager.levelsComplete > 4)
+                    {
+                        _levelDataFilePath = @"Content/Level6Map.json";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level5Description");
+                        GameManager.levelIndex = 6;
+                    }
+
+                    break;
             }
 
             ResetMenu();
@@ -930,6 +942,9 @@ namespace Terramental
             Button levelFiveSelect = new Button(GameManager.LevelButton.Level5Button, this);
             levelFiveSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level5_Button"), new Vector2(700, 380), new Vector2(40, 40));
 
+            Button levelSixSelect = new Button(GameManager.LevelButton.Level6Button, this);
+            levelSixSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(550, 75), new Vector2(40, 40));
+
             Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
             MenuComponent confirmPanel = new MenuComponent();
             confirmPanel.InitialiseMenuComponent(confirmPanelTexture, new Vector2((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2, (GameManager.screenHeight / 2) - confirmPanelTexture.Height / 2), new Vector2(confirmPanelTexture.Width, confirmPanelTexture.Height));
@@ -952,6 +967,7 @@ namespace Terramental
             levelSelectButtonList.Add(levelThreeSelect);
             levelSelectButtonList.Add(levelFourSelect);
             levelSelectButtonList.Add(levelFiveSelect);
+            levelSelectButtonList.Add(levelSixSelect);
             levelSelectButtonList.Add(levelSelectExitButton);
 
             confirmLevelComponentList.Add(confirmPanel);
