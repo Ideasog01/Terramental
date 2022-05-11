@@ -195,8 +195,6 @@ namespace Terramental
         {
             if (_currentKeyboardState.IsKeyUp(key) && oldKeyboardState.IsKeyDown(key))
             {
-                // lastSuccessfulKeyPress = key;
-                // lastSuccessfulKeyPressTime = gameTime.ElapsedGameTime.TotalMilliseconds;
                 return true;
             }
 
@@ -238,14 +236,6 @@ namespace Terramental
             {
                 if (_gameManager.useDoubleTapDash) // Checks to see which chosen method of dashing the player has selected (shift vs double tap)
                 {
-                    // Double tap dash method
-                    if (IsKeyPressed(Keys.W))
-                    {
-                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up; // Vertical Dash
-                        _playerCharacter.DashStateMachine();
-                    
-                    }
-
                     if (IsKeyPressed(Keys.A))
                     {
                         _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left; // Left Dash
@@ -262,14 +252,6 @@ namespace Terramental
                 {
                     if (IsKeyPressed(Keys.LeftShift)) // Checks to see if left shift is pressed
                     {
-                        if (_currentKeyboardState.IsKeyDown(Keys.W)) // Vertical Dash
-                        {
-                            _playerCharacter.dashDirY = -1;
-                            _playerCharacter.dashDirX = 0;
-                            _playerCharacter.dashCooldown = 2;
-                            _playerCharacter._isDashing = true;
-                        }
-
                         if (_currentKeyboardState.IsKeyDown(Keys.A)) // Left Dash
                         {
                             _playerCharacter.dashDirY = 0;

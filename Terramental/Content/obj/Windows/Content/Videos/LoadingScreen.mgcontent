@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/LoadingScreen.wmv</SourceFile>
-  <SourceTime>2022-05-05T20:04:29.1583189+01:00</SourceTime>
-  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Videos/LoadingScreen.xnb</DestFile>
-  <DestTime>2022-05-09T00:12:02.3387948+01:00</DestTime>
+  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Videos/LoadingScreen.wmv</SourceFile>
+  <SourceTime>2022-05-06T22:41:29.7217393+01:00</SourceTime>
+  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Videos/LoadingScreen.xnb</DestFile>
+  <DestTime>2022-05-11T16:21:23.8802388+01:00</DestTime>
   <Importer>WmvImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>VideoProcessor</Processor>
@@ -11,6 +11,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Videos/LoadingScreen.wmv</string>
+    <string>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Videos/LoadingScreen.wmv</string>
   </BuildOutput>
 </PipelineBuildEvent>
