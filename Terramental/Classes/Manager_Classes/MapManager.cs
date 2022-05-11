@@ -542,6 +542,21 @@ namespace Terramental
             return null;
         }
 
+        public Tile FindNearestTile(Rectangle rectangle)
+        {
+            foreach (Tile tile in tileList)
+            {
+                float distance = MathF.Sqrt(MathF.Pow(rectangle.X - tile.SpritePosition.X, 2) + MathF.Pow(rectangle.Y - tile.SpritePosition.Y, 2));
+
+                if(distance <= 64)
+                {
+                    return tile;
+                }
+            }
+
+            return null;
+        }
+
         private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height)
         {
             return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);

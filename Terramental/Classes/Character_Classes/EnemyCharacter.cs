@@ -220,9 +220,17 @@ namespace Terramental
                     ApplyGravity();
                 }
 
+                
+
                 if (_pathBlocked && !DisableMovement)
                 {
-                    EnemyJump();
+                    Rectangle rectangleOffset = SpriteRectangle;
+                    rectangleOffset.Offset(0, -256);
+
+                    if(!_gameManager.mapManager.FindNearestTile(rectangleOffset).IsBlocking)
+                    {
+                        EnemyJump();
+                    }
                 }
             }
 

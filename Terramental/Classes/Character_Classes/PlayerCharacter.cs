@@ -593,7 +593,7 @@ namespace Terramental
         {
             if (ultimateCooldown <= 0 && ultimateActiveTimer <= 0) // Checks to see if the player can use their ultimate ability
             {
-                ultimateActiveTimer = 10; // Resets the ultimate cooldown
+                ultimateActiveTimer = 8; // Resets the ultimate cooldown
                 ultimateActive = true; // Sets the ultimate to active
                 AudioManager.PlaySound("UltimateActivation_SFX"); // Plays the sound effect for ultimate activation
             }

@@ -629,13 +629,14 @@ namespace Terramental
                         if (GameManager.levelLoaded)
                         {
                             GameManager.PauseGame();
+                            ResetMenu();
                         }
                         else
                         {
                             GameManager.currentGameState = GameManager.GameState.MainMenu;
+                            ResetMenu();
                         }
 
-                        ResetMenu();
                         return;
                     }
 
@@ -841,6 +842,14 @@ namespace Terramental
                 GameManager.currentGameState = GameManager.GameState.Respawn;
                 _gameManager.IsMouseVisible = true;
                 ResetMenu();
+                if (_gameManager.inputManager.IsGamePadConnected())
+                {
+                    respawnMenuButtonList[0].ComponentColor = Color.Gray;
+                }
+                else
+                {
+                    respawnMenuButtonList[0].ComponentColor = Color.White;
+                }
             }
             else
             {
@@ -894,6 +903,7 @@ namespace Terramental
             Button respawnButton = new Button(GameManager.ButtonName.RespawnButton, this);
             respawnButton.InitialiseMenuComponent(respawnButtonTexture, new Vector2(_graphics.PreferredBackBufferWidth / 2 - (respawnButtonTexture.Width / 2), 365), new Vector2(256, 64));
             respawnMenuButtonList.Add(respawnButton);
+            
 
             _gameManager.IsMouseVisible = true;
         }

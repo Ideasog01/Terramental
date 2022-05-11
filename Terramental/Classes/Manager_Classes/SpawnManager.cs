@@ -728,6 +728,7 @@ namespace Terramental
                 {
                     movingPlatform.InitialiseMovingPlatform(position, 0);
                     movingPlatform.SpritePosition = position;
+                    movingPlatform.SpawnPosition = position;
                     movingPlatform.IsActive = true;
                     movingPlatformFound = true;
                     break;
