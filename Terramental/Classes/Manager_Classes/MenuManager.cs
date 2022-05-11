@@ -30,9 +30,13 @@ namespace Terramental
 
         public static List<Button> loadGameButtonList = new List<Button>();
 
+        public static List<Button> allButtonList = new List<Button>();
+
         public static Button dashControlButton;
 
         public static Button levelSelectExitButton;
+
+        public static Button selectedButton;
 
         public int currentButtonIndex;
 
@@ -392,64 +396,32 @@ namespace Terramental
             _gameManager.IsMouseVisible = true;
         }
 
-        public void ChangeSelectedButton(int amount, bool vertical)
+        public void ChangeSelectedButton(int amount)
         {
             if(_gameManager.inputManager.IsGamePadConnected())
             {
                 if (GameManager.currentGameState != GameManager.GameState.SplashScreen && GameManager.currentGameState != GameManager.GameState.Level && _gamePadButtonTimer <= 0)
                 {
-                    switch (GameManager.currentGameState)
+                    if(selectedButton != null)
                     {
-                        case GameManager.GameState.MainMenu:
-                            _buttonList = mainMenuButtonList;
-                            _verticalMenu = true;
-                            break;
-                        case GameManager.GameState.LevelSelect:
-                            _buttonList = levelSelectButtonList;
-                            _verticalMenu = false;
-                            break;
-                        case GameManager.GameState.LevelSelectConfirm:
-                            _buttonList = confirmLevelButtonList;
-                            _verticalMenu = true;
-                            break;
-                        case GameManager.GameState.LevelPause:
-                            _buttonList = pauseMenuButtonList;
-                            _verticalMenu = true;
-                            break;
-                        case GameManager.GameState.Respawn:
-                            _buttonList = respawnMenuButtonList;
-                            _verticalMenu = false;
-                            break;
-                        case GameManager.GameState.LevelComplete:
-                            _buttonList = completeMenuButtonList;
-                            _verticalMenu = true;
-                            break;
+                        selectedButton.ComponentColor = Color.White;
                     }
 
-                    if (_verticalMenu == vertical)
+                    currentButtonIndex += amount;
+
+                    if(currentButtonIndex < 0)
                     {
-                        _buttonList[currentButtonIndex].ComponentColor = Color.White;
-
-                        currentButtonIndex -= amount;
-
-                        if (currentButtonIndex >= _buttonList.Count)
-                        {
-                            currentButtonIndex = 0;
-                        }
-
-                        if (currentButtonIndex < 0)
-                        {
-                            currentButtonIndex = _buttonList.Count - 1;
-                        }
-
-                        if (!_buttonList[currentButtonIndex].ButtonActive)
-                        {
-                            ChangeSelectedButton(1, vertical);
-                            return;
-                        }
-
-                        _buttonList[currentButtonIndex].ComponentColor = Color.Gray;
+                        currentButtonIndex = 0;
                     }
+
+                    if(currentButtonIndex >= allButtonList.Count)
+                    {
+                        currentButtonIndex = allButtonList.Count - 1;
+                    }
+
+                    selectedButton = allButtonList[currentButtonIndex];
+
+                    selectedButton.ComponentColor = Color.Gray;
 
                     _gamePadButtonTimer = 0.25f;
                 }
@@ -458,22 +430,16 @@ namespace Terramental
 
         public void InteractSelectedButton()
         {
-            if(GameManager.currentGameState != GameManager.GameState.Level)
+            if(GameManager.currentGameState != GameManager.GameState.Level && GameManager.currentGameState != GameManager.GameState.StartScreen)
             {
-                if (currentButtonIndex < _buttonList.Count && _buttonBuffer <= 0)
+                selectedButton.ComponentColor = Color.White;
+
+                if (GameManager.currentGameState == GameManager.GameState.LevelSelect)
                 {
-                    Button button = _buttonList[currentButtonIndex];
-                    button.ComponentColor = Color.White;
-
-                    if (GameManager.currentGameState == GameManager.GameState.LevelSelect)
-                    {
-                        LevelSelectButtonInteraction(button.LevelButtonName);
-                    }
-
-                    ButtonInteraction(button.ButtonName);
-
-                    currentButtonIndex = 0;
+                    LevelSelectButtonInteraction(selectedButton.LevelButtonName);
                 }
+
+                ButtonInteraction(selectedButton.ButtonName);
             }
         }
 
@@ -565,14 +531,14 @@ namespace Terramental
                 {
                     case GameManager.ButtonName.StartGameButton:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
-                        ChangeSelectedButton(0, false);
+                        ChangeSelectedButton(0);
                         break;
                     case GameManager.ButtonName.ExitGameButton:
                         _gameManager.ExitGame();
                         break;
                     case GameManager.ButtonName.RespawnButton:
                         DisplayRespawnScreen(false);
-                        ChangeSelectedButton(0, true);
+                        ChangeSelectedButton(0);
                         _gameManager.mapManager.ResetLevel();
                         _gameManager.playerCharacter.TeleportPlayer(SpawnManager.levelStartPosition);
                         break;
@@ -584,15 +550,15 @@ namespace Terramental
                         }
                         
                         _gameManager.LoadNewGame(_levelDataFilePath);
-                        ChangeSelectedButton(0, true);
+                        ChangeSelectedButton(0);
                         break;
                     case GameManager.ButtonName.LevelSelectExit:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
-                        ChangeSelectedButton(0, false);
+                        ChangeSelectedButton(0);
                         break;
                     case GameManager.ButtonName.OptionsButton:
                         GameManager.currentGameState = GameManager.GameState.Options;
-                        ChangeSelectedButton(0, true);
+                        ChangeSelectedButton(0);
                         break;
                     case GameManager.ButtonName.ResumeGame:
                         GameManager.currentGameState = GameManager.GameState.Level;
@@ -600,7 +566,7 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.CreditsButton:
                         GameManager.currentGameState = GameManager.GameState.Credits;
-                        ChangeSelectedButton(0, true);
+                        ChangeSelectedButton(0);
                         break;
                     case GameManager.ButtonName.Replay:
                         GameManager.currentGameState = GameManager.GameState.Level;
@@ -608,7 +574,7 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.Continue:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
-                        ChangeSelectedButton(0, false);
+                        ChangeSelectedButton(0);
 
                         if (GameManager.levelsComplete < GameManager.levelIndex)
                         {
@@ -624,7 +590,7 @@ namespace Terramental
                         break;
                     case GameManager.ButtonName.HelpScreenButton:
                         GameManager.currentGameState = GameManager.GameState.HelpMenu;
-                        ChangeSelectedButton(0, false);
+                        ChangeSelectedButton(0);
                         break;
                     case GameManager.ButtonName.MusicVolumeUp:
                         AudioManager.AdjustMusicVolume(true);
@@ -655,8 +621,6 @@ namespace Terramental
                         {
                             _gameManager.playerCharacter.useDoubleTapDash = true;
                             dashControlButton.ComponentTexture = _gameManager.GetTexture("UserInterface/HelpScreen/ShiftButton");
-
-
                         }
                         break;
                 }
@@ -776,6 +740,11 @@ namespace Terramental
             exitButton.InitialiseMenuComponent(exitButtonTexture, new Vector2(viewportCentreX - (exitButtonTexture.Width / 2), 365), new Vector2(300, 60));
             mainMenuButtonList.Add(exitButton);
 
+            allButtonList.Add(startGameButton);
+            allButtonList.Add(optionsButton);
+            allButtonList.Add(creditsButton);
+            allButtonList.Add(exitButton);
+
             _gameManager.IsMouseVisible = true;
         }
 
@@ -790,6 +759,8 @@ namespace Terramental
             Button respawnButton = new Button(GameManager.ButtonName.RespawnButton, this);
             respawnButton.InitialiseMenuComponent(respawnButtonTexture, new Vector2(_graphics.PreferredBackBufferWidth / 2 - (respawnButtonTexture.Width / 2), 365), new Vector2(256, 64));
             respawnMenuButtonList.Add(respawnButton);
+
+            allButtonList.Add(respawnButton);
 
             _gameManager.IsMouseVisible = true;
         }
@@ -844,6 +815,14 @@ namespace Terramental
             confirmLevelButtonList.Add(confirmExitButton);
             confirmLevelButtonList.Add(confirmButton);
 
+            allButtonList.Add(levelOneSelect);
+            allButtonList.Add(levelTwoSelect);
+            allButtonList.Add(levelThreeSelect);
+            allButtonList.Add(levelFourSelect);
+            allButtonList.Add(levelFiveSelect);
+            allButtonList.Add(confirmExitButton);
+            allButtonList.Add(confirmButton);
+
         }
 
         private void LoadPauseMenu()
@@ -878,7 +857,12 @@ namespace Terramental
             pauseMenuButtonList.Add(helpButton);
             pauseMenuButtonList.Add(exitGameButton);
 
-
+            allButtonList.Add(resumeButton);
+            allButtonList.Add(optionsButton);
+            allButtonList.Add(mainMenuButton);
+            allButtonList.Add(helpButton);
+            allButtonList.Add(exitGameButton);
+            
             pauseMenuComponentList.Add(pauseMenuPanel);
         
         }
@@ -892,6 +876,8 @@ namespace Terramental
             Texture2D creditsReturnTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/ReturnButton");
             creditsReturnButton = new Button(GameManager.ButtonName.ReturnMainMenu, this);
             creditsReturnButton.InitialiseMenuComponent(creditsReturnTexture, new Vector2(10, 460), new Vector2(creditsReturnTexture.Width, creditsReturnTexture.Height));
+
+            allButtonList.Add(creditsReturnButton);
         }
 
         private void LoadSplashScreens()
@@ -929,6 +915,9 @@ namespace Terramental
 
             completeMenuButtonList.Add(replayButton);
             completeMenuButtonList.Add(continueButton);
+
+            allButtonList.Add(replayButton);
+            allButtonList.Add(continueButton);
         }
 
         private void LoadStartScreen()
@@ -998,6 +987,18 @@ namespace Terramental
             sfxVolIncButton.InitialiseMenuComponent(rightButtonTexture, new Vector2(SFXVolButton.ComponentPosition.X + SFXVolButtonTexture.Width + 10, SFXVolButton.ComponentPosition.Y + 5), new Vector2(rightButtonTexture.Width, rightButtonTexture.Height));
             optionsButtonList.Add(sfxVolIncButton);
 
+            allButtonList.Add(ResolutionButton);
+            allButtonList.Add(MusicButton);
+            allButtonList.Add(SFXVolButton);
+            allButtonList.Add(ControlsButton);
+            allButtonList.Add(ReturnButton);
+            allButtonList.Add(resDecButton);
+            allButtonList.Add(resIncButton);
+            allButtonList.Add(musicVolDecButton);
+            allButtonList.Add(musicVolIncButton);
+            allButtonList.Add(sfxVolDecButton);
+            allButtonList.Add(sfxVolIncButton);
+
             _gameManager.IsMouseVisible = true;
         }
 
@@ -1014,6 +1015,9 @@ namespace Terramental
             Texture2D dashButtonTexture = _gameManager.GetTexture("UserInterface/HelpScreen/DoubleTap");
             dashControlButton = new Button(GameManager.ButtonName.DashButton, this);
             dashControlButton.InitialiseMenuComponent(dashButtonTexture, new Vector2(750, 80), new Vector2(75, 75));
+
+            allButtonList.Add(_helpScreenReturnButton);
+            allButtonList.Add(dashControlButton);
 
         }
     }

@@ -66,7 +66,7 @@ namespace Terramental
                     if (_currentKeyboardState.GetPressedKeys().Length > 0) // Checks to see if keys are being pressed
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
-                        _gameManager.menuManager.ChangeSelectedButton(0, true);
+                        _gameManager.menuManager.ChangeSelectedButton(0);
                     }
                 }
             }
@@ -77,7 +77,7 @@ namespace Terramental
                     if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
-                        _gameManager.menuManager.ChangeSelectedButton(0, true);
+                        _gameManager.menuManager.ChangeSelectedButton(0);
                     }
                 }
 
@@ -96,20 +96,20 @@ namespace Terramental
 
                 if (leftStick.X > 0) // Checks to see if left stick is moving to the right
                 {
-                    _menuManager.ChangeSelectedButton(1, false);
+                    _menuManager.ChangeSelectedButton(1);
                 }
                 else if (leftStick.X < 0) // Checks to see if left stick is moving to the left
                 {
-                    _menuManager.ChangeSelectedButton(-1, false);
+                    _menuManager.ChangeSelectedButton(-1);
                 }
 
                 if(leftStick.Y > 0) // Checks to see if left stick is moving up
                 {
-                    _menuManager.ChangeSelectedButton(1, true);
+                    _menuManager.ChangeSelectedButton(1);
                 }
                 else if(leftStick.Y < 0) // Checks to see if left stick is moving down
                 {
-                    _menuManager.ChangeSelectedButton(-1, true);
+                    _menuManager.ChangeSelectedButton(-1);
                 }
             }
             
