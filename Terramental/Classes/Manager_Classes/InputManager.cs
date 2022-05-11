@@ -66,50 +66,59 @@ namespace Terramental
                     if (_currentKeyboardState.GetPressedKeys().Length > 0) // Checks to see if keys are being pressed
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
-                        _gameManager.menuManager.ChangeSelectedButton(0);
+                        _menuManager.ResetMenu();
+
                     }
                 }
             }
             else
             {
-                if (GameManager.currentGameState == GameManager.GameState.StartScreen)
-                {
-                    if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
-                    {
-                        GameManager.currentGameState = GameManager.GameState.MainMenu;
-                        _gameManager.menuManager.ChangeSelectedButton(0);
-                    }
-                }
 
                 if (_currentGamepadState.Buttons.Start == ButtonState.Pressed && _oldGamepadState.Buttons.Start == ButtonState.Released && GameManager.currentGameState == GameManager.GameState.Level)
                 {
                     GameManager.PauseGame();
+                    _menuManager.ResetMenu();
                     _gameManager.IsMouseVisible = true;
                 }
 
-                if(_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
+                if(GameManager.currentGameState != GameManager.GameState.Level)
                 {
-                    _menuManager.InteractSelectedButton();
-                }
+                    if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
+                    {
+                        _menuManager.ActivateButtonController();
+                    }
 
-                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left; // Left thumbstick using controller
+                    if (GameManager.currentGameState == GameManager.GameState.StartScreen)
+                    {
+                        if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
+                        {
+                            GameManager.currentGameState = GameManager.GameState.MainMenu;
+                            _menuManager.ResetMenu();
 
-                if (leftStick.X > 0) // Checks to see if left stick is moving to the right
-                {
-                    _menuManager.ChangeSelectedButton(1);
-                }
-                else if (leftStick.X < 0) // Checks to see if left stick is moving to the left
-                {
-                    _menuManager.ChangeSelectedButton(-1);
-                }
+                        }
+                    }
+                    else
+                    {
+                        Vector2 leftStick = _currentGamepadState.ThumbSticks.Left; // Left thumbstick using controller
 
-                if(leftStick.Y > 0) // Checks to see if left stick is moving up
-                {
-                    _menuManager.ChangeSelectedButton(1);
-                }
-                else if(leftStick.Y < 0) // Checks to see if left stick is moving down
-                {
-                    _menuManager.ChangeSelectedButton(-1);
+                        if (leftStick.X > 0) // Checks to see if left stick is moving to the right
+                        {
+                            _menuManager.ChangeButtonController(true, false);
+                        }
+                        else if (leftStick.X < 0) // Checks to see if left stick is moving to the left
+                        {
+                            _menuManager.ChangeButtonController(false, false);
+                        }
+
+                        if (leftStick.Y > 0) // Checks to see if left stick is moving up
+                        {
+                            _menuManager.ChangeButtonController(true, true);
+                        }
+                        else if (leftStick.Y < 0) // Checks to see if left stick is moving down
+                        {
+                            _menuManager.ChangeButtonController(false, true);
+                        }
+                    }
                 }
             }
             
@@ -140,41 +149,45 @@ namespace Terramental
             }
 
             PlayerMovementInput(gameTime);
-            PlayerDashInput(gameTime);
 
-            if(!_currentGamepadState.IsConnected) // Checks to see that no controller is connected
+            if(GameManager.currentGameState == GameManager.GameState.Level)
             {
-                if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q)) // If Q is pressed
+                if (!_currentGamepadState.IsConnected) // Checks to see that no controller is connected
                 {
-                    _playerCharacter.ActivateUltimate();
+                    if (_currentKeyboardState.IsKeyUp(Keys.Q) && oldKeyboardState.IsKeyDown(Keys.Q)) // If Q is pressed
+                    {
+                        _playerCharacter.ActivateUltimate();
+                    }
+
+                    if (_currentMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
+                    {
+                        _playerCharacter.PrimaryUltimateAttack();
+                    }
+
+                    if (_currentKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space)) // If Space is pressed
+                    {
+                        _playerCharacter.PlayerJump();
+                    }
+                }
+                else // Controller is connected
+                {
+                    if (_currentGamepadState.IsButtonDown(Buttons.Y) && _oldGamepadState.IsButtonUp(Buttons.Y))
+                    {
+                        _playerCharacter.ActivateUltimate();
+                    }
+
+                    if (_currentGamepadState.IsButtonDown(Buttons.RightTrigger) && _oldGamepadState.IsButtonUp(Buttons.RightTrigger))
+                    {
+                        _playerCharacter.PrimaryUltimateAttack();
+                    }
+
+                    if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
+                    {
+                        _playerCharacter.PlayerJump();
+                    }
                 }
 
-                if (_currentMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
-                {
-                    _playerCharacter.PrimaryUltimateAttack();
-                }
-
-                if (_currentKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space)) // If Space is pressed
-                {
-                    _playerCharacter.PlayerJump();
-                }
-            }
-            else // Controller is connected
-            {
-                if(_currentGamepadState.IsButtonDown(Buttons.Y) && _oldGamepadState.IsButtonUp(Buttons.Y))
-                {
-                    _playerCharacter.ActivateUltimate();
-                }
-
-                if(_currentGamepadState.IsButtonDown(Buttons.RightTrigger) && _oldGamepadState.IsButtonUp(Buttons.RightTrigger))
-                {
-                    _playerCharacter.PrimaryUltimateAttack();
-                }
-
-                if (_currentGamepadState.Buttons.A == ButtonState.Pressed && _oldGamepadState.Buttons.A == ButtonState.Released)
-                {
-                    _playerCharacter.PlayerJump();
-                }
+                PlayerDashInput(gameTime);
             }
         }
 
@@ -274,32 +287,50 @@ namespace Terramental
                         }
                     }
                 }
-
             }
             else
             {
-                Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
-                Vector2 oldLeftStick = _oldGamepadState.ThumbSticks.Left;
-
-                if(leftStick.X > 0 && oldLeftStick.X == 0) // Right Dash
+                if(_gameManager.useDoubleTapDash)
                 {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
-                    _playerCharacter.DashStateMachine();
+                    Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
+                    Vector2 oldLeftStick = _oldGamepadState.ThumbSticks.Left;
+
+                    if (leftStick.X > 0 && oldLeftStick.X == 0) // Right Dash
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Right;
+                        _playerCharacter.DashStateMachine();
+                    }
+
+                    if (leftStick.X < 0 && oldLeftStick.X == 0) // Left Dash
+                    {
+                        _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
+                        _playerCharacter.DashStateMachine();
+                    }
                 }
-
-                if(leftStick.X < 0 && oldLeftStick.X == 0) // Left Dash
+                else
                 {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Left;
-                    _playerCharacter.DashStateMachine();
-                }
+                    if(_currentGamepadState.Buttons.B == ButtonState.Pressed && _oldGamepadState.Buttons.B == ButtonState.Released) // Checks to see if controller A button is pressed
+                    {
+                        Vector2 leftStick = _currentGamepadState.ThumbSticks.Left;
 
-                if(leftStick.Y > 0 && oldLeftStick.Y == 0) // Vertical Dash
-                {
-                    _playerCharacter.dashDir = PlayerCharacter.DashDirections.Up;
-                    _playerCharacter.DashStateMachine();
+                        if (leftStick.X < 0) // Left Dash
+                        {
+                            _playerCharacter.dashDirY = 0;
+                            _playerCharacter.dashDirX = -1;
+                            _playerCharacter.dashCooldown = 2;
+                            _playerCharacter._isDashing = true;
+                        }
+
+                        if (leftStick.X > 0) // Right Dash
+                        {
+                            _playerCharacter.dashDirY = 0;
+                            _playerCharacter.dashDirX = 1;
+                            _playerCharacter.dashCooldown = 2;
+                            _playerCharacter._isDashing = true;
+                        }
+                    }
                 }
             }
-            
         }
     }
 }

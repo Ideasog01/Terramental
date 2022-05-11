@@ -70,51 +70,6 @@ namespace Terramental
                     {
                         AudioManager.PlaySound("MenuButton_SFX");
                     }
-
-                    if (_buttonName == GameManager.ButtonName.ReturnMainMenu)
-                    {
-
-                        if (GameManager.currentGameState == GameManager.GameState.HelpMenu)
-                        {
-                            if (GameManager.levelLoaded)
-                            {
-                                GameManager.PauseGame();
-                            }
-                            else
-                            {
-                                GameManager.currentGameState = GameManager.GameState.MainMenu;
-                            }
-
-                            return;
-                        }
-
-                        if (GameManager.currentGameState == GameManager.GameState.Options)
-                        {
-                            if (GameManager.levelLoaded)
-                            {
-                                GameManager.PauseGame();
-                            }
-                            else
-                            {
-                                GameManager.currentGameState = GameManager.GameState.MainMenu;
-                            }
-
-                            return;
-                        }
-
-                        if (GameManager.currentGameState == GameManager.GameState.Credits || GameManager.currentGameState == GameManager.GameState.LevelSelect)
-                        {
-                            GameManager.currentGameState = GameManager.GameState.MainMenu;
-                            return;
-                        }
-
-                        if (GameManager.currentGameState == GameManager.GameState.LevelComplete || GameManager.currentGameState == GameManager.GameState.LevelPause)
-                        {
-                            _menuManager.ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
-                            AudioManager.PlaySound("Level_Music");
-                            GameManager.levelLoaded = false;
-                        }
-                    }
                 }
             }
         }

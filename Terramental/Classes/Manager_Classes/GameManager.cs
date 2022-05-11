@@ -119,7 +119,7 @@ namespace Terramental
                 }
             }
 
-            menuManager.UpdateMenuButtons(gameTime);
+            menuManager.UpdateMenu(gameTime);
             mainCam.UpdateCamera(gameTime);
 
 
