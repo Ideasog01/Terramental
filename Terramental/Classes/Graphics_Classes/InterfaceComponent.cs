@@ -6,7 +6,6 @@ namespace Terramental
 {
     public class InterfaceComponent
     {
-        private PlayerCharacter _playerCharacter;
         private Vector2 _componentPosition;
         private Vector2 _componentOffset;
         private Vector2 _componentScale;
@@ -14,9 +13,8 @@ namespace Terramental
         private Rectangle _componentRectangle;
         private Color _componentColor = Color.White;
 
-        public InterfaceComponent(PlayerCharacter playerCharacter, Vector2 position, Vector2 scale, Texture2D texture)
+        public InterfaceComponent(Vector2 position, Vector2 scale, Texture2D texture)
         {
-            _playerCharacter = playerCharacter;
             _componentOffset = position;
             _componentPosition = position;
             _componentScale = scale;

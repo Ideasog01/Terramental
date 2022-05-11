@@ -137,6 +137,9 @@ namespace Terramental
 
         public void EnableWorldCanvas(bool active)
         {
+            enemyHealthBar.IsLoaded = active;
+            enemyHealthBarFill.IsLoaded = active;
+            enemyElement.IsLoaded = active;
             enemyHealthBar.IsActive = active;
             enemyHealthBarFill.IsActive = active;
             enemyElement.IsActive = active;

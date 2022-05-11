@@ -872,7 +872,8 @@ namespace Terramental
                 {
                     cannon.IsActive = true;
                     cannon.SpritePosition = cannon.SpawnPosition;
-                }            }
+                }
+            }
 
             foreach(MovingPlatform movingPlatform in movingPlatformList)
             {

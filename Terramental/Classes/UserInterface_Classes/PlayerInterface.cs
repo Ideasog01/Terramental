@@ -155,36 +155,36 @@ namespace Terramental
 
         private void LoadPlayerInterface()
         {
-            _currentElement = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(846, 26), new Vector2(64, 64), _gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element"));
+            _currentElement = new InterfaceComponent(new Vector2(846, 26), new Vector2(64, 64), _gameManager.GetTexture("UserInterface/PlayerInterface/Fire_Element"));
             playerInterfaceElements.Add(_currentElement);
 
-            _firstElement = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(910, 8), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element"));
+            _firstElement = new InterfaceComponent(new Vector2(910, 8), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Snow_Element"));
             playerInterfaceElements.Add(_firstElement);
 
-            _secondElement = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(910, 46), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element"));
+            _secondElement = new InterfaceComponent(new Vector2(910, 46), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Water_Element"));
             playerInterfaceElements.Add(_secondElement);
 
-            _dashAbility = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(906, 84), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Dash_Element"));
+            _dashAbility = new InterfaceComponent(new Vector2(906, 84), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Dash_Element"));
             playerInterfaceElements.Add(_dashAbility);
 
-            _ultimateAbility = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(860, 92), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Special_PowerUp"));
+            _ultimateAbility = new InterfaceComponent(new Vector2(860, 92), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Special_PowerUp"));
             playerInterfaceElements.Add(_ultimateAbility);
 
-            _firstLife = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(5, 5), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
+            _firstLife = new InterfaceComponent(new Vector2(5, 5), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
             playerInterfaceElements.Add(_firstLife);
 
-            _secondLife = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(49, 5), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
+            _secondLife = new InterfaceComponent(new Vector2(49, 5), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
             playerInterfaceElements.Add(_secondLife);
 
-            _thirdLife = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(92, 5), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
+            _thirdLife = new InterfaceComponent(new Vector2(92, 5), new Vector2(42, 42), _gameManager.GetTexture("UserInterface/PlayerInterface/Health"));
             playerInterfaceElements.Add(_thirdLife);
 
-            _playerScoreComponent = new InterfaceComponent(_gameManager.playerCharacter, new Vector2(10, 56), new Vector2(32, 32), _gameManager.GetTexture("Sprites/Pickups/Collectible"));
+            _playerScoreComponent = new InterfaceComponent(new Vector2(10, 56), new Vector2(32, 32), _gameManager.GetTexture("Sprites/Pickups/Collectible"));
             playerInterfaceElements.Add(_playerScoreComponent);
 
-            _ultimateSlider = new InterfaceComponent(_gameManager.playerCharacter, new Vector2((GameManager.screenWidth / 2) - 200, (GameManager.screenHeight / 2) - 240), new Vector2(400, 40), _gameManager.GetTexture("UserInterface/Sliders/UltimateSliderBorder"));
+            _ultimateSlider = new InterfaceComponent(new Vector2((GameManager.screenWidth / 2) - 200, (GameManager.screenHeight / 2) - 240), new Vector2(400, 40), _gameManager.GetTexture("UserInterface/Sliders/UltimateSliderBorder"));
 
-            _ultimateSliderFill = new InterfaceComponent(_gameManager.playerCharacter, _ultimateSlider.ComponentPosition, new Vector2((GameManager.screenWidth / 2) - 200, (GameManager.screenHeight / 2) - 240), _gameManager.GetTexture("UserInterface/Sliders/BlankSliderFill"));
+            _ultimateSliderFill = new InterfaceComponent(_ultimateSlider.ComponentPosition, new Vector2((GameManager.screenWidth / 2) - 200, (GameManager.screenHeight / 2) - 240), _gameManager.GetTexture("UserInterface/Sliders/BlankSliderFill"));
 
             _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
 

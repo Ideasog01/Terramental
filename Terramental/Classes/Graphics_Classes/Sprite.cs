@@ -136,6 +136,7 @@ namespace Terramental
             _spriteRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, (int)scale.X, (int)scale.Y);
             _spawnPosition = startPosition;
             _spriteColor = Color.White;
+            _isLoaded = true;
 
             if (!SpriteManager.SpriteList.Contains(this))
             {
