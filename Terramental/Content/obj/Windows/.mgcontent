@@ -35,8 +35,6 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/UltimateActivation_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SFXs/WaterProjectile_SFX.wav</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/DefaultFont.spritefont</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/LevelNumberFont.spritefont</File>
-    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/LevelTitleFont.spritefont</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/SpriteFont/TutorialFont.spritefont</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/Flame_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Effects/FrozenEffect.png</File>
@@ -213,8 +211,6 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

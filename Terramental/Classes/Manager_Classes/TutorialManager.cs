@@ -44,29 +44,6 @@ namespace Terramental
             get { return _displayMessageTimer; }
         }
 
-        public void DisplayMessage(TutorialMessage message)
-        {
-            GamePadState gamePadState = GamePad.GetState(0);
-
-            switch (message)
-            {
-                case TutorialMessage.ElementPickup:
-
-                    _displayMessage = "CHANGE YOUR ELEMENT BY HARNESSING THE NEARBY ELEMENT";
-
-                    break;
-
-                case TutorialMessage.ElementWall:
-
-                    _displayMessage = "USE YOUR ULTIMATE WITH THE OPPOSITE ELEMENT TO BREAK THE WALL";
-
-                    break;
-            }
-
-            _displayMessageTimer = 10;
-            _displayMessageWidth = _displayMessage.Length * 6;
-        }
-
         public void UpdateDisplayMessageTimer(GameTime gameTime)
         {
             if (_displayMessageTimer > 0)
@@ -109,7 +86,7 @@ namespace Terramental
             {
                 if (_displayMessageTimer > 0)
                 {
-                    spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 150), Color.White);
+                    spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraCentre.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraCentre.Y + (GameManager.screenHeight / 2) - 80), Color.White);
                 }
             }
             else
@@ -132,10 +109,9 @@ namespace Terramental
 
                             if (distanceToElementPickup < 300)
                             {
-                                DisplayMessage(TutorialMessage.ElementPickup);
                                 _displayMessage = "ELEMENTS CAN BE FOUND THROUGHOUT THE LANDS OF TERRA.\nUSE THEM TO OVERCOME OBSTACLES AND DEFEAT ENEMIES.";
                                 _displayMessageWidth = _messageFont.MeasureString(_displayMessage).X;
-                                _displayMessageTimer = 40;
+                                _displayMessageTimer = 12;
                                 _elementPickupActivated = true;
                                 break;
                             }
@@ -155,22 +131,19 @@ namespace Terramental
 
                                 if (distanceToElementWall < 300)
                                 {
-                                    DisplayMessage(TutorialMessage.ElementWall);
                                     GamePadState gamePadState = GamePad.GetState(0);
 
                                     if (gamePadState.IsConnected)
                                     {
                                         _displayMessage = "YOU CAN USE YOUR ULTIMATE ABILITY BY PRESSING THE Y BUTTON.\nCAST AN ELEMENT BOLT BY PRESSING RIGHT TRIGGER.\nUSE YOUR ULTIMATE TO BREAK THROUGH THE WALL.";
-                                        _displayMessageWidth = _messageFont.MeasureString(_displayMessage).X;
                                     }
                                     else
                                     {
                                         _displayMessage = "YOU CAN USE YOUR ULTIMATE ABILITY BY USING THE Q KEY.\nCAST AN ELEMENT BOLT BY PRESSING LEFT MOUSE BUTTON.\nUSE YOUR ULTIMATE TO BREAK THROUGH THE WALL.";
-                                        _displayMessageWidth = _messageFont.MeasureString(_displayMessage).X;
                                     }
 
-                                    _displayMessageTimer = 40;
-
+                                    _displayMessageWidth = _messageFont.MeasureString(_displayMessage).X;
+                                    _displayMessageTimer = 12;
                                     _elementWallActivated = true;
                                     break;
                                 }

@@ -29,6 +29,9 @@ namespace Terramental
 
         public static Fragment levelFragment;
 
+        public static int enemyCount;
+        public static int gemCount;
+
         public static void Update(GameTime gameTime)
         {
             if (GameManager.currentGameState == GameManager.GameState.Level) // Checks to see if the game is in the level state (in game)
@@ -413,6 +416,8 @@ namespace Terramental
                     darkMageCharacter.EnemyIndex = 1;
                 }
             }
+
+            enemyCount++;
         }
 
         public static void SpawnHealthPickup(Vector2 position) // Code that runs when spawning a health pickup 
@@ -464,7 +469,9 @@ namespace Terramental
                 scorePickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
                 scorePickup.LayerOrder = -2;
                 scorePickupList.Add(scorePickup);
-            } 
+            }
+
+            gemCount++;
         }
 
         public static void SpawnElementPickup(int elementIndex, Vector2 position)
@@ -563,14 +570,14 @@ namespace Terramental
                 levelFragment.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), new Vector2(64, 64)); // Initialises the object
                 Animation levelEndAnim = new Animation(_gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), 4, 120f, true, new Vector2(64, 64)); // Adds animation to the level end object
                 levelFragment.AddAnimation(levelEndAnim);
-
                 levelFragment.LayerOrder = -2;
+                levelFragment.IsActive = false;
             }
             else
             {
                 levelFragment.SpritePosition = position;
                 levelFragment.SpawnPosition = position;
-                levelFragment.IsActive = true;
+                levelFragment.IsActive = false;
             }
         }
 
@@ -794,7 +801,7 @@ namespace Terramental
                 movingPlatform.InitialiseMovingPlatform(movingPlatform.SpawnPosition, 0);
             }
 
-            levelFragment.IsActive = true;
+            levelFragment.IsActive = false;
         }
 
         public static void UnloadEntities() // Used to deactivate entities
@@ -846,6 +853,8 @@ namespace Terramental
 
             levelFragment.IsActive = false;
             GameManager.levelLoaded = false;
+            gemCount = 0;
+            enemyCount = 0;
         }
     }
 }

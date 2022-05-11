@@ -19,6 +19,7 @@ namespace Terramental
             {
                 _playerCharacter.PlayerScore++; // Increments player score value by 1
                 AudioManager.PlaySound("ScorePickup_SFX"); // Plays the score pickup sound effect
+                SpawnManager._gameManager.objectiveManager.UpdateObjective(ObjectiveManager.Objective.CollectGems); //Increase the objective progress by one
                 IsActive = false; // Used to hide the score pickup by setting IsActive to false 
             }
         }

@@ -31,6 +31,7 @@ namespace Terramental
 
         public static int levelIndex; //The current level index. Level 1 = 1, Level 2 = 2 etc.
 
+        public ObjectiveManager objectiveManager; //The Objective Manager handles level objectives. Includes displaying the current objective, updating the objective progress, and setting the end of level object active when the objective is complete.
         public MapManager mapManager; //The MapManager handles all processes concerning levels. Involves spawning tiles, entities and environment assets.
         public PlayerInterface playerInterface; //The player interface that handles the heads-up-display
         public MenuManager menuManager; //The MenuManager handles everything regarding menus, including drawing, checking button interaction and loading.
@@ -134,15 +135,23 @@ namespace Terramental
             if (currentGameState == GameState.Level || currentGameState == GameState.LevelPause && playerInterface != null)
             {
                 spriteManager.Draw(gameTime, _spriteBatch);
-                playerInterface.DrawInterface(_spriteBatch);
-                playerInterface.DrawCooldownTexts(_spriteBatch);
             }
 
             menuManager.DrawMenus(_spriteBatch);
 
-            if (tutorialManager != null)
+            if(currentGameState == GameState.Level)
             {
-                tutorialManager.DrawMessage(_spriteBatch);
+                if (tutorialManager != null)
+                {
+                    playerInterface.DrawInterface(_spriteBatch);
+                    playerInterface.DrawCooldownTexts(_spriteBatch);
+                    tutorialManager.DrawMessage(_spriteBatch);
+                }
+
+                if (objectiveManager != null)
+                {
+                    objectiveManager.DrawObjectiveString(_spriteBatch);
+                }
             }
 
             _spriteBatch.End();
@@ -189,8 +198,34 @@ namespace Terramental
                 playerInterface = new PlayerInterface(this); //Loads the player's heads-up-display
                 mapManager = new MapManager(this);
                 tutorialManager = new TutorialManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"), playerCharacter); //Initialises the tutorial manager
+                objectiveManager = new ObjectiveManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"));
                 CameraController.playerCharacter = playerCharacter;
                 gameInitialised = true;
+            }
+
+            if(levelIndex == 1)
+            {
+                objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
+            }
+
+            if(levelIndex == 2)
+            {
+                objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
+            if (levelIndex == 3)
+            {
+                objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
+            }
+
+            if (levelIndex == 4)
+            {
+                objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
+            }
+
+            if (levelIndex == 5)
+            {
+                objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
             }
 
             playerCharacter.ResetPlayer(); //Resets the player's variables and properties

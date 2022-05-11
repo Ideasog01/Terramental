@@ -43,12 +43,6 @@ namespace Terramental
             set { _componentColor = value; }
         }
 
-        public void FollowCamera()
-        {
-            _componentPosition = CameraController.cameraCentre + _componentOffset + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
-            _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
-        }
-
         public void SetProperties(Texture2D texture, Vector2 position, Vector2 scale)
         {
             _componentTexture = texture;
@@ -58,6 +52,8 @@ namespace Terramental
 
         public void DrawComponent(SpriteBatch spriteBatch)
         {
+            _componentPosition = CameraController.cameraCentre + _componentOffset;
+            _componentRectangle = new Rectangle((int)_componentPosition.X, (int)_componentPosition.Y, (int)_componentScale.X, (int)_componentScale.Y);
             spriteBatch.Draw(_componentTexture, _componentRectangle, _componentColor);
         }
 

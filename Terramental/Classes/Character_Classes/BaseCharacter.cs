@@ -105,6 +105,8 @@ namespace Terramental
 
         public void TakeDamage(int amount)
         {
+            //TakeDamage is only called for Enemy Characters. For player, use PlayerTakeDamage().
+
             if(_takeDamageCooldown <= 0 && IsActive) // Checks if there is no time remaining in damage cooldown
             {
                 _characterHealth -= amount; // Decreases health
@@ -121,6 +123,7 @@ namespace Terramental
 
                     IsActive = false; // Removes the character
                     SpawnManager._gameManager.playerCharacter.EnemiesDefeated++; // Increments the count storing the number of enemies defeated
+                    SpawnManager._gameManager.objectiveManager.UpdateObjective(ObjectiveManager.Objective.DefeatEnemies);
                     AudioManager.PlaySound("Hit_SFX");
                 }
             }

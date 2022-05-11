@@ -266,20 +266,6 @@
 /processorParam:TextureFormat=Compressed
 /build:SpriteFont/DefaultFont.spritefont
 
-#begin SpriteFont/LevelNumberFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:SpriteFont/LevelNumberFont.spritefont
-
-#begin SpriteFont/LevelTitleFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:SpriteFont/LevelTitleFont.spritefont
-
 #begin SpriteFont/TutorialFont.spritefont
 /importer:FontDescriptionImporter
 /processor:LocalizedFontProcessor
