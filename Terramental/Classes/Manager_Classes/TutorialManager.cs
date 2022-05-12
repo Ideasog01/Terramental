@@ -7,27 +7,29 @@ namespace Terramental
 {
     public class TutorialManager
     {
-        public enum TutorialMessage { ElementPickup, ElementWall };
+        /// <summary>
+        /// TutorialManager is used to display information to the player in the form of text/images that explain mechanics and how to play the game.
+        /// </summary>
 
-        private float _displayMessageTimer;
+        public enum TutorialMessage { ElementPickup, ElementWall }; //The tutorial message to display
 
-        private string _displayMessage = "HELLO!";
-        private float _displayMessageWidth;
+        private float _displayMessageTimer; //The duration of the message
 
-        private bool _elementPickupActivated;
-        private bool _elementWallActivated;
+        private string _displayMessage; //The content of the message
+        private float _displayMessageWidth; //The width of message in pixels
 
-        public bool displayingElementWallMessage;
+        private bool _elementPickupActivated; //Used to check whether the elementPickup message has been displayed
+        private bool _elementWallActivated; //Used to check whether the elementWall message has been displayed
 
-        private SpriteFont _messageFont;
+        private SpriteFont _messageFont; //The font to use for the tutorial message text
 
-        private PlayerCharacter _playerCharacter;
+        private PlayerCharacter _playerCharacter; //Reference to the player character
 
-        private float _elementNotificationTimer;
+        private float _elementNotificationTimer; //Used to display the 'Invalid Element' image when the player uses the wrong element against an entity
 
-        private Sprite elementNotificationSprite;
+        private Sprite elementNotificationSprite; //The object of the 'Invalid Element' image
 
-        public TutorialManager(SpriteFont spriteFont, PlayerCharacter playerCharacter)
+        public TutorialManager(SpriteFont spriteFont, PlayerCharacter playerCharacter) //The TutorialManager constructor that assigns required references and loads the invalid element notification sprite
         {
             _messageFont = spriteFont;
             _playerCharacter = playerCharacter;
@@ -39,11 +41,6 @@ namespace Terramental
             elementNotificationSprite.LayerOrder = -2;
         }
 
-        public float DisplayMessageTimer
-        {
-            get { return _displayMessageTimer; }
-        }
-
         public void UpdateDisplayMessageTimer(GameTime gameTime)
         {
             if (_displayMessageTimer > 0)
@@ -52,10 +49,10 @@ namespace Terramental
             }
             else
             {
-                CheckDistance();
+                CheckDistance(); //If a message is not displaying, check the distance between the player and entities
             }
 
-            if (_elementNotificationTimer > 0)
+            if (_elementNotificationTimer > 0) //Update the invalid element notification's position for it display within the moving camera's view
             {
                 _elementNotificationTimer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 elementNotificationSprite.SpritePosition = CameraController.cameraTopLeftAnchor + new Vector2(-110, -140) + new Vector2((GameManager.screenWidth / 2) - (_playerCharacter.SpriteRectangle.Width / 2), GameManager.screenHeight / 2 - (_playerCharacter.SpriteRectangle.Height / 2));
@@ -66,25 +63,18 @@ namespace Terramental
             }
         }
 
-        public void RemoveMessage()
-        {
-            _displayMessageTimer = 0;
-            displayingElementWallMessage = false;
-            _displayMessage = "";
-        }
-
-        public void DisplayIncorrectElementNotification()
+        public void DisplayIncorrectElementNotification() //This function is called when the player uses the wrong element against an entity
         {
             _elementNotificationTimer = 2;
             elementNotificationSprite.IsActive = true;
             AudioManager.PlaySound("NegativeElement_SFX");
         }
 
-        public void DrawMessage(SpriteBatch spriteBatch)
+        public void DrawMessage(SpriteBatch spriteBatch) //Displays the tutorial message if it has been activated via distance check between a valid entity and the player
         {
             if (GameManager.currentGameState == GameManager.GameState.Level)
             {
-                if (_displayMessageTimer > 0)
+                if (_displayMessageTimer > 0) //Subtracts and divides the _displayMessageWidth value to display message near the centre of the screen
                 {
                     spriteBatch.DrawString(_messageFont, _displayMessage, new Vector2(CameraController.cameraTopLeftAnchor.X + (GameManager.screenWidth / 2) - (_displayMessageWidth / 2), CameraController.cameraTopLeftAnchor.Y + (GameManager.screenHeight / 2) - 80), Color.White);
                 }
@@ -97,7 +87,7 @@ namespace Terramental
 
         private void CheckDistance()
         {
-            if (!_elementPickupActivated)
+            if (!_elementPickupActivated) //If the element pickup tutorial message has not been displayed, check the distance between the player and each element pickup entity. If the player is near, display the message.
             {
                 foreach (ElementPickup elementPickup in SpawnManager.elementPickupList)
                 {
@@ -119,7 +109,7 @@ namespace Terramental
                     }
                 }
 
-                if (!_elementWallActivated)
+                if (!_elementWallActivated) //If the element wall tutorial message has not been displayed, check the distance between the player and each element wall entity. If the player is near, display the message.
                 {
                     foreach (ElementWall elementWall in SpawnManager.elementWallList)
                     {
@@ -133,7 +123,7 @@ namespace Terramental
                                 {
                                     GamePadState gamePadState = GamePad.GetState(0);
 
-                                    if (gamePadState.IsConnected)
+                                    if (gamePadState.IsConnected) //Changes the message depending on whether a controller is connected to display the appropriate input.
                                     {
                                         _displayMessage = "YOU CAN USE YOUR ULTIMATE ABILITY BY PRESSING THE Y BUTTON.\nCAST AN ELEMENT BOLT BY PRESSING RIGHT TRIGGER.\nUSE YOUR ULTIMATE TO BREAK THROUGH THE WALL.";
                                     }
