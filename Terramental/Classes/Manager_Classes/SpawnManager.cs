@@ -42,16 +42,19 @@ namespace Terramental
                     {
                         if (enemy.IsVisible) // Checks to see if the enemy is on screen
                         {
-                            if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health. If this condition is true, update the enemy accordingly
+                            if(enemy.IsActive)
                             {
-                                enemy.UpdateCharacter(gameTime);
-                                enemy.UpdateEnemy(gameTime);
-                                enemy.UpdateWorldCanvas();
-                                enemy.EnableWorldCanvas(true);
-                            }
-                            else
-                            {
-                                enemy.EnableWorldCanvas(false); //If the enemy is not active, disable the world canvas
+                                if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health. If this condition is true, update the enemy accordingly
+                                {
+                                    enemy.UpdateCharacter(gameTime);
+                                    enemy.UpdateEnemy(gameTime);
+                                    enemy.UpdateWorldCanvas();
+                                    enemy.EnableWorldCanvas(true);
+                                }
+                                else
+                                {
+                                    enemy.EnableWorldCanvas(false); //If the enemy is not active, disable the world canvas
+                                }
                             }
                         }
                     }
@@ -75,9 +78,12 @@ namespace Terramental
                 {
                     if(spikeObstacle.IsLoaded)
                     {
-                        if (spikeObstacle.IsVisible && spikeObstacle.IsActive) // Checks to see if the spike is visible and active
+                        if (spikeObstacle.IsVisible) // Checks to see if the spike is visible and active
                         {
-                            spikeObstacle.CheckCollision(gameTime);
+                            if(spikeObstacle.IsActive)
+                            {
+                                spikeObstacle.CheckCollision(gameTime);
+                            }
                         }
                     }
                 }
