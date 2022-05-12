@@ -38,11 +38,11 @@ namespace Terramental
             {
                 foreach (EnemyCharacter enemy in enemyList) // Loops through list of enemies
                 {
-                    if(enemy.IsLoaded)
+                    if (enemy.IsLoaded)
                     {
                         if (enemy.IsVisible) // Checks to see if the enemy is on screen
                         {
-                            if(enemy.IsActive)
+                            if (enemy.IsActive)
                             {
                                 if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health. If this condition is true, update the enemy accordingly
                                 {
@@ -51,10 +51,11 @@ namespace Terramental
                                     enemy.UpdateWorldCanvas();
                                     enemy.EnableWorldCanvas(true);
                                 }
-                                else
-                                {
-                                    enemy.EnableWorldCanvas(false); //If the enemy is not active, disable the world canvas
-                                }
+                            }
+
+                            if (!enemy.IsActive)
+                            {
+                                enemy.EnableWorldCanvas(false); //If the enemy is not active, disable the world canvas
                             }
                         }
                     }
