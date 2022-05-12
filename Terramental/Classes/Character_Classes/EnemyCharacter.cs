@@ -14,6 +14,8 @@ namespace Terramental
 
         public enum AIState { Chase, Attack, Idle }; //AI States control the enemy's current actions
 
+        public PlayerCharacter playerCharacter; //Reference to the player character
+
         private AIState _currentState; //The active AI state being used
 
         private Sprite enemyHealthBar; //The enemy's health bar border
@@ -35,8 +37,6 @@ namespace Terramental
         private int _elementIndex; //The element that the enemy is assigned to. 0 = Fire, 1 = Water, 2 = Snow
 
         private bool _pathBlocked; //This value changes based on whether the enemy collides with a blocking tile that is to their right or left
-
-        private PlayerCharacter playerCharacter; //Reference to the player character
         private GameManager _gameManager; //Reference to the game manager
 
         private Vector2 _oldPosition; //The recent position of the enemy in the last tick.
