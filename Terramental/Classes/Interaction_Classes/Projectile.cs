@@ -67,7 +67,7 @@ namespace Terramental
                                     {
                                         if (enemy.ElementIndex != 2) // Check to see if the enemy is not of snow element type
                                         {
-                                            SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
+                                            SpawnManager.gameManager.tutorialManager.DisplayIncorrectElementNotification();
                                             damageEnemy = false; // Should not apply damage as the element is invalid
                                         }
                                     }
@@ -76,7 +76,7 @@ namespace Terramental
                                     {
                                         if (enemy.ElementIndex != 0) // Check to see if the enemy is not of fire element type
                                         {
-                                            SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
+                                            SpawnManager.gameManager.tutorialManager.DisplayIncorrectElementNotification();
                                             damageEnemy = false; // Should not apply damage as the element is invalid
                                         }
                                     }
@@ -85,7 +85,7 @@ namespace Terramental
                                     {
                                         if (enemy.ElementIndex != 1) // Check to see if the enemy is not of water element type
                                         {
-                                            SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
+                                            SpawnManager.gameManager.tutorialManager.DisplayIncorrectElementNotification();
                                             damageEnemy = false; // Should not apply damage as the element is invalid
                                         }
                                     }
@@ -171,7 +171,7 @@ namespace Terramental
 
             if(_playerCharacter == null)
             {
-                _playerCharacter = SpawnManager._gameManager.playerCharacter;
+                _playerCharacter = SpawnManager.gameManager.playerCharacter;
             }
 
             _activeDelay = 0.1f;
@@ -188,31 +188,31 @@ namespace Terramental
             if(_projectileTrigger == 1) // Fire projectile
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Burning, 5, 2, 20);
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("FireExplosion_SFX");
 
                 if (character.CharacterVFX == null)
                 {
-                    character.CharacterVFX = SpawnManager.SpawnAnimatedVFX(SpawnManager._gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), new Vector2(12, 12), new Vector2(64, 64), 5, 4, 120f, character);
+                    character.CharacterVFX = SpawnManager.SpawnAnimatedVFX(SpawnManager.gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), new Vector2(12, 12), new Vector2(64, 64), 5, 4, 120f, character);
                 }
             }
 
             if (_projectileTrigger == 2) // Water projectile
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Empowered, 10, 0, 0);
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/WaterExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/WaterExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("WaterExplosion_SFX");
             }
 
             if(_projectileTrigger == 3) // Snow projectile
             {
                 character.SetStatus(BaseCharacter.CharacterStatus.Frozen, 2, 0, 0);
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("SnowExplosion_SFX");
 
                 if (character.CharacterVFX == null)
                 {
-                    character.CharacterVFX = SpawnManager.SpawnStaticVFX(SpawnManager._gameManager.GetTexture("Sprites/Effects/FrozenEffect"), new Vector2(0, 0), new Vector2(96, 96), 2, character);
+                    character.CharacterVFX = SpawnManager.SpawnStaticVFX(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), new Vector2(0, 0), new Vector2(96, 96), 2, character);
                 }
             }
         }
@@ -221,19 +221,19 @@ namespace Terramental
         {
             if(_projectileTrigger == 1)
             {
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("FireExplosion_SFX");
             }
 
             if(_projectileTrigger == 2)
             {
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/WaterExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/WaterExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("WaterExplosion_SFX");
             }
 
             if(_projectileTrigger == 3)
             {
-                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager._gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
+                SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("SnowExplosion_SFX");
             }
         }

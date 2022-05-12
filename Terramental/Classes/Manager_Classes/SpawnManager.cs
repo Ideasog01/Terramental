@@ -11,12 +11,12 @@ namespace Terramental
         /// Controls the majority of loaded objects
         /// </summary>
 
-        public static GameManager _gameManager;
+        public static GameManager gameManager; //Static reference to GameManager, can be used in other classes if a reference is not necessary
 
-        public static Vector2 levelStartPosition;
+        public static Vector2 levelStartPosition; //The start location in the level for the player
 
+        //Stores each entity in the appropriate list
         public static List<Projectile> projectileList = new List<Projectile>();
-
         public static List<EnemyCharacter> enemyList = new List<EnemyCharacter>();
         public static List<HealthPickup> healthPickupList = new List<HealthPickup>();
         public static List<ScorePickup> scorePickupList = new List<ScorePickup>();
@@ -27,10 +27,10 @@ namespace Terramental
         public static List<VisualEffect> vfxList = new List<VisualEffect>();
         public static List<MovingPlatform> movingPlatformList = new List<MovingPlatform>();
 
-        public static Fragment levelFragment;
+        public static Fragment levelFragment; //The pickup that ends the level when collision occurs. This entity will reset if it has previously been instantiated
 
-        public static int enemyCount;
-        public static int gemCount;
+        public static int enemyCount; //The number of enemies active at the start of the level
+        public static int gemCount; //The number of gems active at the start of the level
 
         public static void Update(GameTime gameTime)
         {
@@ -42,7 +42,7 @@ namespace Terramental
                     {
                         if (enemy.IsVisible) // Checks to see if the enemy is on screen
                         {
-                            if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health
+                            if (enemy.CharacterHealth > 0) // Checks to see if the enemy has health. If this condition is true, update the enemy accordingly
                             {
                                 enemy.UpdateCharacter(gameTime);
                                 enemy.UpdateEnemy(gameTime);
@@ -51,7 +51,7 @@ namespace Terramental
                             }
                             else
                             {
-                                enemy.EnableWorldCanvas(false);
+                                enemy.EnableWorldCanvas(false); //If the enemy is not active, disable the world canvas
                             }
                         }
                     }
@@ -324,23 +324,23 @@ namespace Terramental
                 {
                     if (index == 0) // Type of enemy
                     {
-                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, _gameManager);
+                        enemy.ResetEnemy(gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, gameManager);
 
                         if (index != enemy.EnemyIndex)
                         {
-                            enemy.Animations[0].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"); // First animation (Idle)
+                            enemy.Animations[0].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"); // First animation (Idle)
                             enemy.Animations[0].FrameCount = 4;
                             enemy.Animations[0].FrameDuration = 250f;
                             enemy.Animations[0].LoopActive = true;
                             enemy.Animations[0].FrameDimensions = new Vector2(96, 96);
 
-                            enemy.Animations[1].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"); // Second animation (Walk)
+                            enemy.Animations[1].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"); // Second animation (Walk)
                             enemy.Animations[1].FrameCount = 7;
                             enemy.Animations[1].FrameDuration = 100f;
                             enemy.Animations[1].LoopActive = true;
                             enemy.Animations[1].FrameDimensions = new Vector2(96, 96);
 
-                            enemy.Animations[2].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"); // Third animation (Attack)
+                            enemy.Animations[2].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"); // Third animation (Attack)
                             enemy.Animations[2].FrameCount = 7;
                             enemy.Animations[2].FrameDuration = 150f;
                             enemy.Animations[2].LoopActive = true;
@@ -357,23 +357,23 @@ namespace Terramental
                     }
                     else if (index == 1)
                     {
-                        enemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, _gameManager);
+                        enemy.ResetEnemy(gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, gameManager);
 
                         if (index != enemy.EnemyIndex)
                         {
-                            enemy.Animations[0].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet");
+                            enemy.Animations[0].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet");
                             enemy.Animations[0].FrameCount = 4;
                             enemy.Animations[0].FrameDuration = 250f;
                             enemy.Animations[0].LoopActive = true;
                             enemy.Animations[0].FrameDimensions = new Vector2(96, 96);
 
-                            enemy.Animations[1].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet");
+                            enemy.Animations[1].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet");
                             enemy.Animations[1].FrameCount = 4;
                             enemy.Animations[1].FrameDuration = 250f;
                             enemy.Animations[1].LoopActive = true;
                             enemy.Animations[1].FrameDimensions = new Vector2(96, 96);
 
-                            enemy.Animations[2].SpriteSheet = _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet");
+                            enemy.Animations[2].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet");
                             enemy.Animations[2].FrameCount = 12;
                             enemy.Animations[2].FrameDuration = 150f;
                             enemy.Animations[2].LoopActive = true;
@@ -399,23 +399,23 @@ namespace Terramental
             {
                 if (index == 0) //Knight Enemy Character
                 {
-                    Animation knightIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
-                    Animation knightWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"), 7, 120f, true, new Vector2(96, 96));
-                    Animation knightAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 7, 150f, true, new Vector2(96, 96));
+                    Animation knightIdle = new Animation(gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
+                    Animation knightWalk = new Animation(gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet"), 7, 120f, true, new Vector2(96, 96));
+                    Animation knightAttack = new Animation(gameManager.GetTexture("Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet"), 7, 150f, true, new Vector2(96, 96));
 
                     EnemyCharacter knightEnemy = new EnemyCharacter();
-                    knightEnemy.Initialise(position + new Vector2(0, -32), _gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
+                    knightEnemy.Initialise(position + new Vector2(0, -32), gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), new Vector2(96, 96));
                     knightEnemy.SetProperties(position, 100, 100);
-                    knightEnemy.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, _gameManager);
+                    knightEnemy.ResetEnemy(gameManager.GetTexture("Sprites/Enemies/Knight/KnightCharacter_Sprite_Default"), position, new Vector2(96, 96), 100, 100, 4, 2, gameManager);
 
                     knightEnemy.AddAnimation(knightIdle);
                     knightEnemy.AddAnimation(knightWalk);
                     knightEnemy.AddAnimation(knightAttack);
                     knightEnemy.SetAnimation(0);
                     
-                    knightEnemy.LoadWorldCanvas(_gameManager);
+                    knightEnemy.LoadWorldCanvas(gameManager);
                     knightEnemy.LayerOrder = -1;
-                    knightEnemy.playerCharacter = _gameManager.playerCharacter;
+                    knightEnemy.playerCharacter = gameManager.playerCharacter;
                     knightEnemy.AttackThreshold = 60; // Distance to attack the player
                     knightEnemy.ChaseThreshold = 900; // Distance to chase the player
                     knightEnemy.ElementIndex = elementIndex;
@@ -426,14 +426,14 @@ namespace Terramental
                 }
                 else if (index == 1) //Dark Mage Character
                 {
-                    Animation mageIdle = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
-                    Animation mageWalk = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
-                    Animation mageAttack = new Animation(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 12, 100f, true, new Vector2(96, 96));
+                    Animation mageIdle = new Animation(gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
+                    Animation mageWalk = new Animation(gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Walk_SpriteSheet"), 4, 250f, true, new Vector2(96, 96));
+                    Animation mageAttack = new Animation(gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Attack_SpriteSheet"), 12, 100f, true, new Vector2(96, 96));
 
                     EnemyCharacter darkMageCharacter = new EnemyCharacter();
-                    darkMageCharacter.Initialise(position, _gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
+                    darkMageCharacter.Initialise(position, gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), new Vector2(96, 96));
                     darkMageCharacter.SetProperties(position, 100, 100);
-                    darkMageCharacter.ResetEnemy(_gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, _gameManager);
+                    darkMageCharacter.ResetEnemy(gameManager.GetTexture("Sprites/Enemies/DarkMage/DarkMage_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, gameManager);
 
                     darkMageCharacter.AddAnimation(mageIdle);
                     darkMageCharacter.AddAnimation(mageWalk);
@@ -443,9 +443,9 @@ namespace Terramental
                     darkMageCharacter.AttackThreshold = 300; // Distance to attack the player
                     darkMageCharacter.ChaseThreshold = 900; // Distance to chase the player
 
-                    darkMageCharacter.LoadWorldCanvas(_gameManager);
+                    darkMageCharacter.LoadWorldCanvas(gameManager);
                     darkMageCharacter.LayerOrder = -1;
-                    darkMageCharacter.playerCharacter = _gameManager.playerCharacter;
+                    darkMageCharacter.playerCharacter = gameManager.playerCharacter;
                     darkMageCharacter.EnemyIndex = 1;
                     darkMageCharacter.AttackCooldown = 3; // Cooldown between attacks
 
@@ -479,8 +479,8 @@ namespace Terramental
             
             if(!healthPickupFound) // Checks to see if no health pickup has been found
             {
-                HealthPickup healthPickup = new HealthPickup(_gameManager.playerCharacter, 1); // Creates a new health pickup
-                healthPickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64, 64)); // Initialises
+                HealthPickup healthPickup = new HealthPickup(gameManager.playerCharacter, 1); // Creates a new health pickup
+                healthPickup.Initialise(position, gameManager.GetTexture("Sprites/Pickups/Health_Pickup"), new Vector2(64, 64)); // Initialises
                 healthPickup.LayerOrder = -2; // Sets the layer
                 healthPickup.IsLoaded = true;
                 healthPickupList.Add(healthPickup); // Adds the health pickup to the list of health pickups
@@ -507,8 +507,8 @@ namespace Terramental
             
             if(!scorePickupFound)
             {
-                ScorePickup scorePickup = new ScorePickup(_gameManager.playerCharacter);
-                scorePickup.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
+                ScorePickup scorePickup = new ScorePickup(gameManager.playerCharacter);
+                scorePickup.Initialise(position, gameManager.GetTexture("Sprites/Pickups/Collectible"), new Vector2(64, 64));
                 scorePickup.LayerOrder = -2;
                 scorePickup.IsLoaded = true;
                 scorePickupList.Add(scorePickup);
@@ -539,8 +539,8 @@ namespace Terramental
 
             if(!elementPickupFound)
             {
-                ElementPickup elementPickup = new ElementPickup(elementIndex, _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), _gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), _gameManager.playerCharacter);
-                elementPickup.Initialise(new Vector2(position.X, position.Y), _gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));
+                ElementPickup elementPickup = new ElementPickup(elementIndex, gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), gameManager.GetTexture("Sprites/Pickups/WaterPickup_SpriteSheet"), gameManager.GetTexture("Sprites/Pickups/SnowPickup_SpriteSheet"), gameManager.playerCharacter);
+                elementPickup.Initialise(new Vector2(position.X, position.Y), gameManager.GetTexture("Sprites/Pickups/FirePickup_SpriteSheet"), new Vector2(64, 64));
                 elementPickup.LayerOrder = -1;
                 elementPickup.IsLoaded = true;
                 elementPickupList.Add(elementPickup);
@@ -558,13 +558,13 @@ namespace Terramental
                     switch (elementIndex) // Checks to see what element the wall is set to
                     {
                         case 0: // Fire wall
-                            elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame3"));
+                            elementWall.LoadWallTextures(gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame2"), gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame3"));
                             break;
                         case 1: // Water wall
-                            elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame3"));
+                            elementWall.LoadWallTextures(gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame1"), gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame2"), gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame3"));
                             break;
                         case 2: // Snow wall
-                            elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame3"));
+                            elementWall.LoadWallTextures(gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame2"), gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame3"));
                             break;
                     }
 
@@ -574,7 +574,7 @@ namespace Terramental
                     elementWall.IsLoaded = true;
                     elementWallFound = true;
 
-                    elementWall.InitialiseElementWall(_gameManager.playerCharacter, _gameManager.mapManager, elementIndex);
+                    elementWall.InitialiseElementWall(gameManager.playerCharacter, gameManager.mapManager, elementIndex);
                     elementWall.ElementWallCollision();
                     break;
                 }
@@ -587,20 +587,20 @@ namespace Terramental
                 switch (elementIndex)
                 {
                     case 0: // Fire wall
-                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), new Vector2(64, 64));
-                        elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame3"));
+                        elementWall.Initialise(position, gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), new Vector2(64, 64));
+                        elementWall.LoadWallTextures(gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame1"), gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame2"), gameManager.GetTexture("Sprites/Obstacles/FireWall_Frame3"));
                         break;
                     case 1: // Water wall
-                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/WaterTile"), new Vector2(64, 64));
-                        elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame3"));
+                        elementWall.Initialise(position, gameManager.GetTexture("Sprites/Obstacles/WaterTile"), new Vector2(64, 64));
+                        elementWall.LoadWallTextures(gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame1"), gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame2"), gameManager.GetTexture("Sprites/Obstacles/WaterWall_Frame3"));
                         break;
                     case 2: // Snow wall
-                        elementWall.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), new Vector2(64, 64));
-                        elementWall.LoadWallTextures(_gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame2"), _gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame3"));
+                        elementWall.Initialise(position, gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), new Vector2(64, 64));
+                        elementWall.LoadWallTextures(gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame1"), gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame2"), gameManager.GetTexture("Sprites/Obstacles/SnowWall_Frame3"));
                         break;
                 }
 
-                elementWall.InitialiseElementWall(_gameManager.playerCharacter, mapManager, elementIndex);
+                elementWall.InitialiseElementWall(gameManager.playerCharacter, mapManager, elementIndex);
                 elementWall.ElementWallCollision();
                 elementWall.IsLoaded = true;
                 elementWall.LayerOrder = -2;
@@ -612,9 +612,9 @@ namespace Terramental
         {
             if(levelFragment == null) // Checks to see that there is no level end
             {
-                levelFragment = new Fragment(_gameManager.menuManager, _gameManager.playerCharacter); // Creates a level end object
-                levelFragment.Initialise(position, _gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), new Vector2(64, 64)); // Initialises the object
-                Animation levelEndAnim = new Animation(_gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), 4, 120f, true, new Vector2(64, 64)); // Adds animation to the level end object
+                levelFragment = new Fragment(gameManager.menuManager, gameManager.playerCharacter); // Creates a level end object
+                levelFragment.Initialise(position, gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), new Vector2(64, 64)); // Initialises the object
+                Animation levelEndAnim = new Animation(gameManager.GetTexture("Sprites/Pickups/Camp_Fire"), 4, 120f, true, new Vector2(64, 64)); // Adds animation to the level end object
                 levelFragment.AddAnimation(levelEndAnim);
                 levelFragment.LayerOrder = -2;
                 levelFragment.IsLoaded = true;
@@ -711,10 +711,10 @@ namespace Terramental
             if(!spikeObstacleFound)
             {
                 SpikeObstacle spikeObstacle = new SpikeObstacle();
-                spikeObstacle.Player = _gameManager.playerCharacter;
+                spikeObstacle.Player = gameManager.playerCharacter;
                 spikeObstacle.SpawnPosition = position;
                 spikeObstacle.LayerOrder = -2;
-                spikeObstacle.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
+                spikeObstacle.Initialise(position, gameManager.GetTexture("Sprites/Obstacles/Spikes"), new Vector2(64, 64));
                 spikeObstacle.IsLoaded = true;
                 spikeObstacleList.Add(spikeObstacle); // Adds the spike obstacle to the list of spikes
             }
@@ -732,11 +732,11 @@ namespace Terramental
 
                     if (faceRight) // Checks to see if it is a right or left facing cannon
                     {
-                        cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right"); // Right facing cannon
+                        cannonTexture = gameManager.GetTexture("Sprites/Obstacles/Cannon_Right"); // Right facing cannon
                     }
                     else
                     {
-                        cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Left"); // Left facing cannon
+                        cannonTexture = gameManager.GetTexture("Sprites/Obstacles/Cannon_Left"); // Left facing cannon
                     }
 
                     cannon.SpriteTexture = cannonTexture;
@@ -753,16 +753,16 @@ namespace Terramental
 
             if(!cannonObstacleFound)
             {
-                Cannon cannon = new Cannon(_gameManager, _gameManager.playerCharacter, faceRight);
+                Cannon cannon = new Cannon(gameManager, gameManager.playerCharacter, faceRight);
                 Texture2D cannonTexture; // Gets the cannon texture
 
                 if(faceRight) // Checks to see if it is a right or left facing cannon
                 {
-                    cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Right"); // Right facing cannon
+                    cannonTexture = gameManager.GetTexture("Sprites/Obstacles/Cannon_Right"); // Right facing cannon
                 }
                 else
                 {
-                    cannonTexture = _gameManager.GetTexture("Sprites/Obstacles/Cannon_Left"); // Left facing cannon
+                    cannonTexture = gameManager.GetTexture("Sprites/Obstacles/Cannon_Left"); // Left facing cannon
                 }
 
                 cannon.Initialise(position - new Vector2(0, 50), cannonTexture, new Vector2(cannonTexture.Width, cannonTexture.Height));
@@ -793,8 +793,8 @@ namespace Terramental
             if(!movingPlatformFound)
             {
                 MovingPlatform movingPlatform = new MovingPlatform();
-                movingPlatform.Initialise(position, _gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
-                movingPlatform.InitialiseMovingPlatform(_gameManager.playerCharacter, mapManager, position, 0);
+                movingPlatform.Initialise(position, gameManager.GetTexture("Sprites/Obstacles/SnowTile"), new Vector2(64, 64));
+                movingPlatform.InitialiseMovingPlatform(gameManager.playerCharacter, mapManager, position, 0);
                 movingPlatform.LayerOrder = -2;
                 movingPlatform.IsLoaded = true;
                 movingPlatformList.Add(movingPlatform);
@@ -835,7 +835,7 @@ namespace Terramental
             {
                 if(elementWall.IsLoaded)
                 {
-                    elementWall.ResetWall(_gameManager.mapManager);
+                    elementWall.ResetWall(gameManager.mapManager);
                 }
             }
 

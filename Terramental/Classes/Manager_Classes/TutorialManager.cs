@@ -33,7 +33,7 @@ namespace Terramental
             _playerCharacter = playerCharacter;
 
             elementNotificationSprite = new Sprite();
-            Texture2D notificationTexture = SpawnManager._gameManager.GetTexture("UserInterface/InvalidElementText");
+            Texture2D notificationTexture = SpawnManager.gameManager.GetTexture("UserInterface/InvalidElementText");
             elementNotificationSprite.Initialise(new Vector2(0, 0), notificationTexture, new Vector2(notificationTexture.Width, notificationTexture.Height));
             elementNotificationSprite.IsActive = false;
             elementNotificationSprite.LayerOrder = -2;

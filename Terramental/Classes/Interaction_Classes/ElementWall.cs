@@ -48,7 +48,7 @@ namespace Terramental
             }
             else
             {
-                SpawnManager._gameManager.tutorialManager.DisplayIncorrectElementNotification();
+                SpawnManager.gameManager.tutorialManager.DisplayIncorrectElementNotification();
             }
 
             if(wallHealth == 40)

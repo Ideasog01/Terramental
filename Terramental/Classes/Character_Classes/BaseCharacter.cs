@@ -98,7 +98,7 @@ namespace Terramental
 
             if(_currentStatus == CharacterStatus.Frozen)
             {
-                SpawnManager.SpawnStaticVFX(SpawnManager._gameManager.GetTexture("Sprites/Effects/FrozenEffect"), SpritePosition, new Vector2(96, 96), statusDuration, this);
+                SpawnManager.SpawnStaticVFX(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), SpritePosition, new Vector2(96, 96), statusDuration, this);
                 _disableMovement = true; // Disables movement if the character is frozen
             }
         }
@@ -122,8 +122,8 @@ namespace Terramental
                     }
 
                     IsActive = false; // Removes the character
-                    SpawnManager._gameManager.playerCharacter.EnemiesDefeated++; // Increments the count storing the number of enemies defeated
-                    SpawnManager._gameManager.objectiveManager.UpdateObjective(ObjectiveManager.Objective.DefeatEnemies);
+                    SpawnManager.gameManager.playerCharacter.EnemiesDefeated++; // Increments the count storing the number of enemies defeated
+                    SpawnManager.gameManager.objectiveManager.UpdateObjective(ObjectiveManager.Objective.DefeatEnemies);
                     AudioManager.PlaySound("Hit_SFX");
                 }
             }

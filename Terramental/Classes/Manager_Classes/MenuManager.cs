@@ -5,81 +5,86 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Terramental
 {
+    /// <summary>
+    /// Loads and controls all menus, including handling button interactions. MenuManager also displays videos.
+    /// </summary>
+
     public class MenuManager
     {
+        //Main Menu Components
         public static List<Button> mainMenuButtonList = new List<Button>();
         public static List<MenuComponent> mainMenuComponentList = new List<MenuComponent>();
 
+        //Respawn Menu Components
         public static List<Button> respawnMenuButtonList = new List<Button>();
         public static List<MenuComponent> respawnMenuComponentList = new List<MenuComponent>();
 
+        //Options Menu Components
         public static List<Button> optionsButtonList = new List<Button>();
         public static List<MenuComponent> optionsComponentList = new List<MenuComponent>();
 
+        //Level Select Menu Components
         public static List<Button> levelSelectButtonList = new List<Button>();
         public static List<MenuComponent> levelSelectComponentList = new List<MenuComponent>();
+        public static Button levelSelectExitButton;
 
+        //Confirm Level Menu Components
         public static List<Button> confirmLevelButtonList = new List<Button>();
         public static List<MenuComponent> confirmLevelComponentList = new List<MenuComponent>();
 
+        //Pause Menu Components
         public static List<Button> pauseMenuButtonList = new List<Button>();
         public static List<MenuComponent> pauseMenuComponentList = new List<MenuComponent>();
 
+        //Level Complete Menu Components
         public static List<MenuComponent> completeMenuComponentList = new List<MenuComponent>();
         public static List<Button> completeMenuButtonList = new List<Button>();
 
-        public static List<Button> loadGameButtonList = new List<Button>();
-
-        public static Button dashControlButton;
-
-        public static Button levelSelectExitButton;
-
-        public Video splashScreenVideo;
-        public Video loadingScreenVideo;
-        public Video creditsVideo;
-
-        public VideoPlayer videoPlayer;
-        public Texture2D videoTexture;
-        public Rectangle videoRectangle;
-
+        //Credits Menu Components
         public Button creditsReturnButton;
         public MenuComponent creditsBackground;
 
-        public MenuComponent loadGameBackground;
-
-        private GameManager _gameManager;
-        private GraphicsDeviceManager _graphics;
-
-        private SpriteFont _defaultFont;
-        private SpriteFont _levelTitleFont;
-
-        private MenuComponent _startScreen;
-
+        //Help Screen Menu Components
         private MenuComponent _helpScreen;
         private Button _helpScreenReturnButton;
-        private string _levelDataFilePath;
 
-        private float _gamePadButtonTimer;
-        private bool _menuIsVertical;
-        private int currentButtonIndex;
+        //Start Screen Menu Component
+        private MenuComponent _startScreen;
 
-        private float videoTimer;
-        private bool videoPlaying;
+        public static Button dashControlButton; //Controls if the dash ability is controlled by a double-tap in a direction of movement, or a single button (Keyboard Left Shift/ Controller B Button)
 
-        private float _buttonBuffer;
+        public Video splashScreenVideo; //Introduction video
+        public Video loadingScreenVideo; //The Loading Screen
+        public Video creditsVideo; //The credits video that occurs at the end of the game after completing all levels.
 
-        GameManager.GameState videoPlayerAfterState;
+        public VideoPlayer videoPlayer; //The class that plays the video
+        public Texture2D videoTexture; //The texture of the video
+        public Rectangle videoRectangle; //Size of the video
+        private float videoTimer; //The duration of the video, this value is decreased overtime
+        private bool videoPlaying; //If a video is playing, set this to true
+        private GameManager.GameState videoPlayerAfterState; //The state to switch to after the videoTimer variable reaches zero.
 
-        private List<Button> _buttonList = new List<Button>();
+        private SpriteFont _titleFont; //The font used for displaying statistics on the level complete menu
 
-        public MenuManager(GameManager gameManager, GraphicsDeviceManager graphics)
+        private string _levelDataFilePath; //The file path of the .json file that contains the level/map data. This value is set when a level button is activated on the level select screen
+
+        private bool _menuIsVertical; //If this value is true, controller menu naviation will require a directional input from the leftstick for the selected button to change
+        private int currentButtonIndex; //The index of the currently selected button in the _buttonList variable
+        private float _gamePadButtonTimer; //A timer that delays the switching of buttons as the gamepad is used to navigate menus
+        private float _buttonBuffer; //A timer that ensures that an incorrect button is not activated during screen transition
+        private List<Button> _buttonList = new List<Button>(); //The current button list to use for controller menu navigation and interaction
+
+        private GameManager _gameManager; //Reference to GameManager
+        private GraphicsDeviceManager _graphics; //Reference to GraphicsDeviceManager
+
+        public MenuManager(GameManager gameManager, GraphicsDeviceManager graphics) //The MenuManager constructor that loads the menus and videos
         {
             _gameManager = gameManager;
             _graphics = graphics;
 
-            _defaultFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/DefaultFont");
-            _levelTitleFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelTitleFont");
+            _titleFont = _gameManager.Content.Load<SpriteFont>("SpriteFont/LevelTitleFont");
 
+            //Load all Menus
             LoadStartScreen();
             LoadMainMenu();
             LoadOptionsMenu();
@@ -92,10 +97,12 @@ namespace Terramental
             LoadHelpScreen();
             LoadLoadingScreen();
 
-            creditsVideo = _gameManager.Content.Load<Video>("Videos/CreditsVideo");
+            creditsVideo = _gameManager.Content.Load<Video>("Videos/CreditsVideo"); //Loads the end credits video
         }
 
-        public void ActivateLoadingScreen(float duration, GameManager.GameState afterState)
+        #region Activate Videos
+
+        public void ActivateLoadingScreen(float duration, GameManager.GameState afterState) //Displays the loading screen for a given duration. After the video has finished playing, the current GameState will change to the given afterState value
         {
             videoTimer = duration;
             videoPlaying = true;
@@ -104,7 +111,7 @@ namespace Terramental
             GameManager.currentGameState = GameManager.GameState.LoadingScreen;
         }
 
-        public void ActivateCreditsScreen(float duration, GameManager.GameState afterState)
+        public void ActivateCreditsScreen(float duration, GameManager.GameState afterState) //Displays the end credits screen for a given duration. After the video has finished playin, the current GameState will change to the given afterState value
         {
             AudioManager.StopMusic();
             AudioManager.PlaySound("Intro_Music");
@@ -115,16 +122,20 @@ namespace Terramental
             GameManager.currentGameState = GameManager.GameState.CreditsVideo;
         }
 
-        public void ChangeButtonController(bool increase, bool verticalMotion)
+        #endregion
+
+        #region Controller Menu Navigation
+
+        public void ChangeButtonController(bool increase, bool verticalMotion) //Allows naviation of menus using a controller. If the motion aligns with the direction of the menu (vertical/horizontal), the button index will be incremented/decremented depending on the increase value
         {
             if(_buttonList.Count > 0)
             {
-                if (_gamePadButtonTimer > 0)
+                if (_gamePadButtonTimer > 0) //Stops the function if the selected button was recently changed
                 {
                     return;
                 }
 
-                _buttonList[currentButtonIndex].ComponentColor = Color.White;
+                _buttonList[currentButtonIndex].ComponentColor = Color.White; //Sets the old button color back to the original
 
                 if (verticalMotion == _menuIsVertical)
                 {
@@ -132,7 +143,7 @@ namespace Terramental
                     {
                         currentButtonIndex--;
 
-                        if (currentButtonIndex < 0)
+                        if (currentButtonIndex < 0) //Ensures the index of the list is never below zero
                         {
                             currentButtonIndex = _buttonList.Count - 1;
                         }
@@ -141,26 +152,26 @@ namespace Terramental
                     {
                         currentButtonIndex++;
 
-                        if (currentButtonIndex >= _buttonList.Count)
+                        if (currentButtonIndex >= _buttonList.Count) //Ensures the index of the list is never above the value of the list count
                         {
                             currentButtonIndex = 0;
                         }
                     }
 
-                    _buttonList[currentButtonIndex].ComponentColor = Color.Gray;
+                    _buttonList[currentButtonIndex].ComponentColor = Color.Gray; //Set the currently selected button's color to gray to inform the user that it is selected
                 }
 
                 _gamePadButtonTimer = 0.2f;
             }
         }
 
-        public void ResetMenu()
+        public void ResetMenu() //The ResetMenu() function changes the button list to store the appropriate buttons for the currently displayed menu. This function should be called whenever a new menu is loaded.
         {
             if(_gameManager.inputManager.IsGamePadConnected())
             {
                 if(_buttonList.Count > 0)
                 {
-                    _buttonList[currentButtonIndex].ComponentColor = Color.White;
+                    _buttonList[currentButtonIndex].ComponentColor = Color.White; //Reset the currently selected button's color
                 }
 
                 switch (GameManager.currentGameState)
@@ -196,13 +207,13 @@ namespace Terramental
                         break;
                 }
 
-                currentButtonIndex = 0;
-                _buttonList[currentButtonIndex].ComponentColor = Color.Gray;
+                currentButtonIndex = 0; //Set the selected button to be the first button in the list
+                _buttonList[currentButtonIndex].ComponentColor = Color.Gray; //Set the selected button's color to gray
             }
             
         }
 
-        public void ActivateButtonController()
+        public void ActivateButtonController() //Activates the currently selected button
         {
             if(_buttonBuffer <= 0)
             {
@@ -250,9 +261,11 @@ namespace Terramental
             }
         }
 
+        #endregion
+
         #region DrawMenus
 
-        public void DrawMenus(SpriteBatch spriteBatch)
+        public void DrawMenus(SpriteBatch spriteBatch) //Handles drawing of menu components, buttons, videos and text
         {
             switch (GameManager.currentGameState)
             {
@@ -457,8 +470,8 @@ namespace Terramental
                     }
 
 
-                    spriteBatch.DrawString(_levelTitleFont, _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) + 5, 178), Color.White);
-                    spriteBatch.DrawString(_levelTitleFont, _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 60, 210), Color.White);
+                    spriteBatch.DrawString(_titleFont, _gameManager.playerCharacter.EnemiesDefeated.ToString(), new Vector2((GameManager.screenWidth / 2) + 5, 178), Color.White);
+                    spriteBatch.DrawString(_titleFont, _gameManager.playerCharacter.PlayerScore.ToString(), new Vector2((GameManager.screenWidth / 2) - 60, 210), Color.White);
 
                     break;
 
@@ -501,31 +514,29 @@ namespace Terramental
                 }
                 else
                 {
-                    if(GameManager.currentGameState == GameManager.GameState.LoadingScreen && GameManager.previousGameState != GameManager.GameState.Level && GameManager.previousGameState != GameManager.GameState.LevelPause)
+                    //Don't pause music if the current game state is equal to Level or LevelPause
+                    if(GameManager.currentGameState == GameManager.GameState.LoadingScreen && GameManager.previousGameState != GameManager.GameState.Level && GameManager.previousGameState != GameManager.GameState.LevelPause) //If the video is not playing, and the loading screen is finished, stop the music.
                     {
                         AudioManager.StopMusic();
                     }
 
-                    GameManager.currentGameState = videoPlayerAfterState;
-                    videoPlaying = false;
-                    videoPlayer.Stop();
+                    GameManager.currentGameState = videoPlayerAfterState; //Set the current start to the after state assigned when the video was activated
+                    videoPlayer.Stop(); //Stops the video as the timer has depleted
 
-                    if(GameManager.currentGameState == GameManager.GameState.Level)
+                    if(GameManager.currentGameState == GameManager.GameState.Level) //When the loading screen is finished, play the level music
                     {
                         AudioManager.PlaySound("Level_Music");
                     }
+
+                    videoPlaying = false;
                 }
             }
             
         }
 
-        public void EndLevel()
-        {
-            GameManager.currentGameState = GameManager.GameState.LevelComplete;
-            _gameManager.IsMouseVisible = true;
-        }
+        #region Button Interactivity
 
-        public void MouseClick(Vector2 mousePos)
+        public void MouseClick(Vector2 mousePos) //Handles mouse clicking for button interaction detection
         {
             if(_buttonBuffer <= 0)
             {
@@ -608,15 +619,15 @@ namespace Terramental
 
         }
 
-        public void ButtonInteraction(GameManager.ButtonName buttonName)
+        public void ButtonInteraction(GameManager.ButtonName buttonName) //When a button has been activated/clicked, perform the appropriate actions depending on the buttonName value
         {
-            if(_buttonBuffer <= 0)
+            if(_buttonBuffer <= 0) //Avoids unintended button activations
             {
                 GameManager.previousGameState = GameManager.currentGameState;
 
-                if (buttonName == GameManager.ButtonName.ReturnMainMenu)
+                if (buttonName == GameManager.ButtonName.ReturnMainMenu) //Depending on the current game state, return to the 'MainMenu'. The Pause Menu acts as a Main Menu when a level is in progress
                 {
-                    if (GameManager.currentGameState == GameManager.GameState.Credits || GameManager.currentGameState == GameManager.GameState.LevelSelect)
+                    if (GameManager.currentGameState == GameManager.GameState.Credits || GameManager.currentGameState == GameManager.GameState.LevelSelect) //Return to the main menu if the current screen is the credits or level select menu
                     {
                         GameManager.currentGameState = GameManager.GameState.MainMenu;
                         ResetMenu();
@@ -626,12 +637,12 @@ namespace Terramental
 
                     if (GameManager.currentGameState == GameManager.GameState.HelpMenu)
                     {
-                        if (GameManager.levelLoaded)
+                        if (GameManager.levelLoaded) //If the level is loaded, display the pause menu
                         {
                             GameManager.PauseGame();
                             ResetMenu();
                         }
-                        else
+                        else //If the level is not loaded, display the main menu
                         {
                             GameManager.currentGameState = GameManager.GameState.MainMenu;
                             ResetMenu();
@@ -642,11 +653,11 @@ namespace Terramental
 
                     if (GameManager.currentGameState == GameManager.GameState.Options)
                     {
-                        if (GameManager.levelLoaded)
+                        if (GameManager.levelLoaded) //If the level is loaded, display the pause menu
                         {
                             GameManager.PauseGame();
                         }
-                        else
+                        else //If the level is not loaded, display the main menu
                         {
                             GameManager.currentGameState = GameManager.GameState.MainMenu;
                         }
@@ -655,9 +666,9 @@ namespace Terramental
                         return;
                     }
 
-                    if (GameManager.currentGameState == GameManager.GameState.LevelComplete || GameManager.currentGameState == GameManager.GameState.LevelPause)
+                    if (GameManager.currentGameState == GameManager.GameState.LevelComplete || GameManager.currentGameState == GameManager.GameState.LevelPause) //If the current game state is equal to the level complete menu or pause menu, display the loading screen.
                     {
-                        ActivateLoadingScreen(2, GameManager.GameState.MainMenu);
+                        ActivateLoadingScreen(2, GameManager.GameState.MainMenu); //Displays the loading screen. After the video is completed, the game will display the main menu.
                         AudioManager.PlaySound("Level_Music");
                         GameManager.levelLoaded = false;
 
@@ -668,7 +679,7 @@ namespace Terramental
                     return;
                 }
 
-                switch (buttonName)
+                switch (buttonName) //Performs the appropriate action depending on the buttonName value
                 {
                     case GameManager.ButtonName.StartGameButton:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
@@ -774,7 +785,7 @@ namespace Terramental
 
         }
 
-        public void LevelSelectButtonInteraction(GameManager.LevelButton buttonName)
+        public void LevelSelectButtonInteraction(GameManager.LevelButton buttonName) //Assigns the values to begin loading a level. The selected level will be loaded once the player uses the start button in the level select confirm menu.
         {
             switch(buttonName)
             {
@@ -782,7 +793,7 @@ namespace Terramental
                     _levelDataFilePath = @"Content/Level1Map.json";
                     GameManager.levelIndex = 1;
                     GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
-                    confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level1Description");
+                    confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level1Description"); //The level panel that displays a description and level name.
                     break;
                 case GameManager.LevelButton.Level2Button:
 
@@ -847,7 +858,11 @@ namespace Terramental
             _buttonBuffer = 0.5f;
         }
 
-        public void DisplayRespawnScreen(bool isActive)
+        #endregion
+
+        #region Display End of Level Menus
+
+        public void DisplayRespawnScreen(bool isActive) //Displays the Respawn Screen/Level depending on the passed in boolean value of isActive
         {
             if(isActive)
             {
@@ -870,11 +885,19 @@ namespace Terramental
             }
         }
 
+        public void EndLevel() //Ends the level and displays the level complete menu. This menu displays when the player collides with the end of level pickup (campfire)
+        {
+            GameManager.currentGameState = GameManager.GameState.LevelComplete;
+            _gameManager.IsMouseVisible = true;
+        }
+
+        #endregion
+
         #region LoadMenus
 
         private void LoadMainMenu()
         {
-            int viewportCentreX = _graphics.PreferredBackBufferWidth / 2;
+            int viewportCentreX = _graphics.PreferredBackBufferWidth / 2; //Gets the centre of the screen on the X axis
 
             Texture2D mainMenuBackgroundTexture = _gameManager.GetTexture("UserInterface/MainMenu/MainMenu_FireBackground");
             MenuComponent mainMenuBackground = new MenuComponent();
@@ -1069,7 +1092,7 @@ namespace Terramental
 
         private void LoadOptionsMenu()
         {
-            int viewportCentreX = (GameManager.screenWidth / 2);
+            int viewportCentreX = (GameManager.screenWidth / 2); //Gets the centre of the screen on the X axis
 
             Texture2D OptionsMenuBackgroundTexture = _gameManager.GetTexture("UserInterface/OptionsMenu/OptionsMenuBackground");
             MenuComponent OptionsMenuBackground = new MenuComponent();

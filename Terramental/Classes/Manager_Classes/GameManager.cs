@@ -239,7 +239,7 @@ namespace Terramental
         {
             spriteManager = new SpriteManager();
             mainCam = new CameraController(_graphics.GraphicsDevice.Viewport);
-            SpawnManager._gameManager = this;
+            SpawnManager.gameManager = this;
             inputManager = new InputManager(mainCam, menuManager, this);
         }
 
