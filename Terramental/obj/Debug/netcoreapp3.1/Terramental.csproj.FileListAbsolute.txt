@@ -1541,3 +1541,14 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level7_Button.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level8_Button.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level9_Button.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\CannonFire_SFX.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\SFXs\Positive_SFX.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\Ashes.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\Rain.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\Snow.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelDescriptions\Level4Description.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelDescriptions\Level5Description.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level6_Button.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level7_Button.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level8_Button.xnb
+D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\UserInterface\LevelSelect\Level9_Button.xnb

@@ -55,6 +55,7 @@ namespace Terramental
         private int[] screenWidths = { 960, 1920 }; //The possible screen widths for changing resolution
         private int[] screenHeights = { 540, 1080 }; //The possible screen heights for changing resolution
         private int currentResolutionIndex; //The current index for the screenWidth and screenHeight array
+        private Sprite particleSprite; //Weather particle.
 
         public GameManager()
         {
@@ -121,6 +122,12 @@ namespace Terramental
 
             menuManager.UpdateMenu(gameTime);
             mainCam.UpdateCamera(gameTime);
+
+            if (particleSprite != null)
+            {
+                particleSprite.SpritePosition = CameraController.cameraWorldPos;
+            }
+
 
 
             base.Update(gameTime);
@@ -189,6 +196,14 @@ namespace Terramental
         {
             menuManager.ActivateLoadingScreen(5, GameState.Level);
 
+
+
+
+
+
+
+
+
             if (!gameInitialised) //Loads neccessary managers and the player if a level has not yet been loaded
             {
                 playerCharacter = new PlayerCharacter(this);
@@ -201,14 +216,30 @@ namespace Terramental
                 objectiveManager = new ObjectiveManager(Content.Load<SpriteFont>("SpriteFont/DefaultFont"));
                 CameraController.playerCharacter = playerCharacter;
                 gameInitialised = true;
+
+                particleSprite = new Sprite();
+
+                particleSprite.Initialise(Vector2.Zero, GetTexture("Sprites/Effects/Rain"), new Vector2(screenWidth, screenHeight));
+                Animation rainParticle = new Animation(GetTexture("Sprites/Effects/Rain"), 4, 90f, true, new Vector2(screenWidth, screenHeight));
+                particleSprite.AddAnimation(rainParticle);
+                particleSprite.SetAnimation(0);
+                rainParticle.AnimationActive = true;
+                particleSprite.LayerOrder = -2;
+
+
+
+
+
+
+
             }
 
-            if(levelIndex == 1)
+            if (levelIndex == 1)
             {
                 objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
             }
 
-            if(levelIndex == 2)
+            if (levelIndex == 2)
             {
                 objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
             }
@@ -233,6 +264,27 @@ namespace Terramental
             CameraController.cameraWorldPos = playerCharacter.SpritePosition;
             mapManager.LoadMapData(filePath); //Loads all tiles, entities and environment assets
             levelLoaded = true;
+
+
+            if (levelIndex < 4)
+            {
+                particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Rain");
+            }
+            if (levelIndex == 4)
+            {
+                particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Snow");
+            }
+
+            if (levelIndex == 5)
+            {
+                particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Ashes");
+            }
+
+            if (levelIndex == 6)
+            {
+                particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Ashes");
+            }
+
         }
 
         private void InitialiseGame() //Loads the appropriate managers at the start of runtime
