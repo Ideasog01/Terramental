@@ -23,34 +23,21 @@ namespace Terramental
         {
             _playerCharacter = playerCharacter;
             _elementIndex = elementIndex;
-
+            wallHealth = 60;
             tile = mapManager.FindTile(SpriteRectangle);
             tile.IsBlocking = true;
-            tile.SpriteColor = Color.Red;
-            wallHealth = 60;
         }
 
         public Tile AssignedTile
         {
             get { return tile; }
-            set { tile = value; }
         }
 
         public void ResetWall(MapManager mapManager)
         {
-            if(tile == null)
-            {
-                tile = mapManager.FindTile(SpriteRectangle);
-            }
-            
+            tile = mapManager.FindTile(SpriteRectangle);
+            tile.IsBlocking = true;
 
-            if (tile != null)
-            {
-                tile.IsBlocking = false;
-                tile.IsBlocking = true;
-                tile.SpriteColor = Color.Red;
-            }
-            
             wallHealth = 60;
             SpriteTexture = _texture1;
             IsActive = true;
@@ -58,30 +45,33 @@ namespace Terramental
 
         public void DamageElementWall()
         {
-            if (!_invalidElement)
+            if(IsActive)
             {
-                wallHealth -= 20;
-            }
-            else
-            {
-                SpawnManager.gameManager.tutorialManager.DisplayIncorrectElementNotification();
-            }
+                if (!_invalidElement)
+                {
+                    wallHealth -= 20;
+                }
+                else
+                {
+                    SpawnManager.gameManager.tutorialManager.DisplayIncorrectElementNotification();
+                }
 
-            if(wallHealth == 40)
-            {
-                SpriteTexture = _texture2;
-            }
+                if (wallHealth == 40)
+                {
+                    SpriteTexture = _texture2;
+                }
 
-            if(wallHealth == 20)
-            {
-                SpriteTexture = _texture3;
-            }
+                if (wallHealth == 20)
+                {
+                    SpriteTexture = _texture3;
+                }
 
-            if (wallHealth <= 0)
-            {
-                AudioManager.PlaySound("WallBreak_SFX");
-                tile.IsBlocking = false;
-                IsActive = false;
+                if (wallHealth <= 0)
+                {
+                    AudioManager.PlaySound("WallBreak_SFX");
+                    tile.IsBlocking = false;
+                    IsActive = false;
+                }
             }
         }
 

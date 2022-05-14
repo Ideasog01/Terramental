@@ -53,9 +53,10 @@ namespace Terramental
                                 }
                             }
 
-                            if (!enemy.IsActive)
+                            if (enemy.CharacterHealth <= 0)
                             {
                                 enemy.EnableWorldCanvas(false); //If the enemy is not active, disable the world canvas
+                                enemy.IsActive = false;
                             }
                         }
                     }
@@ -613,15 +614,16 @@ namespace Terramental
                     elementWall.SpawnPosition = position;
                     elementWall.IsActive = true;
                     elementWall.IsLoaded = true;
-                    elementWallFound = true;
 
                     elementWall.InitialiseElementWall(gameManager.playerCharacter, gameManager.mapManager, elementIndex);
                     elementWall.ElementWallCollision();
+                    elementWall.ResetWall(mapManager);
+                    elementWallFound = true;
                     break;
                 }
             }
 
-            if(!elementWallFound)
+            if (!elementWallFound)
             {
                 ElementWall elementWall = new ElementWall();
 
@@ -944,12 +946,6 @@ namespace Terramental
 
             foreach(ElementWall elementWall in elementWallList)
             {
-                if(elementWall.AssignedTile != null)
-                {
-                    elementWall.AssignedTile.IsBlocking = false;
-                    elementWall.AssignedTile = null;
-                }
-                
                 elementWall.IsActive = false;
                 elementWall.IsLoaded = false;
             }

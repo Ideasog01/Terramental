@@ -13,28 +13,33 @@ namespace Terramental
         private SpriteFont _defaultFont;
 
         private string _objectiveDescription;
-        private float _descriptionWidth;
 
         public ObjectiveManager(SpriteFont defaultFont)
         {
             _defaultFont = defaultFont;
         }
 
+        public string ObjectiveDescription
+        {
+            get { return _objectiveDescription; }
+            set { _objectiveDescription = value; }
+        }
+
         public void SetObjective(Objective objective)
         {
+            objectiveProgress = 0;
+
             switch(objective)
             {
                 case Objective.CollectGems:
 
                     _objectiveDescription = "Objective: Collect all Gems";
-                    _descriptionWidth = _defaultFont.MeasureString(_objectiveDescription).X;
                     currentObjective = Objective.CollectGems;
                     break;
 
                 case Objective.DefeatEnemies:
 
                     _objectiveDescription = "Objective: Defeat all Enemies";
-                    _descriptionWidth = _defaultFont.MeasureString(_objectiveDescription).X;
                     currentObjective = Objective.DefeatEnemies;
                     break;
             }
@@ -52,7 +57,6 @@ namespace Terramental
                 if(objectiveProgress >= SpawnManager.gemCount)
                 {
                     _objectiveDescription = "Objective Complete";
-                    _descriptionWidth = _defaultFont.MeasureString(_objectiveDescription).X;
                     SpawnManager.levelFragment.IsActive = true;
                 }
             }
@@ -62,7 +66,6 @@ namespace Terramental
                 if(objectiveProgress >= SpawnManager.enemyCount)
                 {
                     _objectiveDescription = "Objective Complete";
-                    _descriptionWidth = _defaultFont.MeasureString(_objectiveDescription).X;
                     SpawnManager.levelFragment.IsActive = true;
                 }
             }

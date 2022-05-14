@@ -39,6 +39,48 @@ namespace Terramental
         public void ResetLevel() //Resets the player and all entities currently instantiated
         {
             _gameManager.IsMouseVisible = false;
+            
+            //Reset objective
+            if (GameManager.levelIndex == 1)
+            {
+               _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
+            }
+
+            if (GameManager.levelIndex == 2)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
+            if (GameManager.levelIndex == 3)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
+            if (GameManager.levelIndex == 4)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
+            }
+
+            if (GameManager.levelIndex == 5)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
+            if (GameManager.levelIndex == 6)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
+            if (GameManager.levelIndex == 7)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.DefeatEnemies);
+            }
+
+            if (GameManager.levelIndex == 8)
+            {
+                _gameManager.objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
             _gameManager.playerCharacter.ResetPlayer(); //Resets the player object to it's starting state
             SpawnManager.ResetEntities(); //Resets all Entities, including reseting position, activation and properties including enemy health.
         }
@@ -259,7 +301,6 @@ namespace Terramental
                             Tile tile = new Tile();
                             tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
                             tile.LayerOrder = 0;
-                            tile.IsBlocking = false;
 
                             bool isBlocking = false;
 
@@ -285,6 +326,8 @@ namespace Terramental
                     SpawnEntity(_mapData._entityMap[x2, y2], new Vector2(x2 * 64, y2 * 64));
                 }
             }
+
+            ResetLevel();
 
             int assetCount = 0;
             int spawnedAssetCount = 0;

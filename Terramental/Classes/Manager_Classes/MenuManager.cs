@@ -730,7 +730,7 @@ namespace Terramental
                             GameManager.levelsComplete = GameManager.levelIndex;
                         }
 
-                        if(GameManager.levelsComplete >= 5)
+                        if(GameManager.levelsComplete >= 8)
                         {
                             ActivateCreditsScreen(60, GameManager.GameState.MainMenu);
                         }
