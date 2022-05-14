@@ -361,9 +361,17 @@ namespace Terramental
         {
             if(_enemyIndex == 0 || _enemyIndex == 1)
             {
-                Vector2 dir = playerCharacter.SpritePosition - SpritePosition; //Get the direction of the player from origin of the enemy's location
-                dir.Normalize();
-                SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, SpriteVelocity.Y); //Set velocity so the enemy moves towards the player's location
+                if(IsNextPositionSafe())
+                {
+                    Vector2 dir = playerCharacter.SpritePosition - SpritePosition; //Get the direction of the player from origin of the enemy's location
+                    dir.Normalize();
+                    SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, SpriteVelocity.Y); //Set velocity so the enemy moves towards the player's location
+                }
+                else
+                {
+                    SpriteVelocity = Vector2.Zero;
+                }
+                
             }
             else if(_enemyIndex == 2)
             {
@@ -434,6 +442,43 @@ namespace Terramental
             Rectangle onePixelLower = SpriteRectangle;
             onePixelLower.Offset(0, 1);
             return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
+        }
+
+        private bool IsNextPositionSafe()
+        {
+            if(SpritePosition.Y > (MapManager.mapHeight * 64) - 300)
+            {
+                return true;
+            }
+
+            bool facingLeft = playerCharacter.SpritePosition.X < SpritePosition.X;
+
+            if(facingLeft)
+            {
+                Vector2 positionToTry1 = SpritePosition + new Vector2(-64, 256);
+
+                Rectangle newBoundary = _gameManager.mapManager.CreateRectangleAtPosition(positionToTry1, SpriteRectangle.Width, SpriteRectangle.Height);
+
+                if (_gameManager.mapManager.FoundTileBlocking(newBoundary))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                Vector2 positionToTry1 = SpritePosition + new Vector2(64, 256);
+
+                Rectangle newBoundary = _gameManager.mapManager.CreateRectangleAtPosition(positionToTry1, SpriteRectangle.Width, SpriteRectangle.Height);
+
+                if (_gameManager.mapManager.FoundTileBlocking(newBoundary))
+                {
+                    return true;
+                }
+            }
+            
+            
+
+            return false;
         }
 
         private void MoveIfValid(GameTime gameTime) //Moves the player if the desired location is valid

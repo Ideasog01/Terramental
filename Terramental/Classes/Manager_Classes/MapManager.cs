@@ -270,10 +270,7 @@ namespace Terramental
                 }
             }
 
-            foreach(Tile tile in tileList)
-            {
-                tile.SetNeighborTiles();
-            }
+            SpawnManager.ResetEntities(); //Resets all Entities, including reseting position, activation and properties including enemy health.
 
             int assetCount = 0;
             int spawnedAssetCount = 0;
@@ -489,6 +486,22 @@ namespace Terramental
             return true;
         }
 
+        public bool FoundTileBlocking(Rectangle rectangleToCheck)
+        {
+            foreach (Tile tile in tileList)
+            {
+                if (tile.IsBlocking)
+                {
+                    if (tile.SpriteRectangle.Intersects(rectangleToCheck))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public bool HasRoomForRectangleMP(Rectangle rectangleToCheck) //Checks if there is room for the given rectangle with reference to the generated moving platforms
         {
             foreach (MovingPlatform movingPlatform in SpawnManager.movingPlatformList)
@@ -506,7 +519,7 @@ namespace Terramental
         {
             foreach(Tile tile in tileList)
             {
-                if(tile.SpriteRectangle.Contains(wallRect))
+                if(tile.SpriteRectangle.Intersects(wallRect))
                 {
                     return tile;
                 }
@@ -515,22 +528,7 @@ namespace Terramental
             return null;
         }
 
-        public Tile FindNearestTile(Rectangle rectangle) //Finds the nearest tile based on distance
-        {
-            foreach (Tile tile in tileList)
-            {
-                float distance = MathF.Sqrt(MathF.Pow(rectangle.X - tile.SpritePosition.X, 2) + MathF.Pow(rectangle.Y - tile.SpritePosition.Y, 2));
-
-                if(distance <= 64)
-                {
-                    return tile;
-                }
-            }
-
-            return null;
-        }
-
-        private Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height) //Creates a rectangle based on the given values
+        public Rectangle CreateRectangleAtPosition(Vector2 positionToTry, int width, int height) //Creates a rectangle based on the given values
         {
             return new Rectangle((int)positionToTry.X, (int)positionToTry.Y, width, height);
         }
