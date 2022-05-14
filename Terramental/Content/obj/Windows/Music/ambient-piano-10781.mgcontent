@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/GitHub/Terramental.sln/Terramental/Content/Music/ambient-piano-10781.mp3</SourceFile>
-  <SourceTime>2022-05-04T18:03:21.4268631+00:00</SourceTime>
-  <DestFile>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Music/ambient-piano-10781.xnb</DestFile>
-  <DestTime>2022-05-13T19:40:33.91303+00:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Music/ambient-piano-10781.mp3</SourceFile>
+  <SourceTime>2022-05-05T20:04:25.4358885+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Music/ambient-piano-10781.xnb</DestFile>
+  <DestTime>2022-05-14T10:33:17.6372106+01:00</DestTime>
   <Importer>Mp3Importer</Importer>
-  <ImporterTime>2020-08-10T16:17:54+00:00</ImporterTime>
+  <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>SongProcessor</Processor>
-  <ProcessorTime>2020-08-10T16:17:54+00:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T17:17:54+01:00</ProcessorTime>
   <Parameters>
     <Key>Quality</Key>
     <Value>Best</Value>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>D:/GitHub/Terramental.sln/Terramental/Content/bin/Windows/Music/ambient-piano-10781.wma</string>
+    <string>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Music/ambient-piano-10781.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

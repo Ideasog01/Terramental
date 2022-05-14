@@ -181,6 +181,7 @@ namespace Terramental
         public void DestroyProjectile() // Deletes the projectile
         {
             IsActive = false;
+            IsLoaded = false;
         }
 
         public void ProjectileTrigger(BaseCharacter character)
@@ -190,11 +191,6 @@ namespace Terramental
                 character.SetStatus(BaseCharacter.CharacterStatus.Burning, 5, 2, 20);
                 SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/FireExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("FireExplosion_SFX");
-
-                if (character.CharacterVFX == null)
-                {
-                    character.CharacterVFX = SpawnManager.SpawnAnimatedVFX(SpawnManager.gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), new Vector2(12, 12), new Vector2(64, 64), 5, 4, 120f, character);
-                }
             }
 
             if (_projectileTrigger == 2) // Water projectile
@@ -209,11 +205,6 @@ namespace Terramental
                 character.SetStatus(BaseCharacter.CharacterStatus.Frozen, 2, 0, 0);
                 SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/SnowExplosion_SpriteSheet"), SpritePosition, new Vector2(64, 64), 1, 8, 120f);
                 AudioManager.PlaySound("SnowExplosion_SFX");
-
-                if (character.CharacterVFX == null)
-                {
-                    character.CharacterVFX = SpawnManager.SpawnStaticVFX(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), new Vector2(0, 0), new Vector2(96, 96), 2, character);
-                }
             }
         }
 

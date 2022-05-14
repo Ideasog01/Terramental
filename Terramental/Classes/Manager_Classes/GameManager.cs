@@ -21,7 +21,7 @@ namespace Terramental
 
         public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown, DashButton }; //Each button has this value attributed
 
-        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button, Level6Button, Level8Button }; //Each button that represents a level on the level select screen has this value attributed
+        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button, Level6Button }; //Each button that represents a level on the level select screen has this value attributed
 
         public static GameState currentGameState = GameState.SplashScreen; //The current state of the game.
         public static GameState previousGameState = GameState.SplashScreen; //The previous state of the game. Useful for return buttons in menus.
@@ -48,7 +48,7 @@ namespace Terramental
         public PlayerCharacter playerCharacter; //The player character is instantiated when a level is loaded for the first time
         public CameraController mainCam; //The main camera that follows the player's location
 
-        private bool skipToLevel = false; //TESTING PURPOSES ONLY. SET TO FALSE ON BUILD
+        //private bool skipToLevel = false; //TESTING PURPOSES ONLY. SET TO FALSE ON BUILD
 
         public bool useDoubleTapDash; //Customisation for the dash ability. If this boolean is false, the B button or left shift key can be used instead to activate the dash ability.
 
@@ -56,6 +56,10 @@ namespace Terramental
         private int[] screenHeights = { 540, 1080 }; //The possible screen heights for changing resolution
         private int currentResolutionIndex; //The current index for the screenWidth and screenHeight array
         private Sprite particleSprite; //Weather particle.
+
+        private float loadingBuffer; //Ensures that the loading screen is activated when the start button is activated.
+        private bool levelLoadRequested; //Set to true when the level start button is activated, but loading has not commenced.
+        private string _filePath; //Stores the file path for the purpose of a loading screen buffer.
 
         public GameManager()
         {
@@ -90,11 +94,11 @@ namespace Terramental
             AudioManager.SetVolumes();
             AudioManager.PlaySound("Intro_Music");
 
-            if (skipToLevel) //Skips the splash screen and main menu and instantly. USED FOR TESTING
-            {
-                LoadNewGame(@"Content/Level1Map.json");
-                currentGameState = GameState.Level;
-            }
+            //if (skipToLevel) //Skips the splash screen and main menu and instantly. USED FOR TESTING
+            //{
+            //    LoadNewGame(@"Content/Level1Map.json");
+            //    currentGameState = GameState.Level;
+            //}
         }
 
         protected override void Update(GameTime gameTime)
@@ -126,6 +130,21 @@ namespace Terramental
             if (particleSprite != null)
             {
                 particleSprite.SpritePosition = CameraController.cameraWorldPos;
+            }
+
+            
+            
+            if(levelLoadRequested)
+            {
+                if (loadingBuffer > 0)
+                {
+                    loadingBuffer -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    LoadNewGame(_filePath);
+                    levelLoadRequested = false;
+                }
             }
 
 
@@ -192,18 +211,16 @@ namespace Terramental
             currentGameState = GameState.LevelPause;
         }
 
+        public void PrepareLevelLoad(string filePath) //Displays the loading screen before loading the level
+        {
+            loadingBuffer = 1f;
+            levelLoadRequested = true;
+            menuManager.ActivateLoadingScreen(5, GameState.Level);
+            _filePath = filePath;
+        }
+
         public void LoadNewGame(string filePath) //Loads the approriate level using the data located at the file path.
         {
-            menuManager.ActivateLoadingScreen(5, GameState.Level);
-
-
-
-
-
-
-
-
-
             if (!gameInitialised) //Loads neccessary managers and the player if a level has not yet been loaded
             {
                 playerCharacter = new PlayerCharacter(this);
@@ -225,13 +242,6 @@ namespace Terramental
                 particleSprite.SetAnimation(0);
                 rainParticle.AnimationActive = true;
                 particleSprite.LayerOrder = -2;
-
-
-
-
-
-
-
             }
 
             if (levelIndex == 1)
@@ -259,7 +269,7 @@ namespace Terramental
                 objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
             }
 
-            if (levelIndex == 8)
+            if (levelIndex == 6)
             {
                 objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
             }
@@ -275,17 +285,13 @@ namespace Terramental
             {
                 particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Rain");
             }
+
             if (levelIndex == 4)
             {
                 particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Snow");
             }
 
-            if (levelIndex == 5)
-            {
-                particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Ashes");
-            }
-
-            if (levelIndex == 6)
+            if (levelIndex == 5 || levelIndex == 6)
             {
                 particleSprite.Animations[particleSprite.AnimationIndex].SpriteSheet = GetTexture("Sprites/Effects/Ashes");
             }

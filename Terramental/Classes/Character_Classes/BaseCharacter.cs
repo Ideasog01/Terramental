@@ -96,9 +96,21 @@ namespace Terramental
             _statusDamageTimer = _statusDamageDuration;
             _statusDamageAmount = statusDamageAmount; // Amount of damage the status will apply
 
+            if(_currentStatus == CharacterStatus.Burning)
+            {
+                if(_characterVFX == null)
+                {
+                    _characterVFX = SpawnManager.SpawnAnimatedVisualEffectAtSprite(SpawnManager.gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), this, new Vector2(46, 46), new Vector2(64, 64), statusDuration, 4, 120f);
+                }
+            }
+
             if(_currentStatus == CharacterStatus.Frozen)
             {
-                SpawnManager.SpawnStaticVFX(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), SpritePosition, new Vector2(96, 96), statusDuration, this);
+                if(_characterVFX == null)
+                {
+                    _characterVFX = SpawnManager.SpawnStaticVisualEffectAtSprite(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), this, Vector2.Zero, SpriteScale, statusDuration);
+                }
+
                 _disableMovement = true; // Disables movement if the character is frozen
             }
         }

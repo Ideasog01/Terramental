@@ -37,6 +37,8 @@ namespace Terramental
         private int _elementIndex; //The element that the enemy is assigned to. 0 = Fire, 1 = Water, 2 = Snow
 
         private bool _pathBlocked; //This value changes based on whether the enemy collides with a blocking tile that is to their right or left
+        private float _jumpActivationCooldown; //Avoids the enemy from continuously jumping.
+
         private GameManager _gameManager; //Reference to the game manager
 
         private Vector2 _oldPosition; //The recent position of the enemy in the last tick.
@@ -161,6 +163,7 @@ namespace Terramental
             CharacterMaxHealth = enemyMaxHealth;
             CharacterHealth = enemyHealth;
             _enemyMovementSpeed = enemyMovementSpeed;
+            SetStatus(CharacterStatus.Default, 0, 0, 0);
             IsActive = true;
 
             if(enemyHealthBar != null)
@@ -223,35 +226,21 @@ namespace Terramental
             }
             else if (_currentState == AIState.Chase)
             {
-                if (!IsGrounded() && !_pathBlocked && !DisableMovement)
+                if (!IsGrounded() && !DisableMovement)
                 {
                     ApplyGravity();
                 }
 
-                if (_pathBlocked && !DisableMovement)
+                if (_pathBlocked && !DisableMovement && _jumpActivationCooldown <= 0 && IsGrounded())
                 {
-                    Rectangle rectangleOffset = SpriteRectangle;
-
-                    if(!Animations[AnimationIndex].MirrorTexture) //Sets the tile based on whether the enemy is moving left or right
-                    {
-                        rectangleOffset.Offset(64, -256); //Moving Right
-                    }
-                    else
-                    {
-                        rectangleOffset.Offset(-64, -256); //Moving Left
-                    }
-                    
-
-                    Tile tile = _gameManager.mapManager.FindNearestTile(rectangleOffset); //Only jump if the tile four tiles up and to the enemy's right or left is not blocking
-
-                    if (tile != null)
-                    {
-                        if(!tile.IsBlocking)
-                        {
-                            EnemyJump();
-                        }
-                    }
+                    EnemyJump();
+                    _jumpActivationCooldown = 5;
                 }
+            }
+
+            if(_jumpActivationCooldown > 0)
+            {
+                _jumpActivationCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             MirrorEnemy();
@@ -453,6 +442,7 @@ namespace Terramental
             }
             else //If the enemy is moving on the X axis, then the path is not blocked
             {
+                _jumpActivationCooldown = 0;
                 _pathBlocked = false;
             }
 

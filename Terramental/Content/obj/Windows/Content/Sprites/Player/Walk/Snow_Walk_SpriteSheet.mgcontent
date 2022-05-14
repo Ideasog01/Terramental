@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/Sprites/Player/Walk/Snow_Walk_SpriteSheet.png</SourceFile>
-  <SourceTime>2022-05-14T02:29:26.1348771+01:00</SourceTime>
-  <DestFile>C:/Users/lewis/Documents/GitHub/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Player/Walk/Snow_Walk_SpriteSheet.xnb</DestFile>
-  <DestTime>2022-05-14T02:31:18.6789057+01:00</DestTime>
+  <SourceFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Player/Walk/Snow_Walk_SpriteSheet.png</SourceFile>
+  <SourceTime>2022-05-14T08:42:35.3511542+01:00</SourceTime>
+  <DestFile>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/bin/Windows/Content/Sprites/Player/Walk/Snow_Walk_SpriteSheet.xnb</DestFile>
+  <DestTime>2022-05-14T08:43:49.0618071+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

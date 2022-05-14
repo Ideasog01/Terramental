@@ -190,57 +190,53 @@ namespace Terramental
 
         #region Visual Effects
 
-        public static VisualEffect SpawnAnimatedVFX(Texture2D texture, Vector2 positionOffset, Vector2 scale, float vfxDuration, int frameCount, float frameDuration, Sprite attachSprite)
+        public static VisualEffect SpawnStaticVisualEffectAtSprite(Texture2D texture, Sprite attachSprite, Vector2 positionOffset, Vector2 scale, float vfxDuration)
         {
             bool vfxFound = false;
 
-            foreach(VisualEffect vfx in vfxList)
+            foreach (VisualEffect vfx in vfxList)
             {
-                if(!vfx.IsActive) // Checks that the effect is not active
+                if (!vfx.IsActive)
                 {
-                    if(vfx.Animations.Count > 0) //Checks that the number of animations is greater than 0
+                    if (vfx.Animations.Count > 0)
                     {
-                        vfx.Animations[0].SpriteSheet = texture;
-                        vfx.Animations[0].FrameDimensions = scale;
-                        vfx.Animations[0].FrameCount = frameCount;
-                        vfx.Animations[0].FrameDuration = frameDuration;
-                        vfx.Animations[0].AnimationActive = true;
-                        vfx.IsActive = true;
-                    }
-                    else
-                    {
-                        Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale); // Creates a new animation
-                        vfx.Animations.Add(newAnimation); // Adds the animation to the animation list
+                        vfx.Animations[vfx.AnimationIndex].AnimationActive = false;
                     }
 
-                    vfx.InitialiseVFX(attachSprite, positionOffset, vfxDuration); // Initialises the effect
-
-                    vfx.SpritePosition = attachSprite.AttachSpriteOffset;
+                    vfx.SpritePosition = attachSprite.SpritePosition + positionOffset;
+                    vfx.SpawnPosition = vfx.SpritePosition;
                     vfx.SpriteScale = scale;
-                    vfxFound = true;
                     vfx.IsLoaded = true;
+                    vfx.SpriteTexture = texture;
+                    vfx.InitialiseVFX(vfxDuration);
+
+                    vfxFound = true;
                     return vfx;
                 }
             }
 
-            if(!vfxFound) // Checks to see that no effect has been found
+            if (!vfxFound)
             {
-                VisualEffect visualEffect = new VisualEffect(); // Creates a new effect
-                visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale); // Initialises the effect
-                visualEffect.InitialiseVFX(vfxDuration); // Initialises the effect for the specified amount of time
-                visualEffect.LayerOrder = -2; // Changes the layer
-                Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale); // Creates a new animation
-                visualEffect.Animations.Add(newAnimation); // Adds the animation to the animation list
+                VisualEffect visualEffect = new VisualEffect();
+                visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
+                visualEffect.SpawnPosition = visualEffect.SpritePosition;
+                visualEffect.InitialiseVFX(attachSprite, positionOffset, 4);
+                visualEffect.LayerOrder = -3;
 
-                vfxList.Add(visualEffect); // Adds the effect to the list of visual effects
+                if (visualEffect.Animations.Count > 0)
+                {
+                    visualEffect.Animations[visualEffect.AnimationIndex].AnimationActive = false;
+                }
+
                 visualEffect.IsLoaded = true;
+                vfxList.Add(visualEffect);
                 return visualEffect;
             }
 
             return null;
         }
 
-        public static VisualEffect SpawnStaticVFX(Texture2D texture, Vector2 positionOffset, Vector2 scale, float vfxDuration, Sprite attachSprite) // Same as SpawnAnimatedVFX but for image effects instead of animated effects
+        public static VisualEffect SpawnAnimatedVisualEffectAtSprite(Texture2D texture, Sprite attachSprite, Vector2 positionOffset, Vector2 scale, float vfxDuration, int frameCount, float frameDuration)
         {
             bool vfxFound = false;
 
@@ -252,10 +248,23 @@ namespace Terramental
                     {
                         vfx.Animations[0].SpriteSheet = texture;
                         vfx.Animations[0].FrameDimensions = scale;
+                        vfx.Animations[0].FrameCount = frameCount;
+                        vfx.Animations[0].FrameDuration = frameDuration;
                         vfx.Animations[0].AnimationActive = true;
+                        vfx.IsActive = true;
+                    }
+                    else
+                    {
+                        Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
+                        vfx.Animations.Add(newAnimation);
                     }
 
+                    vfx.SpritePosition = attachSprite.SpritePosition + positionOffset;
+                    vfx.SpawnPosition = vfx.SpritePosition;
+                    vfx.SpriteScale = scale;
                     vfx.IsLoaded = true;
+                    vfx.InitialiseVFX(vfxDuration);
+
                     vfxFound = true;
                     return vfx;
                 }
@@ -265,7 +274,11 @@ namespace Terramental
             {
                 VisualEffect visualEffect = new VisualEffect();
                 visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
+                visualEffect.SpawnPosition = visualEffect.SpritePosition;
+                visualEffect.InitialiseVFX(attachSprite, positionOffset, 4);
                 visualEffect.LayerOrder = -3;
+                Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
+                visualEffect.Animations.Add(newAnimation);
                 visualEffect.IsLoaded = true;
                 vfxList.Add(visualEffect);
                 return visualEffect;

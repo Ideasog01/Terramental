@@ -699,8 +699,8 @@ namespace Terramental
                         {
                             _gameManager.mapManager.UnloadLevel();
                         }
-                        
-                        _gameManager.LoadNewGame(_levelDataFilePath);
+
+                        _gameManager.PrepareLevelLoad(_levelDataFilePath);
                         break;
                     case GameManager.ButtonName.LevelSelectExit:
                         GameManager.currentGameState = GameManager.GameState.LevelSelect;
@@ -846,19 +846,8 @@ namespace Terramental
                     {
                         _levelDataFilePath = @"Content/Level6Map.json";
                         GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
-                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level5Description");
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level6Description");
                         GameManager.levelIndex = 6;
-                    }
-
-                    break;
-
-                case GameManager.LevelButton.Level8Button:
-
-                    if (GameManager.levelsComplete > 4)
-                    {
-                        _levelDataFilePath = @"Content/Level8Map.json";
-                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level5Description");
-                        GameManager.levelIndex = 8;
                     }
 
                     break;
@@ -977,10 +966,7 @@ namespace Terramental
             levelFiveSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level5_Button"), new Vector2(700, 380), new Vector2(40, 40));
 
             Button levelSixSelect = new Button(GameManager.LevelButton.Level6Button, this);
-            levelSixSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(550, 75), new Vector2(40, 40));
-
-            Button levelEightSelect = new Button(GameManager.LevelButton.Level8Button, this);
-            levelEightSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(600, 430), new Vector2(40, 40));
+            levelSixSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(610, 400), new Vector2(40, 40));
 
             Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
             MenuComponent confirmPanel = new MenuComponent();
@@ -1005,7 +991,6 @@ namespace Terramental
             levelSelectButtonList.Add(levelFourSelect);
             levelSelectButtonList.Add(levelFiveSelect);
             levelSelectButtonList.Add(levelSixSelect);
-            levelSelectButtonList.Add(levelEightSelect);
             levelSelectButtonList.Add(levelSelectExitButton);
 
             confirmLevelComponentList.Add(confirmPanel);

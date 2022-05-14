@@ -208,15 +208,10 @@ namespace Terramental
                 _currentTileMap = _snowTileMap;
                 _currentAssetTexture = _assetSnowList;
             }
-            else if (GameManager.levelIndex == 5 || GameManager.levelIndex == 8)
+            else if (GameManager.levelIndex == 5 || GameManager.levelIndex == 6)
             {
                 _currentTileMap = _fireTileMap;
                 _currentAssetTexture = _assetFireList;
-            }
-            else if(GameManager.levelIndex == 6)
-            {
-                _currentTileMap = _snowTileMap;
-                _currentTileMap = _assetSnowList;
             }
 
 
@@ -255,6 +250,8 @@ namespace Terramental
                             Tile tile = new Tile();
                             tile.Initialise(new Vector2(x * 64, y * 64), _currentTileMap[tileIndex], new Vector2(64, 64));
                             tile.LayerOrder = 0;
+                            tile.IsBlocking = false;
+
                             bool isBlocking = false;
 
                             if (tileIndex <= 13 || tileIndex > 20)

@@ -29,7 +29,21 @@ namespace Terramental
         {
             if(_attachSprite != null)
             {
-                SpritePosition = _attachSprite.SpritePosition + _positionOffset;
+                if(_attachSprite.Animations.Count > 0)
+                {
+                    if(_attachSprite.Animations[_attachSprite.AnimationIndex].MirrorTexture)
+                    {
+                        SpritePosition = _attachSprite.SpritePosition + (_attachSprite.SpriteScale / 2);
+                    }
+                    else
+                    {
+                        SpritePosition = _attachSprite.SpritePosition + new Vector2(0, _attachSprite.SpriteScale.Y / 2);
+                    }
+                }
+                else
+                {
+                    SpritePosition = _attachSprite.SpritePosition + _positionOffset;
+                }
             }
 
             if(_vfxTimer > 0)
