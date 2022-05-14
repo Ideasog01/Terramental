@@ -274,12 +274,17 @@ namespace Terramental
                         }
                     }
 
-                    SpawnEntity(_mapData._entityMap[x, y], new Vector2(x * 64, y * 64));
                     tileCount++;
                 }
             }
 
-            SpawnManager.ResetEntities(); //Resets all Entities, including reseting position, activation and properties including enemy health.
+            for(int x2 = 0; x2 < _mapData._mapWidth; x2++)
+            {
+                for(int y2 = 0; y2 < _mapData._mapHeight; y2++)
+                {
+                    SpawnEntity(_mapData._entityMap[x2, y2], new Vector2(x2 * 64, y2 * 64));
+                }
+            }
 
             int assetCount = 0;
             int spawnedAssetCount = 0;

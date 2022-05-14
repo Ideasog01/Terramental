@@ -1668,7 +1668,3 @@ F:\University\Semester2\Game Development Group Project\Terramental_Project\Terra
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\FireLevel\RedCloud.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Assets\FireLevel\DarkCloud.xnb
 F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Effects\FrozenEffect.xnb
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.dll.manifest
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\bin\Debug\netcoreapp3.1\Terramental.application
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.dll.manifest
-F:\University\Semester2\Game Development Group Project\Terramental_Project\Terramental\Terramental\obj\Debug\netcoreapp3.1\Terramental.application

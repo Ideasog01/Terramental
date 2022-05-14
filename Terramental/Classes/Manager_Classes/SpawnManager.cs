@@ -249,6 +249,8 @@ namespace Terramental
             {
                 if (!vfx.IsActive)
                 {
+                    vfx.AttachSprite = null;
+
                     if (vfx.Animations.Count > 0)
                     {
                         vfx.Animations[0].SpriteSheet = texture;

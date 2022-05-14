@@ -38,7 +38,11 @@ namespace Terramental
 
         public void ResetWall(MapManager mapManager)
         {
-            tile = mapManager.FindTile(SpriteRectangle);
+            if(tile == null)
+            {
+                tile = mapManager.FindTile(SpriteRectangle);
+            }
+            
 
             if (tile != null)
             {
