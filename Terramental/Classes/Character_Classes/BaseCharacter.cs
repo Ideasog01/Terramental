@@ -133,10 +133,11 @@ namespace Terramental
                         _characterVFX = null;
                     }
 
-                    IsActive = false; // Removes the character
                     SpawnManager.gameManager.playerCharacter.EnemiesDefeated++; // Increments the count storing the number of enemies defeated
                     SpawnManager.gameManager.objectiveManager.UpdateObjective(ObjectiveManager.Objective.DefeatEnemies);
                     AudioManager.PlaySound("Hit_SFX");
+
+                    IsActive = false; // Removes the character
                 }
             }
         }

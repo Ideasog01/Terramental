@@ -19,6 +19,11 @@ namespace Terramental
             IsActive = true;
         }
 
+        public Sprite AttachSprite
+        {
+            set { _attachSprite = value; }
+        }
+
         public virtual void InitialiseVFX(float vfxTimer)
         {
             _vfxTimer = vfxTimer;

@@ -200,7 +200,7 @@ namespace Terramental
                 {
                     if (vfx.Animations.Count > 0)
                     {
-                        vfx.Animations[vfx.AnimationIndex].AnimationActive = false;
+                        vfx.Animations.Clear();
                     }
 
                     vfx.SpritePosition = attachSprite.SpritePosition + positionOffset;
@@ -209,6 +209,7 @@ namespace Terramental
                     vfx.IsLoaded = true;
                     vfx.SpriteTexture = texture;
                     vfx.InitialiseVFX(vfxDuration);
+                    vfx.AttachSprite = attachSprite;
 
                     vfxFound = true;
                     return vfx;
@@ -222,10 +223,11 @@ namespace Terramental
                 visualEffect.SpawnPosition = visualEffect.SpritePosition;
                 visualEffect.InitialiseVFX(attachSprite, positionOffset, 4);
                 visualEffect.LayerOrder = -3;
+                visualEffect.AttachSprite = attachSprite;
 
                 if (visualEffect.Animations.Count > 0)
                 {
-                    visualEffect.Animations[visualEffect.AnimationIndex].AnimationActive = false;
+                    visualEffect.Animations.Clear();
                 }
 
                 visualEffect.IsLoaded = true;
