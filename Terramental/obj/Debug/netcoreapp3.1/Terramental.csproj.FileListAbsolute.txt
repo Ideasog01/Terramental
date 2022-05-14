@@ -1337,9 +1337,6 @@ D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Pl
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Snow_Activation.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\UltimateActivations\Water_Activation.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\walkspritesheet.xnb
-D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Fire_Walk.xnb
-D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Snow_Walk.xnb
-D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Player\Walk\Water_Walk.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Bullet_RightExample.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Fireball_Projectile.xnb
 D:\GitHub\Terramental.sln\Terramental\bin\Debug\netcoreapp3.1\Content\Sprites\Projectiles\Fire_Projectile.xnb

@@ -14,6 +14,9 @@
     <None Remove="Content\Sprites\Enemies\DarkMage\DarkMage_Attack_SpriteSheet.png" />
     <None Remove="Content\Sprites\Enemies\DarkMage\DarkMage_Idle_SpriteSheet.png" />
     <None Remove="Content\Sprites\Enemies\DarkMage\DarkMage_Walk_SpriteSheet.png" />
+    <None Remove="Content\Sprites\Player\Walk\Fire_Walk.png" />
+    <None Remove="Content\Sprites\Player\Walk\Snow_Walk.png" />
+    <None Remove="Content\Sprites\Player\Walk\Water_Walk.png" />
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />

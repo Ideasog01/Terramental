@@ -70,9 +70,9 @@
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/UltimateActivations/Fire_Activation.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/UltimateActivations/Snow_Activation.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/UltimateActivations/Water_Activation.png</File>
-    <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/Walk/Fire_Walk.png</File>
-    <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/Walk/Snow_Walk.png</File>
-    <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/Walk/Water_Walk.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/Walk/Fire_Walk_SpriteSheet.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/Walk/Snow_Walk_SpriteSheet.png</File>
+    <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Player/Walk/Water_Walk_SpriteSheet.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Projectiles/Bullet_RightExample.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Projectiles/Fire_Projectile.png</File>
     <File>D:/GitHub/Terramental.sln/Terramental/Content/Sprites/Projectiles/Fireball_Projectile.png</File>
