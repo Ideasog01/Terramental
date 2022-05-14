@@ -851,6 +851,32 @@ namespace Terramental
                     }
 
                     break;
+
+                case GameManager.LevelButton.Level7Button:
+
+                    if (GameManager.levelsComplete > 5)
+                    {
+                        _levelDataFilePath = @"Content/Level7Map.json";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level7Description");
+                        GameManager.levelIndex = 7;
+                    }
+
+                    break;
+
+                case GameManager.LevelButton.Level8Button:
+
+                    if (GameManager.levelsComplete > 6)
+                    {
+                        _levelDataFilePath = @"Content/Level8Map.json";
+                        GameManager.currentGameState = GameManager.GameState.LevelSelectConfirm;
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level8Description");
+                        GameManager.levelIndex = 8;
+                    }
+
+                    break;
+
+
             }
 
             ResetMenu();
@@ -957,16 +983,22 @@ namespace Terramental
             levelTwoSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level2_Button"), new Vector2(100, 220), new Vector2(40, 40));
 
             Button levelThreeSelect = new Button(GameManager.LevelButton.Level3Button, this);
-            levelThreeSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level3_Button"), new Vector2(400, 280), new Vector2(40, 40));
+            levelThreeSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level3_Button"), new Vector2(160, 250), new Vector2(40, 40));
 
             Button levelFourSelect = new Button(GameManager.LevelButton.Level4Button, this);
-            levelFourSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level4_Button"), new Vector2(620, 150), new Vector2(40, 40));
+            levelFourSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level4_Button"), new Vector2(400, 265), new Vector2(40, 40));
 
             Button levelFiveSelect = new Button(GameManager.LevelButton.Level5Button, this);
-            levelFiveSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level5_Button"), new Vector2(700, 380), new Vector2(40, 40));
+            levelFiveSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level5_Button"), new Vector2(620, 60), new Vector2(40, 40));
 
             Button levelSixSelect = new Button(GameManager.LevelButton.Level6Button, this);
-            levelSixSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(610, 400), new Vector2(40, 40));
+            levelSixSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(700, 170), new Vector2(40, 40));
+
+            Button levelSevenSelect = new Button(GameManager.LevelButton.Level7Button, this);
+            levelSevenSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level7_Button"), new Vector2(610, 400), new Vector2(40, 40));
+
+            Button levelEightSelect = new Button(GameManager.LevelButton.Level8Button, this);
+            levelEightSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level8_Button"), new Vector2(740, 380), new Vector2(40, 40));
 
             Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
             MenuComponent confirmPanel = new MenuComponent();
@@ -991,6 +1023,8 @@ namespace Terramental
             levelSelectButtonList.Add(levelFourSelect);
             levelSelectButtonList.Add(levelFiveSelect);
             levelSelectButtonList.Add(levelSixSelect);
+            levelSelectButtonList.Add(levelSevenSelect);
+            levelSelectButtonList.Add(levelEightSelect);
             levelSelectButtonList.Add(levelSelectExitButton);
 
             confirmLevelComponentList.Add(confirmPanel);

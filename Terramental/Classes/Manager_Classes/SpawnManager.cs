@@ -923,6 +923,12 @@ namespace Terramental
 
             foreach(ElementWall elementWall in elementWallList)
             {
+                if(elementWall.AssignedTile != null)
+                {
+                    elementWall.AssignedTile.IsBlocking = false;
+                    elementWall.AssignedTile = null;
+                }
+                
                 elementWall.IsActive = false;
                 elementWall.IsLoaded = false;
             }

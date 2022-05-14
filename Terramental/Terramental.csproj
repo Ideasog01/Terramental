@@ -36,6 +36,7 @@
     <Folder Include="Content\Sprites\Player\Walk\" />
     <Folder Include="Content\Sprites\Tiles\" />
     <Folder Include="Content\UserInterface\" />
+    <Folder Include="Content\UserInterface\LevelDescriptions\" />
     <Folder Include="Content\Videos\" />
   </ItemGroup>
 </Project>

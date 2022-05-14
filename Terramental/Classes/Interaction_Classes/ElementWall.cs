@@ -24,14 +24,24 @@ namespace Terramental
             _playerCharacter = playerCharacter;
             _elementIndex = elementIndex;
 
-            tile = mapManager.FindTile(SpriteRectangle);
-            tile.IsBlocking = true;
-            tile.SpriteColor = Color.Red;
-            wallHealth = 60;
+            if(tile != null)
+            {
+                tile = mapManager.FindTile(SpriteRectangle);
+                tile.IsBlocking = true;
+                tile.SpriteColor = Color.Red;
+                wallHealth = 60;
+            }
+        }
+
+        public Tile AssignedTile
+        {
+            get { return tile; }
+            set { tile = value; }
         }
 
         public void ResetWall(MapManager mapManager)
         {
+            tile.IsBlocking = false;
             tile = mapManager.FindTile(SpriteRectangle);
             tile.IsBlocking = true;
             tile.SpriteColor = Color.Red;

@@ -197,18 +197,18 @@ namespace Terramental
 
         private void GenerateMap()
         {
-            if (GameManager.levelIndex == 1 || GameManager.levelIndex == 2 || GameManager.levelIndex == 3)
+            if (GameManager.levelIndex == 1 || GameManager.levelIndex == 2 || GameManager.levelIndex == 3 || GameManager.levelIndex == 4)
             {
                 _currentTileMap = _waterTileMap;
                 _currentAssetTexture = _assetWaterList;
 
             }
-            else if (GameManager.levelIndex == 4)
+            else if (GameManager.levelIndex == 5 || GameManager.levelIndex == 6)
             {
                 _currentTileMap = _snowTileMap;
                 _currentAssetTexture = _assetSnowList;
             }
-            else if (GameManager.levelIndex == 5 || GameManager.levelIndex == 6)
+            else if (GameManager.levelIndex == 7 || GameManager.levelIndex == 8)
             {
                 _currentTileMap = _fireTileMap;
                 _currentAssetTexture = _assetFireList;
