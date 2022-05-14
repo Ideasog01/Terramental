@@ -11,6 +11,11 @@
     <ApplicationIcon>Icon_Terramental.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\Sprites\Tiles\**" />
+    <EmbeddedResource Remove="Content\Sprites\Tiles\**" />
+    <None Remove="Content\Sprites\Tiles\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Content\Sprites\Enemies\DarkMage\DarkMage_Attack_SpriteSheet.png" />
     <None Remove="Content\Sprites\Enemies\DarkMage\DarkMage_Idle_SpriteSheet.png" />
     <None Remove="Content\Sprites\Enemies\DarkMage\DarkMage_Walk_SpriteSheet.png" />
@@ -35,7 +40,6 @@
     <Folder Include="Content\Sprites\Enemies\Knight\" />
     <Folder Include="Content\Sprites\Enemies\Spectre\" />
     <Folder Include="Content\Sprites\Player\Walk\" />
-    <Folder Include="Content\Sprites\Tiles\" />
     <Folder Include="Content\UserInterface\" />
     <Folder Include="Content\UserInterface\LevelDescriptions\" />
     <Folder Include="Content\Videos\" />

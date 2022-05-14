@@ -318,7 +318,7 @@ namespace Terramental
                     {
                         int levelButtonIndex = levelSelectButtonList.IndexOf(selectButton);
 
-                        if (levelButtonIndex > 0 && levelButtonIndex < 7)
+                        if (levelButtonIndex > 0 && levelButtonIndex < 8)
                         {
                             if (GameManager.levelsComplete >= levelButtonIndex)
                             {
@@ -350,7 +350,7 @@ namespace Terramental
                     {
                         int levelButtonIndex = levelSelectButtonList.IndexOf(selectButton);
 
-                        if (levelButtonIndex > 0 && levelButtonIndex < 6)
+                        if (levelButtonIndex > 0 && levelButtonIndex < 8)
                         {
                             if (GameManager.levelsComplete >= levelButtonIndex)
                             {
