@@ -65,6 +65,7 @@ namespace Terramental
             Player.ElementIndex = _elementIndex;
             _elementIndex = index;
             _pickupTimer = 1.2f; // Resets the pickup timer
+            Player.ultimateCooldown = 0;
 
             ChangeTexture();
         }

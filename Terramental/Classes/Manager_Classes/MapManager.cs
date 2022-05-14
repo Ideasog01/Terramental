@@ -208,7 +208,7 @@ namespace Terramental
                 _currentTileMap = _snowTileMap;
                 _currentAssetTexture = _assetSnowList;
             }
-            else if (GameManager.levelIndex == 5)
+            else if (GameManager.levelIndex == 5 || GameManager.levelIndex == 8)
             {
                 _currentTileMap = _fireTileMap;
                 _currentAssetTexture = _assetFireList;

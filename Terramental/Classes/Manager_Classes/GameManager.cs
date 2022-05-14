@@ -21,7 +21,7 @@ namespace Terramental
 
         public enum ButtonName { StartGameButton, OptionsButton, AchievementsButton, CreditsButton, ExitGameButton, RespawnButton, LevelSelectExit, LevelSelectConfirm, ReturnMainMenu, ResumeGame, Replay, Continue, ResolutionButton, OptionsReturn, MusicButton, ControlsButton, HelpScreenButton, SFXVolumeUp, SFXVolumeDown, MusicVolumeUp, MusicVolumeDown, ResolutionUp, ResolutionDown, DashButton }; //Each button has this value attributed
 
-        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button, Level6Button }; //Each button that represents a level on the level select screen has this value attributed
+        public enum LevelButton { Level1Button, Level2Button, Level3Button, Level4Button, Level5Button, Level6Button, Level8Button }; //Each button that represents a level on the level select screen has this value attributed
 
         public static GameState currentGameState = GameState.SplashScreen; //The current state of the game.
         public static GameState previousGameState = GameState.SplashScreen; //The previous state of the game. Useful for return buttons in menus.
@@ -224,6 +224,11 @@ namespace Terramental
             }
 
             if (levelIndex == 5)
+            {
+                objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
+            }
+
+            if (levelIndex == 8)
             {
                 objectiveManager.SetObjective(ObjectiveManager.Objective.CollectGems);
             }

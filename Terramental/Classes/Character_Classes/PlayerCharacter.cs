@@ -11,7 +11,7 @@ namespace Terramental
     {
         public static bool disableMovement;
 
-        public float dashCooldown;
+        public float dashCooldown = 0;
         public float ultimateCooldown;
 
         private int _playerScore;
@@ -362,9 +362,6 @@ namespace Terramental
 
                 if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
                 {
-                    Debug.WriteLine("Performing Shift Dash");
-                    Debug.WriteLine(dashDirX);
-                    Debug.Write(dashDirY);
                     SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                 }
                 else
@@ -373,7 +370,7 @@ namespace Terramental
                 }
                 _isDashing = false;
             }
-            else if (_isDashing && !useDoubleTapDash)
+            else if (_canDash && _isDashing && !useDoubleTapDash)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -382,9 +379,6 @@ namespace Terramental
 
                     if (_gameManager.mapManager.HasRoomForRectangle(rectangle))
                     {
-                        Debug.WriteLine("Performing Shift Dash");
-                        Debug.WriteLine(dashDirX);
-                        Debug.Write(dashDirY);
                         SpriteVelocity += new Vector2(dashDirX * dashVelocity, dashDirY * dashVelocity);
                     }
                     else
@@ -393,6 +387,9 @@ namespace Terramental
                     }
                     _isDashing = false;
                 }
+                AudioManager.PlaySound("Dash_SFX");
+                dashCooldown = 2;
+                _canDash = false;
             }
         }
 
@@ -523,13 +520,29 @@ namespace Terramental
         {
             if (IsGrounded()) // Checks to see if the player is touching the ground
             {
-                SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
+                if (ultimateActive && _elementIndex == 1) // Checks to see if the players ultimate is active and that they are using the water element
+                {
+                    SpriteVelocity = -Vector2.UnitY * 22.25f * 1.25f; // Applies a vertical component of velocity to the player
+
+                }
+                else
+                {
+                    SpriteVelocity = -Vector2.UnitY * 22.25f;
+                }
                 _isDoubleJumpUsed = false;
                 AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
             }
             else if (!_isDoubleJumpUsed) // Checks to see if the player has not used double jump
             {
-                SpriteVelocity = -Vector2.UnitY * 22.25f; // Applies a vertical component of velocity to the player
+                if (ultimateActive && _elementIndex == 1) // Checks to see if the players ultimate is active and that they are using the water element
+                {
+                    SpriteVelocity = -Vector2.UnitY * 22.25f * 1.25f; // Applies a vertical component of velocity to the player
+
+                }
+                else
+                {
+                    SpriteVelocity = -Vector2.UnitY * 22.25f;
+                }
                 _isDoubleJumpUsed = true;
                 AudioManager.PlaySound("Jump_SFX"); // Plays the jump sound effect
             }
