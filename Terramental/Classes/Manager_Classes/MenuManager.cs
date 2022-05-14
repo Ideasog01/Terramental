@@ -851,6 +851,17 @@ namespace Terramental
                     }
 
                     break;
+
+                case GameManager.LevelButton.Level8Button:
+
+                    if (GameManager.levelsComplete > 4)
+                    {
+                        _levelDataFilePath = @"Content/Level8Map.json";
+                        confirmLevelComponentList[0].ComponentTexture = _gameManager.GetTexture("UserInterface/LevelDescriptions/Level5Description");
+                        GameManager.levelIndex = 8;
+                    }
+
+                    break;
             }
 
             ResetMenu();
@@ -968,6 +979,9 @@ namespace Terramental
             Button levelSixSelect = new Button(GameManager.LevelButton.Level6Button, this);
             levelSixSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(550, 75), new Vector2(40, 40));
 
+            Button levelEightSelect = new Button(GameManager.LevelButton.Level8Button, this);
+            levelEightSelect.InitialiseMenuComponent(_gameManager.GetTexture("UserInterface/LevelSelect/Level6_Button"), new Vector2(600, 430), new Vector2(40, 40));
+
             Texture2D confirmPanelTexture = _gameManager.GetTexture("UserInterface/LevelSelect/LevelDetailsPanel");
             MenuComponent confirmPanel = new MenuComponent();
             confirmPanel.InitialiseMenuComponent(confirmPanelTexture, new Vector2((GameManager.screenWidth / 2) - confirmPanelTexture.Width / 2, (GameManager.screenHeight / 2) - confirmPanelTexture.Height / 2), new Vector2(confirmPanelTexture.Width, confirmPanelTexture.Height));
@@ -991,6 +1005,7 @@ namespace Terramental
             levelSelectButtonList.Add(levelFourSelect);
             levelSelectButtonList.Add(levelFiveSelect);
             levelSelectButtonList.Add(levelSixSelect);
+            levelSelectButtonList.Add(levelEightSelect);
             levelSelectButtonList.Add(levelSelectExitButton);
 
             confirmLevelComponentList.Add(confirmPanel);

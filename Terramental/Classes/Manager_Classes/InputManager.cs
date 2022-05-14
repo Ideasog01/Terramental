@@ -252,21 +252,23 @@ namespace Terramental
                 {
                     if (IsKeyPressed(Keys.LeftShift)) // Checks to see if left shift is pressed
                     {
-                        if (_currentKeyboardState.IsKeyDown(Keys.A)) // Left Dash
+                        if (_playerCharacter.CanDash)
                         {
-                            _playerCharacter.dashDirY = 0;
-                            _playerCharacter.dashDirX = -1;
-                            _playerCharacter.dashCooldown = 2;
-                            _playerCharacter._isDashing = true;
+                            if (_currentKeyboardState.IsKeyDown(Keys.A)) // Left Dash
+                            {
+                                _playerCharacter.dashDirY = 0;
+                                _playerCharacter.dashDirX = -1;
+                                _playerCharacter._isDashing = true;
+                            }
+
+                            if (_currentKeyboardState.IsKeyDown(Keys.D)) // Right Dash
+                            {
+                                _playerCharacter.dashDirY = 0;
+                                _playerCharacter.dashDirX = 1;
+                                _playerCharacter._isDashing = true;
+                            }
                         }
 
-                        if (_currentKeyboardState.IsKeyDown(Keys.D)) // Right Dash
-                        {
-                            _playerCharacter.dashDirY = 0;
-                            _playerCharacter.dashDirX = 1;
-                            _playerCharacter.dashCooldown = 2;
-                            _playerCharacter._isDashing = true;
-                        }
                     }
                 }
             }
@@ -299,7 +301,7 @@ namespace Terramental
                         {
                             _playerCharacter.dashDirY = 0;
                             _playerCharacter.dashDirX = -1;
-                            _playerCharacter.dashCooldown = 2;
+                            // _playerCharacter.dashCooldown = 2;
                             _playerCharacter._isDashing = true;
                         }
 
@@ -307,7 +309,7 @@ namespace Terramental
                         {
                             _playerCharacter.dashDirY = 0;
                             _playerCharacter.dashDirX = 1;
-                            _playerCharacter.dashCooldown = 2;
+                            // _playerCharacter.dashCooldown = 2;
                             _playerCharacter._isDashing = true;
                         }
                     }
