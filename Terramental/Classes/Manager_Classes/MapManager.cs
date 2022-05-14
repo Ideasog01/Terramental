@@ -184,15 +184,24 @@ namespace Terramental
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree"));
             _assetWaterList.Add(_gameManager.GetTexture("Assets/WaterLevel/Palm_Tree2"));
 
-            //Load the Fire Level Environment Assets
+            //Load the Snow Level Environment Assets
             _assetSnowList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Igloo1")); //2
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile")); //3
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pile2")); //4
             _assetSnowList.Add(_gameManager.GetTexture("Assets/SnowLevel/Snow_Pine")); //5
 
+            //Load the Fire Level Environment Assets
+            _assetFireList.Add(_gameManager.GetTexture("Tiles/DefaultTile")); //0
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/DarkCloud")); //1
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/DeadGrass_2")); //2
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/DeadTree_1")); //3
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/DeadTree_2")); //4 
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/DeadTree_3")); //5
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/DoubleCloud")); //6
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/GreyCloud")); //7
+            _assetFireList.Add(_gameManager.GetTexture("Assets/FireLevel/RedCloud")); //8
 
-            
         }
 
         private void GenerateMap()

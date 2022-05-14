@@ -98,18 +98,14 @@ namespace Terramental
 
             if(_currentStatus == CharacterStatus.Burning)
             {
-                if(_characterVFX == null)
-                {
-                    _characterVFX = SpawnManager.SpawnAnimatedVisualEffectAtSprite(SpawnManager.gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), this, new Vector2(46, 46), new Vector2(64, 64), statusDuration, 4, 120f);
-                }
+                _characterVFX = SpawnManager.SpawnAnimatedVisualEffectAtSprite(SpawnManager.gameManager.GetTexture("Sprites/Effects/Flame_SpriteSheet"), this, new Vector2(46, 46), new Vector2(64, 64), statusDuration, 4, 120f);
+
             }
 
-            if(_currentStatus == CharacterStatus.Frozen)
+            if (_currentStatus == CharacterStatus.Frozen)
             {
-                if(_characterVFX == null)
-                {
-                    _characterVFX = SpawnManager.SpawnStaticVisualEffectAtSprite(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), this, Vector2.Zero, SpriteScale, statusDuration);
-                }
+                _characterVFX = SpawnManager.SpawnVisualEffectAtPosition(SpawnManager.gameManager.GetTexture("Sprites/Effects/FrozenEffect"), SpritePosition, new Vector2(SpriteScale.X, SpriteScale.Y), statusDuration, 4, 120f);
+
 
                 _disableMovement = true; // Disables movement if the character is frozen
             }

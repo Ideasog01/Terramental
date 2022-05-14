@@ -190,54 +190,6 @@ namespace Terramental
 
         #region Visual Effects
 
-        public static VisualEffect SpawnStaticVisualEffectAtSprite(Texture2D texture, Sprite attachSprite, Vector2 positionOffset, Vector2 scale, float vfxDuration)
-        {
-            bool vfxFound = false;
-
-            foreach (VisualEffect vfx in vfxList)
-            {
-                if (!vfx.IsActive)
-                {
-                    if (vfx.Animations.Count > 0)
-                    {
-                        vfx.Animations.Clear();
-                    }
-
-                    vfx.SpritePosition = attachSprite.SpritePosition + positionOffset;
-                    vfx.SpawnPosition = vfx.SpritePosition;
-                    vfx.SpriteScale = scale;
-                    vfx.IsLoaded = true;
-                    vfx.SpriteTexture = texture;
-                    vfx.InitialiseVFX(vfxDuration);
-                    vfx.AttachSprite = attachSprite;
-
-                    vfxFound = true;
-                    return vfx;
-                }
-            }
-
-            if (!vfxFound)
-            {
-                VisualEffect visualEffect = new VisualEffect();
-                visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
-                visualEffect.SpawnPosition = visualEffect.SpritePosition;
-                visualEffect.InitialiseVFX(attachSprite, positionOffset, 4);
-                visualEffect.LayerOrder = -3;
-                visualEffect.AttachSprite = attachSprite;
-
-                if (visualEffect.Animations.Count > 0)
-                {
-                    visualEffect.Animations.Clear();
-                }
-
-                visualEffect.IsLoaded = true;
-                vfxList.Add(visualEffect);
-                return visualEffect;
-            }
-
-            return null;
-        }
-
         public static VisualEffect SpawnAnimatedVisualEffectAtSprite(Texture2D texture, Sprite attachSprite, Vector2 positionOffset, Vector2 scale, float vfxDuration, int frameCount, float frameDuration)
         {
             bool vfxFound = false;
@@ -261,8 +213,8 @@ namespace Terramental
                         vfx.Animations.Add(newAnimation);
                     }
 
-                    vfx.SpritePosition = attachSprite.SpritePosition + positionOffset;
-                    vfx.SpawnPosition = vfx.SpritePosition;
+                    vfx.SpritePosition = attachSprite.SpritePosition;
+                    vfx.AttachSprite = attachSprite;
                     vfx.SpriteScale = scale;
                     vfx.IsLoaded = true;
                     vfx.InitialiseVFX(vfxDuration);
@@ -275,9 +227,9 @@ namespace Terramental
             if (!vfxFound)
             {
                 VisualEffect visualEffect = new VisualEffect();
-                visualEffect.Initialise(attachSprite.SpritePosition + positionOffset, texture, scale);
-                visualEffect.SpawnPosition = visualEffect.SpritePosition;
-                visualEffect.InitialiseVFX(attachSprite, positionOffset, 4);
+                visualEffect.Initialise(attachSprite.SpritePosition, texture, scale);
+                visualEffect.InitialiseVFX(vfxDuration);
+                visualEffect.AttachSprite = attachSprite;
                 visualEffect.LayerOrder = -3;
                 Animation newAnimation = new Animation(texture, frameCount, frameDuration, true, scale);
                 visualEffect.Animations.Add(newAnimation);
@@ -289,7 +241,7 @@ namespace Terramental
             return null;
         }
 
-        public static void SpawnVisualEffectAtPosition(Texture2D texture, Vector2 position, Vector2 scale, float vfxDuration, int frameCount, float frameDuration) //Spawns the visual effect at a given position instead of attaching it to an existing sprite
+        public static VisualEffect SpawnVisualEffectAtPosition(Texture2D texture, Vector2 position, Vector2 scale, float vfxDuration, int frameCount, float frameDuration) //Spawns the visual effect at a given position instead of attaching it to an existing sprite
         {
             bool vfxFound = false;
 
@@ -318,6 +270,7 @@ namespace Terramental
                     vfx.InitialiseVFX(vfxDuration);
 
                     vfxFound = true;
+                    return vfx;
                 }
             }
 
@@ -331,7 +284,10 @@ namespace Terramental
                 visualEffect.Animations.Add(newAnimation);
                 visualEffect.IsLoaded = true;
                 vfxList.Add(visualEffect);
+                return visualEffect;
             }
+
+            return null;
         }
 
         #endregion

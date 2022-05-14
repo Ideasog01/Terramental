@@ -444,9 +444,9 @@ namespace Terramental
             return !_gameManager.mapManager.HasRoomForRectangle(onePixelLower);
         }
 
-        private bool IsNextPositionSafe()
+        private bool IsNextPositionSafe() //Stops the enemy from falling off a lethal platform edge
         {
-            if(SpritePosition.Y > (MapManager.mapHeight * 64) - 300)
+            if(SpritePosition.Y > (MapManager.mapHeight * 64) - 300) //If near end of the map, don't check as no tiles are underneath the level
             {
                 return true;
             }
