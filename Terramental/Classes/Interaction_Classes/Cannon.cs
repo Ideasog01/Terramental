@@ -36,11 +36,11 @@ namespace Terramental
             {
                 if (_faceRight)
                 {
-                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile for the right facing cannon
+                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(140, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(4.2f, -1), true, false, 0, 2, 1, false); // Spawns a cannon projectile for the right facing cannon
                 }
                 else
                 {
-                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(-40, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1); // Spawns a cannon projectile for the left facing cannon
+                    SpawnManager.SpawnProjectile(_gameManager.GetTexture("Sprites/Projectiles/Bullet_RightExample"), SpritePosition + new Vector2(-40, 20), new Vector2(50, 50), new Vector2(50, 50), new Vector2(-4.2f, -1), true, false, 0, 2, 1, false); // Spawns a cannon projectile for the left facing cannon
                 }
 
                 AudioManager.PlaySound("CannonFire_SFX");

@@ -409,6 +409,37 @@ namespace Terramental
 
                         enemy.IsLoaded = true;
                     }
+                    else if (index == 2)
+                    {
+                        enemy.ResetEnemy(gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet"), position, new Vector2(96, 96), 200, 200, 2, 2, gameManager);
+
+                        if(index != enemy.EnemyIndex)
+                        {
+                            enemy.Animations[0].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet");
+                            enemy.Animations[0].FrameCount = 10;
+                            enemy.Animations[0].FrameDuration = 250f;
+                            enemy.Animations[0].LoopActive = true;
+                            enemy.Animations[0].FrameDimensions = new Vector2(96, 96);
+
+                            enemy.Animations[1].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Walk_SpriteSheet");
+                            enemy.Animations[1].FrameCount = 10;
+                            enemy.Animations[1].FrameDuration = 250f;
+                            enemy.Animations[1].LoopActive = true;
+                            enemy.Animations[1].FrameDimensions = new Vector2(96, 96);
+
+                            enemy.Animations[2].SpriteSheet = gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Attack_SpriteSheet");
+                            enemy.Animations[2].FrameCount = 10;
+                            enemy.Animations[2].FrameDuration = 150f;
+                            enemy.Animations[2].LoopActive = true;
+                            enemy.Animations[2].FrameDimensions = new Vector2(96, 96);
+
+                            enemy.EnemyIndex = 2;
+                            enemy.AttackThreshold = 300;
+                            enemy.ChaseThreshold = 900;
+                            enemy.AttackCooldown = 3;
+                            enemy.ElementIndex = elementIndex;
+                        }
+                    }
 
                     enemyFound = true;
                     break;
@@ -473,6 +504,36 @@ namespace Terramental
                     darkMageCharacter.IsLoaded = true;
                     darkMageCharacter.EnemyIndex = 1;
                     enemyList.Add(darkMageCharacter);
+                }
+                else if(index == 2) //Spectre Character
+                {
+                    Animation spectreIdle = new Animation(gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet"), 10, 250f, true, new Vector2(96, 96));
+                    Animation spectreWalk = new Animation(gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Walk_SpriteSheet"), 10, 250f, true, new Vector2(96, 96));
+                    Animation spectreAttack = new Animation(gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Attack_SpriteSheet"), 10, 100f, true, new Vector2(96, 96));
+
+                    EnemyCharacter spectreCharacter = new EnemyCharacter();
+                    spectreCharacter.Initialise(position, gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet"), new Vector2(96, 96));
+                    spectreCharacter.SetProperties(position, 100, 100);
+                    spectreCharacter.ResetEnemy(gameManager.GetTexture("Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet"), position, new Vector2(96, 96), 100, 100, 2, 2, gameManager);
+
+                    spectreCharacter.AddAnimation(spectreIdle);
+                    spectreCharacter.AddAnimation(spectreWalk);
+                    spectreCharacter.AddAnimation(spectreAttack);
+                    spectreCharacter.SetAnimation(0);
+
+                    spectreCharacter.AttackThreshold = 300; // Distance to attack the player
+                    spectreCharacter.ChaseThreshold = 900; // Distance to chase the player
+
+                    spectreCharacter.LoadWorldCanvas(gameManager);
+                    spectreCharacter.LayerOrder = -1;
+                    spectreCharacter.playerCharacter = gameManager.playerCharacter;
+                    spectreCharacter.EnemyIndex = 2;
+                    spectreCharacter.AttackCooldown = 3; // Cooldown between attacks
+
+                    spectreCharacter.ElementIndex = elementIndex;
+                    spectreCharacter.IsLoaded = true;
+                    spectreCharacter.EnemyIndex = 2;
+                    enemyList.Add(spectreCharacter);
                 }
             }
 
@@ -649,7 +710,7 @@ namespace Terramental
             }
         }
 
-        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 frameDimensions, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage)
+        public static void SpawnProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 frameDimensions, Vector2 velocity, bool isEnemyProjectile, bool hasAnimation, int projectileTrigger, float projectileDuration, int projectileDamage, bool trackPlayer)
         {
             bool projectileFound = false;
 
@@ -657,7 +718,7 @@ namespace Terramental
             {
                 if(!projectile.IsActive)
                 {
-                    projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
+                    projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage, trackPlayer);
 
                     if(projectile.Animations.Count > 0) // Checks that the projectile has more than one animation
                     {
@@ -694,7 +755,7 @@ namespace Terramental
             if(!projectileFound) // Checks whether there is no projectile
             {
                 Projectile projectile = new Projectile(); // Creates a new projectile
-                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage);
+                projectile.ResetProjectile(texture, position, scale, velocity, isEnemyProjectile, projectileTrigger, projectileDuration, projectileDamage, trackPlayer);
                 projectile.Initialise(position, texture, scale);
                 projectile.LayerOrder = -1;
 

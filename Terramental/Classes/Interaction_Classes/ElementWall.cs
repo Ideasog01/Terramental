@@ -41,10 +41,14 @@ namespace Terramental
 
         public void ResetWall(MapManager mapManager)
         {
-            tile.IsBlocking = false;
-            tile = mapManager.FindTile(SpriteRectangle);
-            tile.IsBlocking = true;
-            tile.SpriteColor = Color.Red;
+            if(tile != null)
+            {
+                tile.IsBlocking = false;
+                tile = mapManager.FindTile(SpriteRectangle);
+                tile.IsBlocking = true;
+                tile.SpriteColor = Color.Red;
+            }
+            
             wallHealth = 60;
             SpriteTexture = _texture1;
             IsActive = true;

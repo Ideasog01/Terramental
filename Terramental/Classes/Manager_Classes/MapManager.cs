@@ -413,6 +413,21 @@ namespace Terramental
                 SpawnManager.SpawnMovingPlatform(position, this);
             }
 
+            if(index == 21)
+            {
+                SpawnManager.SpawnEnemy(2, position, 0);
+            }
+
+            if (index == 22)
+            {
+                SpawnManager.SpawnEnemy(2, position, 1);
+            }
+
+            if (index == 23)
+            {
+                SpawnManager.SpawnEnemy(2, position, 2);
+            }
+
         }
 
         public Vector2 FindValidLoaction(Vector2 originalPos, Vector2 destination, Rectangle rectangle) //Finds if the space between the original position and destination is valid, otherwise, returns the furthest available location

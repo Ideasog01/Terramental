@@ -47,6 +47,9 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Attack_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Idle_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Spectre/Spectre_Attack_SpriteSheet.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Enemies/Spectre/Spectre_Walk_SpriteSheet.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Obstacles/Cannon_Left.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Obstacles/Cannon_Right.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Obstacles/FireWall_Frame1.png</File>
@@ -77,6 +80,7 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Projectiles/Fire_Projectile.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Projectiles/Fireball_Projectile.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Projectiles/Snow_Projectile.png</File>
+    <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Projectiles/SpectreProjectile.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Sprites/Projectiles/Water_Projectile.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Tiles/DefaultTile.png</File>
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Tiles/FireLevel/Fire_Filler.png</File>
@@ -220,6 +224,10 @@
     <File>F:/University/Semester2/Game Development Group Project/Terramental_Project/Terramental/Terramental/Content/Videos/SplashScreen_Terramental.wmv</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

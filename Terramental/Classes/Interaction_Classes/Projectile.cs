@@ -11,6 +11,7 @@ namespace Terramental
         private int _projectileDamage;
         private float _destroyTimer;
         private float _activeDelay;
+        private bool _isTracking;
 
         public bool IsEnemyProjectile
         {
@@ -19,7 +20,18 @@ namespace Terramental
 
         public void UpdateProjectile(GameTime gameTime)
         {
-            SpritePosition += SpriteVelocity; // Changes the projectile position based on the projectile velocity
+            if(!_isTracking)
+            {
+                SpritePosition += SpriteVelocity; // Changes the projectile position based on the projectile velocity
+            }
+            else
+            {
+                Vector2 dir = _playerCharacter.SpritePosition - SpritePosition; //Get the direction of the player from origin of the projectile's location
+                dir.Normalize();
+                SpriteVelocity = new Vector2(dir.X * 5, dir.Y * 5); //Set velocity so the enemy moves towards the player's location
+                SpritePosition += SpriteVelocity;
+            }
+            
 
             if (_isEnemyProjectile) // Checks to see if there is an enemy projectile
             {
@@ -157,7 +169,7 @@ namespace Terramental
             }
         }
 
-        public void ResetProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, int projectileTrigger, float projectileDuration, int projectileDamage) // Used to reset a projectile to given parameters
+        public void ResetProjectile(Texture2D texture, Vector2 position, Vector2 scale, Vector2 velocity, bool isEnemyProjectile, int projectileTrigger, float projectileDuration, int projectileDamage, bool trackPlayer) // Used to reset a projectile to given parameters
         {
             SpriteTexture = texture;
             SpritePosition = position;
@@ -168,6 +180,7 @@ namespace Terramental
             _projectileTrigger = projectileTrigger;
             _destroyTimer = projectileDuration;
             _projectileDamage = projectileDamage;
+            _isTracking = trackPlayer;
 
             if(_playerCharacter == null)
             {

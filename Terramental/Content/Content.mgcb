@@ -405,6 +405,42 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Enemies/Knight/Knight_Character_Walk_SpriteSheet.png
 
+#begin Sprites/Enemies/Spectre/Spectre_Attack_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Enemies/Spectre/Spectre_Attack_SpriteSheet.png
+
+#begin Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Enemies/Spectre/Spectre_Idle_SpriteSheet.png
+
+#begin Sprites/Enemies/Spectre/Spectre_Walk_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Enemies/Spectre/Spectre_Walk_SpriteSheet.png
+
 #begin Sprites/Obstacles/Cannon_Left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -764,6 +800,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Projectiles/Snow_Projectile.png
+
+#begin Sprites/Projectiles/SpectreProjectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Projectiles/SpectreProjectile.png
 
 #begin Sprites/Projectiles/Water_Projectile.png
 /importer:TextureImporter

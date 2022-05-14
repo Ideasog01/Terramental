@@ -217,14 +217,7 @@ namespace Terramental
             SimulateFriction();
             StopMovingIfBlocked();
 
-            if (_currentState == AIState.Idle)
-            {
-                if (!IsGrounded())
-                {
-                    ApplyGravity();
-                }
-            }
-            else if (_currentState == AIState.Chase)
+            if(_enemyIndex != 2)
             {
                 if (!IsGrounded() && !DisableMovement)
                 {
@@ -236,12 +229,14 @@ namespace Terramental
                     EnemyJump();
                     _jumpActivationCooldown = 5;
                 }
+
+                if (_jumpActivationCooldown > 0)
+                {
+                    _jumpActivationCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
             }
 
-            if(_jumpActivationCooldown > 0)
-            {
-                _jumpActivationCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            
 
             MirrorEnemy();
 
@@ -288,7 +283,7 @@ namespace Terramental
                 {
                     AudioManager.PlaySound("Sword_SFX");
                 }
-                else if(_enemyIndex == 1)
+                else if(_enemyIndex == 1 || _enemyIndex == 2)
                 {
                     AudioManager.PlaySound("FireProjectile_SFX");
                 }
@@ -312,12 +307,26 @@ namespace Terramental
                 {
                     if(!Animations[AnimationIndex].MirrorTexture) //Fires projectile based on current facing direction
                     {
-                        SpawnManager.SpawnProjectile(SpawnManager.gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(40, 40), new Vector2(4, 0), true, false, 0, 3, 1);
+                        SpawnManager.SpawnProjectile(SpawnManager.gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(40, 40), new Vector2(4, 0), true, false, 0, 3, 1, false);
                         _enemyAttacked = true;
                     }
                     else
                     {
-                        SpawnManager.SpawnProjectile(SpawnManager.gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(-40, 20), new Vector2(40, 40), new Vector2(40, 40), new Vector2(-4, 0), true, false, 0, 3, 1);
+                        SpawnManager.SpawnProjectile(SpawnManager.gameManager.GetTexture("Sprites/Projectiles/Fireball_Projectile"), SpritePosition + new Vector2(-40, 20), new Vector2(40, 40), new Vector2(40, 40), new Vector2(-4, 0), true, false, 0, 3, 1, false);
+                        _enemyAttacked = true;
+                    }
+                }
+
+                if(_enemyIndex == 2 && !_enemyAttacked)
+                {
+                    if (!Animations[AnimationIndex].MirrorTexture) //Fires projectile based on current facing direction
+                    {
+                        SpawnManager.SpawnProjectile(SpawnManager.gameManager.GetTexture("Sprites/Projectiles/SpectreProjectile"), SpritePosition + new Vector2(40, 20), new Vector2(40, 40), new Vector2(40, 40), new Vector2(0, 0), true, false, 0, 7, 1, true);
+                        _enemyAttacked = true;
+                    }
+                    else
+                    {
+                        SpawnManager.SpawnProjectile(SpawnManager.gameManager.GetTexture("Sprites/Projectiles/SpectreProjectile"), SpritePosition + new Vector2(-40, 20), new Vector2(40, 40), new Vector2(40, 40), new Vector2(0, 0), true, false, 0, 7, 1, true);
                         _enemyAttacked = true;
                     }
                 }
@@ -350,9 +359,18 @@ namespace Terramental
 
         private void Chase()
         {
-            Vector2 dir = playerCharacter.SpritePosition - SpritePosition; //Get the direction of the player from origin of the enemy's location
-            dir.Normalize();
-            SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, SpriteVelocity.Y); //Set velocity so the enemy moves towards the player's location
+            if(_enemyIndex == 0 || _enemyIndex == 1)
+            {
+                Vector2 dir = playerCharacter.SpritePosition - SpritePosition; //Get the direction of the player from origin of the enemy's location
+                dir.Normalize();
+                SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, SpriteVelocity.Y); //Set velocity so the enemy moves towards the player's location
+            }
+            else if(_enemyIndex == 2)
+            {
+                Vector2 dir = (playerCharacter.SpritePosition + new Vector2(0, -96)) - SpritePosition; //Get the direction of the player from origin of the enemy's location
+                dir.Normalize();
+                SpriteVelocity = new Vector2(dir.X * _enemyMovementSpeed, dir.Y * _enemyMovementSpeed); //Set velocity so the enemy moves towards the player's location
+            }
 
             Vector2 lastMovement = SpritePosition - _oldPosition; //Gets difference between the player's current position and old position
 
@@ -434,10 +452,13 @@ namespace Terramental
             {
                 SpriteVelocity *= Vector2.UnitY;
 
-                if (!_pathBlocked && IsGrounded() && _currentState == AIState.Chase) //If the enemy is supposed to be chasing, and is not moving on the X axis and grounded, cause the enemy to jump
+                if(_enemyIndex != 2) //If the enemy is not the Spectre character
                 {
-                    AudioManager.PlaySound("Jump_SFX");
-                    _pathBlocked = true;
+                    if (!_pathBlocked && IsGrounded() && _currentState == AIState.Chase) //If the enemy is supposed to be chasing, and is not moving on the X axis and grounded, cause the enemy to jump
+                    {
+                        AudioManager.PlaySound("Jump_SFX");
+                        _pathBlocked = true;
+                    }
                 }
             }
             else //If the enemy is moving on the X axis, then the path is not blocked
