@@ -122,7 +122,7 @@ namespace Terramental
 
                     foreach (ElementWall elementWall in SpawnManager.elementWallList) // Loops through every elemental wall in the list of elemental walls
                     {
-                        if (elementWall.IsActive) // Checks if the elemental wall is active
+                        if(elementWall.IsActive) // Checks if the elemental wall is active
                         {
                             if (_activeDelay <= 0)
                             {

@@ -19,27 +19,34 @@ namespace Terramental
         private Texture2D _texture2;
         private Texture2D _texture3;
 
-        public void InitialiseElementWall(PlayerCharacter playerCharacter, MapManager mapManager, int elementIndex)
+        public void InitialiseElementWall(PlayerCharacter playerCharacter, int elementIndex, Vector2 position)
         {
+            SpritePosition = position;
             _playerCharacter = playerCharacter;
             _elementIndex = elementIndex;
-            wallHealth = 60;
-            tile = mapManager.FindTile(SpriteRectangle);
-            tile.IsBlocking = true;
+            IsActive = true;
+            IsLoaded = true;
+            SetElementWallProperties(SpawnManager.gameManager.mapManager);
         }
 
         public Tile AssignedTile
         {
             get { return tile; }
+            set { tile = value; }
         }
 
-        public void ResetWall(MapManager mapManager)
+        public void SetElementWallProperties(MapManager mapManager)
         {
-            tile = mapManager.FindTile(SpriteRectangle);
-            tile.IsBlocking = true;
-
             wallHealth = 60;
+
+            if(tile != null)
+            {
+                tile.IsBlocking = false;
+            }
+
             SpriteTexture = _texture1;
+            tile = mapManager.FindTile(SpritePosition);
+            tile.IsBlocking = true;
             IsActive = true;
         }
 
@@ -71,6 +78,7 @@ namespace Terramental
                     AudioManager.PlaySound("WallBreak_SFX");
                     tile.IsBlocking = false;
                     IsActive = false;
+                    tile = null;
                 }
             }
         }
@@ -81,10 +89,10 @@ namespace Terramental
             _texture2 = texture2;
             _texture3 = texture3;
 
-            SpriteTexture = texture1;
+            SpriteTexture = _texture1;
         }
 
-        public void ElementWallCollision()
+        public void AssignElementLogic()
         {
             if (_playerCharacter != null && tile != null)
             {

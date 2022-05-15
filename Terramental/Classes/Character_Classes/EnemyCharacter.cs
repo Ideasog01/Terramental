@@ -194,7 +194,10 @@ namespace Terramental
             //Calls the appropriate function based on enemy's current AIState
             if (CurrentState == AIState.Attack)
             {
-                Attack(gameTime);
+                if(!DisableMovement)
+                {
+                    Attack(gameTime);
+                }
             }
 
             if (CurrentState == AIState.Idle)
@@ -219,7 +222,7 @@ namespace Terramental
 
             if(_enemyIndex != 2)
             {
-                if (!IsGrounded() && !DisableMovement)
+                if (!DisableMovement && !IsGrounded())
                 {
                     ApplyGravity();
                 }
@@ -235,8 +238,6 @@ namespace Terramental
                     _jumpActivationCooldown -= 1 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             }
-
-            
 
             MirrorEnemy();
 

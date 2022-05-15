@@ -327,8 +327,6 @@ namespace Terramental
                 }
             }
 
-            ResetLevel();
-
             int assetCount = 0;
             int spawnedAssetCount = 0;
             
@@ -572,11 +570,11 @@ namespace Terramental
             return true;
         }
 
-        public Tile FindTile(Rectangle wallRect) //Finds the tile associated with the position of the rectangle
+        public Tile FindTile(Vector2 wallPosition) //Finds the tile associated with the position of the rectangle
         {
             foreach(Tile tile in tileList)
             {
-                if(tile.SpriteRectangle.Intersects(wallRect))
+                if(wallPosition == tile.SpritePosition)
                 {
                     return tile;
                 }

@@ -610,14 +610,8 @@ namespace Terramental
                             break;
                     }
 
-                    elementWall.SpritePosition = position;
-                    elementWall.SpawnPosition = position;
-                    elementWall.IsActive = true;
-                    elementWall.IsLoaded = true;
-
-                    elementWall.InitialiseElementWall(gameManager.playerCharacter, gameManager.mapManager, elementIndex);
-                    elementWall.ElementWallCollision();
-                    elementWall.ResetWall(mapManager);
+                    elementWall.InitialiseElementWall(gameManager.playerCharacter, elementIndex, position);
+                    elementWall.AssignElementLogic();
                     elementWallFound = true;
                     break;
                 }
@@ -643,11 +637,10 @@ namespace Terramental
                         break;
                 }
 
-                elementWall.InitialiseElementWall(gameManager.playerCharacter, mapManager, elementIndex);
-                elementWall.ElementWallCollision();
-                elementWall.IsLoaded = true;
+                elementWall.InitialiseElementWall(gameManager.playerCharacter, elementIndex, position);
+                elementWall.AssignElementLogic();
                 elementWall.LayerOrder = -2;
-                elementWallList.Add(elementWall); // Adds the elemental wall to the list of elemental walls
+                elementWallList.Add(elementWall); //Adds the elemental wall to the list of elemental walls
             }
         }
 
@@ -878,7 +871,7 @@ namespace Terramental
             {
                 if(elementWall.IsLoaded)
                 {
-                    elementWall.ResetWall(gameManager.mapManager);
+                    elementWall.SetElementWallProperties(gameManager.mapManager);
                 }
             }
 
@@ -946,6 +939,12 @@ namespace Terramental
 
             foreach(ElementWall elementWall in elementWallList)
             {
+                if(elementWall.AssignedTile != null)
+                {
+                    elementWall.AssignedTile.IsBlocking = false;
+                    elementWall.AssignedTile = null;
+                }
+                
                 elementWall.IsActive = false;
                 elementWall.IsLoaded = false;
             }

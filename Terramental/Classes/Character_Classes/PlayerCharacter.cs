@@ -135,7 +135,7 @@ namespace Terramental
 
                 foreach(ElementWall elementWall in SpawnManager.elementWallList)
                 {
-                    elementWall.ElementWallCollision();
+                    elementWall.AssignElementLogic();
                 }
             }
         }
